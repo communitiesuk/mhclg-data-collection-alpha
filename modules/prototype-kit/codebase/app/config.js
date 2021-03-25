@@ -23,7 +23,7 @@ module.exports = {
   useDocumentation: 'true',
 
   // Force HTTP to redirect to HTTPS on production
-  useHttps: 'true',
+  useHttps: 'false',
 
   // Enable or disable Browser Sync
   useBrowserSync: 'true'
