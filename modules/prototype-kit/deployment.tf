@@ -101,6 +101,7 @@ resource "null_resource" "deploy" {
   provisioner "remote-exec" {
     inline = [
       "sudo yum update -y",
+      "[ -f /etc/systemd/system/prototype.service ] && sudo systemctl stop prototype.service",
       "sudo rm -rf /home/ec2-user/app",
       "mkdir /home/ec2-user/app",
       "cd /home/ec2-user/app && unzip ../bundle.zip",
