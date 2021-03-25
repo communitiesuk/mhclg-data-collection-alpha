@@ -26,7 +26,7 @@ resource "aws_instance" "prototype_server" {
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.prototype_deployment.key_name
   associate_public_ip_address = true
-  security_groups             = [aws_security_group.security_group.id]
+  vpc_security_group_ids      = [aws_security_group.security_group.id]
   subnet_id                   = aws_subnet.prototype.id
 
   root_block_device {
@@ -41,32 +41,11 @@ resource "aws_instance" "prototype_server" {
     private_key = var.private_ssh
   }
 
-  provisioner "local-exec" {
-    command     = "make bundle"
-    working_dir = path.module
-  }
-
-  provisioner "file" {
-    source      = "${path.module}/bundle.tar.gz"
-    destination = "/home/ec2-user/bundle.tar.gz"
-  }
-
   provisioner "remote-exec" {
     inline = [
       "curl --silent --location https://rpm.nodesource.com/setup_14.x | sudo bash -",
       "sudo yum install -y nodejs gcc-c++ make",
       "sudo npm i -g yarn",
-    ]
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "mkdir /home/ec2-user/app",
-      "cd /home/ec2-user/app && tar -zxf ../bundle.tar.gz",
-      "cd /home/ec2-user/app && yarn install",
-      "sudo mv /home/ec2-user/app/prototype.service /etc/systemd/system/prototype.service",
-      "sudo systemctl daemon-reload",
-      "sudo systemctl start prototype.service"
     ]
   }
 
@@ -78,6 +57,46 @@ resource "aws_instance" "prototype_server" {
   tags = merge(var.tags, {
     Name = "prototype-kit"
   })
+}
+
+data "archive_file" "codebase" {
+  output_path = "${path.module}/bundle.zip"
+  type        = "zip"
+  source_dir  = "${path.module}/codebase"
+  excludes    = ["node_modules"]
+}
+
+resource "null_resource" "deploy" {
+  triggers = {
+    codebase_updated = data.archive_file.codebase.output_base64sha256
+  }
+
+  depends_on = [aws_eip_association.eip_assoc]
+
+  connection {
+    host        = aws_eip.ip.public_ip
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = var.private_ssh
+  }
+
+  provisioner "file" {
+    source      = data.archive_file.codebase.output_path
+    destination = "/home/ec2-user/bundle.zip"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo yum update -y",
+      "rm -rf /home/ec2-user/app",
+      "mkdir /home/ec2-user/app",
+      "cd /home/ec2-user/app && unzip ../bundle.zip",
+      "cd /home/ec2-user/app && yarn install",
+      "sudo mv /home/ec2-user/app/prototype.service /etc/systemd/system/prototype.service",
+      "sudo systemctl daemon-reload",
+      "sudo systemctl start prototype.service"
+    ]
+  }
 }
 
 resource "aws_vpc" "prototype" {
