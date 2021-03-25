@@ -101,7 +101,7 @@ resource "null_resource" "deploy" {
   provisioner "remote-exec" {
     inline = [
       "sudo yum update -y",
-      "rm -rf /home/ec2-user/app",
+      "sudo rm -rf /home/ec2-user/app",
       "mkdir /home/ec2-user/app",
       "cd /home/ec2-user/app && unzip ../bundle.zip",
       "cd /home/ec2-user/app && yarn install",
