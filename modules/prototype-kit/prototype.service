@@ -1,0 +1,15 @@
+[Unit]
+Description=GOVUK Prototype Service
+After=network.target
+
+[Service]
+Environment=PORT=80 NODE_ENV=production USERNAME=mhclg PASSWORD=${password}
+User=root
+Type=simple
+WorkingDirectory=/home/ec2-user/app
+ExecStart=/usr/bin/yarn gulp server
+TimeoutStartSec=0
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
