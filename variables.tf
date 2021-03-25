@@ -19,3 +19,8 @@ variable "prototype_kit_private_ssh" {
   type      = string
   sensitive = true
 }
+
+variable "prototype_kit_web_password" {
+  type      = string
+  sensitive = true
+}
