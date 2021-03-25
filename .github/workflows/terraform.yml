@@ -21,6 +21,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       TF_VAR_prototype_kit_public_ssh: ${{ secrets.PROTOTYPE_SSH_PUBLIC }}
       TF_VAR_prototype_kit_private_ssh: ${{ secrets.PROTOTYPE_SSH_PRIVATE }}
+      TF_VAR_prototype_kit_web_password: ${{ secrets.PROTOTYPE_WEB_PASSWORD }}
 
     steps:
     # Checkout the repository to the GitHub Actions runner

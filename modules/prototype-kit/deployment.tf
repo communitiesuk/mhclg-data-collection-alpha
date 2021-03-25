@@ -15,6 +15,12 @@ variable "private_ssh" {
   sensitive   = true
 }
 
+variable "web_password" {
+  type        = string
+  description = "The basic auth password to use for the prototype (username is mhclg)"
+  sensitive   = true
+}
+
 resource "aws_key_pair" "prototype_deployment" {
   key_name   = "mhclg-data-collection-prototype-deployment"
   public_key = var.public_ssh
@@ -85,6 +91,13 @@ resource "null_resource" "deploy" {
     destination = "/home/ec2-user/bundle.zip"
   }
 
+  provisioner "file" {
+    content = templatefile("${path.module}/prototype.service", {
+      password = var.web_password
+    })
+    destination = "/home/ec2-user/prototype.service"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "sudo yum update -y",
@@ -92,7 +105,7 @@ resource "null_resource" "deploy" {
       "mkdir /home/ec2-user/app",
       "cd /home/ec2-user/app && unzip ../bundle.zip",
       "cd /home/ec2-user/app && yarn install",
-      "sudo mv /home/ec2-user/app/prototype.service /etc/systemd/system/prototype.service",
+      "sudo mv /home/ec2-user/prototype.service /etc/systemd/system/prototype.service",
       "sudo systemctl daemon-reload",
       "sudo systemctl start prototype.service"
     ]
