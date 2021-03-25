@@ -7,7 +7,7 @@ Environment=PORT=80 NODE_ENV=production USERNAME=mhclg PASSWORD=${password}
 User=root
 Type=simple
 WorkingDirectory=/home/ec2-user/app
-ExecStart=/usr/bin/yarn gulp server
+ExecStart=/usr/bin/yarn start
 TimeoutStartSec=0
 Restart=on-failure
 
