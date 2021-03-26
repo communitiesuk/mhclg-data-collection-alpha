@@ -27,8 +27,17 @@ resource "aws_key_pair" "prototype_deployment" {
   tags       = var.tags
 }
 
+data "aws_ami" "amazon-linux-2" {
+  most_recent = true
+  owners      = ["amazon"]
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm*"]
+  }
+}
+
 resource "aws_instance" "prototype_server" {
-  ami                         = "ami-01c835443b86fe988"
+  ami                         = data.aws_ami.amazon-linux-2.id
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.prototype_deployment.key_name
   associate_public_ip_address = true
@@ -74,7 +83,7 @@ data "archive_file" "codebase" {
 
 resource "null_resource" "deploy" {
   triggers = {
-    codebase_updated = data.archive_file.codebase.output_base64sha256
+    codebase_updated = data.archive_file.codebase.output_md5
   }
 
   depends_on = [aws_eip_association.eip_assoc]
@@ -101,14 +110,16 @@ resource "null_resource" "deploy" {
   provisioner "remote-exec" {
     inline = [
       "sudo yum update -y",
+      "mkdir -p /home/ec2-user/deployment/${data.archive_file.codebase.output_md5}",
+      "cd /home/ec2-user/deployment/${data.archive_file.codebase.output_md5} && unzip -o ../../bundle.zip",
+      "cd /home/ec2-user/deployment/${data.archive_file.codebase.output_md5} && yarn install",
       "[ -f /etc/systemd/system/prototype.service ] && sudo systemctl stop prototype.service",
       "sudo rm -rf /home/ec2-user/app",
-      "mkdir /home/ec2-user/app",
-      "cd /home/ec2-user/app && unzip ../bundle.zip",
-      "cd /home/ec2-user/app && yarn install",
+      "ln -s /home/ec2-user/deployment/${data.archive_file.codebase.output_md5} /home/ec2-user/app",
       "sudo mv /home/ec2-user/prototype.service /etc/systemd/system/prototype.service",
       "sudo systemctl daemon-reload",
-      "sudo systemctl start prototype.service"
+      "sudo systemctl start prototype.service",
+      "cd /home/ec2-user/deployment/ && sudo find . -maxdepth 1 -mindepth 1 ! -name '.' ! -name '..' ! -name '${data.archive_file.codebase.output_md5}' -type d -exec rm -rf {} +"
     ]
   }
 }
