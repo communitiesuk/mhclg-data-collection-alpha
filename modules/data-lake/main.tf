@@ -31,6 +31,20 @@ resource "aws_s3_bucket_public_access_block" "core-data-public-access-block" {
   restrict_public_buckets = true
 }
 
+data "aws_iam_policy_document" "s3-processing-policy-document" {
+  statement {
+    actions   = ["s3:ListBucket", "s3:GetObject", "s3:PutObject"]
+    resources = [aws_s3_bucket.core-data.arn]
+    effect = "Allow"
+  }
+}
+
+resource "aws_iam_policy" "s3-processing-policy" {
+   name        = "s3-processing-policy"
+   description = "Policy that allows interacting with core data s3 data bucket"
+   policy = data.aws_iam_policy_document.s3-processing-policy-document.json
+}
+
 data "aws_iam_policy_document" "AWSLambdaTrustPolicy" {
   statement {
     actions    = ["sts:AssumeRole"]
@@ -42,35 +56,38 @@ data "aws_iam_policy_document" "AWSLambdaTrustPolicy" {
   }
 }
 
-resource "aws_iam_role" "s3_data_processing_role" {
-  name               = "s3_data_processing_role"
+resource "aws_iam_role" "s3-data-processing-role" {
+  name               = "s3-data-processing-role"
   assume_role_policy = data.aws_iam_policy_document.AWSLambdaTrustPolicy.json
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_policy" {
-  role       = aws_iam_role.s3_data_processing_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+resource "aws_iam_role_policy_attachment" "s3-data-processing-s3-attachment" {
+  role       = aws_iam_role.s3-data-processing-role.name
+  policy_arn = aws_iam_policy.s3-processing-policy.arn
 }
-
-data "aws_iam_policy_document" "lambda_s3" {
-  statement {
-    actions   = ["s3:GetObject", "S3:PutObject"]
-    resources = [aws_s3_bucket.core-data.arn]
-    effect = "Allow"
-  }
-}
-
-# Policy for ECR
-
 
 resource "aws_ecr_repository" "mhclg-data-lake" {
   name                 = "mhclg-data-lake"
   image_tag_mutability = "IMMUTABLE"
 }
 
-# Push image to ECR
+data "aws_iam_policy_document" "ecr-policy-document" {
+  statement {
+    actions   = ["ecr:BatchCheckLayerAvailability", "ecr:BatchGetImage", "ecr:CompleteLayerUpload",
+                 "ecr:GetDownloadUrlForLayer", "ecr:GetLifecyclePolicy", "ecr:InitiateLayerUpload",
+                 "ecr:PutImage","ecr:UploadLayerPart"
+               ]
+    effect = "Allow"
+  }
+}
 
-data "aws_ecr_image" "lambda_image" {
+resource "aws_iam_policy" "ecr-policy" {
+   name        = "ecr-policy"
+   description = "Policy that allows pushing and pulling docker images from ECR"
+   policy = data.aws_iam_policy_document.ecr-policy-document.json
+}
+
+data "aws_ecr_image" "lambda-image" {
   repository_name = aws_ecr_repository.mhclg-data-lake.name
   image_tag       = "latest"
 }
@@ -78,8 +95,8 @@ data "aws_ecr_image" "lambda_image" {
 resource "aws_lambda_function" "xlsx_to_parquet_function" {
   function_name    = "xlsx_to_parquet"
   handler          = "handler"
-  role             = aws_iam_role.s3_data_processing_role.arn
-  image_uri        = aws_ecr_image.lambda_image.id
+  role             = aws_iam_role.s3-data-processing-role.arn
+  image_uri        = aws_ecr_image.lambda-image.id
   runtime          = "python3.8"
   tags             = var.tags
 }
