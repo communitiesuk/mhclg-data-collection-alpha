@@ -1,0 +1,4 @@
+openpyxl==3.0.7
+pyarrow==3.0.0
+pandas==1.2.3
+boto3==1.17.40
