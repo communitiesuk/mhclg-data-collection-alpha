@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="/url/of/previous/page">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">Heading or question goes here</h1>
+
+      <form class="form" action="/juggling-trick" method="post">
+
+        {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+        {% from "govuk/components/accordion/macro.njk" import govukAccordion %}
+
+        <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-with-summary-sections">
+          <script>
+          
+          </script>
+        </div>
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
