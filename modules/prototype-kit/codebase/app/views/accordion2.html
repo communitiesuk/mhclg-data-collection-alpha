@@ -137,7 +137,13 @@
           "16) Which of following reasonable preferences apply (tick any which are applicable, leave un-ticked if Q15 answered 'No' or 'Don't Know')?:", 
           "17) Was the letting made under any of the following allocations systems? (tick any which are applicable, leave un-ticked if none apply):",
           "20) How many times has the unit been previously offered since becoming available for relet since the last tenancy ended or as a first let?  For an Affordable Rent or Rent to Buy Letting, only include number of offers as that type. (For a property let at t", 
-          "21) Reason for vacancy:"
+          "21) Reason for vacancy:",
+          "Company Code",
+          "Contract",
+          "Legal Agreement Type",
+          "Notice Procedure Name",
+          "Fixed End Date"
+
         ]
       
   const mapping = {}
@@ -161,7 +167,7 @@
           </div>
            <div id="accordion-with-summary-sections-content-x-1" class="govuk-accordion__section-content" aria-labelledby="accordion-with-summary-sections-heading-1">
        <select class="govuk-select" id="section-${i}-mapping" name="section-${i}-mapping" onchange="mapSection(${i})">
-               <option value="" selected></option>
+               <option value="" selected>Please select the field to map</option>
                ${options}
              </select>
            </div>
@@ -171,12 +177,12 @@
   }
 
   function mapSection(index){
-      const map_from = $(`#map-from-column-${index}`).val();
-      const map_to = $("#section-"+index+"-mapping").val();
-      console.log(`Mapping ${map_from} to ${map_to} for ${index}`)
-      mapping[map_from] = map_to;
-      //$("#heading-"+index).append("-> "+map_to)
-      $(`#accordion-with-summary-sections-heading-x-${index}`).html(`${map_from} -> ${map_to} <span class="govuk-accordion__icon" aria-hidden="true"></span>`);
+      const mapFrom = $(`#map-from-column-${index}`).val();
+      const mapTo = $("#section-"+index+"-mapping").val();
+      const mappingDisplay = mapTo ? ` -> ${mapTo}` : "";
+      console.log(`Mapping ${mapFrom} to ${mapTo} for ${index}`)
+      mapping[mapFrom] = mapTo;
+      $(`#accordion-with-summary-sections-heading-x-${index}`).html(`${mapFrom}${mappingDisplay} <span class="govuk-accordion__icon" aria-hidden="true"></span>`);
   }
 
   function buildAccordion(){
