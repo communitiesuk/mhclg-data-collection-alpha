@@ -9,10 +9,10 @@ resource "aws_api_gateway_deployment" "alpha" {
 }
 
 resource "aws_api_gateway_stage" "alpha" {
-  rest_api_id = aws_api_gateway_rest_api.data-collection.id
+  rest_api_id   = aws_api_gateway_rest_api.data-collection.id
   deployment_id = aws_api_gateway_deployment.alpha.id
-  stage_name = "alpha"
-  tags      = var.default_tags
+  stage_name    = "alpha"
+  tags          = var.default_tags
 }
 
 module "lambda-excel-parser" {
