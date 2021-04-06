@@ -15,3 +15,11 @@ are deployed via GitHub actions and generally take a minute or two to reflect.
 
 Please bear in mind that pushing a change will **bring down the prototype for a few seconds and could reset session 
 data** so check that no one is currently using it.
+
+#### Lambda in Container
+
+There is a terraform module that allows for the deployment of a lambda function that runs inside a docker container. 
+
+See the [module readme](./modules/lambda-with-container) for more information.
+
+See the [example lambda](./modules/lambda-example) for ideas on how to use this.
