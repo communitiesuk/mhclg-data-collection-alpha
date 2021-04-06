@@ -1,32 +1,82 @@
+variable "s3_upload_bucket" {
+  description = "The S3 bucket resource"
+}
+
+variable "tags" {
+  description = "The AWS tags to apply to all infrastructure"
+  type        = map(string)
+}
+
+variable "rest_api" {
+  description = "The rest api this function integrates with"
+}
+
+variable "api_stage" {
+  description = "The rest api this function integrates with"
+}
+
 module "lambda-with-container" {
   source      = "../lambda-with-container"
   codebase    = path.module
   name        = "lambda-excel-parser"
   name_prefix = "mhclg-data-collection"
-  handler     = "main.default_handler"
-  tags        = {}
+  tags        = var.tags
 }
 
-resource "aws_s3_bucket" "bucket" {
-  bucket = "mhclg-data-collection-lambda-excel-parser"
+resource "aws_iam_role_policy_attachment" "lambda_accesses_s3" {
+  role       = module.lambda-with-container.lambda-role.name
+  policy_arn = aws_iam_policy.lambda_accesses_s3.arn
 }
 
-resource "aws_lambda_permission" "allow_bucket_to_trigger_function" {
-  action        = "lambda:InvokeFunction"
-  function_name = module.lambda-with-container.lambda-function.arn
-  source_arn    = aws_s3_bucket.bucket.arn
-  principal     = "s3.amazonaws.com"
+resource "aws_iam_policy" "lambda_accesses_s3" {
+  policy = data.aws_iam_policy_document.lambda_accesses_s3.json
 }
 
-resource "aws_s3_bucket_notification" "bucket_notification" {
-  bucket = aws_s3_bucket.bucket.id
-
-  lambda_function {
-    lambda_function_arn = module.lambda-with-container.lambda-function.arn
-    events              = ["s3:ObjectCreated:*"]
+data "aws_iam_policy_document" "lambda_accesses_s3" {
+  statement {
+    effect = "Allow"
+    actions = ["s3:PutObject"]
+    resources = [
+      "${var.s3_upload_bucket.arn}/excel-parser",
+      "${var.s3_upload_bucket.arn}/excel-parser/*"
+    ]
   }
+}
 
-  depends_on = [
-    aws_lambda_permission.allow_bucket_to_trigger_function,
-  ]
+resource "aws_api_gateway_resource" "data-collection" {
+  rest_api_id = var.rest_api.id
+  parent_id   = var.rest_api.root_resource_id
+  path_part   = "parse-excel"
+}
+
+resource "aws_api_gateway_method" "data-collection" {
+  rest_api_id   = var.rest_api.id
+  resource_id   = aws_api_gateway_resource.data-collection.id
+  http_method   = "POST"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "lambda" {
+  rest_api_id = var.rest_api.id
+  resource_id = aws_api_gateway_method.data-collection.resource_id
+  http_method = aws_api_gateway_method.data-collection.http_method
+
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = module.lambda-with-container.lambda-function.invoke_arn
+}
+
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
+resource "aws_lambda_permission" "apigw_lambda" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = module.lambda-with-container.lambda-function.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn = "arn:aws:execute-api:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${var.rest_api.id}/*/${aws_api_gateway_method.data-collection.http_method}${aws_api_gateway_resource.data-collection.path}"
+}
+
+output "public_endpoint" {
+  value = "${var.api_stage.invoke_url}${aws_api_gateway_resource.data-collection.path}"
 }

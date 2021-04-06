@@ -1,17 +1,31 @@
+from base64 import b64decode
 import os
 import json
 import numpy
 import pandas as pd
 
+
 def handler(event, context):
     print("event: {}".format(event))
 
+    sheet = b64decode(event['body'])
+
+    return {
+        'statusCode': 200,
+        'body': parse_excel(sheet),
+        'isBase64Encoded': False,
+    }
+
+
 def parse_excel(file):
-    df = pd.read_excel(file, sheet_name='Data Extract', usecols='B:DO', nrows=31, skiprows=[1,2,3,4,5], na_values=[' '])
+    df = pd.read_excel(file, na_values=[' '])
+
     headers = df.columns.values.tolist()
+
     unique_data_values = []
     for column in df:
         unique_data_values.append(df[column].unique())
+
     file_structure = {
         "columns": headers,
         "data": unique_data_values

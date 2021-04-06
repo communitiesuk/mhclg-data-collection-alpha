@@ -1,3 +1,4 @@
+boto3==1.17.40
 openpyxl==3.0.7
 pandas==1.2.3
-boto3==1.17.40
+xlrd==2.0.1
