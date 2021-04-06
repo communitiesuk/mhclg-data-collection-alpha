@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="/url/of/previous/page">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">Map the tenancy start date</h1>
+
+      {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+      {{ govukRadios({
+        classes: "govuk-radios--inline",
+        idPrefix: "changed-name",
+        name: "changed-name",
+        fieldset: {
+          legend: {
+            text: "Type of letting",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        hint: {
+          text: "Select the matching data type from your data for 'Type of letting'"
+        },
+        items: [
+          {
+            value: "yes",
+            text: "Letting type"
+          },
+          {
+            value: "no",
+            text: "Property type"
+          },
+          {
+            value: "no",
+            text: "Property type"
+          }
+        ]
+}) }}
+
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{{ govukButton({
+  text: "Save and continue"
+}) }}
+
+
+    </div>
+  </div>
+
+  <a href="#" class="govuk-link govuk-link--no-visited-state">None of these match</a>
+
+{% endblock %}
