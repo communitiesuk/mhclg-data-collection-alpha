@@ -54,4 +54,19 @@ data "aws_iam_policy_document" "ecr_policy" {
       "ecr:CompleteLayerUpload",
     ]
   }
+  statement {
+    sid    = "LambdaECRAccessPolicy"
+    effect = "Allow"
+    principals {
+      identifiers = ["lambda.amazonaws.com"]
+      type        = "Service"
+    }
+    actions = [
+      "ecr:BatchGetImage",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:SetRepositoryPolicy",
+      "ecr:DeleteRepositoryPolicy",
+      "ecr:GetRepositoryPolicy",
+    ]
+  }
 }
