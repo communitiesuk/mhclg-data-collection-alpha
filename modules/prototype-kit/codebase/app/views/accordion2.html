@@ -29,11 +29,16 @@
 <script src="/public/javascripts/automapping.js"></script>
 <script>
   const mapping = {}
+  const bestMatches = findBestMatches()
+  console.log(bestMatches)
 
   function buildSection(i, column){
+      let matches = Object.keys(bestMatches[column])
+      let bestMatch = matches.length > 0 ? matches[0] : null;
       var options = "";
       $.each(theirColumns, function(i, column){
-          options = options + `<option value="${column}">${column}</option>`
+          let selected = column == bestMatch ? "selected" : "";
+          options = options + `<option ${selected} value="${column}">${column}</option>`
         })
       const section = `
         <div class="govuk-accordion__section ">

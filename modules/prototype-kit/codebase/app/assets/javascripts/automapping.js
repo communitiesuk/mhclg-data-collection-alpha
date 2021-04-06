@@ -12,19 +12,27 @@ function matchDataColumns(ours, theirs){
 
 function getMostWordsInCommon(column, columnsToMatch){
   let wordsInCommonCounts = {};
-  let wordsInColumn = nlp(column); //column.toLowerCase().split(/\s+/);
-  console.log(wordsInColumn.nouns().json())
+  let wordsInColumn = columnToWords(column);
 
-  // $.each(columnsToMatch, function(i, columnName){
-    // let words = nlp(columnName.toLowerCase().split(/\s+/));
-    // words.forEach(function(word){
-      // if (wordsInColumn.includes(word)){
-        // increment(columnName, wordsInCommonCounts)
-      // }
-    // })
-  // });
+  $.each(columnsToMatch, function(i, columnName){
+    let words = columnToWords(columnName);
+    words.forEach(function(word){
+      if (wordsInColumn.includes(word)){
+        append(columnName, word, wordsInCommonCounts)
+      }
+    })
+  });
 
   return wordsInCommonCounts;
+}
+
+function columnToWords(column){
+  // let document = nlp(column);
+  // let normalizedWords = document.normalize({plurals: true, whitespace: true, case: true, punctuation: true, unicode: true, contractions: true, acronyms: true, possessives: true, plurals: true, verbs: true, honorifics: true});
+  // let normalizedNounsAndVerbs = normalizedWords.match("(#Noun|#Verb)");
+  // return document.out("array");
+  let out = Array.from(new Set(column.replace(/\W+/, " ").split(" ")));
+  return out.filter(function(word){ return word.length > 2});
 }
 
 function increment(item, dictionary){
@@ -35,8 +43,16 @@ function increment(item, dictionary){
   dictionary[item]++;
 }
 
+function append(column, item, dictionary){
+  if (! (item in dictionary)){
+    dictionary[column] = [];
+  }
+
+  dictionary[column].push(item);
+}
+
 function findBestMatches(){
   return matchDataColumns(ourColumns, theirColumns);
 }
 
-const bestMatches = findBestMatches()
+// console.log(bestMatches)
