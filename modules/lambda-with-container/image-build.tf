@@ -1,17 +1,13 @@
-data "docker_registry_image" "image" {
-  name = local.base_image
-}
-
 data "archive_file" "codebase" {
   source_dir  = var.codebase
   output_path = "${path.module}/${var.name}.zip"
+  excludes    = split("\n", file("${var.codebase}/.dockerignore"))
   type        = "zip"
 }
 
 resource "null_resource" "build-image" {
   triggers = {
-    code-files-changed = data.archive_file.codebase.output_base64sha256
-    base-image-changed = data.docker_registry_image.image.sha256_digest
+    code-files-changed = data.archive_file.codebase.output_md5
   }
 
   provisioner "local-exec" {
