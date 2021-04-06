@@ -55,4 +55,8 @@ function findBestMatches(){
   return matchDataColumns(ourColumns, theirColumns);
 }
 
+function orderedBestMatches(){
+  return matchDataColumns(ourColumns, theirColumns);
+}
+
 // console.log(bestMatches)

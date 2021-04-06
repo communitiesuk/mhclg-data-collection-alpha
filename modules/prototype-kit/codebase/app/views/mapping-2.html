@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block pageTitle %}
-  Question page
+  Radio Example
 {% endblock %}
 
 {% block beforeContent %}
@@ -34,23 +34,14 @@
             <div id="changed-name-hint" class="govuk-hint">
               Select the data to match.
             </div>
-            <div class="govuk-radios govuk-radios--inline">
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" onchange="updateResults(this)" id="property" name="yours" type="radio" value="type of property">
-                <label class="govuk-label govuk-radios__label" for="property">
-                  Type of property
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" onchange="updateResults(this)" id="start-date" name="yours" type="radio" value="tenancy start date">
-                <label class="govuk-label govuk-radios__label" for="start-date">
-                  Tenancy start date
-                </label>
-              </div>
+            <div id="your-data-radios" class="govuk-radios govuk-radios--inline">
             </div>
           </div>
 
       </div>
+
+      <script src="/public/javascripts/example-column-data.js"></script>
+
       <div class="govuk-grid-column-one-third">
 
         <div class="govuk-form-group">
@@ -63,24 +54,27 @@
             <div id="changed-name-hint" class="govuk-hint">
               Match your data to ours.
             </div>
-            <div class="govuk-radios govuk-radios--inline">
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" onchange="updateResults(this)" id="changed-name" name="ours" type="radio" value="property type">
-                <label class="govuk-label govuk-radios__label" for="changed-name">
-                  Property type
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" onchange="updateResults(this)" id="changed-name-2" name="ours" type="radio" value="start date">
-                <label class="govuk-label govuk-radios__label" for="changed-name-2">
-                  Start date
-                </label>
-              </div>
+            <div id="our-data-radios" class="govuk-radios govuk-radios--inline">
             </div>
-        
           </fieldset>
         </div>
 
+      <script>
+        function addRadios(columns, whose, sectionId){
+          var options = ""
+          $.each(columns, function(i, column){
+            options = options + `<div class="govuk-radios__item"> <input
+                  class="govuk-radios__input" onchange="updateResults(this)"
+                    id="start-date" name="${whose}" type="radio" value="${column}">
+                    <label class="govuk-label govuk-radios__label"
+                    for="start-date"> ${column}</label> </div>`;
+          })
+          $(sectionId).append(options);
+        }
+
+        addRadios(theirColumns, "yours","#your-data-radios")
+        addRadios(ourColumns, "ours","#our-data-radios")
+      </script>
       </div>
       <div class="govuk-grid-column-one-third">
         {{ govukRadios({
@@ -121,7 +115,7 @@
         <dl class="govuk-summary-list govuk-!-margin-bottom-9">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Type of property 
+              Type of property
             </dt>
             <dd class="govuk-summary-list__value">
               &#8594;
