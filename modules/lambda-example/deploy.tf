@@ -3,7 +3,7 @@ module "lambda-with-container" {
   codebase    = path.module
   name        = "lambda-example"
   name_prefix = "mhclg-data-collection"
-  handler     = "main.default_handler"
+  handler     = "main.handler"
   tags        = {}
 }
 
