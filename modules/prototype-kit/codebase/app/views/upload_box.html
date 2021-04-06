@@ -2,15 +2,91 @@
 block beforeContent %}
 <a class="govuk-back-link" href="/url/of/previous/page">Back</a>
 {% endblock %} {% block content %}
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl">Heading or question goes here</h1>
+    <h1 class="govuk-heading-xl">Bulk upload</h1>
 
-    <form class="form" action="/juggling-trick" method="post">
-      {% from "govuk/components/file-upload/macro.njk" import govukFileUpload %}
-      {{ govukFileUpload({ id: "file-upload-1", name: "file-upload-1", label: {
-      text: "Upload a file" } }) }}
+    <!-- Bulk upload bullet points -->
+    <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+      <li>Submit data direct</li>
+      <li>Supported formats; CSV, PDF, XML</li>
+      <li>Match your data for faster data entry</li>
+    </ul>
+
+    <!-- Form and validation script -->
+    <script>
+      var _validFileExtensions = [".pdf", ".csv"];
+      let validation = false;
+
+      function validateFileType(oInput) {
+        console.log(oInput);
+        if (oInput.type == "file") {
+          var fileName = oInput.value;
+          console.log(fileName);
+          if (fileName.length > 0) {
+            var blnValid = false;
+            for (var j = 0; j < _validFileExtensions.length; j++) {
+              var sCurExtension = _validFileExtensions[j];
+              if (
+                fileName
+                  .substr(
+                    fileName.length - sCurExtension.length,
+                    sCurExtension.length
+                  )
+                  .toLowerCase() == sCurExtension.toLowerCase()
+              ) {
+                blnValid = true;
+                break;
+              }
+            }
+
+            if (!blnValid) {
+              alert(
+                "Sorry, " +
+                  fileName +
+                  " is invalid, allowed extensions are: " +
+                  _validFileExtensions.join(", ")
+              );
+              validation = false;
+            }
+          }
+        }
+        validation = true;
+      }
+    </script>
+
+    <form
+      class="upload"
+      action="/accordion2"
+      method="post"
+      onsubmit="return validation"
+    >
+      <div class="govuk-form-group">
+
+        <div class="govuk-checkboxes govuk-!-padding-bottom-4">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses">
+            <label class="govuk-label govuk-checkboxes__label" for="waste">
+              I confirm I have shown the <a href="#" class="govuk-link">privacy note</a> set out by MHCLG
+            </label>
+          </div>
+        </div>
+
+        <label class="govuk-label" for="file-upload-1"> Upload a file </label>
+        <!-- <span id="file-upload-1-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> The CSV must be
+          smaller than 2MB
+        </span> -->
+        <input
+          class="govuk-file-upload govuk-file-upload--error"
+          id="file-upload-1"
+          name="file-upload-1"
+          type="file"
+          aria-describedby="file-upload-1-error"
+          onchange="return validateFileType(this)"
+        />
+      </div>
+      <button class="govuk-button" data-module="govuk-button">Continue</button>
     </form>
   </div>
 </div>
