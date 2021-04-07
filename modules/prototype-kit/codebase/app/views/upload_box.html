@@ -1,0 +1,159 @@
+{% extends "layout.html" %} {% block pageTitle %} Bulk Upload {% endblock %} {%
+block beforeContent %}
+<a class="govuk-back-link" href="/url/of/previous/page">Back</a>
+{% endblock %} {% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Bulk upload</h1>
+
+    <!-- Bulk upload bullet points -->
+    <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+      <li>Submit data direct</li>
+      <li>Supported formats; CSV, XLS, XLSX</li>
+      <li>Match your data for faster data entry</li>
+    </ul>
+
+    <!-- Form and validation script -->
+    <script>
+      var _validFileExtensions = [".csv", ".xls", ".xlsx"]; //File extensions that we accept
+      let validation = false; //Valid boolean
+      let privacyNoteTick = false; //Privacy note boolean
+      //*
+      // Adds the styles and span to the error components
+      //*
+      const setErrorStyles = () => {
+        validation
+          ? (document.getElementById("file-upload-1-error").style.display =
+              "none")
+          : (document.getElementById("file-upload-1-error").style.display =
+              "block");
+
+        privacyNoteTick
+          ? (document.getElementById("file-upload-2-error").style.display =
+              "none")
+          : (document.getElementById("file-upload-2-error").style.display =
+              "block");
+
+        !validation || !privacyNoteTick
+          ? document
+              .getElementById("govuk-form-group")
+              .classList.add("govuk-form-group--error")
+          : document
+              .getElementById("govuk-form-group")
+              .classList.remove("govuk-form-group--error");
+      };
+      //*
+      // Update when privacy note checkbox changed
+      //*
+      function updatedPrivacyNote(checked) {
+        privacyNoteTick = checked;
+        setErrorStyles();
+      }
+      //*
+      // Check input file extension against predeined allowed extensions
+      //*
+      const checkFileExstension = (fileName) => {
+        for (var j = 0; j < _validFileExtensions.length; j++) {
+          let extensionTypeCheck = _validFileExtensions[j];
+          const inputFileExtension = fileName
+            .substr(
+              fileName.length - extensionTypeCheck.length,
+              extensionTypeCheck.length
+            )
+            .toLowerCase();
+          if (inputFileExtension == extensionTypeCheck.toLowerCase()) {
+            return true;
+          }
+        }
+        return false;
+      };
+      //*
+      // Validate that the file input type is correct and deal with errors
+      //*
+      function validateFileType(oInput) {
+        var blnValid = false;
+        if (oInput.type == "file") {
+          var fileName = oInput.value;
+          if (fileName.length > 0) {
+            blnValid = checkFileExstension(fileName);
+          }
+        }
+        validation = blnValid;
+        setErrorStyles();
+      }
+      //*
+      // Check validation has been passed on form submit
+      //*
+      function submitForm() {
+        setErrorStyles();
+        let submit = validation && privacyNoteTick ? true : false;
+        return submit;
+      }
+    </script>
+
+    <!-- form start -->
+    <form
+      class="upload"
+      onsubmit="return submitForm();"
+      action="/mapping-2"
+      method="post"
+    >
+      <div class="govuk-form-group" id="govuk-form-group">
+        <!-- checkbox start -->
+        <div class="govuk-checkboxes govuk-!-padding-bottom-4">
+          <div class="govuk-checkboxes__item">
+            <input
+              class="govuk-checkboxes__input"
+              id="privacy-note"
+              name="privacy-note"
+              type="checkbox"
+              value="privacy-note"
+              onchange="updatedPrivacyNote(this.checked)"
+            />
+            <label class="govuk-label govuk-checkboxes__label" for="waste">
+              I confirm I have shown the
+              <a href="#" class="govuk-link">privacy note</a> set out by MHCLG
+            </label>
+          </div>
+        </div>
+        <!-- checkbox end -->
+
+        <!-- upload file start -->
+        <label class="govuk-label" for="file-upload-1"> Upload a file </label>
+
+        <!-- errors start -->
+        <span
+          style="display: none"
+          id="file-upload-2-error"
+          class="govuk-error-message"
+        >
+          <span class="govuk-visually-hidden">Error:</span> Please confirm you
+          have read the privacy note.
+        </span>
+        <span
+          style="display: none"
+          id="file-upload-1-error"
+          class="govuk-error-message"
+        >
+          <span class="govuk-visually-hidden">Error:</span> The file must be
+          .csv, .xls, .xlsx.
+        </span>
+        <!-- errors end -->
+
+        <input
+          class="govuk-file-upload govuk-file-upload--error"
+          id="file-upload-1"
+          accept=".csv, .xls, .xlsx"
+          name="file-upload-1"
+          type="file"
+          aria-describedby="file-upload-1-error"
+          onchange="return validateFileType(this)"
+        />
+        <!-- upload file end -->
+      </div>
+      <button class="govuk-button" data-module="govuk-button">Continue</button>
+    </form>
+    <!-- form end -->
+  </div>
+</div>
+{% endblock %}

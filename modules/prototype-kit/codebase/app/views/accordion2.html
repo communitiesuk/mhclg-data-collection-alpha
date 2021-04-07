@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Accordion Example
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="/url/of/previous/page">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">Data Mapping</h1>
+      <p>Please map your data to ours in the form below:</p>
+
+      <form class="form" action="/complete" method="post">
+        <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-with-summary-sections">
+        </div>
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+      </form>
+    </div>
+  </div>
+
+<script src="/public/javascripts/compromise.js"></script>
+<script src="/public/javascripts/example-column-data.js"></script>
+<script src="/public/javascripts/automapping.js"></script>
+<script>
+  const mapping = {}
+  const bestMatches = orderedMatches()
+  console.log(bestMatches)
+
+  function buildSection(i, column){
+      let matches = bestMatches[column]
+      let bestMatch = matches.length > 0 ? matches[0] : null;
+      var options = "";
+      $.each(theirColumns, function(i, column){
+          let selected = column == bestMatch ? "selected" : "";
+          options = options + `<option ${selected} value="${column}">${column}</option>`
+        })
+      const section = `
+        <div class="govuk-accordion__section ">
+          <div class="govuk-accordion__section-header">
+             <input type="hidden" id="map-from-column-${i}" name="map-from-column-${i}" value="${column}" />
+             <h2 class="govuk-accordion__section-heading" id="heading-${i}">
+             <span class="govuk-accordion__section-button" id="accordion-with-summary-sections-heading-x-${i}">
+               ${column}
+             </span>
+            </h2>
+            <div class="govuk-accordion__section-summary govuk-body" id="accordion-with-summary-sections-summary-x-${i}">
+            </div>
+          </div>
+           <div id="accordion-with-summary-sections-content-x-1" class="govuk-accordion__section-content" aria-labelledby="accordion-with-summary-sections-heading-1">
+       <select class="govuk-select" id="section-${i}-mapping" name="section-${i}-mapping" onchange="mapSection(${i})">
+               <option value="" selected>Please select the field to map</option>
+               ${options}
+             </select>
+           </div>
+        </div>
+          `
+      $("#accordion-with-summary-sections").append(section);
+  }
+
+  function mapSection(index){
+      const mapFrom = $(`#map-from-column-${index}`).val();
+      const mapTo = $("#section-"+index+"-mapping").val();
+      const mappingDisplay = mapTo ? ` -> ${mapTo}` : "";
+      console.log(`Mapping ${mapFrom} to ${mapTo} for ${index}`)
+      mapping[mapFrom] = mapTo;
+      $(`#accordion-with-summary-sections-heading-x-${index}`).html(`${mapFrom}${mappingDisplay} <span class="govuk-accordion__icon" aria-hidden="true"></span>`);
+  }
+
+  function buildAccordion(){
+    $.each(ourColumns, buildSection)
+  }
+
+  buildAccordion()
+</script>
+
+</div>
+{% endblock %}

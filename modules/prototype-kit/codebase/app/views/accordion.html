@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="/url/of/previous/page">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">Heading or question goes here</h1>
+
+      <form class="form" action="/juggling-trick" method="post">
+
+        {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+        {% from "govuk/components/accordion/macro.njk" import govukAccordion %}
+
+{{ govukAccordion({
+  id: "accordion-with-summary-sections",
+  items: [
+    {
+      heading: {
+        text: "Tenant Id"
+      },
+      content: {
+        html:
+        '
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="sort">
+            Map to:
+          </label>
+          <select class="govuk-select" id="sort" name="sort">
+            <option value="" selected></option>
+            <option value="Id">Id</option>
+            <option value="Address 1">Address 1</option>
+            <option value="Address 1">Address 1</option>
+            <option value="Postcode">Postcode</option>
+          </select>
+        </div>
+        '
+      }
+    },
+        {
+      heading: {
+        text: "House Number"
+      },
+      content: {
+        html:
+        '
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="sort">
+            Map to:
+          </label>
+          <select class="govuk-select" id="sort" name="sort">
+            <option value="" selected></option>
+            <option value="Id">Id</option>
+            <option value="Address 1">Address 1</option>
+            <option value="Address 1">Address 1</option>
+            <option value="Postcode">Postcode</option>
+          </select>
+        </div>
+        '
+      }
+    },
+            {
+      heading: {
+        text: "Street"
+      },
+      content: {
+        html:
+        '
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="sort">
+            Map to:
+          </label>
+          <select class="govuk-select" id="sort" name="sort">
+            <option value="" selected></option>
+            <option value="Id">Id</option>
+            <option value="Address 1">Address 1</option>
+            <option value="Address 1">Address 1</option>
+            <option value="Postcode">Postcode</option>
+          </select>
+        </div>
+        '
+      }
+    },
+                {
+      heading: {
+        text: "Town"
+      },
+      content: {
+        html:
+        '
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="sort">
+            Map to:
+          </label>
+          <select class="govuk-select" id="sort" name="sort">
+            <option value="" selected></option>
+            <option value="Id">Id</option>
+            <option value="Address 1">Address 1</option>
+            <option value="Address 1">Address 1</option>
+            <option value="Postcode">Postcode</option>
+          </select>
+        </div>
+        '
+      }
+    }
+  ]
+}) }}
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
