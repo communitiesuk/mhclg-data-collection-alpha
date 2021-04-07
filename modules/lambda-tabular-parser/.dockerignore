@@ -1,0 +1,4 @@
+*.tf
+__pycache__/
+fixtures/
+.pytest_cache/
