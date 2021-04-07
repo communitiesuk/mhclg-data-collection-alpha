@@ -27,7 +27,7 @@ def handler(event, context):
                 'stored': f"s3://{environ.get('S3_BUCKET')}::{upload_key}"
             },
             'data': parse_tabular(uploaded_file),
-        }),
+        }, cls=NumpyEncoder),
         'isBase64Encoded': False,
     }
 
@@ -49,7 +49,7 @@ def parse_tabular(file):
         "columns": headers,
         "data": unique_data_values
     }
-    return json.dumps(file_structure, cls=NumpyEncoder)
+    return file_structure
 
 
 class NumpyEncoder(json.JSONEncoder):
