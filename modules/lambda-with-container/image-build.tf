@@ -5,13 +5,18 @@ data "archive_file" "codebase" {
   type        = "zip"
 }
 
+variable "fake_sensitive" {
+  default = "secret"
+  sensitive = true
+}
+
 resource "null_resource" "build-image" {
   triggers = {
     code-files-changed = data.archive_file.codebase.output_md5
   }
 
   provisioner "local-exec" {
-    command = "aws ecr get-login-password | docker login --username AWS --password-stdin ${local.ecr_hostname}"
+    command = "echo ${var.fake_sensitive} && docker login --username AWS --password $(aws ecr get-login-password) ${local.ecr_hostname}"
   }
 
   provisioner "local-exec" {
