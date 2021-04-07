@@ -1,4 +1,5 @@
 from base64 import b64decode
+from io import StringIO
 import json
 from os import environ
 from uuid import uuid4
@@ -31,8 +32,12 @@ def handler(event, context):
     }
 
 
-def parse_excel(file):
-    df = pd.read_excel(file, na_values=[' '])
+def parse_tabular(file):
+    try:
+        df = pd.read_excel(file, na_values=[' '])
+    except ValueError:
+        s = StringIO(str(file, 'utf-8'))
+        df = pd.read_csv(s, na_values=[' '])
 
     headers = df.columns.values.tolist()
 
