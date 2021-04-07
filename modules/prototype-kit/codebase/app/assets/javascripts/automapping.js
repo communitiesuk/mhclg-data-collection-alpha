@@ -60,7 +60,6 @@ function findBestMatches(){
 
 function orderedMatches(){
   let matchedData = findBestMatches()
-  console.log(matchedData)
   let out = {}
 
   $.each(Object.keys(matchedData), function(i, key){
