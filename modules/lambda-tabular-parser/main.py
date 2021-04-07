@@ -26,7 +26,7 @@ def handler(event, context):
             'meta': {
                 'stored': f"s3://{environ.get('S3_BUCKET')}::{upload_key}"
             },
-            'data': parse_excel(uploaded_file),
+            'data': parse_tabular(uploaded_file),
         }),
         'isBase64Encoded': False,
     }
