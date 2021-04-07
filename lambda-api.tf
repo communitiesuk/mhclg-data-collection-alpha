@@ -28,3 +28,7 @@ module "lambda-tabular-parser" {
 locals {
   tabular-parser-uri = "${aws_api_gateway_stage.alpha.invoke_url}/parse-tabular"
 }
+
+output "tabular-parser-uri" {
+  value = local.tabular-parser-uri
+}
