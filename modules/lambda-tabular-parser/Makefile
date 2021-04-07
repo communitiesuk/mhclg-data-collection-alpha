@@ -14,7 +14,7 @@ test:
 		--env S3_PREFIX="tabular-parser/" \
 		--name $(DOCKER_TEST_IMAGE_NAME) \
 		$(DOCKER_TEST_IMAGE_NAME) &
-	@sleep 2
+	@sleep 4
 	@curl -i -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -w "\n" -d @test-input.json
 	@docker kill $(DOCKER_TEST_IMAGE_NAME)
 	@docker rm $(DOCKER_TEST_IMAGE_NAME)
