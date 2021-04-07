@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Task list
+{% endblock %}
+
+{% block content %}
+
+  <script src="/public/javascripts/mhclg_column_data.js"></script>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        Data mapping
+      </h1>
+
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-2">Upload successful</h2>
+      <p class="govuk-body govuk-!-margin-bottom-7">Please select a data type to map your data to the CORE database.</p>
+
+      <ol class="app-task-list" id="group-list">
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    function addQuestions(sectionId){
+      return function questions(index, question){
+         const questionItem = `
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/mapping.html" aria-describedby="eligibility-status">
+                   ${question}
+                </a>
+              </span>
+              <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="list-convictions-status">Not started</strong>
+            </li>
+           `
+          $(sectionId).append(questionItem);
+      }
+    }
+
+    function group(index, groupData){
+          console.log(groupData)
+      const groupList = `
+        <li>
+          <h2 class="app-task-list__section">
+   <span class="app-task-list__section-number"></span>${groupData.name}
+          </h2>
+          <ul class="app-task-list__items" id="group-list-items-${index}">
+          </ul>
+            `
+
+      $("#group-list").append(groupList);
+      $.each(groupData.columns, addQuestions(`#group-list-items-${index}`))
+    }
+
+    $.each(mhclg_data_columns, group);
+  </script>
+
+{% endblock %}
+
+<!--
+        <li>
+          <h2 class="app-task-list__section">
+            <span class="app-task-list__section-number">1. </span> Tenancy details
+          </h2>
+          <ul class="app-task-list__items">
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/mapping.html" aria-describedby="eligibility-status">
+                  Tenancy start date
+                </a>
+              </span>
+              <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="list-convictions-status">Not started</strong>
+            </li>
+          </ul>
+        </li>
+-->
