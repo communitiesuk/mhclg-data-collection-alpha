@@ -24,11 +24,6 @@ jobs:
       TF_VAR_prototype_kit_web_password: ${{ secrets.PROTOTYPE_WEB_PASSWORD }}
 
     steps:
-    - id: install-aws-cli
-      uses: unfor19/install-aws-cli-action@v1
-      with:
-        version: 2 # default
-        verbose: false # default
 
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
