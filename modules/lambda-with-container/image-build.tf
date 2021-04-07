@@ -11,7 +11,11 @@ resource "null_resource" "build-image" {
   }
 
   provisioner "local-exec" {
-    command = "docker login -u AWS -p $(aws ecr get-login-password) ${local.ecr_hostname}"
+    command = "aws --version"
+  }
+
+  provisioner "local-exec" {
+    command = "aws ecr get-login-password | docker login --username AWS --password-stdin ${local.ecr_hostname}"
   }
 
   provisioner "local-exec" {
