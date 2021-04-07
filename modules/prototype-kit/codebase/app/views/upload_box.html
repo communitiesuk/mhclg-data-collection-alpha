@@ -9,15 +9,15 @@ block beforeContent %}
     <!-- Bulk upload bullet points -->
     <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
       <li>Submit data direct</li>
-      <li>Supported formats; CSV, PDF, XML</li>
+      <li>Supported formats; CSV, XLS, XLSX</li>
       <li>Match your data for faster data entry</li>
     </ul>
 
     <!-- Form and validation script -->
     <script>
-      var _validFileExtensions = [".pdf", ".csv", ".xml"]; //File extensions that we accept
+      var _validFileExtensions = [".csv", ".xls", ".xlsx"]; //File extensions that we accept
       let validation = false; //Valid boolean
-      let privacyNoteTick = false;
+      let privacyNoteTick = false; //Privacy note boolean
       //*
       // Adds the styles and span to the error components
       //*
@@ -42,9 +42,8 @@ block beforeContent %}
               .getElementById("govuk-form-group")
               .classList.remove("govuk-form-group--error");
       };
-
       //*
-      // update
+      // Update when privacy note checkbox changed
       //*
       function updatedPrivacyNote(checked) {
         privacyNoteTick = checked;
@@ -85,19 +84,22 @@ block beforeContent %}
       //*
       // Check validation has been passed on form submit
       //*
-      function isValidForm() {
+      function submitForm() {
+        setErrorStyles();
         let submit = validation && privacyNoteTick ? true : false;
         return submit;
       }
     </script>
 
+    <!-- form start -->
     <form
       class="upload"
-      onsubmit="return isValidForm();"
+      onsubmit="return submitForm();"
       action="/mapping-2"
       method="post"
     >
       <div class="govuk-form-group" id="govuk-form-group">
+        <!-- checkbox start -->
         <div class="govuk-checkboxes govuk-!-padding-bottom-4">
           <div class="govuk-checkboxes__item">
             <input
@@ -114,8 +116,12 @@ block beforeContent %}
             </label>
           </div>
         </div>
+        <!-- checkbox end -->
 
+        <!-- upload file start -->
         <label class="govuk-label" for="file-upload-1"> Upload a file </label>
+
+        <!-- errors start -->
         <span
           style="display: none"
           id="file-upload-2-error"
@@ -130,19 +136,24 @@ block beforeContent %}
           class="govuk-error-message"
         >
           <span class="govuk-visually-hidden">Error:</span> The file must be
-          PDF, CSV or XML.
+          .csv, .xls, .xlsx.
         </span>
+        <!-- errors end -->
+
         <input
           class="govuk-file-upload govuk-file-upload--error"
           id="file-upload-1"
+          accept=".csv, .xls, .xlsx"
           name="file-upload-1"
           type="file"
           aria-describedby="file-upload-1-error"
           onchange="return validateFileType(this)"
         />
+        <!-- upload file end -->
       </div>
       <button class="govuk-button" data-module="govuk-button">Continue</button>
     </form>
+    <!-- form end -->
   </div>
 </div>
 {% endblock %}
