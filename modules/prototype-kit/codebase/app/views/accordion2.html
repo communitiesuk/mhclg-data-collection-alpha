@@ -29,11 +29,11 @@
 <script src="/public/javascripts/automapping.js"></script>
 <script>
   const mapping = {}
-  const bestMatches = findBestMatches()
+  const bestMatches = orderedMatches()
   console.log(bestMatches)
 
   function buildSection(i, column){
-      let matches = Object.keys(bestMatches[column])
+      let matches = bestMatches[column]
       let bestMatch = matches.length > 0 ? matches[0] : null;
       var options = "";
       $.each(theirColumns, function(i, column){
@@ -73,7 +73,7 @@
   }
 
   function buildAccordion(){
-    $.each(ourColumns, buildSection) 
+    $.each(ourColumns, buildSection)
   }
 
   buildAccordion()
