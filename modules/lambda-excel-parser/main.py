@@ -1,5 +1,8 @@
 from base64 import b64decode
 import json
+from os import environ
+from uuid import uuid4
+import boto3
 import numpy
 import pandas as pd
 
@@ -7,11 +10,23 @@ import pandas as pd
 def handler(event, context):
     print("event: {}".format(event))
 
-    sheet = b64decode(event['body'])
+    uploaded_file = b64decode(event['body'])
+
+    s3 = boto3.resource('s3')
+    upload_key = f"{environ.get('S3_PREFIX')}{uuid4()}"
+    upload = s3.Object(environ.get("S3_BUCKET"), upload_key)
+    upload.put(Body=uploaded_file)
+
+    print(f"Uploaded file to: {upload_key}")
 
     return {
         'statusCode': 200,
-        'body': parse_excel(sheet),
+        'body': {
+            'meta': {
+                'stored': f"s3://{environ.get('S3_BUCKET')}::{upload_key}"
+            },
+            'data': parse_excel(uploaded_file),
+        },
         'isBase64Encoded': False,
     }
 

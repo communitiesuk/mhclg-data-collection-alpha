@@ -20,7 +20,11 @@ module "lambda-with-container" {
   codebase    = path.module
   name        = "lambda-excel-parser"
   name_prefix = "mhclg-data-collection"
-  tags        = var.tags
+  environment = {
+    S3_BUCKET = var.s3_upload_bucket.bucket
+    S3_PREFIX = "excel-parser/"
+  }
+  tags = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_accesses_s3" {

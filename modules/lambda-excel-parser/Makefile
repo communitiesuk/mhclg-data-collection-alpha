@@ -10,6 +10,8 @@ test:
 		--env AWS_DEFAULT_REGION=$$AWS_DEFAULT_REGION \
 		--env AWS_ACCESS_KEY_ID=$$AWS_ACCESS_KEY_ID \
 		--env AWS_SECRET_ACCESS_KEY=$$AWS_SECRET_ACCESS_KEY \
+		--env S3_BUCKET="test-things-45134-data-upload" \
+		--env S3_PREFIX="excel-parser/" \
 		--name $(DOCKER_TEST_IMAGE_NAME) \
 		$(DOCKER_TEST_IMAGE_NAME) &
 	@sleep 2

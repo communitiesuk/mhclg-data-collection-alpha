@@ -18,6 +18,12 @@ variable "tags" {
   type        = map(string)
 }
 
+variable "environment" {
+  description = "The AWS tags to apply to all infrastructure"
+  type        = map(string)
+  default     = {}
+}
+
 variable "handler" {
   description = "The function that will be called when the lambda executes."
   type        = string
