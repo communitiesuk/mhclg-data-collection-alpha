@@ -6,6 +6,9 @@ resource "aws_api_gateway_rest_api" "data-collection" {
 
 resource "aws_api_gateway_deployment" "alpha" {
   rest_api_id = aws_api_gateway_rest_api.data-collection.id
+  depends_on = [
+    module.lambda-tabular-parser
+  ]
 }
 
 resource "aws_api_gateway_stage" "alpha" {
@@ -13,19 +16,6 @@ resource "aws_api_gateway_stage" "alpha" {
   deployment_id = aws_api_gateway_deployment.alpha.id
   stage_name    = "alpha"
   tags          = var.default_tags
-}
-
-resource "aws_api_gateway_resource" "tabular-parser" {
-  rest_api_id = aws_api_gateway_rest_api.data-collection.id
-  parent_id   = aws_api_gateway_rest_api.data-collection.root_resource_id
-  path_part   = "test"
-}
-
-resource "aws_api_gateway_method" "tabular-parser" {
-  rest_api_id   = aws_api_gateway_rest_api.data-collection.id
-  resource_id   = aws_api_gateway_resource.tabular-parser.id
-  http_method   = "GET"
-  authorization = "NONE"
 }
 
 module "lambda-tabular-parser" {
@@ -36,6 +26,6 @@ module "lambda-tabular-parser" {
   tags             = var.default_tags
 }
 
-output "tabular-parser-url" {
-  value = module.lambda-tabular-parser.public_endpoint
+locals {
+  tabular-parser-uri = "${aws_api_gateway_stage.alpha.invoke_url}/parse-tabular"
 }
