@@ -5,6 +5,13 @@ resource "aws_lambda_function" "lambda" {
   role          = aws_iam_role.execution.arn
   tags          = local.tags
 
+  dynamic "environment" {
+    for_each = length(var.environment) > 0 ? [1] : []
+    content {
+      variables = var.environment
+    }
+  }
+
   lifecycle {
     create_before_destroy = true
   }
