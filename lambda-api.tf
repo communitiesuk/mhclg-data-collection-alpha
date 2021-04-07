@@ -22,7 +22,6 @@ module "lambda-tabular-parser" {
   source           = "./modules/lambda-tabular-parser"
   s3_upload_bucket = aws_s3_bucket.core-data
   rest_api         = aws_api_gateway_rest_api.data-collection
-  api_stage        = aws_api_gateway_stage.alpha
   tags             = var.default_tags
 }
 
