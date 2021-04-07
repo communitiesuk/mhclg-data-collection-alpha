@@ -21,12 +21,12 @@ def handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': {
+        'body': json.dumps({
             'meta': {
                 'stored': f"s3://{environ.get('S3_BUCKET')}::{upload_key}"
             },
             'data': parse_excel(uploaded_file),
-        },
+        }),
         'isBase64Encoded': False,
     }
 

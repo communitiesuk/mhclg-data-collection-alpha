@@ -18,11 +18,11 @@ variable "api_stage" {
 module "lambda-with-container" {
   source      = "../lambda-with-container"
   codebase    = path.module
-  name        = "lambda-excel-parser"
+  name        = "lambda-tabular-parser"
   name_prefix = "mhclg-data-collection"
   environment = {
     S3_BUCKET = var.s3_upload_bucket.bucket
-    S3_PREFIX = "excel-parser/"
+    S3_PREFIX = "tabular-parser/"
   }
   tags = var.tags
 }
@@ -38,32 +38,32 @@ resource "aws_iam_policy" "lambda_accesses_s3" {
 
 data "aws_iam_policy_document" "lambda_accesses_s3" {
   statement {
-    effect = "Allow"
+    effect  = "Allow"
     actions = ["s3:PutObject"]
     resources = [
-      "${var.s3_upload_bucket.arn}/excel-parser",
-      "${var.s3_upload_bucket.arn}/excel-parser/*"
+      "${var.s3_upload_bucket.arn}/tabular-parser",
+      "${var.s3_upload_bucket.arn}/tabular-parser/*"
     ]
   }
 }
 
-resource "aws_api_gateway_resource" "data-collection" {
+resource "aws_api_gateway_resource" "tabular-parser" {
   rest_api_id = var.rest_api.id
   parent_id   = var.rest_api.root_resource_id
-  path_part   = "parse-excel"
+  path_part   = "parse-tabular"
 }
 
-resource "aws_api_gateway_method" "data-collection" {
+resource "aws_api_gateway_method" "tabular-parser" {
   rest_api_id   = var.rest_api.id
-  resource_id   = aws_api_gateway_resource.data-collection.id
+  resource_id   = aws_api_gateway_resource.tabular-parser.id
   http_method   = "POST"
   authorization = "NONE"
 }
 
 resource "aws_api_gateway_integration" "lambda" {
   rest_api_id = var.rest_api.id
-  resource_id = aws_api_gateway_method.data-collection.resource_id
-  http_method = aws_api_gateway_method.data-collection.http_method
+  resource_id = aws_api_gateway_method.tabular-parser.resource_id
+  http_method = aws_api_gateway_method.tabular-parser.http_method
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
@@ -78,9 +78,9 @@ resource "aws_lambda_permission" "apigw_lambda" {
   action        = "lambda:InvokeFunction"
   function_name = module.lambda-with-container.lambda-function.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn = "arn:aws:execute-api:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${var.rest_api.id}/*/${aws_api_gateway_method.data-collection.http_method}${aws_api_gateway_resource.data-collection.path}"
+  source_arn    = "arn:aws:execute-api:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${var.rest_api.id}/*/${aws_api_gateway_method.tabular-parser.http_method}${aws_api_gateway_resource.tabular-parser.path}"
 }
 
 output "public_endpoint" {
-  value = "${var.api_stage.invoke_url}${aws_api_gateway_resource.data-collection.path}"
+  value = "${var.api_stage.invoke_url}${aws_api_gateway_resource.tabular-parser.path}"
 }
