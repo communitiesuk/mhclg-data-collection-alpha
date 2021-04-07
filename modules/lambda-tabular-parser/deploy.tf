@@ -11,10 +11,6 @@ variable "rest_api" {
   description = "The rest api this function integrates with"
 }
 
-variable "api_stage" {
-  description = "The rest api this function integrates with"
-}
-
 module "lambda-with-container" {
   source      = "../lambda-with-container"
   codebase    = path.module
@@ -79,8 +75,4 @@ resource "aws_lambda_permission" "apigw_lambda" {
   function_name = module.lambda-with-container.lambda-function.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "arn:aws:execute-api:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${var.rest_api.id}/*/${aws_api_gateway_method.tabular-parser.http_method}${aws_api_gateway_resource.tabular-parser.path}"
-}
-
-output "public_endpoint" {
-  value = "${var.api_stage.invoke_url}${aws_api_gateway_resource.tabular-parser.path}"
 }

@@ -3,7 +3,7 @@ Description=GOVUK Prototype Service
 After=network.target
 
 [Service]
-Environment=PORT=80 NODE_ENV=production USERNAME=mhclg PASSWORD=${password}
+Environment=PORT=80 NODE_ENV=production USERNAME=mhclg PASSWORD=${password} TABULAR_PARSER_URI=${tabular_parser_uri}
 User=root
 Type=simple
 WorkingDirectory=/home/ec2-user/app

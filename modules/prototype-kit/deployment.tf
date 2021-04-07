@@ -21,6 +21,11 @@ variable "web_password" {
   sensitive   = true
 }
 
+variable "tabular_parser_uri" {
+  type        = string
+  description = "The URI of the tabular data parser"
+}
+
 resource "aws_key_pair" "prototype_deployment" {
   key_name   = "mhclg-data-collection-prototype-deployment"
   public_key = var.public_ssh
@@ -102,7 +107,8 @@ resource "null_resource" "deploy" {
 
   provisioner "file" {
     content = templatefile("${path.module}/prototype.service", {
-      password = var.web_password
+      password           = var.web_password
+      tabular_parser_uri = var.tabular_parser_uri
     })
     destination = "/home/ec2-user/prototype.service"
   }
