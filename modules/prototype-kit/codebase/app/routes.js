@@ -15,7 +15,7 @@ router.post(
     const {buffer: file, mimetype} = req.file
     const {data: parsedTabularDocument} = await axios.post(url, file)
 
-    res.render(req.query.template || "mapping-2", {
+    res.render(req.query.template || "task-list-3", {
       parsedTabularDocument,
     })
   },

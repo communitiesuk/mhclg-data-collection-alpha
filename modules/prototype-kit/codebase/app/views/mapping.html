@@ -10,10 +10,18 @@
 
 {% block content %}
 
+<div>
+  DATA:
+
+{% for header in parsedTabularDocument.data.columns %}
+{{ header }}
+{% endfor %}
+</div>
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-xl">Map the tenancy start date</h1>
+      <h1 class="govuk-heading-xl">Map the {{ data.columnToEdit }}</h1>
 
       {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
@@ -23,13 +31,13 @@
         name: "changed-name",
         fieldset: {
           legend: {
-            text: "Type of letting",
+            text: data.columnToEdit,
             isPageHeading: true,
             classes: "govuk-fieldset__legend--l"
           }
         },
         hint: {
-          text: "Select the matching data type from your data for 'Type of letting'"
+          text: "Select the matching data type from your data for'"+data.columnToEdit+"'"
         },
         items: [
           {
