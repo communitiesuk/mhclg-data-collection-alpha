@@ -20,10 +20,9 @@ router.post(
       mimetype,
     })
 
-    const outputData = req.session.data
-    outputData['parsedTabularDocument'] = parsedTabularDocument
+    req.session.data.parsedTabularDocument = parsedTabularDocument
 
-    res.render(req.query.template || "task-list-3", outputData)
+    res.render(req.query.template || "task-list-3")
   },
 )
 
