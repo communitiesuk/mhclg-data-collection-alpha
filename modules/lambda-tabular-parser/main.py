@@ -9,14 +9,16 @@ import pandas as pd
 
 
 def handler(event, context):
-    print("event: {}".format(event))
+    uploaded_data = json.loads(b64decode(event['body']))
 
-    uploaded_file = b64decode(event['body'])
+    file_name = uploaded_data['filename']
+    mimetype = uploaded_data['mimetype']
+    uploaded_file = b64decode(uploaded_data['file'])
 
     s3 = boto3.resource('s3')
-    upload_key = f"{environ.get('S3_PREFIX')}{uuid4()}"
+    upload_key = f"{environ.get('S3_PREFIX')}{uuid4()}-{file_name}"
     upload = s3.Object(environ.get("S3_BUCKET"), upload_key)
-    upload.put(Body=uploaded_file)
+    upload.put(Body=uploaded_file, ContentType=mimetype)
 
     print(f"Uploaded file to: {upload_key}")
 
