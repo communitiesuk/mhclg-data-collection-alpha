@@ -30,6 +30,18 @@ variable "handler" {
   default     = "main.handler"
 }
 
+variable "timeout" {
+  description = "The number of seconds this function can run for before being halted."
+  type        = number
+  default     = 3
+}
+
+variable "memory" {
+  description = "The amount of RAM allocated to the functions execution environment."
+  type        = number
+  default     = 128
+}
+
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
