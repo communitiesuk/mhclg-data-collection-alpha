@@ -15,7 +15,7 @@ router.post(
     const {buffer: file, mimetype, originalname: filename} = req.file
 
     const {data: parsedTabularDocument} = await axios.post(url, {
-      file,
+      file: file.toString('base64'),
       filename,
       mimetype,
     })
