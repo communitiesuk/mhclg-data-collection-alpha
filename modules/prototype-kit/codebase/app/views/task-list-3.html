@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Task list
+{% endblock %}
+
+{% block content %}
+
+<script>
+  function edit(columnName){
+    $("#columnToEdit").attr("value", columnName);
+    $("#edit-form").submit()
+  }
+</script>
+
+<form action="/mapping" id="edit-form">
+  <input type="hidden" id="columnToEdit" name="columnToEdit" value="" />
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-xl">
+        Data mapping
+      </h1>
+
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-2">Page {{ 1 + data.nextPage | int }}
+        of {{data.mhclg_data_columns|length }}</h2>
+      <p class="govuk-body govuk-!-margin-bottom-7">Please select a data type to map your data to the CORE database.</p>
+
+      <ol class="app-task-list" id="group-list">
+        <li>
+          <h2 class="app-task-list__section">
+            <span class="app-task-list__section-number"></span>
+            {{ data.mhclg_data_columns[data.nextPage].columnName }}
+          </h2>
+          <ul class="app-task-list__items" id="group-list-items-${index}">
+            {% for question in data.mhclg_data_columns[data.nextPage].columns %}
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                {{ question.name }}
+                {% if question.mappedTo %}
+                &nbsp;&nbsp;&#8250;&nbsp;&nbsp; {{ question.mappedTo }}
+                {% endif %}
+              </span>
+              <a href="javascript:edit('{{ question.name }}')" class="app-task-list__tag govuk-link--no-visited-state"
+   style="padding-left: 10px">Edit</a>
+   <strong class="govuk-tag govuk-tag--{% if question.mappedTo %}green{% else %}grey{% endif %} app-task-list__tag"
+           id="list-convictions-status">
+     {% if question.mappedTo %}Mapped{% else %}Unmapped{% endif %}
+   </strong>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </div>
+</form>
+
+<form action="/task-list-3" id="task-form">
+  <input type="hidden" name="current_page" value="{{ data.nextPage | int }}" />
+  <input type="hidden" name="nextPage" value="{{ 1 + data.nextPage | int }}" />
+  <input type="submit" value="Next Page" class="govuk-button" data-module="govuk-button" />
+
+</form>
+{% endblock %}
+
