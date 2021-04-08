@@ -4,6 +4,8 @@ resource "aws_lambda_function" "lambda" {
   image_uri     = local.remote_image_name
   role          = aws_iam_role.execution.arn
   tags          = local.tags
+  timeout       = var.timeout
+  memory_size   = var.memory
 
   dynamic "environment" {
     for_each = length(var.environment) > 0 ? [1] : []

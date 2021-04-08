@@ -20,7 +20,9 @@ module "lambda-with-container" {
     S3_BUCKET = var.s3_upload_bucket.bucket
     S3_PREFIX = "tabular-parser/"
   }
-  tags = var.tags
+  timeout = 15
+  memory  = 256
+  tags    = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_accesses_s3" {
