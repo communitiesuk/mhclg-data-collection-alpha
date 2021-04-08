@@ -95,8 +95,9 @@ block beforeContent %}
     <form
       class="upload"
       onsubmit="return submitForm();"
-      action="/mapping-2"
+      action="/upload/tabular-data?template=mapping-2"
       method="post"
+      enctype="multipart/form-data"
     >
       <div class="govuk-form-group" id="govuk-form-group">
         <!-- checkbox start -->
@@ -144,7 +145,7 @@ block beforeContent %}
           class="govuk-file-upload govuk-file-upload--error"
           id="file-upload-1"
           accept=".csv, .xls, .xlsx"
-          name="file-upload-1"
+          name="file"
           type="file"
           aria-describedby="file-upload-1-error"
           onchange="return validateFileType(this)"
