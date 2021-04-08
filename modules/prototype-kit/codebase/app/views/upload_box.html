@@ -4,14 +4,8 @@ block beforeContent %}
 {% endblock %} {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl">Bulk upload</h1>
-
-    <!-- Bulk upload bullet points -->
-    <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
-      <li>Submit data direct</li>
-      <li>Supported formats; CSV, XLS, XLSX</li>
-      <li>Match your data for faster data entry</li>
-    </ul>
+    <h1 class="govuk-heading-xl">Upload your data</h1>
+    <p class="govuk-caption-m">Choose the files that contain your data, we will then ask you to map these to ours before you can continue your submission.</p>
 
     <!-- Form and validation script -->
     <script>
@@ -100,27 +94,8 @@ block beforeContent %}
       enctype="multipart/form-data"
     >
       <div class="govuk-form-group" id="govuk-form-group">
-        <!-- checkbox start -->
-        <div class="govuk-checkboxes govuk-!-padding-bottom-4">
-          <div class="govuk-checkboxes__item">
-            <input
-              class="govuk-checkboxes__input"
-              id="privacy-note"
-              name="privacy-note"
-              type="checkbox"
-              value="privacy-note"
-              onchange="updatedPrivacyNote(this.checked)"
-            />
-            <label class="govuk-label govuk-checkboxes__label" for="waste">
-              I confirm I have shown the
-              <a href="#" class="govuk-link">privacy note</a> set out by MHCLG
-            </label>
-          </div>
-        </div>
-        <!-- checkbox end -->
-
         <!-- upload file start -->
-        <label class="govuk-label" for="file-upload-1"> Upload a file </label>
+        <label class="govuk-label" for="file-upload-1"> <strong>Upload a file</strong> </label>
 
         <!-- errors start -->
         <span
@@ -151,10 +126,70 @@ block beforeContent %}
           onchange="return validateFileType(this)"
         />
         <!-- upload file end -->
+
+        <!-- checkbox start -->
+        <div class="govuk-checkboxes govuk-!-padding-bottom-4 govuk-!-padding-top-4">
+          <div class="govuk-checkboxes__item">
+            <input
+              class="govuk-checkboxes__input"
+              id="privacy-note"
+              name="privacy-note"
+              type="checkbox"
+              value="privacy-note"
+              onchange="updatedPrivacyNote(this.checked)"
+            />
+            <label class="govuk-label govuk-checkboxes__label" for="waste">
+              I confirm I have shown the
+              <a href="#" class="govuk-link">privacy note</a> set out by MHCLG
+            </label>
+          </div>
+        </div>
+        <!-- checkbox end -->
       </div>
-      <button class="govuk-button" data-module="govuk-button">Continue</button>
+      <button class="govuk-button" data-module="govuk-button">Upload data</button>
     </form>
     <!-- form end -->
+
+    <!-- Start accordion -->
+    <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+      <div class="govuk-accordion__section ">
+        <div class="govuk-accordion__section-header">
+          <h2 class="govuk-accordion__section-heading">
+            <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
+              What formats can I use?
+            </span>
+          </h2>
+        </div>
+        <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
+          <p class='govuk-body'>Supported formats: CSV, XLS, XLSX. Please note only one header can be used for these file types.</p>
+        </div>
+      </div>
+      <div class="govuk-accordion__section ">
+        <div class="govuk-accordion__section-header">
+          <h2 class="govuk-accordion__section-heading">
+            <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
+              Can I upload more than one file?
+            </span>
+          </h2>
+        </div>
+        <div id="accordion-default-content-2" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-2">
+          <p class='govuk-body'>Not right now, we are working hard to allow multiple file uploads. For now we reccomend combining your files into one sheet with one set of headers only if you have multiple sources.</p>
+        </div>
+      </div>
+      <div class="govuk-accordion__section ">
+        <div class="govuk-accordion__section-header">
+          <h2 class="govuk-accordion__section-heading">
+            <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+              I am getting an error, I need help
+            </span>
+          </h2>
+        </div>
+        <div id="accordion-default-content-3" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-3">
+          <p class='govuk-body'>Please email support@support.com with your query and we will try to respond in 3 working days.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 {% endblock %}
