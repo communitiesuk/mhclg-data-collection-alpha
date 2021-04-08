@@ -12,8 +12,13 @@ router.post(
   upload.single('file'),
   async (req, res) => {
     const url = process.env.TABULAR_PARSER_URI
-    const {buffer: file, mimetype} = req.file
-    const {data: parsedTabularDocument} = await axios.post(url, file)
+    const {buffer: file, mimetype, originalname: filename} = req.file
+
+    const {data: parsedTabularDocument} = await axios.post(url, {
+      file,
+      filename,
+      mimetype,
+    })
 
     res.render(req.query.template || "mapping-2", {
       parsedTabularDocument,
