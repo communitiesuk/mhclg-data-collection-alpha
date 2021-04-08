@@ -15,20 +15,40 @@ def handler(event, context):
     mimetype = uploaded_data['mimetype']
     uploaded_file = b64decode(uploaded_data['file'])
 
+    log(context, {
+        'event': "upload:received",
+        'filename': file_name,
+        'mimetype': mimetype,
+    })
+
     s3 = boto3.resource('s3')
     upload_key = f"{environ.get('S3_PREFIX')}{uuid4()}-{file_name}"
     upload = s3.Object(environ.get("S3_BUCKET"), upload_key)
     upload.put(Body=uploaded_file, ContentType=mimetype)
 
-    print(f"Uploaded file to: {upload_key}")
+    log(context, {
+        'event': "upload:stored",
+        'filename': file_name,
+        'mimetype': mimetype,
+        's3_location': upload_key,
+    })
+
+    parsed_data = parse_tabular(uploaded_file)
+
+    log(context, {
+        'event': "upload:parsed",
+        's3_location': upload_key,
+        'parsed_data': parsed_data,
+    })
 
     return {
         'statusCode': 200,
         'body': json.dumps({
             'meta': {
-                'stored': f"s3://{environ.get('S3_BUCKET')}::{upload_key}"
+                'stored': f"s3://{environ.get('S3_BUCKET')}/{upload_key}",
+                'request_id': context.aws_request_id,
             },
-            'data': parse_tabular(uploaded_file),
+            'data': parsed_data,
         }, cls=NumpyEncoder),
         'isBase64Encoded': False,
     }
@@ -67,3 +87,8 @@ class NumpyEncoder(json.JSONEncoder):
         elif isinstance(obj, (numpy.ndarray,)):
             return obj.tolist()
         return json.JSONEncoder.default(self, obj)
+
+
+def log(context, event):
+    event['request_id'] = context.aws_request_id
+    print(json.dumps(event, cls=NumpyEncoder))
