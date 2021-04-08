@@ -20,7 +20,8 @@ router.post(
       mimetype,
     })
 
-    req.session.data.parsedTabularDocument = parsedTabularDocument
+    req.session.data.columns = parsedTabularDocument.data.columns
+    console.log(req.session.data)
 
     res.render(req.query.template || "task-list-3")
   },

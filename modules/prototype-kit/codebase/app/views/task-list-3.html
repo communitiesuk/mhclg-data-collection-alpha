@@ -13,10 +13,6 @@
   }
 </script>
 
-{% for header in data.parsedTabularDocument.data.columns %}
-{{ header }}
-{% endfor %}
-
 <form action="/mapping" id="edit-form">
   <input type="hidden" id="columnToEdit" name="columnToEdit" value="" />
   <div class="govuk-grid-row">

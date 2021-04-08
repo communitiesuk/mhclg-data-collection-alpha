@@ -11,8 +11,6 @@
 {% block content %}
 
 <div>
-  DATA:
-
 {% for header in data.parsedTabularDocument.data.columns %}
 {{ header }}
 {% endfor %}
@@ -23,6 +21,7 @@
 
       <h1 class="govuk-heading-xl">Map the {{ data.columnToEdit }}</h1>
 
+      <form action="/map-columns" method="post">
       {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
       {{ govukRadios({
@@ -50,10 +49,12 @@
           },
           {
             value: "no",
-            text: "Property type"
+            text: "Archetype"
           }
         ]
 }) }}
+
+      </form>
 
 
 {% from "govuk/components/button/macro.njk" import govukButton %}
