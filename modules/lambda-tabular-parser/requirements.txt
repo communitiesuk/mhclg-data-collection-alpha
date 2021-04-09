@@ -2,3 +2,5 @@ boto3==1.17.40
 openpyxl==3.0.7
 pandas==1.2.3
 xlrd==2.0.1
+fuzzywuzzy==0.18.0
+python-levenshtein==0.12.2

@@ -1,6 +1,6 @@
 FROM public.ecr.aws/lambda/python:3.8
 
-RUN yum install -y amazon-linux-extras
+RUN yum install -y amazon-linux-extras gcc
 
 RUN pip install --upgrade pip
 
