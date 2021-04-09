@@ -19,8 +19,12 @@ router.post(
       filename,
       mimetype,
     })
+    console.log(parsedTabularDocument.data.column_mapping)
 
     req.session.data.columns = parsedTabularDocument.data.columns
+    if (parsedTabularDocument.data.column_mapping){
+      req.session.data.columnMappings = parsedTabularDocument.data.column_mapping
+    }
 
     console.log(req.session.data)
     const nextPage = `/${req.query.template || "tasklist"}`

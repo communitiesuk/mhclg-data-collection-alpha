@@ -7,10 +7,13 @@ module.exports = function (env) {
    */
   var filters = {}
 
-  filters.unused = function(columns, columnMapping){
+  filters.unused = function(columns, thisColumn, columnMapping){
     if (! columnMapping) return columns
     if (! columns) return []
-    return columns.filter(col => !Object.values(columnMapping).includes(col))
+    const out = columns.filter(col => !Object.values(columnMapping).includes(col))
+    if (columnMapping[thisColumn]) out.unshift(columnMapping[thisColumn])
+    out.push("<No mapping>")
+    return out
   }
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:

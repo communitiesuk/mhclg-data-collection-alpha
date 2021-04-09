@@ -39,10 +39,12 @@
             </div>
             <div class="govuk-radios">
 
-            {% for column in data.columns|unused(data.columnMappings) %}
+            {% for column in data.columns|unused(data.columnToEdit, data.columnMappings) %}
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="mapTo" name="mapTo" type="radio" value="{{ column }}">
-                <label class="govuk-label govuk-radios__label" for="mapTo">
+                <input class="govuk-radios__input" id="mapTo-{{ column|replace(" ","-") }}" name="mapTo" type="radio" value="{{ column if column != "<No mapping>" }}"
+                  {{ "checked" if column == data.columnMappings[data.columnToEdit] }}
+                />
+                <label class="govuk-label govuk-radios__label" for="mapTo-{{ column|replace(" ","-") }}">
                   {{column}}
                 </label>
               </div>
