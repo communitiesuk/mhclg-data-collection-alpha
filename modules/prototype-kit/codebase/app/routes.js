@@ -21,9 +21,9 @@ router.post(
     })
 
     req.session.data.columns = parsedTabularDocument.data.columns
-    console.log(req.session.data)
 
-    res.render(req.query.template || "task-list-3")
+    const nextPage = `/${req.query.template || "tasklist"}`
+    res.redirect(nextPage)
   },
 )
 
@@ -41,9 +41,9 @@ router.post(
       .mhclg_data_columns[currentPage]
       .columns[columnNumber]
       .mappedTo = mapTo
-    console.log(req.session.data)
-    console.log(req.session.data.mhclg_data_columns[0].columns)
-    res.render(req.query.template || "task-list-3")
+
+    const nextPage = `/${req.query.template || "tasklist"}`
+    res.redirect(nextPage)
   }
 )
 
