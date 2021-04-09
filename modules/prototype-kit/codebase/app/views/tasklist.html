@@ -55,7 +55,7 @@
   </div>
 </form>
 
-<form action="/task-list-3" id="task-form">
+<form action="/tasklist" id="task-form">
   <input type="hidden" name="current_page" value="{{ data.nextPage | int }}" />
   <input type="hidden" name="nextPage" value="{{ 1 + data.nextPage | int }}" />
   <input type="submit" value="Next Page" class="govuk-button" data-module="govuk-button" />
