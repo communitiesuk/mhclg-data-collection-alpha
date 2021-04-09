@@ -7,8 +7,8 @@ const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 const express = require('express')
 const nunjucks = require('nunjucks')
-const sessionInCookie = require('client-sessions')
-const sessionInMemory = require('express-session')
+const session = require('express-session')
+const fileSessionStore = require('session-file-store')(session)
 
 // Run before other code to make sure variables from .env are available
 dotenv.config()
@@ -172,19 +172,15 @@ const sessionOptions = {
 }
 
 // Support session data in cookie or memory
-if (useCookieSessionStore === 'true') {
-  app.use(sessionInCookie(Object.assign(sessionOptions, {
-    cookieName: sessionName,
-    proxy: true,
-    requestKey: 'session'
-  })))
-} else {
-  app.use(sessionInMemory(Object.assign(sessionOptions, {
-    name: sessionName,
-    resave: false,
-    saveUninitialized: false
-  })))
-}
+app.use(session({
+  store: new fileSessionStore({
+    path: "/tmp/prototype-sessions"
+  }),
+  cookieName: sessionName,
+  resave: false,
+  saveUninitialized: false,
+  secret: "supersecret"
+}))
 
 // Automatically store all data users enter
 if (useAutoStoreData === 'true') {
