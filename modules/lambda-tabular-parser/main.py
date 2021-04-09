@@ -94,7 +94,10 @@ def map_colums(input_columns_list):
                 match.append(' ')
 
     df['match'] = pd.Series(match)
-    return df.set_index('mhclg_columns').to_dict()
+    df = df[['mhclg_columns', 'match']]
+    df.replace(['', ' '], numpy.nan, inplace=True)
+    df.dropna(inplace=True)
+    return df.set_index('mhclg_columns').to_dict()['match']
 
 
 class NumpyEncoder(json.JSONEncoder):
