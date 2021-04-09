@@ -27,4 +27,24 @@ router.post(
   },
 )
 
+router.post(
+  '/save-mapping',
+  async (req, res) => {
+    const mapFrom = req.session.data.mapFrom
+    const mapTo = req.session.data.mapTo
+    const currentPage = parseInt(req.session.data.currentPage)
+
+    const columnNumber = req.session.data
+      .mhclg_data_columns[currentPage].columns
+      .findIndex( item => item.name == mapFrom )
+    req.session.data
+      .mhclg_data_columns[currentPage]
+      .columns[columnNumber]
+      .mappedTo = mapTo
+    console.log(req.session.data)
+    console.log(req.session.data.mhclg_data_columns[0].columns)
+    res.render(req.query.template || "task-list-3")
+  }
+)
+
 module.exports = router

@@ -16,12 +16,17 @@
 {% endfor %}
 </div>
 
+<form action="/save-mapping" method="post">
+
+  <input type="hidden" name="currentPage" value="{{ data.nextPage }}">
+  <input type="hidden" name="mapFrom" value="{{ data.columnToEdit }}">
+  <input type="hidden" name="mapTo" value="Brian">
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-xl">Map the {{ data.columnToEdit }}</h1>
 
-      <form action="/map-columns" method="post">
 
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset" aria-describedby="changed-name-hint">
@@ -45,7 +50,6 @@
             {% endfor %}
           </fieldset>
         </div>
-      </form>
 
 
 {% from "govuk/components/button/macro.njk" import govukButton %}
@@ -53,6 +57,7 @@
 {{ govukButton({
   text: "Save and continue"
 }) }}
+      </form>
 
 
     </div>

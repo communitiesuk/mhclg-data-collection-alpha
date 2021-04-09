@@ -7,3 +7,6 @@ start: stop build
 stop:
 	- docker kill mhclg-prototype
 	- docker rm mhclg-prototype
+
+log:
+	- docker logs -f mhclg-prototype
