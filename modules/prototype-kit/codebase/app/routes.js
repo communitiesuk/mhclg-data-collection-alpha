@@ -22,7 +22,7 @@ router.post(
     console.log(parsedTabularDocument.data.column_mapping)
 
     req.session.data.columns = parsedTabularDocument.data.columns
-    if (parsedTabularDocument.data.column_mapping){
+    if (process.env.USE_LAMBDA_MAPPINGS && parsedTabularDocument.data.column_mapping){
       req.session.data.columnMappings = parsedTabularDocument.data.column_mapping
     }
 
