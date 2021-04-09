@@ -74,7 +74,7 @@ module.exports = {
       "Housing situation": "Prior Housing status",
   },
   mhclgSections: [
-    {columnName: "Tenancy Details", columns: [
+    {sectionName: "Tenancy Details", columns: [
       "Tenancy start date",
       "Type of letting",
       "Who is the landlord",
@@ -87,7 +87,7 @@ module.exports = {
       "Type of tenancy",
       "Tenancy Duration",
     ]},
-    {columnName: "Housing Details", columns: [
+    {sectionName: "Housing Details", columns: [
       "Age of Person 1",
       "Age of Person 2",
       "Age of Person 3",
@@ -132,7 +132,7 @@ module.exports = {
       "Accessibility requirements",
       "Housing situation",
     ]},
-    {columnName: "Previous Accomodation", columns: [
+    {sectionName: "Previous Accomodation", columns: [
       "LA in which household lived prior to this letting",
       "Postcode of previous accommodation",
       "How long has the household lived in the LA",
@@ -144,7 +144,7 @@ module.exports = {
       "Was the letting made under CAP",
       "Source of referral for this letting",
     ]},
-    {columnName: "Financials", columns:[
+    {sectionName: "Financials", columns:[
       "Rent and other charges period",
       "Basic rent",
       "Service charge",
@@ -154,7 +154,7 @@ module.exports = {
       "Exempt from accommodation charges",
       "After benefits, what is the outstanding rent",
     ]},
-    {columnName: "Property Details", columns: [
+    {sectionName: "Property Details", columns: [
       "Void or newbuild/renewal date",
       "Major repairs completion date",
       "Supported scheme",
