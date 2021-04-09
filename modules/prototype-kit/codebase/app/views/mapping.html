@@ -20,7 +20,6 @@
 
   <input type="hidden" name="currentPage" value="{{ data.nextPage }}">
   <input type="hidden" name="mapFrom" value="{{ data.columnToEdit }}">
-  <input type="hidden" name="mapTo" value="Brian">
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -42,8 +41,8 @@
 
             {% for column in data.mhclg_data_columns %}
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="changed-name" name="changed-name" type="radio" value="yes">
-                <label class="govuk-label govuk-radios__label" for="changed-name">
+                <input class="govuk-radios__input" id="mapTo" name="mapTo" type="radio" value="{{ column.columnName }}">
+                <label class="govuk-label govuk-radios__label" for="mapTo">
                   {{column.columnName}}
                 </label>
               </div>
