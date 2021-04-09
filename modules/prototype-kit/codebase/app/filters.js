@@ -7,6 +7,11 @@ module.exports = function (env) {
    */
   var filters = {}
 
+  filters.unused = function(columns, columnMapping){
+    if (! columnMapping) return columns
+    if (! columns) return []
+    return columns.filter(col => !Object.values(columnMapping).includes(col))
+  }
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
     @example:
