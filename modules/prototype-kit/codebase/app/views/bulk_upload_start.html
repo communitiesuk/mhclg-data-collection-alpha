@@ -8,7 +8,8 @@
 {% endblock %} {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl">Upload your data</h1>
+    <h2 class="govuk-caption-l govuk-!-margin-top-0">Upload data</h2>
+    <h1 class="govuk-heading-xl">Upload your files</h1>
     <p class="govuk-caption-m">Choose the files that contain your data, we will then ask you to map these to ours before you can continue your submission.</p>
 
     <!-- Form and validation script -->
@@ -116,7 +117,7 @@
           class="govuk-error-message"
         >
           <span class="govuk-visually-hidden">Error:</span> The file must be
-          .csv, .xls, .xlsx.
+          .csv, .xls, .xlsx, .xml.
         </span>
         <!-- errors end -->
 
@@ -144,7 +145,7 @@
             />
             <label class="govuk-label govuk-checkboxes__label" for="waste">
               I confirm I have shown the
-              <a href="/public/files/MHCLGPrivacyNotice.pdf" class="govuk-link" download>privacy note</a> set out by MHCLG
+              <a href="/public/files/MHCLGPrivacyNotice.pdf" class="govuk-link" download>privacy note</a> set out by MHCLG to the tenants/buyers
             </label>
           </div>
         </div>
@@ -165,7 +166,7 @@
           </h2>
         </div>
         <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
-          <p class='govuk-body'>Supported formats: CSV, XLS, XLSX. Please note only one header can be used for these file types.</p>
+          <p class='govuk-body'>Supported formats: CSV, XLS, XLSX and XML. Please note only one header can be used for these file types.</p>
         </div>
       </div>
       <div class="govuk-accordion__section ">

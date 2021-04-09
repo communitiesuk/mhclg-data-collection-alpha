@@ -12,16 +12,21 @@ block content %}
   <input type="hidden" id="columnToEdit" name="columnToEdit" value="" />
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <h1 class="govuk-heading-xl">Data mapping</h1>
-
+      <h2 class="govuk-caption-l govuk-!-margin-top-0">File upload successful</h2>
+      <h1 class="govuk-heading-xl">Please map your data to CORE</h1>
+      <div class="govuk-inset-text">
+          To speed up future data submission, map your data fields to the CORE data structure. <strong> You should only need to do this once per year.
+        </strong> Your data will be accepted after the mapping is complete.
+      </div>
       <h2 class="govuk-heading-s govuk-!-margin-bottom-2">Page {{ 1 + data.nextPage | int }}
         of {{data.mhclgSections|length }}</h2>
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">We have automatically mapped 80/100 fields</h3>
       <p class="govuk-body govuk-!-margin-bottom-7">Please select a data type to map your data to the CORE database.</p>
 
       <ol class="app-task-list" id="group-list">
         <li>
           <h2 class="app-task-list__section">
-            {{ data.mhclgSections[data.nextPage].sectionName }}
+            {{ data.mhclgSections[data.nextPage].columnName }}
           </h2>
           <ul class="app-task-list__items govuk-!-padding-left-0" id="group-list-items-${index}">
             {% for question in data.mhclgSections[data.nextPage].columns %}
