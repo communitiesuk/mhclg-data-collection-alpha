@@ -22,38 +22,29 @@
       <h1 class="govuk-heading-xl">Map the {{ data.columnToEdit }}</h1>
 
       <form action="/map-columns" method="post">
-      {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
-      {{ govukRadios({
-        classes: "govuk-radios--inline",
-        idPrefix: "changed-name",
-        name: "changed-name",
-        fieldset: {
-          legend: {
-            text: data.columnToEdit,
-            isPageHeading: true,
-            classes: "govuk-fieldset__legend--l"
-          }
-        },
-        hint: {
-          text: "Select the matching data type from your data for'"+data.columnToEdit+"'"
-        },
-        items: [
-          {
-            value: "yes",
-            text: "Letting type"
-          },
-          {
-            value: "no",
-            text: "Property type"
-          },
-          {
-            value: "no",
-            text: "Archetype"
-          }
-        ]
-}) }}
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="changed-name-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                {{data.columnToEdit}}
+              </h1>
+            </legend>
+            <div id="changed-name-hint" class="govuk-hint">
+              Select the matching data type from your data for {{data.columnToEdit}}
+            </div>
+            <div class="govuk-radios govuk-radios--inline">
 
+            {% for column in data.mhclg_data_columns %}
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="changed-name" name="changed-name" type="radio" value="yes">
+                <label class="govuk-label govuk-radios__label" for="changed-name">
+                  {{column.columnName}}
+                </label>
+              </div>
+            {% endfor %}
+          </fieldset>
+        </div>
       </form>
 
 
