@@ -39,11 +39,11 @@
             </div>
             <div class="govuk-radios">
 
-            {% for column in data.mhclg_data_columns %}
+            {% for column in data.columns|unused(data.columnMappings) %}
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="mapTo" name="mapTo" type="radio" value="{{ column.columnName }}">
+                <input class="govuk-radios__input" id="mapTo" name="mapTo" type="radio" value="{{ column }}">
                 <label class="govuk-label govuk-radios__label" for="mapTo">
-                  {{column.columnName}}
+                  {{column}}
                 </label>
               </div>
             {% endfor %}

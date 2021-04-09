@@ -14,39 +14,30 @@ block content %}
     <div class="govuk-grid-column-full">
       <h1 class="govuk-heading-xl">Data mapping</h1>
 
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
-        Page {{ 1 + data.nextPage | int }} of {{data.mhclg_data_columns|length
-        }}
-      </h2>
-      <p class="govuk-body govuk-!-margin-bottom-7">
-        Please select a data type to map your data to the CORE database.
-      </p>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-2">Page {{ 1 + data.nextPage | int }}
+        of {{data.mhclgSections|length }}</h2>
+      <p class="govuk-body govuk-!-margin-bottom-7">Please select a data type to map your data to the CORE database.</p>
 
       <ol class="app-task-list" id="group-list">
         <li>
           <h2 class="app-task-list__section">
-            {{ data.mhclg_data_columns[data.nextPage].columnName }}
+            {{ data.mhclgSections[data.nextPage].sectionName }}
           </h2>
           <ul class="app-task-list__items govuk-!-padding-left-0" id="group-list-items-${index}">
-            {% for question in data.mhclg_data_columns[data.nextPage].columns %}
+            {% for question in data.mhclgSections[data.nextPage].columns %}
             <li class="app-task-list__item">
               <span class="app-task-list__task-name">
-                {{ question.name }} {% if question.mappedTo %}
-                &nbsp;&nbsp;&#8250;&nbsp;&nbsp; {{ question.mappedTo }} {% endif
-                %}
+                {{ question }}
+                {% if data.columnMappings[question] %}
+                &nbsp;&nbsp;&#8250;&nbsp;&nbsp; {{ data.columnMappings[question] }}
+                {% endif %}
               </span>
-              <a
-                href="javascript:edit('{{ question.name }}')"
-                class="app-task-list__tag govuk-link--no-visited-state"
-                style="padding-left: 10px"
-                >Edit</a
-              >
-              <strong
-                class="govuk-tag govuk-tag--{% if question.mappedTo %}green{% else %}grey{% endif %} app-task-list__tag"
-                id="list-convictions-status"
-              >
-                {% if question.mappedTo %}Mapped{% else %}Unmapped{% endif %}
-              </strong>
+              <a href="javascript:edit('{{ question }}')" class="app-task-list__tag govuk-link--no-visited-state"
+   style="padding-left: 10px">Edit</a>
+   <strong class="govuk-tag govuk-tag--{% if data.columnMappings[question] %}green{% else %}grey{% endif %} app-task-list__tag"
+           id="list-convictions-status">
+     {% if data.columnMappings[question] %}Mapped{% else %}Unmapped{% endif %}
+   </strong>
             </li>
             {% endfor %}
           </ul>
