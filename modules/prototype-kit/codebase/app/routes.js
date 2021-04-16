@@ -8,7 +8,7 @@ const router = express.Router()
 
 // Add your routes here - above the module.exports line
 router.post(
-  '/upload/tabular-data',
+  '/sprint2/upload/tabular-data',
   upload.single('file'),
   async (req, res) => {
     const url = process.env.TABULAR_PARSER_URI
@@ -33,7 +33,7 @@ router.post(
 )
 
 router.post(
-  '/save-mapping',
+  '/sprint2/save-mapping',
   async (req, res) => {
     const mapFrom = req.session.data.mapFrom
     const mapTo = req.session.data.mapTo
@@ -41,7 +41,7 @@ router.post(
     req.session.data
       .columnMappings[mapFrom] = mapTo
 
-    const nextPage = `/${req.query.template || "tasklist"}`
+    const nextPage = `/sprint2/${req.query.template || "tasklist"}`
     res.redirect(nextPage)
   }
 )

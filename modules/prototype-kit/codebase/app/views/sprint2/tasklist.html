@@ -8,7 +8,7 @@ block content %}
   }
 </script>
 
-<form action="/mapping" id="edit-form">
+<form action="/sprint2/mapping" id="edit-form">
   <input type="hidden" id="columnToEdit" name="columnToEdit" value="" />
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -52,7 +52,7 @@ block content %}
   </div>
 </form>
 <div class="buttons-test" style="display: flex">
-  <form action="/tasklist" id="task-form">
+  <form action="/sprint2/tasklist" id="task-form">
     <input
       type="hidden"
       name="current_page"
@@ -73,7 +73,7 @@ block content %}
     {% endif %}
   </form>
 
-  <form action="/tasklist" id="task-form">
+  <form action="/sprint2/tasklist" id="task-form">
     <input
       type="hidden"
       name="current_page"
@@ -96,7 +96,7 @@ block content %}
 
   {% if data.nextPage == 4 %}
   <a
-    href="/confirmation"
+    href="/sprint2/confirmation"
     role="button"
     draggable="false"
     class="govuk-button govuk-!-margin-right-3"

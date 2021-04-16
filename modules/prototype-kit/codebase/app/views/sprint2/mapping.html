@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-  <a class="govuk-back-link" href="/tasklist">Back</a>
+  <a class="govuk-back-link" href="/sprint2/tasklist">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,7 @@
 {% endfor %}
 </div>
 
-<form action="/save-mapping" method="post">
+<form action="/sprint2/save-mapping" method="post">
 
   <input type="hidden" name="currentPage" value="{{ data.nextPage }}">
   <input type="hidden" name="mapFrom" value="{{ data.columnToEdit }}">
