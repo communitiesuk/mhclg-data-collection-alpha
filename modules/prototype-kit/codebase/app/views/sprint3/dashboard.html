@@ -1,0 +1,224 @@
+{% extends "layout.html" %} {% block pageTitle %} Dashboard | Log Errors {%
+endblock %} {% block beforeContent %} {% endblock %} {% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Log Errors Dashboard</h1>
+
+    <!-- Bulk upload card -->
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        <div
+          class="govuk-notification-banner"
+          role="region"
+          aria-labelledby="govuk-notification-banner-title"
+          data-module="govuk-notification-banner"
+        >
+          <div class="govuk-notification-banner__header">
+            <h2
+              class="govuk-notification-banner__title"
+              id="govuk-notification-banner-title"
+            >
+              Important
+            </h2>
+          </div>
+          <div class="govuk-notification-banner__content">
+            <p class="govuk-notification-banner__heading">
+              56% of submissions are without error.
+            </p>
+            <a
+              class="govuk-notification-banner__heading govuk-notification-banner__link"
+              href="#"
+              >Read more</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <div
+          class="govuk-notification-banner"
+          role="region"
+          aria-labelledby="govuk-notification-banner-title"
+          data-module="govuk-notification-banner"
+        >
+          <div class="govuk-notification-banner__header">
+            <h2
+              class="govuk-notification-banner__title"
+              id="govuk-notification-banner-title"
+            >
+              Important
+            </h2>
+          </div>
+          <div class="govuk-notification-banner__content">
+            <p class="govuk-notification-banner__heading">
+              12% submitted within 7 days of tenancy start.
+            </p>
+            <a
+              class="govuk-notification-banner__heading govuk-notification-banner__link"
+              href="#"
+              >Read more</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <div
+          class="govuk-notification-banner"
+          role="region"
+          aria-labelledby="govuk-notification-banner-title"
+          data-module="govuk-notification-banner"
+        >
+          <div class="govuk-notification-banner__header">
+            <h2
+              class="govuk-notification-banner__title"
+              id="govuk-notification-banner-title"
+            >
+              Important
+            </h2>
+          </div>
+          <div class="govuk-notification-banner__content">
+            <p class="govuk-notification-banner__heading">
+              123 out of 220 logs submitted with errors.
+            </p>
+            <a
+              class="govuk-notification-banner__heading govuk-notification-banner__link"
+              href="#"
+              >Read more</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Line chart cdn and script-->
+    <div class="govuk-!-padding-bottom-5">
+      <canvas id="myChart"></canvas>
+    </div>
+    <div>
+      <canvas id="myChart1"></canvas>
+    </div>
+    <div>
+      <canvas id="myChart2"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline"></script>
+
+    <script>
+      const labels = [250, 110, 25, 50, 211];
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "Errors Per Log",
+            backgroundColor: "#1d70b8",
+            borderColor: "#1d70b8",
+            data: [25, 11, 2, 5, 21],
+          },
+        ],
+      };
+      const config = {
+        type: "line",
+        data,
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "Number of Logs vs Errors Per Log",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      };
+      var myChart = new Chart(document.getElementById("myChart"), config);
+    </script>
+
+    <!-- Line chart cdn and script-->
+    <script>
+      const labels1 = ["Yes", "No", "N/A"];
+      const data1 = {
+        labels: labels1,
+        datasets: [
+          {
+            label: "Percentage of logs",
+            data: [65, 32, 3],
+            backgroundColor: "#1d70b8",
+            borderColor: "#1d70b8",
+            borderWidth: 1,
+          },
+        ],
+      };
+      const config1 = {
+        type: "bar",
+        data: data1,
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "Reasonable Preference",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      };
+      var myChart1 = new Chart(document.getElementById("myChart1"), config1);
+    </script>
+
+    <script>
+      const data2 = {
+        datasets: [
+          {
+            label: "Scatter Dataset",
+            data: [
+              {
+                x: -10,
+                y: 0,
+              },
+              {
+                x: 0,
+                y: 10,
+              },
+              {
+                x: 10,
+                y: 5,
+              },
+              {
+                x: 0.5,
+                y: 5.5,
+              },
+            ],
+            backgroundColor: "rgb(255, 99, 132)",
+          },
+        ],
+      };
+      const config2 = {
+        type: "scatter",
+        data: data,
+        options: {
+          trendlineLinear: {
+            style: "rgb(43 ,66 ,255, 0.3)",
+            lineStyle: "dotted|solid",
+            width: 2,
+          },
+          scales: {
+            x: {
+              type: "linear",
+              position: "bottom",
+            },
+          },
+        },
+      };
+      var myChart2 = new Chart(document.getElementById("myChart2"), config2);
+    </script>
+  </div>
+</div>
+
+<style></style>
+{% endblock %}
