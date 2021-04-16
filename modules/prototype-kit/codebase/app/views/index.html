@@ -1,44 +1,59 @@
-{% extends "layout.html" %} {% block pageTitle %} Introduction Page {% endblock %} {%
-block beforeContent %}
-{% endblock %} {% block content %}
+{% extends "layout.html" %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
+{% block pageTitle %} Introduction Page {% endblock %}
+{% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <h1 class="govuk-heading-xl">How do you want to submit your data?</h1>
+    <h1 class="govuk-heading-xl">Data Collection Alpha</h1>
     <!-- Bulk upload card -->
     <div class="govuk-grid-column-one-half">
-    <h2 class="govuk-caption-l">Upload data</h2>
-    <h2 class="govuk-heading-l">Multiple cases</h2>
-      <h3 class="govuk-heading-s">Why use this service?</h3>
-      <p>Upload multiple cases using your data directly in a bulk format.</p>
-      <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
-        <li>Submit data directly from raw data</li>
-        <li>Supported formats: CSV, XLS, XML</li>
-        <li>Map your data for faster future submission</li>
-      </ul>
-      <a href="/share_data_with_mhclg" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
-        Start data upload
-        <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+      <h2 class="govuk-caption-l">Sprint 2</h2>
+      <h2 class="govuk-heading-l">Data upload and mapping</h2>
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">?</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive">Hypothesis</span>
+          If we allow data providers to submit data in their own format (i.e
+          their own data exports) then we will get more timely data because
+          providers will find it easier to submit data
+        </strong>
+      </div>
+
+      <a href="/sprint2" role="button" draggable="false"
+         class="govuk-button govuk-button--start" data-module="govuk-button">
+        View
+        <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg"
+             width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true"
+             focusable="false">
           <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
-        </svg></a>
+        </svg>
+      </a>
     </div>
-    <!-- Manual upload card -->
+
     <div class="govuk-grid-column-one-half">
-    <h2 class="govuk-caption-l">Fill in a form</h2>
-      <h2 class="govuk-heading-l">Single case</h2>
-      <h3 class="govuk-heading-s">Why use this service?</h3>
-      <p>Submit single cases manually through a simple form. </p>
-      <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
-        <li>Upload individual forms</li>
-        <li>Submit online</li>
-      </ul>
-      <a href="#" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
-        Submit a form
-        <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+      <h2 class="govuk-caption-l">Sprint 3</h2>
+      <h2 class="govuk-heading-l">Data Insights</h2>
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">?</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive">Hypothesis</span>
+          If providers have faster and easier access to the insights they value,
+          then they will feel more motivated to provide good (accurate, timely)
+          data.
+        </strong>
+      </div>
+
+      <a href="/sprint3" role="button" draggable="false"
+         class="govuk-button govuk-button--start" data-module="govuk-button">
+        View
+        <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg"
+             width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true"
+             focusable="false">
           <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
-        </svg></a>
+        </svg>
+      </a>
     </div>
   </div>
 </div>
-<style>
-</style>
 {% endblock %}
