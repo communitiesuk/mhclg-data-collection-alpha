@@ -29,8 +29,6 @@ endblock %} {% block beforeContent %} <div class="grid-row ">
 
 
     <style>
-    @import 'colours';
-    @import 'shims';
 
     .navigation-secondary {
       background: $panel-colour;
@@ -251,12 +249,12 @@ endblock %} {% block beforeContent %} <div class="grid-row ">
                   <div class="key-details-bar__top-block">
   
                     <dt class="visually-hidden">Case Id:</dt>
-                    <dd class="key-details-bar__nino">Case: 627873618</dd>
+                    <dd class="key-details-bar__nino">Case: 7827364532</dd>
   
                     <dt class="visually-hidden">Status:</dt>
-                    <dd class="key-details-bar__status govuk-!-margin-left-3">Matthew</dd>
+                    <dd class="key-details-bar__status govuk-!-margin-left-3">Mark</dd>
                     <dt class="visually-hidden">Status:</dt>
-                    <dd class="key-details-bar__status error-tag govuk-tag govuk-tag--red">17 Errors</dd>
+                    <dd class="key-details-bar__status error-tag govuk-tag govuk-tag--red">2 Errors</dd>
                   </div>
   
                   <div class="key-details-bar__bottom-block">
@@ -264,7 +262,7 @@ endblock %} {% block beforeContent %} <div class="grid-row ">
                     <dd class="dd-margin">15/04/21</dd>
   
                     <dt>Start date:</dt>
-                    <dd class="dd-margin">01/05/21</dd>
+                    <dd class="dd-margin">06/05/21</dd>
                   </div>
                 </dl>
               </section>
@@ -277,20 +275,20 @@ endblock %} {% block beforeContent %} <div class="grid-row ">
                     <div class="key-details-bar__top-block">
     
                       <dt class="visually-hidden">Case Id:</dt>
-                      <dd class="key-details-bar__nino">Case: 627873618</dd>
+                      <dd class="key-details-bar__nino">Case: 9283758263</dd>
     
                       <dt class="visually-hidden">Status:</dt>
-                      <dd class="key-details-bar__status govuk-!-margin-left-3">Matthew</dd>
+                      <dd class="key-details-bar__status govuk-!-margin-left-3">Lawrence</dd>
                       <dt class="visually-hidden">Status:</dt>
-                      <dd class="key-details-bar__status error-tag govuk-tag govuk-tag--red">17 Errors</dd>
+                      <dd class="key-details-bar__status error-tag govuk-tag govuk-tag--red">3 Errors</dd>
                     </div>
     
                     <div class="key-details-bar__bottom-block">
                       <dt>Submitted:</dt>
-                      <dd class="dd-margin">15/04/21</dd>
+                      <dd class="dd-margin">16/04/21</dd>
     
                       <dt>Start date:</dt>
-                      <dd class="dd-margin">01/05/21</dd>
+                      <dd class="dd-margin">11/05/21</dd>
                     </div>
                   </dl>
                 </section>
@@ -298,307 +296,251 @@ endblock %} {% block beforeContent %} <div class="grid-row ">
                 </li>
 
                 <a href="/logs">View all logs</a>
-            
+                <style>
+                .visually-hidden {
+                  display: none;
+                }
+                dd.key-details-bar__name {
+                    margin-left: 0;
+                }
+                dd.dd-margin {
+                  margin-inline-start: 0 !important;
+                }
 
-<style>
-.visually-hidden {
-  display: none;
-}
-dd.key-details-bar__name {
-    margin-left: 0;
-}
-dd.dd-margin {
-  margin-inline-start: 0 !important;
-}
+                dd.key-details-bar__status.error-tag.govuk-tag {
+                  background-color: #f6d7d2 !important;
+                  color: #942514 !important;
+                }
 
-dd.key-details-bar__status.error-tag.govuk-tag {
-  background-color: #f6d7d2 !important;
-  color: #942514 !important;
-}
+                @import 'colours';
+                $white-transparent: rgba(255, 255, 255, .3);
 
-@import 'colours';
-$white-transparent: rgba(255, 255, 255, .3);
+                .key-details-bar {
+                  background-color: #f3f2f1;
 
-.key-details-bar {
-  background-color: #f3f2f1;
+                  .key-details-bar__key-details {
+                    margin: 0 auto;
+                    max-width: 960px;
+                    padding: 20px 30px;
+                    position: relative;
+                    @media(max-width: 670px) {
+                      padding: 20px 15px;
+                    }
 
-  .key-details-bar__key-details {
-    margin: 0 auto;
-    max-width: 960px;
-    padding: 20px 30px;
-    position: relative;
-    @media(max-width: 670px) {
-      padding: 20px 15px;
-    }
+                    .key-details-bar__top-block,
+                    .key-details-bar__bottom-block {
+                      &::after {
+                        clear: both;
+                        content: ' ';
+                        display: block;
+                      }
+                    }
 
-    .key-details-bar__top-block,
-    .key-details-bar__bottom-block {
-      &::after {
-        clear: both;
-        content: ' ';
-        display: block;
-      }
-    }
+                    .key-details-bar__bottom-block {
+                      border-top: 1px solid $white-transparent;
+                      content: ' ';
+                      padding-top: 10px;
+                      margin-top: 6px;
+                      @media(max-width: 670px) {
+                        border: 0;
+                      }
+                    }
 
-    .key-details-bar__bottom-block {
-      border-top: 1px solid $white-transparent;
-      content: ' ';
-      padding-top: 10px;
-      margin-top: 6px;
-      @media(max-width: 670px) {
-        border: 0;
-      }
-    }
+                    dd,
+                    dt {
+                      float: left;
+                      font-size: 19px;
+                      margin-right: 5px;
+                      @media(max-width: 670px) {
+                        float: none;
+                        font-size: 16px;
+                        margin: 0;
+                      }
+                    }
 
-    dd,
-    dt {
-      float: left;
-      font-size: 19px;
-      margin-right: 5px;
-      @media(max-width: 670px) {
-        float: none;
-        font-size: 16px;
-        margin: 0;
-      }
-    }
+                    dd {
+                      margin-right: 20px;
+                      @media(max-width: 670px) {
+                        margin-bottom: 20px;
 
-    dd {
-      margin-right: 20px;
-      @media(max-width: 670px) {
-        margin-bottom: 20px;
+                        &:last-of-type {
+                          margin-bottom: 0;
+                        }
+                      }
+                    }
 
-        &:last-of-type {
-          margin-bottom: 0;
-        }
-      }
-    }
+                    .key-details-bar__name {
+                      font-size: 36px;
+                      font-weight: 700;
+                      line-height: 1.11111;
+                      margin-right: 10px;
+                      @media(max-width: 670px) {
+                        font-size: 24px;
+                        line-height: 1.04167;
+                        float: left;
+                        margin: 0 5px 0 0;
+                      }
+                    }
 
-    .key-details-bar__name {
-      font-size: 36px;
-      font-weight: 700;
-      line-height: 1.11111;
-      margin-right: 10px;
-      @media(max-width: 670px) {
-        font-size: 24px;
-        line-height: 1.04167;
-        float: left;
-        margin: 0 5px 0 0;
-      }
-    }
+                    .key-details-bar__nino {
+                      font-size: 24px;
+                      line-height: 1;
+                      margin-top: 12px;
+                      @media(max-width: 670px) {
+                        font-size: 18px;
+                        float: left;
+                        margin: 5px 0 0 0;
+                      }
+                    }
 
-    .key-details-bar__nino {
-      font-size: 24px;
-      line-height: 1;
-      margin-top: 12px;
-      @media(max-width: 670px) {
-        font-size: 18px;
-        float: left;
-        margin: 5px 0 0 0;
-      }
-    }
+                    .key-details-bar__status {
+                      font-size: 16px;
+                      font-weight: 700;
+                      line-height: 1.25;
+                      padding: 5px 8px 0;
+                      color: #0b0c0c;
+                      background-color: #fff;
+                      letter-spacing: 1px;
+                      text-decoration: none;
+                      text-transform: uppercase;
 
-    .key-details-bar__status {
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1.25;
-      padding: 5px 8px 0;
-      color: #0b0c0c;
-      background-color: #fff;
-      letter-spacing: 1px;
-      text-decoration: none;
-      text-transform: uppercase;
+                      float: right;
+                      margin: 5px 0 0;
+                      @media(max-width: 670px) {
+                        font-size: 14px;
+                        float: left;
+                        clear: both;
+                        margin-top: 5px;
+                      }
+                    }
+                  }
+                }
 
-      float: right;
-      margin: 5px 0 0;
-      @media(max-width: 670px) {
-        font-size: 14px;
-        float: left;
-        clear: both;
-        margin-top: 5px;
-      }
-    }
-  }
-}
+                .key-details-bar {
+                  background-color: #f3f2f1;
+                }
 
-.key-details-bar {
-  background-color: #f3f2f1;
-}
+                .key-details-bar .key-details-bar__key-details {
+                  margin: 0 auto;
+                  max-width: 960px;
+                  padding: 20px 30px;
+                  position: relative;
+                }
 
-.key-details-bar .key-details-bar__key-details {
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 20px 30px;
-  position: relative;
-}
+                @media (max-width: 670px) {
+                  .key-details-bar .key-details-bar__key-details {
+                    padding: 20px 15px;
+                  }
+                }
 
-@media (max-width: 670px) {
-  .key-details-bar .key-details-bar__key-details {
-    padding: 20px 15px;
-  }
-}
+                .key-details-bar .key-details-bar__key-details * {
+                  color: #0b0c0c;
+                }
 
-.key-details-bar .key-details-bar__key-details * {
-  color: #0b0c0c;
-}
+                .key-details-bar .key-details-bar__key-details .key-details-bar__top-block::after,
+                .key-details-bar .key-details-bar__key-details .key-details-bar__bottom-block::after {
+                  clear: both;
+                  content: ' ';
+                  display: block;
+                }
 
-.key-details-bar .key-details-bar__key-details .key-details-bar__top-block::after,
-.key-details-bar .key-details-bar__key-details .key-details-bar__bottom-block::after {
-  clear: both;
-  content: ' ';
-  display: block;
-}
+                .key-details-bar .key-details-bar__key-details .key-details-bar__bottom-block {
+                  border-top: 1px solid #505a5f;
+                  content: ' ';
+                  padding-top: 10px;
+                  margin-top: 6px;
+                }
 
-.key-details-bar .key-details-bar__key-details .key-details-bar__bottom-block {
-  border-top: 1px solid #505a5f;
-  content: ' ';
-  padding-top: 10px;
-  margin-top: 6px;
-}
+                @media (max-width: 670px) {
+                  .key-details-bar .key-details-bar__key-details .key-details-bar__bottom-block {
+                    border: 0;
+                  }
+                }
 
-@media (max-width: 670px) {
-  .key-details-bar .key-details-bar__key-details .key-details-bar__bottom-block {
-    border: 0;
-  }
-}
+                .key-details-bar .key-details-bar__key-details dd,
+                .key-details-bar .key-details-bar__key-details dt {
+                  float: left;
+                  font-size: 19px;
+                  margin-right: 5px;
+                }
 
-.key-details-bar .key-details-bar__key-details dd,
-.key-details-bar .key-details-bar__key-details dt {
-  float: left;
-  font-size: 19px;
-  margin-right: 5px;
-}
+                @media (max-width: 670px) {
+                  .key-details-bar .key-details-bar__key-details dd,
+                  .key-details-bar .key-details-bar__key-details dt {
+                    float: none;
+                    font-size: 16px;
+                    margin: 0;
+                  }
+                }
 
-@media (max-width: 670px) {
-  .key-details-bar .key-details-bar__key-details dd,
-  .key-details-bar .key-details-bar__key-details dt {
-    float: none;
-    font-size: 16px;
-    margin: 0;
-  }
-}
+                .key-details-bar .key-details-bar__key-details dd {
+                  margin-right: 20px;
+                }
 
-.key-details-bar .key-details-bar__key-details dd {
-  margin-right: 20px;
-}
+                @media (max-width: 670px) {
+                  .key-details-bar .key-details-bar__key-details dd {
+                    margin-bottom: 20px;
+                  }
+                  .key-details-bar .key-details-bar__key-details dd:last-of-type {
+                    margin-bottom: 0;
+                  }
+                }
 
-@media (max-width: 670px) {
-  .key-details-bar .key-details-bar__key-details dd {
-    margin-bottom: 20px;
-  }
-  .key-details-bar .key-details-bar__key-details dd:last-of-type {
-    margin-bottom: 0;
-  }
-}
+                .key-details-bar .key-details-bar__key-details .key-details-bar__name {
+                  font-size: 36px;
+                  font-weight: 700;
+                  line-height: 1.11111;
+                  margin-right: 10px;
+                }
 
-.key-details-bar .key-details-bar__key-details .key-details-bar__name {
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 1.11111;
-  margin-right: 10px;
-}
+                @media (max-width: 670px) {
+                  .key-details-bar .key-details-bar__key-details .key-details-bar__name {
+                    font-size: 24px;
+                    line-height: 1.04167;
+                    float: left;
+                    margin: 0 5px 0 0;
+                  }
+                }
 
-@media (max-width: 670px) {
-  .key-details-bar .key-details-bar__key-details .key-details-bar__name {
-    font-size: 24px;
-    line-height: 1.04167;
-    float: left;
-    margin: 0 5px 0 0;
-  }
-}
+                .key-details-bar .key-details-bar__key-details .key-details-bar__nino {
+                  margin-inline-start: 0 !important;
+                  font-size: 24px;
+                  line-height: 1;
+                  margin-top: 12px;
+                }
 
-.key-details-bar .key-details-bar__key-details .key-details-bar__nino {
-  margin-inline-start: 0 !important;
-  font-size: 24px;
-  line-height: 1;
-  margin-top: 12px;
-}
+                @media (max-width: 670px) {
+                  .key-details-bar .key-details-bar__key-details .key-details-bar__nino {
+                    margin-inline-start: 0 !important;
+                    font-size: 18px;
+                    float: left;
+                    margin: 5px 0 0 0;
+                  }
+                }
 
-@media (max-width: 670px) {
-  .key-details-bar .key-details-bar__key-details .key-details-bar__nino {
-    margin-inline-start: 0 !important;
-    font-size: 18px;
-    float: left;
-    margin: 5px 0 0 0;
-  }
-}
+                .key-details-bar .key-details-bar__key-details .key-details-bar__status {
+                  font-size: 16px;
+                  font-weight: 700;
+                  line-height: 1.25;
+                  padding: 5px 8px 0;
+                  color: #0b0c0c;
+                  background-color: #fff;
+                  letter-spacing: 1px;
+                  text-decoration: none;
+                  text-transform: uppercase;
+                  float: right;
+                  margin: 5px 0 0;
+                }
 
-.key-details-bar .key-details-bar__key-details .key-details-bar__status {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.25;
-  padding: 5px 8px 0;
-  color: #0b0c0c;
-  background-color: #fff;
-  letter-spacing: 1px;
-  text-decoration: none;
-  text-transform: uppercase;
-  float: right;
-  margin: 5px 0 0;
-}
-
-@media (max-width: 670px) {
-  .key-details-bar .key-details-bar__key-details .key-details-bar__status {
-    font-size: 14px;
-    float: left;
-    clear: both;
-    margin-top: 5px;
-  }
-}
-</style>
-
-            {# <li class="app-task-list__item">
-              <span class="app-task-list__task-name">
-                question
-              </span>
-              <a href="javascript:edit('{{ question }}')" class="app-task-list__tag govuk-link--no-visited-state"
-   style="padding-left: 10px">Edit</a>
-   <strong class="govuk-tag govuk-tag--grey app-task-list__tag"
-           id="list-convictions-status">Rachel
-   </strong>
-   <strong class="govuk-tag govuk-tag--red app-task-list__tag"
-           id="list-convictions-status">Error
-   </strong>
-   <strong class="govuk-tag govuk-tag--green app-task-list__tag"
-           id="list-convictions-status">ID:12354625
-   </strong>
-            </li>
-
-            <li class="app-task-list__item">
-              <span class="app-task-list__task-name">
-                question
-              </span>
-              <a href="javascript:edit('{{ question }}')" class="app-task-list__tag govuk-link--no-visited-state"
-   style="padding-left: 10px">Edit</a>
-   <strong class="govuk-tag govuk-tag--grey app-task-list__tag"
-           id="list-convictions-status">Rachel
-   </strong>
-   <strong class="govuk-tag govuk-tag--red app-task-list__tag"
-           id="list-convictions-status">Error
-   </strong>
-   <strong class="govuk-tag govuk-tag--green app-task-list__tag"
-           id="list-convictions-status">ID:12354625
-   </strong>
-            </li>
-
-            <li class="app-task-list__item">
-              <span class="app-task-list__task-name">
-                question
-              </span>
-              <a href="javascript:edit('{{ question }}')" class="app-task-list__tag govuk-link--no-visited-state"
-   style="padding-left: 10px">Edit</a>
-   <strong class="govuk-tag govuk-tag--grey app-task-list__tag"
-           id="list-convictions-status">Rachel
-   </strong>
-   <strong class="govuk-tag govuk-tag--red app-task-list__tag"
-           id="list-convictions-status">Error
-   </strong>
-   <strong class="govuk-tag govuk-tag--green app-task-list__tag"
-           id="list-convictions-status">ID:12354625
-   </strong>
-            </li>
-            
-            #}
-
+                @media (max-width: 670px) {
+                  .key-details-bar .key-details-bar__key-details .key-details-bar__status {
+                    font-size: 14px;
+                    float: left;
+                    clear: both;
+                    margin-top: 5px;
+                  }
+                }
+                </style>
           </ul>
         </li>
       </ol>
@@ -621,15 +563,15 @@ $white-transparent: rgba(255, 255, 255, .3);
           </div>
           <div class="govuk-notification-banner__content">
             <h2 class="govuk-heading-xl govuk-!-margin-bottom-0">
-              12% 
+              30% 
             </h2>
-            <p class="">of lettings are because of homelessness</p>
+            <p class="">of lettings are to tenants who were homeless</p>
             
             <a
               class="
               govuk-notification-banner__link"
-              href="#"
-              >Check rates over time</a
+              href="/sprint3/homelessnessReview"
+              >Check lettings</a
             >
           </div>
         </div>
@@ -691,142 +633,12 @@ $white-transparent: rgba(255, 255, 255, .3);
         </div>
       </div>
     </div>
-
-    <!-- Line chart cdn and script-->
-    {# <div class="govuk-!-padding-bottom-5">
-      <canvas id="myChart"></canvas>
-    </div>
-    <div>
-      <canvas id="myChart1"></canvas>
-    </div>
-    <div>
-      <canvas id="myChart2"></canvas>
-    </div> #}
-
-   
-
-    {# <script>
-      const labels = [250, 110, 25, 50, 211];
-      const data = {
-        labels: labels,
-        datasets: [
-          {
-            label: "Errors Per Log",
-            backgroundColor: "#1d70b8",
-            borderColor: "#1d70b8",
-            data: [25, 11, 2, 5, 21],
-          },
-        ],
-      };
-      const config = {
-        type: "line",
-        data,
-        options: {
-          plugins: {
-            title: {
-              display: true,
-              text: "Number of Logs vs Errors Per Log",
-            },
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      };
-      var myChart = new Chart(document.getElementById("myChart"), config);
-    </script>
-
-    <!-- Line chart cdn and script-->
-    <script>
-      const labels1 = ["Yes", "No", "N/A"];
-      const data1 = {
-        labels: labels1,
-        datasets: [
-          {
-            label: "Percentage of logs",
-            data: [65, 32, 3],
-            backgroundColor: "#1d70b8",
-            borderColor: "#1d70b8",
-            borderWidth: 1,
-          },
-        ],
-      };
-      const config1 = {
-        type: "bar",
-        data: data1,
-        options: {
-          plugins: {
-            title: {
-              display: true,
-              text: "Reasonable Preference",
-            },
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      };
-      var myChart1 = new Chart(document.getElementById("myChart1"), config1);
-    </script>
-
-    <script>
-      const data2 = {
-        datasets: [
-          {
-            label: "Scatter Dataset",
-            data: [
-              {
-                x: -10,
-                y: 0,
-              },
-              {
-                x: 0,
-                y: 10,
-              },
-              {
-                x: 10,
-                y: 5,
-              },
-              {
-                x: 0.5,
-                y: 5.5,
-              },
-            ],
-            backgroundColor: "rgb(255, 99, 132)",
-          },
-        ],
-      };
-      const config2 = {
-        type: "scatter",
-        data: data,
-        options: {
-          trendlineLinear: {
-            style: "rgb(43 ,66 ,255, 0.3)",
-            lineStyle: "dotted|solid",
-            width: 2,
-          },
-          scales: {
-            x: {
-              type: "linear",
-              position: "bottom",
-            },
-          },
-        },
-      };
-      var myChart2 = new Chart(document.getElementById("myChart2"), config2);
-    </script> #}
   </div>
 </div>
 
 
 {# ######## tab tests #}
-
-
-<div class="govuk-tabs" data-module="govuk-tabs">
+{# <div class="govuk-tabs" data-module="govuk-tabs">
   <h2 class="govuk-tabs__title">
     Contents
   </h2>
@@ -984,7 +796,7 @@ $white-transparent: rgba(255, 255, 255, .3);
       };
       var myChart2 = new Chart(document.getElementById("myChart2"), config2);
     </script>
-  </div>
+  </div> #}
 </div>
 <style></style>
 {% endblock %}
