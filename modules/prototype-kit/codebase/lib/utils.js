@@ -131,9 +131,11 @@ exports.forceHttps = function (req, res, next) {
 // would look for /app/views/test.html
 // and /app/views/test/index.html
 
-function renderPath (path, res, next) {
+function renderPath (path, req, res, next) {
   // Try to render the path
-  res.render(path, function (error, html) {
+  res.render(path, {
+    query: req.query
+  }, function (error, html) {
     if (!error) {
       // Success - send the response
       res.set({ 'Content-type': 'text/html; charset=utf-8' })
@@ -147,7 +149,7 @@ function renderPath (path, res, next) {
     }
     if (!path.endsWith('/index')) {
       // Maybe it's a folder - try to render [path]/index.html
-      renderPath(path + '/index', res, next)
+      renderPath(path + '/index', req, res, next)
       return
     }
     // We got template not found both times - call next to trigger the 404 page
@@ -166,7 +168,7 @@ exports.matchRoutes = function (req, res, next) {
     path = 'index'
   }
 
-  renderPath(path, res, next)
+  renderPath(path, req, res, next)
 }
 
 // Try to match a request to a Markdown file and render it
