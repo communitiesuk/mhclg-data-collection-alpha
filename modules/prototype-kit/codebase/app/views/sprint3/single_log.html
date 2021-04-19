@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+{% block pageTitle %} Case {{query.case}}  {% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div>
+      {{
+        govukBreadcrumbs({
+          items: [
+            {
+              text: "Dashboard",
+              href: "/sprint3/dashboard"
+            },
+            {
+              text: "Case View"
+            }
+          ]
+        })
+      }}
+      <h2 class="govuk-heading-m">Case ID: {{query.case}}</h2>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.head
+        })
+      }}
+    </div>
+
+    <div>
+      <h2 class="govuk-heading-m">Tenancy Details</h2>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.tenancy
+        })
+      }}
+    </div>
+
+    <div>
+      <h2 class="govuk-heading-m">Demographics</h2>
+      <h3 class="govuk-caption-m">First Person</h3>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.demographics.person1
+        })
+      }}
+
+      {% if data.sprint3.individualCases[query.case].form.demographics.person2 %}
+      <h3 class="govuk-caption-m">Second Person</h3>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.demographics.person2
+        })
+      }}
+      {% endif %}
+
+      {% if data.sprint3.individualCases[query.case].form.demographics.person3 %}
+      <h3 class="govuk-caption-m">Third Person</h3>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.demographics.person3
+        })
+      }}
+      {% endif %}
+
+
+      <h3 class="govuk-caption-m">Household</h3>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.demographics.household
+        })
+      }}
+    </div>
+
+    <div>
+      <h2 class="govuk-heading-m">Access and Health needs</h2>
+      <h3 class="govuk-caption-m">Access</h3>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.needs.access
+        })
+      }}
+
+      <h3 class="govuk-caption-m">Health</h3>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.needs.health
+        })
+      }}
+    </div>
+
+    <div>
+      <h2 class="govuk-heading-m">Circumstances of Move</h2>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.circumstances
+        })
+      }}
+    </div>
+
+    <div>
+      <h2 class="govuk-heading-m">Cost of letting</h2>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.costs
+        })
+      }}
+    </div>
+
+    <div>
+      <h2 class="govuk-heading-m">Property Details</h2>
+      {{
+        govukSummaryList({
+          rows: data.sprint3.individualCases[query.case].form.property
+        })
+      }}
+    </div>
+  </div>
+</div>
+{% endblock %}
