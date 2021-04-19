@@ -1,30 +1,30 @@
 {% extends "layout.html" %} {% block pageTitle %} Overview {%
-endblock %} {% block beforeContent %} {% endblock %} {% block content %}
+endblock %} {% block beforeContent %} <div class="grid-row ">
+  <div class="column-full">
+  
+    <nav class="navigation-secondary">
+      <ul>
+        <li>
+          <a href="#" class="active" aria-current="section">Overview</a>
+        </li>
+        <li>
+          <a href="#">My team</a>
+        </li>
+        <li>
+          <a href="#">Performance</a>
+        </li>
+        <li>
+          <a href="#">Log list</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</div>{% endblock %} {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <main id="content" role="main">
-      <div class="grid-row ">
-        <div class="column-full">
-        
-          <nav class="navigation-secondary">
-            <ul>
-              <li>
-                <a href="#" class="active" aria-current="section">Overview</a>
-              </li>
-              <li>
-                <a href="#">My team</a>
-              </li>
-              <li>
-                <a href="#">Performance</a>
-              </li>
-              <li>
-                <a href="#">Log list</a>
-              </li>
-            </ul>
-          </nav>
-
-        </div>
-      </div>
+      
     </main>
 
 
@@ -154,6 +154,9 @@ endblock %} {% block beforeContent %} {% endblock %} {% block content %}
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
+
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3">Your recent logs</h2>
+
         <ol class="app-task-list" id="group-list">
         <li>
           <h2 class="app-task-list__section">
@@ -240,6 +243,61 @@ endblock %} {% block beforeContent %} {% endblock %} {% block content %}
             </section>
 
             </li>
+
+            <li class="govuk-!-margin-bottom-3">
+
+              <section class="key-details-bar" role="contentinfo" aria-label="Key details">
+                <dl class="key-details-bar__key-details">
+                  <div class="key-details-bar__top-block">
+  
+                    <dt class="visually-hidden">Case Id:</dt>
+                    <dd class="key-details-bar__nino">Case: 627873618</dd>
+  
+                    <dt class="visually-hidden">Status:</dt>
+                    <dd class="key-details-bar__status govuk-!-margin-left-3">Matthew</dd>
+                    <dt class="visually-hidden">Status:</dt>
+                    <dd class="key-details-bar__status error-tag govuk-tag govuk-tag--red">17 Errors</dd>
+                  </div>
+  
+                  <div class="key-details-bar__bottom-block">
+                    <dt>Submitted:</dt>
+                    <dd class="dd-margin">15/04/21</dd>
+  
+                    <dt>Start date:</dt>
+                    <dd class="dd-margin">01/05/21</dd>
+                  </div>
+                </dl>
+              </section>
+  
+              </li>
+              <li class="govuk-!-margin-bottom-3">
+
+                <section class="key-details-bar" role="contentinfo" aria-label="Key details">
+                  <dl class="key-details-bar__key-details">
+                    <div class="key-details-bar__top-block">
+    
+                      <dt class="visually-hidden">Case Id:</dt>
+                      <dd class="key-details-bar__nino">Case: 627873618</dd>
+    
+                      <dt class="visually-hidden">Status:</dt>
+                      <dd class="key-details-bar__status govuk-!-margin-left-3">Matthew</dd>
+                      <dt class="visually-hidden">Status:</dt>
+                      <dd class="key-details-bar__status error-tag govuk-tag govuk-tag--red">17 Errors</dd>
+                    </div>
+    
+                    <div class="key-details-bar__bottom-block">
+                      <dt>Submitted:</dt>
+                      <dd class="dd-margin">15/04/21</dd>
+    
+                      <dt>Start date:</dt>
+                      <dd class="dd-margin">01/05/21</dd>
+                    </div>
+                  </dl>
+                </section>
+    
+                </li>
+
+                <a href="/logs">View all logs</a>
             
 
 <style>
@@ -537,15 +595,18 @@ $white-transparent: rgba(255, 255, 255, .3);
    <strong class="govuk-tag govuk-tag--green app-task-list__tag"
            id="list-convictions-status">ID:12354625
    </strong>
-            </li> #}
+            </li>
+            
+            #}
 
           </ul>
         </li>
       </ol>
       </div>
       <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-l">Good to know...</h2>
         <div
-          class="govuk-notification-banner"
+          class="govuk-notification-banner govuk-!-margin-bottom-2"
           role="region"
           aria-labelledby="govuk-notification-banner-title"
           data-module="govuk-notification-banner"
@@ -559,19 +620,21 @@ $white-transparent: rgba(255, 255, 255, .3);
             </h2>
           </div>
           <div class="govuk-notification-banner__content">
-            <p class="govuk-notification-banner__heading">
-              56% of submissions are without error.
-            </p>
+            <h2 class="govuk-heading-xl govuk-!-margin-bottom-0">
+              12% 
+            </h2>
+            <p class="">of your lettings are due to homelessness.</p>
+            
             <a
               class="
               govuk-notification-banner__link"
               href="#"
-              >Read more</a
+              >Check rates over time</a
             >
           </div>
         </div>
         <div
-          class="govuk-notification-banner"
+          class="govuk-notification-banner govuk-!-margin-bottom-2"
           role="region"
           aria-labelledby="govuk-notification-banner-title"
           data-module="govuk-notification-banner"
@@ -585,13 +648,16 @@ $white-transparent: rgba(255, 255, 255, .3);
             </h2>
           </div>
           <div class="govuk-notification-banner__content">
-            <p class="govuk-notification-banner__heading">
-              56% of submissions are without error.
-            </p>
+            <h2 class="govuk-heading-xl govuk-!-margin-bottom-0">
+              3% increase
+            </h2>
+            <p class="">of log submissions vs last year.</p>
+            
             <a
-              class="govuk-notification-banner__link"
-              href="#"
-              >Read more</a
+              class="
+              govuk-notification-banner__link"
+              href="/sprint3/dataReview"
+              >Check team’s activity</a
             >
           </div>
         </div>
@@ -610,13 +676,16 @@ $white-transparent: rgba(255, 255, 255, .3);
             </h2>
           </div>
           <div class="govuk-notification-banner__content">
-            <p class="govuk-notification-banner__heading">
-              56% of submissions are without error.
-            </p>
+            <h2 class="govuk-heading-xl govuk-!-margin-bottom-0">
+              8%
+            </h2>
+            <p class="">of errors are on the same question.</p>
+            
             <a
-              class=" govuk-notification-banner__link"
+              class="
+              govuk-notification-banner__link"
               href="#"
-              >Read more</a
+              >Understand how to fix it</a
             >
           </div>
         </div>

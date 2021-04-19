@@ -1,0 +1,87 @@
+{% extends "layout.html" %} {% block pageTitle %} Data review {% endblock %} {%
+block beforeContent %}
+<a class="govuk-back-link" href="/sprint3/dashboard">Back</a>
+{% endblock %}
+{% block content %}
+<div class="grid-row">
+  <div class="column-full">
+    <h2 class="govuk-caption-l">Data Comparison</h2>
+    <h1 class="govuk-heading-xl">Submissions</h1>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter dropdowns">
+        <h3 class="govuk-heading-m">
+          Compare your teams performance...
+        </h3>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="level-1"> Value 1: </label>
+          <select
+            class="govuk-select govuk-!-margin-bottom-3"
+            id="level-1"
+            name="level-1"
+          >
+            <option value="published">2017/2018</option>
+            <option value="updated">2018/2019</option>
+            <option value="views" selected>2019/2020</option>
+            <option value="comments">2020/2021</option>
+          </select>
+          <label class="govuk-label" for="level-2"> Value 2: </label>
+          <select class="govuk-select" id="level-2" name="level-2">
+            <option value="published">2017/2018</option>
+            <option value="updated">2018/2019</option>
+            <option value="views">2019/2020</option>
+            <option value="comments" selected>2020/2021</option>
+          </select>
+        </div>
+      </div>
+      <div class="govuk-grid-column-three-quarters chart">
+        <div>
+          <canvas id="myChart"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+          const labels = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ];
+          const data = {
+            labels: labels,
+            datasets: [
+              {
+                label: "2019/2020",
+                backgroundColor: "rgb(255, 99, 132)",
+                borderColor: "rgb(255, 99, 132)",
+                data: [0, 10, 5, 2, 20, 30, 45, 50, 55, 32, 21, 60],
+              },
+              {
+                label: "2020/2021",
+                data: [65, 59, 80, 81],
+                fill: false,
+                borderColor: "rgb(75, 192, 192)",
+                tension: 0.1,
+              },
+            ],
+          };
+          const config = {
+            type: "line",
+            data,
+            options: {},
+          };
+
+          var myChart = new Chart(document.getElementById("myChart"), config);
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
