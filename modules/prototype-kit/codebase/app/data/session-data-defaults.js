@@ -213,12 +213,6 @@ module.exports = {
               {
                 label: 'Privacy notice shown',
                 value: 'Yes',
-                stats: [
-                  {
-                    type: 'image',
-                    data: ''
-                  }
-                ]
               }
             ],
           },
@@ -229,19 +223,19 @@ module.exports = {
                 label: 'Tenancy Start Date',
                 value: '5 January 2021',
                 invalid: true,
-                details: {
-                  type: "widgets",
-                  widgets: [
-                    {
-                      title: "Validation Error stats",
-                      content: "56% of the time this date is incorrect"
-                    }
-                  ]
-                }
               },
               {
                 label: 'Type of provider',
                 value: 'Private',
+                details: {
+                  type: 'widgets',
+                  widgets: [
+                    {
+                      title: 'Validation Error stats',
+                      content: '56% of the time this date is incorrect'
+                    }
+                  ]
+                }
               },
               {
                 label: 'Landlord',
@@ -262,6 +256,15 @@ module.exports = {
               {
                 label: 'Length of fixed term tenancy',
                 value: '6 months',
+                details: {
+                  type: 'widgets',
+                  widgets: [
+                    {
+                      title: 'Length',
+                      content: '56% of your agreements are for 12 months'
+                    }
+                  ]
+                }
               }
             ]
           },
@@ -396,146 +399,146 @@ module.exports = {
             ]
           },
           {
-            title: "Circumstances of move",
+            title: 'Circumstances of move',
             rows: [
               {
-              label: 'Reason for move',
-              value: 'Repossession',
-            },
-            {
-              label: 'Prior living situation',
-              value: 'Owner occupation (private)',
-            },
-            {
-              label: 'Previous Local Authority',
-              value: 'Coventry (E08000026)',
-            },
-            {
-              label: 'Previous Postcode',
-              value: 'CV8 2LZ',
-            },
-            {
-              label: 'Time living in new let area',
-              value: 'More than 4 but less than 5 years',
-            },
-            {
-              label: 'Time on LA waiting list',
-              value: 'Less than 1 year',
-            },
-            {
-              label: 'Homelessness',
-              value: 'Assessed as homeless',
-            },
-            {
-              label: 'Given Reasonable Preference',
-              value: 'Yes',
-            },
-            {
-              label: 'If given reasonable preference, why?',
-              value: 'Homeless or about to lose their home (within 56 days)',
-            },
-            {
-              label: 'Letting under Choice-based Lettings?',
-              value: 'Yes',
-            },
-            {
-              label: 'Letting under Common housing register?',
-              value: 'No',
-            },
-            {
-              label: 'Letting under Common Allocation Policy?',
-              value: 'No',
-            },
-            {
-              label: 'Source of letting referral',
-              value: 'Tenant Applied Directly',
-            },
+                label: 'Reason for move',
+                value: 'Repossession',
+              },
+              {
+                label: 'Prior living situation',
+                value: 'Owner occupation (private)',
+              },
+              {
+                label: 'Previous Local Authority',
+                value: 'Coventry (E08000026)',
+              },
+              {
+                label: 'Previous Postcode',
+                value: 'CV8 2LZ',
+              },
+              {
+                label: 'Time living in new let area',
+                value: 'More than 4 but less than 5 years',
+              },
+              {
+                label: 'Time on LA waiting list',
+                value: 'Less than 1 year',
+              },
+              {
+                label: 'Homelessness',
+                value: 'Assessed as homeless',
+              },
+              {
+                label: 'Given Reasonable Preference',
+                value: 'Yes',
+              },
+              {
+                label: 'If given reasonable preference, why?',
+                value: 'Homeless or about to lose their home (within 56 days)',
+              },
+              {
+                label: 'Letting under Choice-based Lettings?',
+                value: 'Yes',
+              },
+              {
+                label: 'Letting under Common housing register?',
+                value: 'No',
+              },
+              {
+                label: 'Letting under Common Allocation Policy?',
+                value: 'No',
+              },
+              {
+                label: 'Source of letting referral', // Do something here for "OTHER"
+                value: 'Tenant Applied Directly',
+              },
             ]
           },
           {
-            title: "Cost of letting",
+            title: 'Cost of letting',
             rows: [
               {
-              label: 'Rental period',
-              value: 'Weekly for 52 weeks',
-            },
-            {
-              label: 'Basic Rent',
-              value: '&pound; 52',
-            },
-            {
-              label: 'Service Charge',
-              value: '&pound; 14',
-            },
-            {
-              label: 'Personal service charge',
-              value: '&pound; 0',
-            },
-            {
-              label: 'Support charge',
-              value: '&pound; 0',
-            },
-            {
-              label: 'Total Charge',
-              value: '&pound; 66',
-            },
-            {
-              label: 'Is total charge covered by benefits?',
-              value: 'Yes',
-            },
+                label: 'Rental period',
+                value: 'Weekly for 52 weeks',
+              },
+              {
+                label: 'Basic Rent',
+                value: '&pound; 52',
+              },
+              {
+                label: 'Service Charge',
+                value: '&pound; 14',
+              },
+              {
+                label: 'Personal service charge',
+                value: '&pound; 0',
+              },
+              {
+                label: 'Support charge',
+                value: '&pound; 0',
+              },
+              {
+                label: 'Total Charge',
+                value: '&pound; 66',
+              },
+              {
+                label: 'Is total charge covered by benefits?',
+                value: 'Yes',
+              },
             ]
           },
           {
-            title: "Property details",
+            title: 'Property details',
             rows: [
               {
-              label: 'Property Reference',
-              value: 'PT238500',
-            },
-            {
-              label: 'Void date',
-              value: '14 December 2020',
-            },
-            {
-              label: 'Major Repairs date',
-              value: 'N/A',
-            },
-            {
-              label: 'Number of times let previously offered',
-              value: '1',
-            },
-            {
-              label: 'Number of Bedrooms',
-              value: '1',
-            },
-            {
-              label: 'Type of Unit',
-              value: 'Flat / Maisonette',
-            },
-            {
-              label: 'Type of Building',
-              value: 'Purpose Built',
-            },
-            {
-              label: 'Adapted for wheelchair',
-              value: 'No',
-            },
-            {
-              label: 'Property previously let under',
-              value: 'A social rent basis',
-            },
-            {
-              label: 'Reason for Vacancy',
-              value: 'First let of leased property',
-            },
-            {
-              label: 'Property LA',
-              value: 'Coventry (E08000026)',
-            },
-            {
-              label: 'Property Postcode',
-              value: 'CV6 2KP',
-            },
+                label: 'Property Reference',
+                value: 'PT238500',
+              },
+              {
+                label: 'Void date',
+                value: '14 December 2020',
+              },
+              {
+                label: 'Major Repairs date',
+                value: 'N/A',
+              },
+              {
+                label: 'Number of times let previously offered',
+                value: '1',
+              },
+              {
+                label: 'Number of Bedrooms',
+                value: '1',
+              },
+              {
+                label: 'Type of Unit',
+                value: 'Flat / Maisonette',
+              },
+              {
+                label: 'Type of Building',
+                value: 'Purpose Built',
+              },
+              {
+                label: 'Adapted for wheelchair',
+                value: 'No',
+              },
+              {
+                label: 'Property previously let under',
+                value: 'A social rent basis',
+              },
+              {
+                label: 'Reason for Vacancy',
+                value: 'First let of leased property',
+              },
+              {
+                label: 'Property LA',
+                value: 'Coventry (E08000026)',
+              },
+              {
+                label: 'Property Postcode',
+                value: 'CV6 2KP',
+              },
             ]
           }
         ],
