@@ -1,11 +1,548 @@
-{% extends "layout.html" %} {% block pageTitle %} Dashboard | Log Errors {%
+{% extends "layout.html" %} {% block pageTitle %} Overview {%
 endblock %} {% block beforeContent %} {% endblock %} {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <h1 class="govuk-heading-xl">Log Errors Dashboard</h1>
+    <main id="content" role="main">
+      <div class="grid-row ">
+        <div class="column-full">
+        
+          <nav class="navigation-secondary">
+            <ul>
+              <li>
+                <a href="#" class="active" aria-current="section">Overview</a>
+              </li>
+              <li>
+                <a href="#">My team</a>
+              </li>
+              <li>
+                <a href="#">Performance</a>
+              </li>
+              <li>
+                <a href="#">Log list</a>
+              </li>
+            </ul>
+          </nav>
 
-    <!-- Bulk upload card -->
+        </div>
+      </div>
+    </main>
+
+
+    <style>
+    @import 'colours';
+    @import 'shims';
+
+    .navigation-secondary {
+      background: $panel-colour;
+
+      ul {
+        @extend %contain-floats;
+
+        margin: 0 auto;
+        max-width: 960px;
+        padding-left: 0;
+      }
+
+      li {
+        float: left;
+        list-style-type: none;
+
+        @include media(mobile) {
+          width: 100%;
+        }
+      }
+
+      a {
+        display: block;
+        padding: 15px;
+        text-decoration: none;
+
+        &:link,
+        &:visited {
+          color: $black;
+        }
+
+        &:active,
+        &:focus {
+          background: $focus-colour;
+          color: $black;
+        }
+
+        &:hover {
+          background: $highlight-colour;
+          text-decoration: underline;
+        }
+      }
+
+      .active {
+        background: $govuk-blue;
+        border-bottom: 0;
+        font-weight: 700;
+
+        &:link,
+        &:visited,
+        &:active {
+          color: $white;
+        }
+
+        &:focus {
+          color: $black;
+        }
+
+        &:hover {
+          background: $govuk-blue;
+          text-decoration: underline;      
+        }
+      }
+    }
+
+    .navigation-secondary ul:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .navigation-secondary {
+      border-bottom: 1px solid #bfc1c3;
+      margin: auto;
+      max-width: 960px;
+    }
+
+    .navigation-secondary ul {
+      margin: 0 auto;
+      max-width: 960px;
+      padding-left: 0;
+    }
+
+    .navigation-secondary li {
+      float: left;
+      list-style-type: none;
+    }
+
+    @media (max-width: 640px) {
+      .navigation-secondary li {
+        border: 0;
+        width: 100%;
+      }
+    }
+
+    .navigation-secondary a {
+      display: block;
+      padding: 15px;
+    }
+
+    .navigation-secondary a:visited {
+      color: #005ea5;
+    }
+
+    .navigation-secondary a:hover {
+      background-color: #f8f8f8;
+    }
+
+    .navigation-secondary .active {
+      box-shadow: inset 0px -5px 0px 0px #005ea5;
+      color: #0b0c0c;
+      text-decoration: none;
+    }
+
+    .navigation-secondary .active:visited {
+      color: #0b0c0c;
+    }
+    </style>
+    <h2 class="govuk-caption-l govuk-!-margin-top-6">Welcome back,</h2>
+    <h1 class="govuk-heading-xl">Here is your overview</h1>
+
     <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <ol class="app-task-list" id="group-list">
+        <li>
+          <h2 class="app-task-list__section">
+            {{ data.mhclgSections[data.nextPage].columnName }}
+          </h2>
+          <ul class="app-task-list__items govuk-!-padding-left-0" id="group-list-items-${index}">
+            <li class="govuk-!-margin-bottom-3">
+
+            <section class="key-details-bar" role="contentinfo" aria-label="Key details">
+              <dl class="key-details-bar__key-details">
+                <div class="key-details-bar__top-block">
+
+                  <dt class="visually-hidden">Case Id:</dt>
+                  <dd class="key-details-bar__nino">Case: 4527281746</dd>
+
+                  <dt class="visually-hidden">Status:</dt>
+                  <dd class="key-details-bar__status govuk-!-margin-left-3">Rachel</dd>
+                  <dt class="visually-hidden">Status:</dt>
+                  <dd class="key-details-bar__status error-tag govuk-tag govuk-tag--red">4 Errors</dd>
+                </div>
+
+                <div class="key-details-bar__bottom-block">
+                  <dt>Submitted:</dt>
+                  <dd class="dd-margin">12/04/21</dd>
+
+                  <dt>Start date:</dt>
+                  <dd class="dd-margin">28/04/21</dd>
+                </div>
+              </dl>
+            </section>
+
+            </li>
+
+            <li class="govuk-!-margin-bottom-3">
+
+            <section class="key-details-bar" role="contentinfo" aria-label="Key details">
+              <dl class="key-details-bar__key-details">
+                <div class="key-details-bar__top-block">
+
+                  <dt class="visually-hidden">Case Id:</dt>
+                  <dd class="key-details-bar__nino">Case: 9725726736</dd>
+
+                  <dt class="visually-hidden">Status:</dt>
+                  <dd class="key-details-bar__status govuk-!-margin-left-3">Thomas</dd>
+                  <dt class="visually-hidden">Status:</dt>
+                  <dd class="key-details-bar__status error-tag govuk-tag govuk-tag--red">1 Error</dd>
+                </div>
+
+                <div class="key-details-bar__bottom-block">
+                  <dt>Submitted:</dt>
+                  <dd class="dd-margin">13/04/21</dd>
+
+                  <dt>Start date:</dt>
+                  <dd class="dd-margin">29/04/21</dd>
+                </div>
+              </dl>
+            </section>
+
+            </li>
+
+            <li class="govuk-!-margin-bottom-3">
+
+            <section class="key-details-bar" role="contentinfo" aria-label="Key details">
+              <dl class="key-details-bar__key-details">
+                <div class="key-details-bar__top-block">
+
+                  <dt class="visually-hidden">Case Id:</dt>
+                  <dd class="key-details-bar__nino">Case: 627873618</dd>
+
+                  <dt class="visually-hidden">Status:</dt>
+                  <dd class="key-details-bar__status govuk-!-margin-left-3">Matthew</dd>
+                  <dt class="visually-hidden">Status:</dt>
+                  <dd class="key-details-bar__status error-tag govuk-tag govuk-tag--red">17 Errors</dd>
+                </div>
+
+                <div class="key-details-bar__bottom-block">
+                  <dt>Submitted:</dt>
+                  <dd class="dd-margin">15/04/21</dd>
+
+                  <dt>Start date:</dt>
+                  <dd class="dd-margin">01/05/21</dd>
+                </div>
+              </dl>
+            </section>
+
+            </li>
+            
+
+<style>
+.visually-hidden {
+  display: none;
+}
+dd.key-details-bar__name {
+    margin-left: 0;
+}
+dd.dd-margin {
+  margin-inline-start: 0 !important;
+}
+
+dd.key-details-bar__status.error-tag.govuk-tag {
+  background-color: #f6d7d2 !important;
+  color: #942514 !important;
+}
+
+@import 'colours';
+$white-transparent: rgba(255, 255, 255, .3);
+
+.key-details-bar {
+  background-color: #f3f2f1;
+
+  .key-details-bar__key-details {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 20px 30px;
+    position: relative;
+    @media(max-width: 670px) {
+      padding: 20px 15px;
+    }
+
+    .key-details-bar__top-block,
+    .key-details-bar__bottom-block {
+      &::after {
+        clear: both;
+        content: ' ';
+        display: block;
+      }
+    }
+
+    .key-details-bar__bottom-block {
+      border-top: 1px solid $white-transparent;
+      content: ' ';
+      padding-top: 10px;
+      margin-top: 6px;
+      @media(max-width: 670px) {
+        border: 0;
+      }
+    }
+
+    dd,
+    dt {
+      float: left;
+      font-size: 19px;
+      margin-right: 5px;
+      @media(max-width: 670px) {
+        float: none;
+        font-size: 16px;
+        margin: 0;
+      }
+    }
+
+    dd {
+      margin-right: 20px;
+      @media(max-width: 670px) {
+        margin-bottom: 20px;
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .key-details-bar__name {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.11111;
+      margin-right: 10px;
+      @media(max-width: 670px) {
+        font-size: 24px;
+        line-height: 1.04167;
+        float: left;
+        margin: 0 5px 0 0;
+      }
+    }
+
+    .key-details-bar__nino {
+      font-size: 24px;
+      line-height: 1;
+      margin-top: 12px;
+      @media(max-width: 670px) {
+        font-size: 18px;
+        float: left;
+        margin: 5px 0 0 0;
+      }
+    }
+
+    .key-details-bar__status {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
+      padding: 5px 8px 0;
+      color: #0b0c0c;
+      background-color: #fff;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      float: right;
+      margin: 5px 0 0;
+      @media(max-width: 670px) {
+        font-size: 14px;
+        float: left;
+        clear: both;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.key-details-bar {
+  background-color: #f3f2f1;
+}
+
+.key-details-bar .key-details-bar__key-details {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 20px 30px;
+  position: relative;
+}
+
+@media (max-width: 670px) {
+  .key-details-bar .key-details-bar__key-details {
+    padding: 20px 15px;
+  }
+}
+
+.key-details-bar .key-details-bar__key-details * {
+  color: #0b0c0c;
+}
+
+.key-details-bar .key-details-bar__key-details .key-details-bar__top-block::after,
+.key-details-bar .key-details-bar__key-details .key-details-bar__bottom-block::after {
+  clear: both;
+  content: ' ';
+  display: block;
+}
+
+.key-details-bar .key-details-bar__key-details .key-details-bar__bottom-block {
+  border-top: 1px solid #505a5f;
+  content: ' ';
+  padding-top: 10px;
+  margin-top: 6px;
+}
+
+@media (max-width: 670px) {
+  .key-details-bar .key-details-bar__key-details .key-details-bar__bottom-block {
+    border: 0;
+  }
+}
+
+.key-details-bar .key-details-bar__key-details dd,
+.key-details-bar .key-details-bar__key-details dt {
+  float: left;
+  font-size: 19px;
+  margin-right: 5px;
+}
+
+@media (max-width: 670px) {
+  .key-details-bar .key-details-bar__key-details dd,
+  .key-details-bar .key-details-bar__key-details dt {
+    float: none;
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.key-details-bar .key-details-bar__key-details dd {
+  margin-right: 20px;
+}
+
+@media (max-width: 670px) {
+  .key-details-bar .key-details-bar__key-details dd {
+    margin-bottom: 20px;
+  }
+  .key-details-bar .key-details-bar__key-details dd:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.key-details-bar .key-details-bar__key-details .key-details-bar__name {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.11111;
+  margin-right: 10px;
+}
+
+@media (max-width: 670px) {
+  .key-details-bar .key-details-bar__key-details .key-details-bar__name {
+    font-size: 24px;
+    line-height: 1.04167;
+    float: left;
+    margin: 0 5px 0 0;
+  }
+}
+
+.key-details-bar .key-details-bar__key-details .key-details-bar__nino {
+  margin-inline-start: 0 !important;
+  font-size: 24px;
+  line-height: 1;
+  margin-top: 12px;
+}
+
+@media (max-width: 670px) {
+  .key-details-bar .key-details-bar__key-details .key-details-bar__nino {
+    margin-inline-start: 0 !important;
+    font-size: 18px;
+    float: left;
+    margin: 5px 0 0 0;
+  }
+}
+
+.key-details-bar .key-details-bar__key-details .key-details-bar__status {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  padding: 5px 8px 0;
+  color: #0b0c0c;
+  background-color: #fff;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  float: right;
+  margin: 5px 0 0;
+}
+
+@media (max-width: 670px) {
+  .key-details-bar .key-details-bar__key-details .key-details-bar__status {
+    font-size: 14px;
+    float: left;
+    clear: both;
+    margin-top: 5px;
+  }
+}
+</style>
+
+            {# <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                question
+              </span>
+              <a href="javascript:edit('{{ question }}')" class="app-task-list__tag govuk-link--no-visited-state"
+   style="padding-left: 10px">Edit</a>
+   <strong class="govuk-tag govuk-tag--grey app-task-list__tag"
+           id="list-convictions-status">Rachel
+   </strong>
+   <strong class="govuk-tag govuk-tag--red app-task-list__tag"
+           id="list-convictions-status">Error
+   </strong>
+   <strong class="govuk-tag govuk-tag--green app-task-list__tag"
+           id="list-convictions-status">ID:12354625
+   </strong>
+            </li>
+
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                question
+              </span>
+              <a href="javascript:edit('{{ question }}')" class="app-task-list__tag govuk-link--no-visited-state"
+   style="padding-left: 10px">Edit</a>
+   <strong class="govuk-tag govuk-tag--grey app-task-list__tag"
+           id="list-convictions-status">Rachel
+   </strong>
+   <strong class="govuk-tag govuk-tag--red app-task-list__tag"
+           id="list-convictions-status">Error
+   </strong>
+   <strong class="govuk-tag govuk-tag--green app-task-list__tag"
+           id="list-convictions-status">ID:12354625
+   </strong>
+            </li>
+
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                question
+              </span>
+              <a href="javascript:edit('{{ question }}')" class="app-task-list__tag govuk-link--no-visited-state"
+   style="padding-left: 10px">Edit</a>
+   <strong class="govuk-tag govuk-tag--grey app-task-list__tag"
+           id="list-convictions-status">Rachel
+   </strong>
+   <strong class="govuk-tag govuk-tag--red app-task-list__tag"
+           id="list-convictions-status">Error
+   </strong>
+   <strong class="govuk-tag govuk-tag--green app-task-list__tag"
+           id="list-convictions-status">ID:12354625
+   </strong>
+            </li> #}
+
+          </ul>
+        </li>
+      </ol>
+      </div>
       <div class="govuk-grid-column-one-third">
         <div
           class="govuk-notification-banner"
@@ -18,7 +555,7 @@ endblock %} {% block beforeContent %} {% endblock %} {% block content %}
               class="govuk-notification-banner__title"
               id="govuk-notification-banner-title"
             >
-              Important
+              Homelessness
             </h2>
           </div>
           <div class="govuk-notification-banner__content">
@@ -26,14 +563,13 @@ endblock %} {% block beforeContent %} {% endblock %} {% block content %}
               56% of submissions are without error.
             </p>
             <a
-              class="govuk-notification-banner__heading govuk-notification-banner__link"
+              class="
+              govuk-notification-banner__link"
               href="#"
               >Read more</a
             >
           </div>
         </div>
-      </div>
-      <div class="govuk-grid-column-one-third">
         <div
           class="govuk-notification-banner"
           role="region"
@@ -45,22 +581,20 @@ endblock %} {% block beforeContent %} {% endblock %} {% block content %}
               class="govuk-notification-banner__title"
               id="govuk-notification-banner-title"
             >
-              Important
+              Submissions
             </h2>
           </div>
           <div class="govuk-notification-banner__content">
             <p class="govuk-notification-banner__heading">
-              12% submitted within 7 days of tenancy start.
+              56% of submissions are without error.
             </p>
             <a
-              class="govuk-notification-banner__heading govuk-notification-banner__link"
+              class="govuk-notification-banner__link"
               href="#"
               >Read more</a
             >
           </div>
         </div>
-      </div>
-      <div class="govuk-grid-column-one-third">
         <div
           class="govuk-notification-banner"
           role="region"
@@ -72,15 +606,15 @@ endblock %} {% block beforeContent %} {% endblock %} {% block content %}
               class="govuk-notification-banner__title"
               id="govuk-notification-banner-title"
             >
-              Important
+              Errors
             </h2>
           </div>
           <div class="govuk-notification-banner__content">
             <p class="govuk-notification-banner__heading">
-              123 out of 220 logs submitted with errors.
+              56% of submissions are without error.
             </p>
             <a
-              class="govuk-notification-banner__heading govuk-notification-banner__link"
+              class=" govuk-notification-banner__link"
               href="#"
               >Read more</a
             >
@@ -90,7 +624,7 @@ endblock %} {% block beforeContent %} {% endblock %} {% block content %}
     </div>
 
     <!-- Line chart cdn and script-->
-    <div class="govuk-!-padding-bottom-5">
+    {# <div class="govuk-!-padding-bottom-5">
       <canvas id="myChart"></canvas>
     </div>
     <div>
@@ -98,12 +632,176 @@ endblock %} {% block beforeContent %} {% endblock %} {% block content %}
     </div>
     <div>
       <canvas id="myChart2"></canvas>
-    </div>
+    </div> #}
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline"></script>
+   
+
+    {# <script>
+      const labels = [250, 110, 25, 50, 211];
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "Errors Per Log",
+            backgroundColor: "#1d70b8",
+            borderColor: "#1d70b8",
+            data: [25, 11, 2, 5, 21],
+          },
+        ],
+      };
+      const config = {
+        type: "line",
+        data,
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "Number of Logs vs Errors Per Log",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      };
+      var myChart = new Chart(document.getElementById("myChart"), config);
+    </script>
+
+    <!-- Line chart cdn and script-->
+    <script>
+      const labels1 = ["Yes", "No", "N/A"];
+      const data1 = {
+        labels: labels1,
+        datasets: [
+          {
+            label: "Percentage of logs",
+            data: [65, 32, 3],
+            backgroundColor: "#1d70b8",
+            borderColor: "#1d70b8",
+            borderWidth: 1,
+          },
+        ],
+      };
+      const config1 = {
+        type: "bar",
+        data: data1,
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "Reasonable Preference",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      };
+      var myChart1 = new Chart(document.getElementById("myChart1"), config1);
+    </script>
 
     <script>
+      const data2 = {
+        datasets: [
+          {
+            label: "Scatter Dataset",
+            data: [
+              {
+                x: -10,
+                y: 0,
+              },
+              {
+                x: 0,
+                y: 10,
+              },
+              {
+                x: 10,
+                y: 5,
+              },
+              {
+                x: 0.5,
+                y: 5.5,
+              },
+            ],
+            backgroundColor: "rgb(255, 99, 132)",
+          },
+        ],
+      };
+      const config2 = {
+        type: "scatter",
+        data: data,
+        options: {
+          trendlineLinear: {
+            style: "rgb(43 ,66 ,255, 0.3)",
+            lineStyle: "dotted|solid",
+            width: 2,
+          },
+          scales: {
+            x: {
+              type: "linear",
+              position: "bottom",
+            },
+          },
+        },
+      };
+      var myChart2 = new Chart(document.getElementById("myChart2"), config2);
+    </script> #}
+  </div>
+</div>
+
+
+{# ######## tab tests #}
+
+
+<div class="govuk-tabs" data-module="govuk-tabs">
+  <h2 class="govuk-tabs__title">
+    Contents
+  </h2>
+  <ul class="govuk-tabs__list">
+    <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+      <a class="govuk-tabs__tab" href="#past-day">
+        Past day
+      </a>
+    </li>
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab" href="#past-week">
+        Past week
+      </a>
+    </li>
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab" href="#past-month">
+        Past month
+      </a>
+    </li>
+  </ul>
+  <div class="govuk-tabs__panel" id="past-day">
+    <h2 class="govuk-heading-l">Past day</h2>
+    <div class="govuk-!-padding-bottom-5">
+      <canvas id="myChart"></canvas>
+    </div>
+
+  </div>
+  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-week">
+    <h2 class="govuk-heading-l">Past week</h2>
+    <div>
+      <canvas id="myChart1"></canvas>
+    </div>
+
+  </div>
+  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-month">
+    <h2 class="govuk-heading-l">Past month</h2>
+    <div>
+      <canvas id="myChart2"></canvas>
+    </div>
+
+  </div>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline"></script>
+  <script>
       const labels = [250, 110, 25, 50, 211];
       const data = {
         labels: labels,
@@ -219,6 +917,5 @@ endblock %} {% block beforeContent %} {% endblock %} {% block content %}
     </script>
   </div>
 </div>
-
 <style></style>
 {% endblock %}
