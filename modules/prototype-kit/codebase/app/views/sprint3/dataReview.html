@@ -1,17 +1,162 @@
 {% extends "layout.html" %} {% block pageTitle %} Data review {% endblock %} {%
 block beforeContent %}
+<div class="grid-row ">
+  <div class="column-full">
+  
+    <nav class="navigation-secondary">
+      <ul>
+        <li>
+          <a href="/sprint3/dashboard" aria-current="section">Overview</a>
+        </li>
+        <li>
+          <a href="#">My team</a>
+        </li>
+        <li>
+          <a href="#">Performance</a>
+        </li>
+        <li>
+          <a href="#">Log list</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</div>
+
+<style>
+    @import 'colours';
+    @import 'shims';
+
+    .navigation-secondary {
+      background: $panel-colour;
+
+      ul {
+        @extend %contain-floats;
+
+        margin: 0 auto;
+        max-width: 960px;
+        padding-left: 0;
+      }
+
+      li {
+        float: left;
+        list-style-type: none;
+
+        @include media(mobile) {
+          width: 100%;
+        }
+      }
+
+      a {
+        display: block;
+        padding: 15px;
+        text-decoration: none;
+
+        &:link,
+        &:visited {
+          color: $black;
+        }
+
+        &:active,
+        &:focus {
+          background: $focus-colour;
+          color: $black;
+        }
+
+        &:hover {
+          background: $highlight-colour;
+          text-decoration: underline;
+        }
+      }
+
+      .active {
+        background: $govuk-blue;
+        border-bottom: 0;
+        font-weight: 700;
+
+        &:link,
+        &:visited,
+        &:active {
+          color: $white;
+        }
+
+        &:focus {
+          color: $black;
+        }
+
+        &:hover {
+          background: $govuk-blue;
+          text-decoration: underline;      
+        }
+      }
+    }
+
+    .navigation-secondary ul:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .navigation-secondary {
+      border-bottom: 1px solid #bfc1c3;
+      margin: auto;
+      max-width: 960px;
+    }
+
+    .navigation-secondary ul {
+      margin: 0 auto;
+      max-width: 960px;
+      padding-left: 0;
+    }
+
+    .navigation-secondary li {
+      float: left;
+      list-style-type: none;
+    }
+
+    @media (max-width: 640px) {
+      .navigation-secondary li {
+        border: 0;
+        width: 100%;
+      }
+    }
+
+    .navigation-secondary a {
+      display: block;
+      padding: 15px;
+    }
+
+    .navigation-secondary a:visited {
+      color: #005ea5;
+    }
+
+    .navigation-secondary a:hover {
+      background-color: #f8f8f8;
+    }
+
+    .navigation-secondary .active {
+      box-shadow: inset 0px -5px 0px 0px #005ea5;
+      color: #0b0c0c;
+      text-decoration: none;
+    }
+
+    .navigation-secondary .active:visited {
+      color: #0b0c0c;
+    }
+    </style>
+
 <a class="govuk-back-link" href="/sprint3/dashboard">Back</a>
 {% endblock %}
 {% block content %}
 <div class="grid-row">
   <div class="column-full">
-    <h2 class="govuk-caption-l">Data Comparison</h2>
+    <h2 class="govuk-caption-l">Data comparison</h2>
     <h1 class="govuk-heading-xl">Submissions</h1>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-quarter dropdowns">
         <h3 class="govuk-heading-m">
-          Compare your teams performance...
+          Compare submission rates over time
         </h3>
         <div class="govuk-form-group">
           <label class="govuk-label" for="level-1"> Value 1: </label>
