@@ -227,7 +227,8 @@ module.exports = {
             rows: [
               {
                 label: 'Tenancy Start Date',
-                value: '5 January 2021'
+                value: '5 January 2021',
+                invalid: true,
               },
               {
                 label: 'Type of provider',

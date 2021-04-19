@@ -25,7 +25,7 @@
       <dl class="govuk-summary-list">
         {% for row in section.rows %}
         <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
+          <dt class="govuk-summary-list__key {% if row.invalid %}invalid{% endif %}">
             {{row.label | safe}}
           </dt>
           <dd class="govuk-summary-list__value">
@@ -46,7 +46,7 @@
       <dl class="govuk-summary-list">
         {% for row in section.rows %}
         <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
+          <dt class="govuk-summary-list__key {% if row.invalid %}invalid{% endif %}">
             {{row.label | safe}}
           </dt>
           <dd class="govuk-summary-list__value">
@@ -64,4 +64,12 @@
     </div>
   </div>
 </div>
+
+<style>
+  .invalid {
+    color: #d4351c;
+    border-left: 5px solid #d4351c;
+    padding-left: 5px;
+  }
+</style>
 {% endblock %}
