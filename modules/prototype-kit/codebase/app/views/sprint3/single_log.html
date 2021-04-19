@@ -17,23 +17,31 @@
     <div>
       <h2 class="govuk-heading-m">Case ID: {{query.case}}</h2>
       {% for section in data.sprint3.individualCases[query.case].data %}
+
       {% if section.title %}
       <h3 class="govuk-heading-m">{{section.title}}</h3>
       {% endif %}
 
       {% if section.rows.length > 0 %}
+      {% set outerSectionLoopIdx = loop.index %}
       <dl class="govuk-summary-list">
         {% for row in section.rows %}
         <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key {% if row.invalid %}invalid{% endif %}">
+          <dt
+            class="govuk-summary-list__key {% if row.invalid %}invalid{% endif %}">
             {{row.label | safe}}
           </dt>
           <dd class="govuk-summary-list__value">
             {{row.value | safe}}
           </dd>
           <dd class="govuk-summary-list__actions">
-
+            <a class="govuk-link" onclick="showDetails('details-{{outerSectionLoopIdx}}-{{loop.index}}')">
+              Find out more...
+            </a>
           </dd>
+        </div>
+        <div class="details-section" id="details-{{outerSectionLoopIdx}}-{{loop.index}}">
+
         </div>
         {% endfor %}
       </dl>
@@ -42,6 +50,8 @@
       {% for section in section.sections %}
       <h3 class="govuk-caption-m">{{section.title}}</h3>
 
+      {% set innerSectionLoopIdx = loop.index %}
+
       {% if section.rows.length > 0 %}
       <dl class="govuk-summary-list">
         {% for row in section.rows %}
@@ -53,12 +63,18 @@
             {{row.value | safe}}
           </dd>
           <dd class="govuk-summary-list__actions">
-
+            <a class="govuk-link" data-show-section="details-{{outerSectionLoopIdx}}-{{innerSectionLoopIdx}}-{{loop.index}}">
+              Find out more...
+            </a>
           </dd>
+        </div>
+        <div class="details-section" id="details-{{outerSectionLoopIdx}}-{{innerSectionLoopIdx}}-{{loop.index}}">
+
         </div>
         {% endfor %}
       </dl>
       {% endif %}
+
       {% endfor %}
       {% endfor %}
     </div>
@@ -66,10 +82,28 @@
 </div>
 
 <style>
+  a.govuk-link {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
   .invalid {
     color: #d4351c;
     border-left: 5px solid #d4351c;
     padding-left: 5px;
   }
+
+  .details-section {
+    margin-right: -233%;
+    width: unset;
+    display: none;
+  }
 </style>
+
+<script>
+  const showDetails = (section) => {
+    const el = document.getElementById(section);
+    el.style.display = (el.style.display === 'none') ? 'block' : 'none';
+  };
+</script>
 {% endblock %}
