@@ -12,115 +12,55 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
+    {{ govukBreadcrumbs({ items: [{ text: "Dashboard", href: "/sprint3/dashboard" }, { text: "Case View" } ] }) }}
+
     <div>
-      {{
-        govukBreadcrumbs({
-          items: [
-            {
-              text: "Dashboard",
-              href: "/sprint3/dashboard"
-            },
-            {
-              text: "Case View"
-            }
-          ]
-        })
-      }}
       <h2 class="govuk-heading-m">Case ID: {{query.case}}</h2>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.head
-        })
-      }}
-    </div>
-
-    <div>
-      <h2 class="govuk-heading-m">Tenancy Details</h2>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.tenancy
-        })
-      }}
-    </div>
-
-    <div>
-      <h2 class="govuk-heading-m">Demographics</h2>
-      <h3 class="govuk-caption-m">First Person</h3>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.demographics.person1
-        })
-      }}
-
-      {% if data.sprint3.individualCases[query.case].form.demographics.person2 %}
-      <h3 class="govuk-caption-m">Second Person</h3>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.demographics.person2
-        })
-      }}
+      {% for section in data.sprint3.individualCases[query.case].data %}
+      {% if section.title %}
+      <h3 class="govuk-heading-m">{{section.title}}</h3>
       {% endif %}
 
-      {% if data.sprint3.individualCases[query.case].form.demographics.person3 %}
-      <h3 class="govuk-caption-m">Third Person</h3>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.demographics.person3
-        })
-      }}
+      {% if section.rows.length > 0 %}
+      <dl class="govuk-summary-list">
+        {% for row in section.rows %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            {{row.label | safe}}
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{row.value | safe}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+
+          </dd>
+        </div>
+        {% endfor %}
+      </dl>
       {% endif %}
 
+      {% for section in section.sections %}
+      <h3 class="govuk-caption-m">{{section.title}}</h3>
 
-      <h3 class="govuk-caption-m">Household</h3>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.demographics.household
-        })
-      }}
-    </div>
+      {% if section.rows.length > 0 %}
+      <dl class="govuk-summary-list">
+        {% for row in section.rows %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            {{row.label | safe}}
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{row.value | safe}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
 
-    <div>
-      <h2 class="govuk-heading-m">Access and Health needs</h2>
-      <h3 class="govuk-caption-m">Access</h3>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.needs.access
-        })
-      }}
-
-      <h3 class="govuk-caption-m">Health</h3>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.needs.health
-        })
-      }}
-    </div>
-
-    <div>
-      <h2 class="govuk-heading-m">Circumstances of Move</h2>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.circumstances
-        })
-      }}
-    </div>
-
-    <div>
-      <h2 class="govuk-heading-m">Cost of letting</h2>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.costs
-        })
-      }}
-    </div>
-
-    <div>
-      <h2 class="govuk-heading-m">Property Details</h2>
-      {{
-        govukSummaryList({
-          rows: data.sprint3.individualCases[query.case].form.property
-        })
-      }}
+          </dd>
+        </div>
+        {% endfor %}
+      </dl>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
     </div>
   </div>
 </div>

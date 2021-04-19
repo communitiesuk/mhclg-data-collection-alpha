@@ -206,1136 +206,329 @@ module.exports = {
   sprint3: {
     individualCases: {
       '234fnskdjd23': {
-        form: {
-          head: [
-            {
-              key: {
-                text: 'Privacy Notice'
-              },
-              value: {
-                text: 'Yes'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'name'
-                  }
-                ]
-              }
-            },
-          ],
-          tenancy: [
-            {
-              key: {
-                text: 'Tenancy Start Date'
-              },
-              value: {
-                text: '5 January 2021'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'date of birth'
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: 'Type of provider'
-              },
-              value: {
-                html: 'Private'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact information'
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: 'Landlord'
-              },
-              value: {
-                html: 'This landlord'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: 'Starter Tenancy'
-              },
-              value: {
-                html: 'No'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: 'Main tenancy type'
-              },
-              value: {
-                html: 'Assured Shorthold'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: 'Tenant Code'
-              },
-              value: {
-                html: '239S23GH'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: 'Length of fixed term tenancy'
-              },
-              value: {
-                html: '6 months'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
-            }
-          ],
-          demographics: {
-            person1: [
+        data: [
+          {
+            title: null,
+            rows: [
               {
-                key: {
-                  text: 'Person 1 Age'
-                },
-                value: {
-                  html: '24'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Person 1 Age Refused'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Person 1 Economic Status'
-                },
-                value: {
-                  html: 'Part Time'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Person 1 Ethnicity'
-                },
-                value: {
-                  html: 'White: Irish'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Person 1 Nationality'
-                },
-                value: {
-                  html: 'UK national resident in UK'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
+                label: 'Privacy notice shown',
+                value: 'Yes',
+                stats: [
+                  {
+                    type: 'image',
+                    data: ''
+                  }
+                ]
+              }
             ],
-            household: [
+          },
+          {
+            title: 'Tenancy details',
+            rows: [
               {
-                key: {
-                  text: 'Armed Forces'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
+                label: 'Tenancy Start Date',
+                value: '5 January 2021'
               },
               {
-                key: {
-                  text: 'Pregnancy'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
+                label: 'Type of provider',
+                value: 'Private',
               },
               {
-                key: {
-                  text: 'Benefits'
-                },
-                value: {
-                  html: 'Don\'t know'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
+                label: 'Landlord',
+                value: 'This landlord',
               },
               {
-                key: {
-                  text: 'Benefits portion of income'
-                },
-                value: {
-                  html: 'Don\'t know'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
+                label: 'Starter Tenancy',
+                value: 'No',
               },
               {
-                key: {
-                  text: 'Net income'
-                },
-                value: {
-                  html: '&pound; 14000'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
+                label: 'Main tenancy type',
+                value: 'Assured Shorthold',
               },
               {
-                key: {
-                  text: 'Income is'
-                },
-                value: {
-                  html: 'Annual'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
+                label: 'Tenant Code',
+                value: '239S23GH',
+              },
+              {
+                label: 'Length of fixed term tenancy',
+                value: '6 months',
               }
             ]
           },
-          needs: {
-            access: [
+          {
+            title: 'Demographics',
+            sections: [
               {
-                key: {
-                  text: 'Fully wheelchair accessible'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
+                title: 'First Person',
+                rows: [
+                  {
+                    label: 'Person 1 Age',
+                    value: '24',
+                  },
+                  {
+                    label: 'Person 1 Age Refused',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Person 1 Economic Status',
+                    value: 'Part Time',
+                  },
+                  {
+                    label: 'Person 1 Ethnicity',
+                    value: 'White: Irish',
+                  },
+                  {
+                    label: 'Person 1 Nationality',
+                    value: 'UK national resident in UK',
+                  },
+                ]
               },
               {
-                key: {
-                  text: 'Wheelchair access to essential rooms'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Level access housing'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'No access requirements'
-                },
-                value: {
-                  html: 'Yes'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-            ],
-            health: [
-              {
-                key: {
-                  text: 'Chronic Mental or Physical illnesses'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Vision Impaired'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Hearing Impaired'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Mobility Impaired'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Dexterity Impaired'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Learning Difficulty'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Memory Impaired'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Mental Health'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Fatigue'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: 'Social or Behavioural'
-                },
-                value: {
-                  html: 'No'
-                },
-                actions: {
-                  items: [
-                    {
-                      href: '#',
-                      text: 'Change',
-                      visuallyHiddenText: 'contact details'
-                    }
-                  ]
-                }
-              },
+                title: 'Household',
+                rows: [
+                  {
+                    label: 'Armed Forces',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Pregnancy',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Benefits',
+                    value: 'Don\'t know',
+                  },
+                  {
+                    label: 'Benefits portion of income',
+                    value: 'Don\'t know',
+                  },
+                  {
+                    label: 'Net income',
+                    value: '&pound; 14000',
+                  },
+                  {
+                    label: 'Income is',
+                    value: 'Annual',
+                  }
+                ]
+              }
             ]
           },
-          circumstances: [
-            {
-              key: {
-                text: 'Reason for move'
-              },
-              value: {
-                html: 'Repossession'
-              },
-              actions: {
-                items: [
+          {
+            title: 'Access and Health needs',
+            sections: [
+              {
+                title: 'Access',
+                rows: [
                   {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
+                    label: 'Fully wheelchair accessible',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Wheelchair access to essential rooms',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Level access housing',
+                    value: 'No',
+                  },
+                  {
+                    label: 'No access requirements',
+                    value: 'Yes',
+                  },
+                ]
+              },
+              {
+                title: 'Health',
+                rows: [
+                  {
+                    label: 'Chronic Mental or Physical illnesses',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Vision Impaired',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Hearing Impaired',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Mobility Impaired',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Dexterity Impaired',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Learning Difficulty',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Memory Impaired',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Mental Health',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Fatigue',
+                    value: 'No',
+                  },
+                  {
+                    label: 'Social or Behavioural',
+                    value: 'No',
+                  },
                 ]
               }
+            ]
+          },
+          {
+            title: "Circumstances of move",
+            rows: [
+              {
+              label: 'Reason for move',
+              value: 'Repossession',
             },
             {
-              key: {
-                text: 'Prior living situation'
-              },
-              value: {
-                html: 'Owner occupation (private)'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Prior living situation',
+              value: 'Owner occupation (private)',
             },
             {
-              key: {
-                text: 'Previous Local Authority'
-              },
-              value: {
-                html: 'Coventry (E08000026)'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Previous Local Authority',
+              value: 'Coventry (E08000026)',
             },
             {
-              key: {
-                text: 'Previous Postcode'
-              },
-              value: {
-                html: 'CV8 2LZ'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Previous Postcode',
+              value: 'CV8 2LZ',
             },
             {
-              key: {
-                text: 'Time living in new let area'
-              },
-              value: {
-                html: 'More than 4 but less than 5 years'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Time living in new let area',
+              value: 'More than 4 but less than 5 years',
             },
             {
-              key: {
-                text: 'Time on LA waiting list'
-              },
-              value: {
-                html: 'Less than 1 year'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Time on LA waiting list',
+              value: 'Less than 1 year',
             },
             {
-              key: {
-                text: 'Homelessness'
-              },
-              value: {
-                html: 'Assessed as homeless'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Homelessness',
+              value: 'Assessed as homeless',
             },
             {
-              key: {
-                text: 'Given Reasonable Preference'
-              },
-              value: {
-                html: 'Yes'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Given Reasonable Preference',
+              value: 'Yes',
             },
             {
-              key: {
-                text: 'If given reasonable preference, why?'
-              },
-              value: {
-                html: 'Homeless or about to lose their home (within 56 days)'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'If given reasonable preference, why?',
+              value: 'Homeless or about to lose their home (within 56 days)',
             },
             {
-              key: {
-                text: 'Letting under Choice-based Lettings?'
-              },
-              value: {
-                html: 'Yes'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Letting under Choice-based Lettings?',
+              value: 'Yes',
             },
             {
-              key: {
-                text: 'Letting under Common housing register?'
-              },
-              value: {
-                html: 'No'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Letting under Common housing register?',
+              value: 'No',
             },
             {
-              key: {
-                text: 'Letting under Common Allocation Policy?'
-              },
-              value: {
-                html: 'No'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Letting under Common Allocation Policy?',
+              value: 'No',
             },
             {
-              key: {
-                text: 'Source of letting referral'
-              },
-              value: {
-                html: 'Tenant Applied Directly'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Source of letting referral',
+              value: 'Tenant Applied Directly',
             },
-          ],
-          costs: [
-            {
-              key: {
-                text: 'Rental period'
-              },
-              value: {
-                html: 'Weekly for 52 weeks'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+            ]
+          },
+          {
+            title: "Cost of letting",
+            rows: [
+              {
+              label: 'Rental period',
+              value: 'Weekly for 52 weeks',
             },
             {
-              key: {
-                text: 'Basic Rent'
-              },
-              value: {
-                html: '&pound; 52'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Basic Rent',
+              value: '&pound; 52',
             },
             {
-              key: {
-                text: 'Service Charge'
-              },
-              value: {
-                html: '&pound; 14'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Service Charge',
+              value: '&pound; 14',
             },
             {
-              key: {
-                text: 'Personal service charge'
-              },
-              value: {
-                html: '&pound; 0'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Personal service charge',
+              value: '&pound; 0',
             },
             {
-              key: {
-                text: 'Support charge'
-              },
-              value: {
-                html: '&pound; 0'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Support charge',
+              value: '&pound; 0',
             },
             {
-              key: {
-                text: 'Total Charge'
-              },
-              value: {
-                html: '&pound; 66'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Total Charge',
+              value: '&pound; 66',
             },
             {
-              key: {
-                text: 'Is total charge covered by benefits?'
-              },
-              value: {
-                html: 'Yes'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Is total charge covered by benefits?',
+              value: 'Yes',
             },
-          ],
-          property: [
-            {
-              key: {
-                text: 'Property Reference'
-              },
-              value: {
-                html: 'PT238500'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+            ]
+          },
+          {
+            title: "Property details",
+            rows: [
+              {
+              label: 'Property Reference',
+              value: 'PT238500',
             },
             {
-              key: {
-                text: 'Void date'
-              },
-              value: {
-                html: '14 December 2020'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Void date',
+              value: '14 December 2020',
             },
             {
-              key: {
-                text: 'Major Repairs date'
-              },
-              value: {
-                html: 'N/A'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Major Repairs date',
+              value: 'N/A',
             },
             {
-              key: {
-                text: 'Number of times let previously offered'
-              },
-              value: {
-                html: '1'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Number of times let previously offered',
+              value: '1',
             },
             {
-              key: {
-                text: 'Number of Bedrooms'
-              },
-              value: {
-                html: '1'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Number of Bedrooms',
+              value: '1',
             },
             {
-              key: {
-                text: 'Type of Unit'
-              },
-              value: {
-                html: 'Flat / Maisonette'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Type of Unit',
+              value: 'Flat / Maisonette',
             },
             {
-              key: {
-                text: 'Type of Building'
-              },
-              value: {
-                html: 'Purpose Built'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Type of Building',
+              value: 'Purpose Built',
             },
             {
-              key: {
-                text: 'Adapted for wheelchair'
-              },
-              value: {
-                html: 'No'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Adapted for wheelchair',
+              value: 'No',
             },
             {
-              key: {
-                text: 'Property previously let under'
-              },
-              value: {
-                html: 'A social rent basis'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Property previously let under',
+              value: 'A social rent basis',
             },
             {
-              key: {
-                text: 'Reason for Vacancy'
-              },
-              value: {
-                html: 'First let of leased property'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Reason for Vacancy',
+              value: 'First let of leased property',
             },
             {
-              key: {
-                text: 'Property LA'
-              },
-              value: {
-                html: 'Coventry (E08000026)'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Property LA',
+              value: 'Coventry (E08000026)',
             },
             {
-              key: {
-                text: 'Property Postcode'
-              },
-              value: {
-                html: 'CV6 2KP'
-              },
-              actions: {
-                items: [
-                  {
-                    href: '#',
-                    text: 'Change',
-                    visuallyHiddenText: 'contact details'
-                  }
-                ]
-              }
+              label: 'Property Postcode',
+              value: 'CV6 2KP',
             },
-
-          ]
-        }
+            ]
+          }
+        ],
       }
     }
   }
