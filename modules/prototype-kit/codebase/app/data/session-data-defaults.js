@@ -229,6 +229,15 @@ module.exports = {
                 label: 'Tenancy Start Date',
                 value: '5 January 2021',
                 invalid: true,
+                details: {
+                  type: "widgets",
+                  widgets: [
+                    {
+                      title: "Validation Error stats",
+                      content: "56% of the time this date is incorrect"
+                    }
+                  ]
+                }
               },
               {
                 label: 'Type of provider',

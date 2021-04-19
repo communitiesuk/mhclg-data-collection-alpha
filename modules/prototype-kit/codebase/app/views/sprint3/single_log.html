@@ -35,14 +35,33 @@
             {{row.value | safe}}
           </dd>
           <dd class="govuk-summary-list__actions">
+            {% if row.details %}
             <a class="govuk-link" onclick="showDetails('details-{{outerSectionLoopIdx}}-{{loop.index}}')">
               Find out more...
             </a>
+            {% endif %}
           </dd>
         </div>
+        {% if row.details %}
         <div class="details-section" id="details-{{outerSectionLoopIdx}}-{{loop.index}}">
-
+          {% if row.details.type === 'widgets' %}
+            {% for widget in row.details.widgets %}
+            <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+              <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                  {{widget.title}}
+                </h2>
+              </div>
+              <div class="govuk-notification-banner__content">
+                <p class="govuk-notification-banner__heading">
+                  {{widget.content|safe}}
+                </p>
+              </div>
+            </div>
+            {% endfor %}
+          {% endif %}
         </div>
+        {% endif %}
         {% endfor %}
       </dl>
       {% endif %}
@@ -63,14 +82,18 @@
             {{row.value | safe}}
           </dd>
           <dd class="govuk-summary-list__actions">
+            {% if row.details %}
             <a class="govuk-link" data-show-section="details-{{outerSectionLoopIdx}}-{{innerSectionLoopIdx}}-{{loop.index}}">
               Find out more...
             </a>
+            {% endif %}
           </dd>
         </div>
+        {% if row.details %}
         <div class="details-section" id="details-{{outerSectionLoopIdx}}-{{innerSectionLoopIdx}}-{{loop.index}}">
 
         </div>
+        {% endif %}
         {% endfor %}
       </dl>
       {% endif %}
