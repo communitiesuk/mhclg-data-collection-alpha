@@ -1,0 +1,34 @@
+<script src="https://unpkg.com/@flatfile/adapter/build/dist/index.min.js"></script>
+{% extends "layout.html" %} {% block pageTitle %} Flat File {% endblock %} {%
+block beforeContent %} {% endblock %} {% block content %}
+<div>
+  <button id="flatfile-button">Start Flatfile</button>
+</div>
+<script src="https://unpkg.com/@flatfile/adapter/build/dist/index.min.js"></script>
+<script>
+  const importer = new FlatfileImporter("b673cbe9-dda6-4045-a536-3ecff934d443", {
+    type: "Import type",
+    fields: [
+      { label: "Start date", key: "start_date" },
+      { label: "Type of letting", key: "letting_type" },
+    ],
+    managed: false,
+  });
+  importer.setCustomer({
+    userId: "54321",
+    name: "John Doe",
+    email: "john@doe.com",
+    companyName: "Doe Industries",
+    companyId: "12345",
+  });
+  const startImport = () => {
+    importer.requestDataFromUser().then(function (results) {
+      console.log(results);
+      importer.displaySuccess("Thank you for your import!");
+    });
+  };
+  const flatfileButton = document.getElementById("flatfile-button");
+  flatfileButton.addEventListener("click", startImport);
+</script>
+<style></style>
+{% endblock %}
