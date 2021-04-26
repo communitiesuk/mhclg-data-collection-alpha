@@ -5,6 +5,7 @@ block beforeContent %} {% endblock %} {% block content %}
   <button id="flatfile-button">Start Flatfile</button>
 </div>
 <script src="https://unpkg.com/@flatfile/adapter/build/dist/index.min.js"></script>
+<script src="/public/javascripts/homeless_validations.js"></script>
 <script>
   const importer = new FlatfileImporter(
     "b673cbe9-dda6-4045-a536-3ecff934d443",
@@ -35,9 +36,11 @@ block beforeContent %} {% endblock %} {% block content %}
           label: "How long has the tenant been in the tenency",
           key: "how_long_has_the_tenant_been_in_the_tenency",
         },
-        { label: "Homeless", key: "homeless" },
+        { label: "Homeless", key: "homeless", 
+          validators: homeless_validations
+        }
       ],
-      managed: false,
+      managed: false
     }
   );
   importer.setCustomer({
