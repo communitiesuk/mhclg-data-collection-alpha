@@ -36,7 +36,7 @@ block beforeContent %} {% endblock %} {% block content %}
           label: "How long has the tenant been in the tenency",
           key: "how_long_has_the_tenant_been_in_the_tenency",
         },
-        homeless
+        homeless1, homeless2, homeless3, homeless4, homeless5,
       ],
       managed: false
     }
@@ -48,11 +48,7 @@ block beforeContent %} {% endblock %} {% block content %}
     companyName: "Doe Industries",
     companyId: "12345",
   });
-  const startImport = () => {
-    importer.requestDataFromUser().then(function (results) {
-      const data = results.data;
-
-      data.map((el) => {
+  const mapPostcodes = (el) => {
         const pc1 = el.postcode1;
         const pc2 = el.postcode2;
 
@@ -65,7 +61,13 @@ block beforeContent %} {% endblock %} {% block content %}
           console.log(`postcode1: ${postcode1}`);
           console.log(`postcode2: ${postcode2}`);
         }
-      });
+        return el;
+  }
+  const startImport = () => {
+    importer.requestDataFromUser().then(function (results) {
+      const data = results.data;
+
+      data.map((el) => [mapPostcodes, mapHomelessness].map( (mapper) => mapper(el)));
 
       importer.displaySuccess("Thank you for your import!");
     });
