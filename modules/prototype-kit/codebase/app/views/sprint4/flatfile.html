@@ -63,11 +63,10 @@ block beforeContent %} {% endblock %} {% block content %}
         }
         return el;
   }
+  const postProcessors = [mapPostcodes, mapHomelessness];
   const startImport = () => {
     importer.requestDataFromUser().then(function (results) {
-      const data = results.data;
-
-      data.map((el) => [mapPostcodes, mapHomelessness].map( (mapper) => mapper(el)));
+      results.data = results.data.map((row) => postProcessors.map( (processor) => processor(row)));
 
       importer.displaySuccess("Thank you for your import!");
     });
