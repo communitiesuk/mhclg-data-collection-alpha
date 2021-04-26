@@ -52,10 +52,10 @@ block beforeContent %} {% endblock %} {% block content %}
         const pc1 = el.postcode1;
         const pc2 = el.postcode2;
 
-        if (pc1.length <= 4 && pc2.length == 3) {
+        if (pc1 && pc1.length <= 4 && pc2 && pc2.length == 3) {
           console.log(`postcode1: ${pc1}`);
           console.log(`postcode2: ${pc2}`);
-        } else if (pc1.length > 4) {
+        } else if (pc1 && pc1.length > 4) {
           let postcode1 = pc1.substr(0, pc1.length - 3);
           let postcode2 = pc1.substr(pc1.length - 3);
           console.log(`postcode1: ${postcode1}`);

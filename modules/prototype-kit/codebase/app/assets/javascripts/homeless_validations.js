@@ -56,22 +56,32 @@ const homeless5 = {
 
 
 function mapHomelessness(entry){
+    entry.homeless = false;
+    entry.unsatisfactory_housing = false;
+    entry.welfare = false;
+    entry.hardship = false;
+    entry.unknown = false;
 
-    if (entry.homeless1){
-        switch (entry.homeless1) {
-            case 'homeless':
-                entry.homeless = true; break;
-            case 'unsatisfactory_housing':
-                entry.unsatisfactory_housing = true; break;
-            case 'welfare':
-                entry.welfare = true; break;
-            case 'hardship':
-                entry.hardship = true; break;
-            case 'unknown':
-                entry.unknown = true; break;
+    [entry.homeless1, entry.homeless2, entry.homeless3, entry.homeless4, entry.homeless5].map(
+        (homelessField) => {
+            if (homelessField) {
+                switch (homelessField) {
+                    case 'homeless':
+                        entry.homeless = true; break;
+                    case 'unsatisfactory_housing':
+                        entry.unsatisfactory_housing = true; break;
+                    case 'welfare':
+                        entry.welfare = true; break;
+                    case 'hardship':
+                        entry.hardship = true; break;
+                    case 'unknown':
+                        entry.unknown = true; break;
+                }
+            }
         }
-    }
+    )
+    if (!entry.homeless && !entry.unsatisfactory_housing && !entry.welfare && !entry.hardship) entry.unknown = true;
 
-    console.log(entry.homeless);
+    console.log(`Homeless: ${entry.homeless}; Unsatisfactory: ${entry.unsatisfactory_housing}; Welfare: ${entry.welfare}; Hardship: ${entry.hardship}; Unknown: ${entry.unknown}`);
     return entry;
 }
