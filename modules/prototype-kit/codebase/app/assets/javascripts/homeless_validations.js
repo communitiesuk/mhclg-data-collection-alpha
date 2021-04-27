@@ -81,3 +81,12 @@ const mapHomelessness = (originalRecord, index, mode) => {
         `Welfare: ${record.welfare.value}; Hardship: ${record.hardship.value}; Unknown: ${record.unknown.value}`);
     return record;
 }
+
+const fieldHookForHardship = (data) => {
+    data.map(value => {
+        let val = value[0];
+        let index = value[1];
+
+        return [{value: val || false}, index]
+    })
+}

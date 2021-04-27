@@ -106,7 +106,8 @@ block beforeContent %} {% endblock %} {% block content %}
     return out
   };
 
-  // importer.registerRecordHook(mapHomelessness);
+  importer.registerFieldHook("hardship", fieldHookForHardship);
+
   importer.registerRecordHook((record, index, mode) => {
     let out = {};
     
