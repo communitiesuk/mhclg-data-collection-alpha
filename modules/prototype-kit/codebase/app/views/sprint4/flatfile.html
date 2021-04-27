@@ -41,13 +41,37 @@ block beforeContent %} {% endblock %} {% block content %}
           label: "Start date",
           key: "start_date",
         },
-        { label: "Postcode 1", key: "postcode1" },
-        { label: "Postcode 2", key: "postcode2" },
+        {
+          label: "Postcode 1",
+          key: "postcode1",
+          validators: [
+            {
+              validate: "regex_matches",
+              regex: "^[a-zA-Z0-9]{3,4}$",
+              error: "Only three or four characters in length",
+            },
+          ],
+        },
+        {
+          label: "Postcode 2",
+          key: "postcode2",
+          validators: [
+            {
+              validate: "regex_matches",
+              regex: "^[a-zA-Z0-9]{3}$",
+              error: "Only three characters in length",
+            },
+          ],
+        },
         { label: "Type of letting", key: "letting_type" },
         { label: "previous tenure", key: "previous_tenure" },
         timeInTenancy,
         homelessCombined,
-        homeless1, homeless2, homeless3, homeless4, homeless5,
+        homeless1,
+        homeless2,
+        homeless3,
+        homeless4,
+        homeless5,
       ],
       managed: false,
     }
@@ -63,28 +87,30 @@ block beforeContent %} {% endblock %} {% block content %}
 
   const checkGender = (input) => {
     let ilc = input.toLowerCase();
-    if(ilc == "m" || ilc == "male") {
+    if (ilc == "m" || ilc == "male") {
       return {
-          value: "Male",
-        };
-    } else if(ilc == "f" || ilc == "female") {
+        value: "Male",
+      };
+    } else if (ilc == "f" || ilc == "female") {
       return {
-          value: "Female",
-        };
-    } else if(ilc == "x" || ilc == "other") {
+        value: "Female",
+      };
+    } else if (ilc == "x" || ilc == "other") {
       return {
-          value: "Other",
-        };
-    } else if(ilc == "r" || ilc == "refused") {
+        value: "Other",
+      };
+    } else if (ilc == "r" || ilc == "refused") {
       return {
-          value: "Refused",
-        };
+        value: "Refused",
+      };
     } else {
       return input;
     }
   };
 
   const mapPostcodes = (pc1, pc2) => {
+    pc1 = pc1.replace(" ", '');
+    pc2 = pc2.replace(" ", '');
     if (pc1 && pc1.length <= 4 && pc2 && pc2.length == 3) {
       out.postcode1 = { value: pc1 };
       out.postcode2 = { value: pc2 };
@@ -99,7 +125,7 @@ block beforeContent %} {% endblock %} {% block content %}
 
   importer.registerRecordHook((record, index, mode) => {
     out = {};
-    
+
     out.gender = checkGender(record.gender);
     mapPostcodes(record.postcode1, record.postcode2);
 
