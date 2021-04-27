@@ -97,6 +97,7 @@ block beforeContent %} {% endblock %} {% block content %}
     }
   };
 
+  importer.registerRecordHook(mapHomelessness);
   importer.registerRecordHook((record, index, mode) => {
     out = {};
     
@@ -106,7 +107,7 @@ block beforeContent %} {% endblock %} {% block content %}
     return out;
   });
 
-  const postProcessors = [mapPostcodes, mapHomelessness];
+  const postProcessors = [mapPostcodes, ];
   const startImport = () => {
     importer.requestDataFromUser().then(function (results) {
       results.data = results.data.map((row) =>
