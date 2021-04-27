@@ -47,28 +47,37 @@ const homeless5 = {
     type: 'checkbox',
 }
 
-function mapHomelessness(entry){
-    entry.homeless = false;
-    entry.unsatisfactory_housing = false;
-    entry.welfare = false;
-    entry.hardship = false;
-    entry.unknown = false;
+// const timeInTenancyFixer = values => {
+//     return values.map(value => {
+//         let time = value[0];
+//         let index = value[1];
 
-    if (entry.homeless_status) {
-        switch (entry.homeless_status){
+//         var out = [{value: "unknown"}, index];
+
+const mapHomelessness = (originalRecord, index, mode) => {
+    const record = {}
+    record.homeless = {value: false}
+    record.unsatisfactory_housing = {value: false}
+    record.welfare = {value: false}
+    record.hardship = {value: false}
+    record.unknown = {value: false}
+
+    if (originalRecord.homeless_status) {
+        switch (originalRecord.homeless_status){
             case 'homeless':
-                entry.homeless = true; break;
+                record.homeless = {value: true}; break;
             case 'unsatisfactory_housing':
-                entry.unsatisfactory_housing = true; break;
+                record.unsatisfactory_housing = {value: true}; break;
             case 'welfare':
-                entry.welfare = true; break;
+                record.welfare = {value: true}; break;
             case 'hardship':
-                entry.hardship = true; break;
+                record.hardship = {value: true}; break;
             case 'unknown':
-                entry.unknown = true; break;
+                record.unknown = {value: true}; break;
         }
     }
 
-    console.log(`Homeless: ${entry.homeless}; Unsatisfactory: ${entry.unsatisfactory_housing}; Welfare: ${entry.welfare}; Hardship: ${entry.hardship}; Unknown: ${entry.unknown}`);
-    return entry;
+    console.log(`Homeless: ${record.homeless.value}; Unsatisfactory: ${record.unsatisfactory_housing.value}; ` +
+        `Welfare: ${record.welfare.value}; Hardship: ${record.hardship.value}; Unknown: ${record.unknown.value}`);
+    return record;
 }
