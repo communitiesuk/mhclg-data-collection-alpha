@@ -1,2 +1,4 @@
 .terraform/*
 yarn.lock
+*.orig
+*#

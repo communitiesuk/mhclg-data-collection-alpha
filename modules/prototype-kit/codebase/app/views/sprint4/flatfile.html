@@ -6,6 +6,7 @@ block beforeContent %} {% endblock %} {% block content %}
 </div>
 <script src="https://unpkg.com/@flatfile/adapter/build/dist/index.min.js"></script>
 <script src="/public/javascripts/homeless_validations.js"></script>
+<script src="/public/javascripts/time_in_tenancy_validations.js"></script>
 <script>
   const importer = new FlatfileImporter(
     "b673cbe9-dda6-4045-a536-3ecff934d443",
@@ -32,10 +33,7 @@ block beforeContent %} {% endblock %} {% block content %}
         { label: "Postcode 2", key: "postcode2" },
         { label: "Type of letting", key: "letting_type" },
         { label: "previous tenure", key: "previous_tenure" },
-        {
-          label: "How long has the tenant been in the tenency",
-          key: "how_long_has_the_tenant_been_in_the_tenency",
-        },
+        timeInTenancy,
         homeless1, homeless2, homeless3, homeless4, homeless5,
       ],
       managed: false
@@ -63,6 +61,9 @@ block beforeContent %} {% endblock %} {% block content %}
         }
         return el;
   }
+
+  // importer.registerFieldHook("time_in_tenancy", timeInTenancyFixer);
+
   const postProcessors = [mapPostcodes, mapHomelessness];
   const startImport = () => {
     importer.requestDataFromUser().then(function (results) {

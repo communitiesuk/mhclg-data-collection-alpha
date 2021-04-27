@@ -1,9 +1,4 @@
 const homeless_validations = [
-    // {
-    //     validate: "regex_matches",
-    //     regex: "^\\d{1,3}$",
-    //     error: "Only can be number and must not be more than 3 digits in length.",
-    // }
 ]
 
 const homeless_options = [
@@ -14,7 +9,6 @@ const homeless_options = [
     { label: "Don't know", value: "unknown" },
 ]
 
-
 const homeless1 = {
     label: "Homeless 1", key: "homeless1",
     validators: homeless_validations,
@@ -22,6 +16,7 @@ const homeless1 = {
     options: homeless_options,
     matchStrategy: 'fuzzy'
 }
+
 const homeless2 = {
     label: "Homeless 2", key: "homeless2",
     validators: homeless_validations,
@@ -53,7 +48,6 @@ const homeless5 = {
     options: homeless_options,
     matchStrategy: 'fuzzy'
 }
-
 
 function mapHomelessness(entry){
     entry.homeless = false;
