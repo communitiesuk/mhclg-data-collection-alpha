@@ -59,32 +59,39 @@ block beforeContent %} {% endblock %} {% block content %}
     companyName: "Doe Industries",
     companyId: "12345",
   });
-  let out = {};
 
-  const checkGender = (input) => {
+  const checkGender = (record) => {
+    if (!record.gender) return {}
+    let input = record.gender
+    let out = {}
     let ilc = input.toLowerCase();
     if(ilc == "m" || ilc == "male") {
-      return {
+      out.gender = {
           value: "Male",
         };
     } else if(ilc == "f" || ilc == "female") {
-      return {
+      out.gender = {
           value: "Female",
         };
     } else if(ilc == "x" || ilc == "other") {
-      return {
+      out.gender = {
           value: "Other",
         };
     } else if(ilc == "r" || ilc == "refused") {
-      return {
+      out.gender = {
           value: "Refused",
         };
     } else {
-      return input;
+      out.gender = input;
     }
+
+    return out
   };
 
-  const mapPostcodes = (pc1, pc2) => {
+  const mapPostcodes = (record) => {
+    const pc1 = record.postcode1
+    const pc2 = record.postcode2
+    let out = {}
     if (pc1 && pc1.length <= 4 && pc2 && pc2.length == 3) {
       out.postcode1 = { value: pc1 };
       out.postcode2 = { value: pc2 };
@@ -95,14 +102,17 @@ block beforeContent %} {% endblock %} {% block content %}
       out.postcode1 = { value: postcode1 };
       out.postcode2 = { value: postcode2 };
     }
+
+    return out
   };
 
-  importer.registerRecordHook(mapHomelessness);
+  // importer.registerRecordHook(mapHomelessness);
   importer.registerRecordHook((record, index, mode) => {
-    out = {};
+    let out = {};
     
-    out.gender = checkGender(record.gender);
-    mapPostcodes(record.postcode1, record.postcode2);
+    out = {...out, ...checkGender(record)};
+    out = {...out, ...mapPostcodes(record)};
+    out = {...out, ...mapHomelessness(record)};
 
     return out;
   });
