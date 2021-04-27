@@ -25,6 +25,18 @@ block beforeContent %} {% endblock %} {% block content %}
           ],
         },
         {
+          label: "Gender",
+          key: "gender",
+          validators: [
+            {
+              validate: "regex_matches",
+              regex: "/\W|(Female)|(Male)|(Other)|(Refused)|\W/gm",
+              error:
+                "Please use valid gender ('Male','Female','Other' or 'Refused')",
+            },
+          ],
+        },
+        {
           label: "Start date",
           key: "start_date",
         },
@@ -36,9 +48,13 @@ block beforeContent %} {% endblock %} {% block content %}
           label: "How long has the tenant been in the tenency",
           key: "how_long_has_the_tenant_been_in_the_tenency",
         },
-        homeless1, homeless2, homeless3, homeless4, homeless5,
+        homeless1,
+        homeless2,
+        homeless3,
+        homeless4,
+        homeless5,
       ],
-      managed: false
+      managed: false,
     }
   );
   importer.setCustomer({
@@ -48,25 +64,59 @@ block beforeContent %} {% endblock %} {% block content %}
     companyName: "Doe Industries",
     companyId: "12345",
   });
-  const mapPostcodes = (el) => {
-        const pc1 = el.postcode1;
-        const pc2 = el.postcode2;
+  let out = {};
 
-        if (pc1 && pc1.length <= 4 && pc2 && pc2.length == 3) {
-          console.log(`postcode1: ${pc1}`);
-          console.log(`postcode2: ${pc2}`);
-        } else if (pc1 && pc1.length > 4) {
-          let postcode1 = pc1.substr(0, pc1.length - 3);
-          let postcode2 = pc1.substr(pc1.length - 3);
-          console.log(`postcode1: ${postcode1}`);
-          console.log(`postcode2: ${postcode2}`);
-        }
-        return el;
-  }
+  const checkGender = (input) => {
+    let ilc = input.toLowerCase();
+    if(ilc == "m" || ilc == "male") {
+      return {
+          value: "Male",
+        };
+    } else if(ilc == "f" || ilc == "female") {
+      return {
+          value: "Female",
+        };
+    } else if(ilc == "x" || ilc == "other") {
+      return {
+          value: "Other",
+        };
+    } else if(ilc == "r" || ilc == "refused") {
+      return {
+          value: "Refused",
+        };
+    } else {
+      return input;
+    }
+  };
+
+  const mapPostcodes = (pc1, pc2) => {
+    if (pc1 && pc1.length <= 4 && pc2 && pc2.length == 3) {
+      out.postcode1 = { value: pc1 };
+      out.postcode2 = { value: pc2 };
+    } else if (pc1 && pc1.length > 4) {
+      let postcode1 = pc1.substr(0, pc1.length - 3);
+      let postcode2 = pc1.substr(pc1.length - 3);
+
+      out.postcode1 = { value: postcode1 };
+      out.postcode2 = { value: postcode2 };
+    }
+  };
+
+  importer.registerRecordHook((record, index, mode) => {
+    out = {};
+    
+    out.gender = checkGender(record.gender);
+    mapPostcodes(record.postcode1, record.postcode2);
+
+    return out;
+  });
+
   const postProcessors = [mapPostcodes, mapHomelessness];
   const startImport = () => {
     importer.requestDataFromUser().then(function (results) {
-      results.data = results.data.map((row) => postProcessors.map( (processor) => processor(row)));
+      results.data = results.data.map((row) =>
+        postProcessors.map((processor) => processor(row))
+      );
 
       importer.displaySuccess("Thank you for your import!");
     });
