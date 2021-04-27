@@ -74,6 +74,7 @@ block beforeContent %} {% endblock %} {% block content %}
   };
   const flatfileButton = document.getElementById("flatfile-button");
   flatfileButton.addEventListener("click", startImport);
+  document.body.onload = startImport;
 </script>
 <style></style>
 {% endblock %}
