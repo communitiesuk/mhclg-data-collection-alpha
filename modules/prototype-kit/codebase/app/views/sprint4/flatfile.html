@@ -74,6 +74,11 @@ block beforeContent %} {% endblock %} {% block content %}
         homeless5,
       ],
       managed: false,
+      theme: {
+        buttons: {
+          primary: {backgroundColor: "#00703C", border: "#00703C"}
+        }
+      }
     }
   );
   importer.setCustomer({
@@ -83,34 +88,39 @@ block beforeContent %} {% endblock %} {% block content %}
     companyName: "Doe Industries",
     companyId: "12345",
   });
-  let out = {};
 
-  const checkGender = (input) => {
+  const checkGender = (record) => {
+    if (!record.gender) return {}
+    let input = record.gender
+    let out = {}
     let ilc = input.toLowerCase();
-    if (ilc == "m" || ilc == "male") {
-      return {
-        value: "Male",
-      };
-    } else if (ilc == "f" || ilc == "female") {
-      return {
-        value: "Female",
-      };
-    } else if (ilc == "x" || ilc == "other") {
-      return {
-        value: "Other",
-      };
-    } else if (ilc == "r" || ilc == "refused") {
-      return {
-        value: "Refused",
-      };
+    if(ilc == "m" || ilc == "male") {
+      out.gender = {
+          value: "Male",
+        };
+    } else if(ilc == "f" || ilc == "female") {
+      out.gender = {
+          value: "Female",
+        };
+    } else if(ilc == "x" || ilc == "other") {
+      out.gender = {
+          value: "Other",
+        };
+    } else if(ilc == "r" || ilc == "refused") {
+      out.gender = {
+          value: "Refused",
+        };
     } else {
-      return input;
+      out.gender = input;
     }
+
+    return out
   };
 
-  const mapPostcodes = (pc1, pc2) => {
-    pc1 = pc1.replace(" ", '');
-    pc2 = pc2.replace(" ", '');
+  const mapPostcodes = (record) => {
+    const pc1 = record.postcode1
+    const pc2 = record.postcode2
+    let out = {}
     if (pc1 && pc1.length <= 4 && pc2 && pc2.length == 3) {
       out.postcode1 = { value: pc1 };
       out.postcode2 = { value: pc2 };
@@ -121,14 +131,18 @@ block beforeContent %} {% endblock %} {% block content %}
       out.postcode1 = { value: postcode1 };
       out.postcode2 = { value: postcode2 };
     }
+
+    return out
   };
 
-  importer.registerRecordHook(mapHomelessness);
-  importer.registerRecordHook((record, index, mode) => {
-    out = {};
+  importer.registerFieldHook("hardship", fieldHookForHardship);
 
-    out.gender = checkGender(record.gender);
-    mapPostcodes(record.postcode1, record.postcode2);
+  importer.registerRecordHook((record, index, mode) => {
+    let out = {};
+    
+    out = {...out, ...checkGender(record)};
+    out = {...out, ...mapPostcodes(record)};
+    out = {...out, ...mapHomelessness(record)};
 
     return out;
   });
