@@ -31,8 +31,27 @@
           label: "Start date",
           key: "start_date",
         },
-        { label: "Postcode 1", key: "postcode1" },
-        { label: "Postcode 2", key: "postcode2" },
+        { label: "Postcode 1", key: "postcode1", 
+          validators: [
+            {
+              validate: 'required',
+            },
+            {
+              validate: "regex_matches",
+              regex: "^[a-zA-Z0-9]{3,4}$",
+              error: "Only three or four characters in length",
+            },
+          ], 
+        },
+        { label: "Postcode 2", key: "postcode2", 
+          validators: [
+            {
+              validate: "regex_matches",
+              regex: "^[a-zA-Z0-9]{3}$",
+              error: "Only three characters in length",
+            },
+          ],
+        },
         { label: "Type of letting", key: "letting_type" },
         { label: "previous tenure", key: "previous_tenure" },
         timeInTenancy,
@@ -40,6 +59,11 @@
         homeless1, homeless2, homeless3, homeless4, homeless5,
       ],
       managed: false,
+      theme: {
+        buttons: {
+          primary: {backgroundColor: "#00703C", border: "#00703C"}
+        }
+      }
     }
   );
   importer.setCustomer({
@@ -83,13 +107,13 @@
     const pc2 = record.postcode2
     let out = {}
     if (pc1 && pc1.length <= 4 && pc2 && pc2.length == 3) {
-      out.postcode1 = { value: pc1 };
+      out.postcode1 = { value: pc1.replace(' ', '') };
       out.postcode2 = { value: pc2 };
     } else if (pc1 && pc1.length > 4) {
       let postcode1 = pc1.substr(0, pc1.length - 3);
-      let postcode2 = pc1.substr(pc1.length - 3);
+      let postcode2 = pc2 || pc1.substr(pc1.length - 3);
 
-      out.postcode1 = { value: postcode1 };
+      out.postcode1 = { value: postcode1.replace(' ', '') };
       out.postcode2 = { value: postcode2 };
     }
 
@@ -100,7 +124,7 @@
 
   importer.registerRecordHook((record, index, mode) => {
     let out = {};
-    
+
     out = {...out, ...checkGender(record)};
     out = {...out, ...mapPostcodes(record)};
     out = {...out, ...mapHomelessness(record)};
@@ -108,14 +132,8 @@
     return out;
   });
 
-  const postProcessors = [mapPostcodes, ];
-
   const startImport = () => {
     importer.requestDataFromUser().then(function (results) {
-      results.data = results.data.map((row) =>
-        postProcessors.map((processor) => processor(row))
-      );
-
       importer.displaySuccess("Thank you for your import!");
     });
   };
