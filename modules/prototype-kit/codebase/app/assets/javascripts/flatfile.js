@@ -4,6 +4,10 @@
       type: "Import type",
       fields: [
         {
+          label: "Tenancy Id",
+          key: "tenancy_id",
+        },
+        {
           label: "Age",
           key: "age",
           validators: [
@@ -38,8 +42,8 @@
             },
             {
               validate: "regex_matches",
-              regex: "^[a-zA-Z0-9]{3,4}$",
-              error: "Only three or four characters in length",
+              regex: "^[a-zA-Z0-9 ]{3,9}$",
+              error: "At least 3 characters",
             },
           ], 
         },
@@ -47,8 +51,8 @@
           validators: [
             {
               validate: "regex_matches",
-              regex: "^[a-zA-Z0-9]{3}$",
-              error: "Only three characters in length",
+              regex: "^$",
+              error: "Only valid in combination with 'Postcode (or first part of)'",
             },
           ],
         },
@@ -80,7 +84,7 @@
     let out = {};
 
     out = {...out, ...checkGender(record)};
-    out = {...out, ...mapPostcodes(record)};
+    out = {...out, ...mapPostcodesToSingle(record)};
     out = {...out, ...mapHomelessness(record)};
 
     return out;
