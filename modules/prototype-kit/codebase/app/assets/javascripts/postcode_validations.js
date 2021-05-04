@@ -17,7 +17,6 @@ const mapPostcodesToDouble = (record) => {
 };
 
 const mapPostcodesToSingle = (record) => {
-    console.log("Joining...")
     const pc1 = record.postcode1
     const pc2 = record.postcode2
     let out = {}

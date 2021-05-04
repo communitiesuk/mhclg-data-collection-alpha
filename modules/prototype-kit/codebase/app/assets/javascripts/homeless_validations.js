@@ -51,8 +51,6 @@ const homelessState = {}
 const mapHomelessness = (originalRecord, index, mode) => {
     const record = {}
 
-    console.log(originalRecord)
-
     if (originalRecord.homeless_status) {
         switch (originalRecord.homeless_status){
             case 'homeless':
