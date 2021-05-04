@@ -57,7 +57,7 @@
           ],
         },
         { label: "Type of letting", key: "letting_type" },
-        { label: "Previous tenure", key: "previous_tenure" },
+        previousTenure,
         timeInTenancy,
         homelessCombined,
         homeless1, homeless2, homeless3, homeless4, homeless5,
