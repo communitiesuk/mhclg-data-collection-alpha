@@ -31,7 +31,7 @@
           label: "Start date",
           key: "start_date",
         },
-        { label: "Postcode 1", key: "postcode1", 
+        { label: "Postcode (or first part of)", key: "postcode1", 
           validators: [
             {
               validate: 'required',
@@ -43,7 +43,7 @@
             },
           ], 
         },
-        { label: "Postcode 2", key: "postcode2", 
+        { label: "Postcode second part", key: "postcode2", 
           validators: [
             {
               validate: "regex_matches",
@@ -53,7 +53,7 @@
           ],
         },
         { label: "Type of letting", key: "letting_type" },
-        { label: "previous tenure", key: "previous_tenure" },
+        { label: "Previous tenure", key: "previous_tenure" },
         timeInTenancy,
         homelessCombined,
         homeless1, homeless2, homeless3, homeless4, homeless5,
@@ -73,52 +73,6 @@
     companyName: "Doe Industries",
     companyId: "12345",
   });
-
-  const checkGender = (record) => {
-    if (!record.gender) return {}
-    let input = record.gender
-    let out = {}
-    let ilc = input.toLowerCase();
-    if(ilc == "m" || ilc == "male") {
-      out.gender = {
-          value: "Male",
-        };
-    } else if(ilc == "f" || ilc == "female") {
-      out.gender = {
-          value: "Female",
-        };
-    } else if(ilc == "x" || ilc == "other") {
-      out.gender = {
-          value: "Other",
-        };
-    } else if(ilc == "r" || ilc == "refused") {
-      out.gender = {
-          value: "Refused",
-        };
-    } else {
-      out.gender = input;
-    }
-
-    return out
-  };
-
-  const mapPostcodes = (record) => {
-    const pc1 = record.postcode1
-    const pc2 = record.postcode2
-    let out = {}
-    if (pc1 && pc1.length <= 4 && pc2 && pc2.length == 3) {
-      out.postcode1 = { value: pc1.replace(' ', '') };
-      out.postcode2 = { value: pc2 };
-    } else if (pc1 && pc1.length > 4) {
-      let postcode1 = pc1.substr(0, pc1.length - 3);
-      let postcode2 = pc2 || pc1.substr(pc1.length - 3);
-
-      out.postcode1 = { value: postcode1.replace(' ', '') };
-      out.postcode2 = { value: postcode2 };
-    }
-
-    return out
-  };
 
   importer.registerFieldHook("hardship", fieldHookForHardship);
 

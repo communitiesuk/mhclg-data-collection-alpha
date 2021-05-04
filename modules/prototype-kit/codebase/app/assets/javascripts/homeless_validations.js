@@ -47,6 +47,7 @@ const homeless5 = {
     type: 'checkbox',
 }
 
+const homelessState = {}
 const mapHomelessness = (originalRecord, index, mode) => {
     const record = {}
 
