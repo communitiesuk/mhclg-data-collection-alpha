@@ -1,3 +1,5 @@
+dayjs.extend(window.dayjs_plugin_customParseFormat)
+
 const allFields = [
   {
     label: "Tenancy Id",
@@ -65,6 +67,7 @@ importer.registerRecordHook((record, index, mode) => {
   out = { ...out, ...checkGender(record) };
   out = { ...out, ...mapPostcodes(record) };
   out = { ...out, ...mapHomelessness(record) };
+  out = { ...out, ...mapStartDate(record) };
 
   return out;
 });
