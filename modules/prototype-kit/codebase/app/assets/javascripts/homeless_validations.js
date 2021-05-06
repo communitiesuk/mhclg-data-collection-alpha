@@ -65,7 +65,6 @@ const mapHomelessness = (originalRecord, index, mode) => {
                 record.unknown = {value: true}; break;
         }
     }
-    record.homeless_status = {value: ""}
 
     return record;
 }
