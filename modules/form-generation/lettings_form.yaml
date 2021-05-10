@@ -1,6 +1,6 @@
-section:
+sections:
   - name: intro
-  - label: Introductory questions
+    label: Introductory questions
     questions:
     - name: letting_type
       label: Is this an Affordable Rent, Social Rent or Rent To Buy Letting Log?
@@ -11,12 +11,12 @@ section:
         - name: affordable_rent
           label: Affordable Rent
           position: 0
-    - name: social
-      label: Social
-      position: 1
-    - name: rent_to_buy
-      label: Rent to Buy
-      position: 2
+        - name: social
+          label: Social
+          position: 1
+        - name: rent_to_buy
+          label: Rent to Buy
+          position: 2
     - name: tenancy_start_date
       label: Key Dates (e.g. 12/05/18)
       mandatory: true
