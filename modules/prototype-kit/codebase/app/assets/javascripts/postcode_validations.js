@@ -37,10 +37,19 @@ const postcodeSecondPart = {
     ],
 }
 
+function fixPostcode(){
+    if (record.postcode){
+        return record.postcode
+            .replace(' ', '')
+            .toUpperCase() 
+    }
+    return ""
+}
+
 const mapPostcodes = (record) => {
-    const postcode = record.postcode ? record.postcode.replace(' ', '') : ""
-    const pc1 = record.postcode1 ? record.postcode1.replace(' ', '') : ""
-    const pc2 = record.postcode2 ? record.postcode2.replace(' ', '') : ""
+    const postcode = fixPostcode(record.postcode)
+    const pc1 = fixPostcode(record.postcode1)
+    const pc2 = fixPostcode(record.postcode2)
     let out = {}
 
     if (postcode.length > 0) {
