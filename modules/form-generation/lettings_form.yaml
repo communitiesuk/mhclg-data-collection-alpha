@@ -1,0 +1,215 @@
+section:
+  - name: intro
+  - label: Introductory questions
+    questions:
+    - name: letting_type
+      label: Is this an Affordable Rent, Social Rent or Rent To Buy Letting Log?
+      question_number: 0
+      mandatory: true
+      question_type: multiple_choice_select
+      answer_options:
+        - name: affordable_rent
+          label: Affordable Rent
+          position: 0
+    - name: social
+      label: Social
+      position: 1
+    - name: rent_to_buy
+      label: Rent to Buy
+      position: 2
+    - name: tenancy_start_date
+      label: Key Dates (e.g. 12/05/18)
+      mandatory: true
+      question_number: 1
+      question_type: date
+    - name: type_of_letting_provider
+      label: Landlord / Lettings Details
+      mandatory: true
+      question_number: 2
+      question_type: multiple_choice_select
+      answer_options:
+        - name: private_registered_provider
+          label: Private Registered Provider
+          position: 0
+        - name: ha_landlord_or_local_authority_landlord
+          label: (HA) Landlord OR Local Authority Landlord
+          position: 1
+    - name: general_needs_or_supported
+      label: Letting in General Needs or Supported Unit?
+      mandatory: true
+      question_number: 3
+      question_type: multiple_choice_select
+      answer_options:
+        - name: general_needs
+          label: General Needs
+          position: 0
+        - name: supported
+          label: Supported
+          position: 1
+    - name: landlord_on_tenancy_agreement
+      label: Who is the landlord on the tenancy agreement?
+      mandatory: true
+      question_number: 4
+      depends_on:
+        - operator: AND
+          dependency:
+            - name: general_needs_or_supported
+              answer_options:
+                - name: general_needs
+                - name: type_of_letting_provider
+                  answer_options:
+                    - name: ha_landlord_or_local_authority_landlord
+      question_type: filterable_multiple_choice_select
+      data_source: providers
+    - name: management_group
+      label: Please enter the management group name for the property?
+      mandatory: true
+      question_number: 5
+      depends_on:
+        - name: general_needs_or_supported
+          answer_options:
+            - name: supported
+      question_type: filterable_multiple_choice_select
+      data_source: management_code
+    - name: scheme_code
+      label: Please enter the scheme code for the property?
+      mandatory: true
+      question_number: 6
+      depends_on:
+        - name: general_needs_or_supported
+          answer_options:
+            - name: supported
+      question_type: filterable_multiple_choice_select
+      data_source: management_code
+    - name: sheltered
+      label: Is this letting sheltered accomodation?
+      mandatory: true
+      question_number: 7
+      question_type: multiple_choice_select
+      answer_options:
+        - name: yes_sheltered
+          label: Yes - sheletered housing
+          position: 0
+        - name: yes_extra
+          label: Yes - extra care housing
+          position: 1
+        - name: no
+          label: No
+          position: 2
+        - name: dont_know
+          label: Don't Know
+          position: 3
+      depends_on:
+        - name: general_needs_or_supported
+          answer_options:
+            - name: supported
+    - name: starter_tenancy
+      label: Is this a starter / introductory tenancy?
+      mandatory: true
+      question_number: 8
+      question_type: boolean
+    - name: type_of_tenancy
+      label: Type of main tenancy (after any starter/introductory period)?
+      mandatory: true
+      question_number: 9
+      question_type: multiple_choice_select
+      answer_options:
+        - name: secure
+          label: Secure (including flexible)
+          position: 0
+        - name: assured
+          label: Assured
+          position: 1
+        - name: assured_shorthold
+          label: Assured Shorthold
+          position: 2
+        - name: license_agreement
+          label: License Agreement (supported housing/almhouses only)
+          position: 3
+        - name: other
+          label: Other
+          position: 4
+    - name: tenant_code
+      label: Tenant Code
+      mandatory: true
+      question_number: 10
+      question_type: numeric
+      constraints:
+        - max_length: 13
+        - min_length: null
+    - name: other_type_of_tenancy
+      label: Tenancy Type
+      mandatory: true
+      question_number: 11
+      depends_on:
+        - name: type_of_tenancy
+          answer_options:
+            - name: other
+      question_type: text
+      constraints:
+        max_length: null
+        min_length: null
+    - name: tenancy_term
+      label: If the main tenancy is a fixed term tenancy, please provide the length of the fixed term (to the nearest year) excluding any starter/introductory period
+      mandatory: true
+      question_number: 12
+      depends_on:
+        - operator: OR
+          dependency:
+            - name: tenancy_type
+              answer_options:
+                - name: secure
+                - name: tenancy_type
+                  answer_options:
+                    - name: assured
+                - name: tenancy_type
+                  answer_options:
+                    - name:license_agreement
+                - name: tenancy_type
+                  answer_options:
+                    - name: other
+      question_type: numeric
+      constraints:
+        max_length: 2
+        min_length: 1
+  - name: household_characteristics
+    label: Information regarding the tenants
+    questions:
+    - name: lead_tenant_age
+      label: Age of lead tenant
+      mandatory: false
+      question_number: 13
+      question_type: numeric
+      constraints:
+        max_value: 120
+        min_value: 15
+    - name: lead_tenant_gender
+      label: Gender of lead tenant
+      mandatory: false
+      question_number: 13
+      question_type: multiple_choice_select
+      answer_options:
+        - name: m
+          label: Male
+          position: 0
+        - name: f
+          label: Female
+          position: 1
+        - name: o
+          label: Other
+          position: 2
+    - name: lead_tenant_economic_status
+      label: Economic Status of lead tenant
+      mandatory: false
+      question_number: 13
+      question_type: multiple_choice_select
+      answer_options:
+        - name: full_time
+          label: Full Time Work (30 hours or more)
+          position: 0
+        - name: part_time
+          label: Part time work
+          position: 1
+        - name: child
+          label: Child under 16
+          position: 2
