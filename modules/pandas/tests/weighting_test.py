@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 import pandas
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
 from weighting.weighting import apply_weighting
 
 path = Path(__file__).parent / "../weighting/fixtures"
