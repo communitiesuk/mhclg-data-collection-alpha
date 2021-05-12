@@ -2,3 +2,4 @@
 yarn.lock
 *.orig
 *#
+modules/pandas/.env
