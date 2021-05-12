@@ -21,6 +21,7 @@ jupyter nbextension enable --py jupytext --user
 
 ## Run tests:
 
+`cd tests`
 `pytest`
 
 
