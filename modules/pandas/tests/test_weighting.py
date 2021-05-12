@@ -13,18 +13,18 @@
 #     name: python3
 # ---
 
-# + hide_input=true
+# + hide_input=false
 # Setup ipytest extension
-def type_of_script():
-    try:
-        ipy_str = str(type(get_ipython()))
-        if 'zmqshell' in ipy_str or 'terminal' in ipy_str:
-            import ipytest
-            ipytest.autoconfig()
-    except:
-        pass
+try:
+    ipy_str = str(type(get_ipython()))
+    if 'zmqshell' in ipy_str or 'terminal' in ipy_str:
+        import ipytest
+        ipytest.autoconfig()
+except:
+    pass
 
-# + hide_input=true
+
+# + hide_input=false
 # Import our dependencies
 
 import os
@@ -34,7 +34,7 @@ import pytest
 import pandas
 from pandas.testing import assert_frame_equal
 
-# + hide_input=true
+# + hide_input=false
 # Import our data model
 
 module_path = os.path.abspath(os.path.join('../'))
@@ -73,3 +73,5 @@ actual_result
 def test_apply_weighting():
     assert_frame_equal(actual_result, expected_result)
 # -
+
+
