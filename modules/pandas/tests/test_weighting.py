@@ -13,7 +13,7 @@
 #     name: python3
 # ---
 
-# + hide_input=false
+# + hide_input=true
 # Setup ipytest extension
 try:
     ipy_str = str(type(get_ipython()))
@@ -24,7 +24,7 @@ except:
     pass
 
 
-# + hide_input=false
+# + hide_input=true
 # Import our dependencies
 
 import os
@@ -34,7 +34,7 @@ import pytest
 import pandas
 from pandas.testing import assert_frame_equal
 
-# + hide_input=false
+# + hide_input=true
 # Import our data model
 
 module_path = os.path.abspath(os.path.join('../'))
@@ -42,8 +42,8 @@ if module_path not in sys.path:
     sys.path.append(module_path)
 
 from weighting.weighting import apply_weighting
-# -
 
+# + hide_input=true
 path = os.path.normpath(os.path.join(Path().absolute(), '../weighting/fixtures'))
 
 # +
@@ -72,6 +72,3 @@ actual_result
 
 def test_apply_weighting():
     assert_frame_equal(actual_result, expected_result)
-# -
-
-
