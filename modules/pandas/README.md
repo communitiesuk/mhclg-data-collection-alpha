@@ -1,11 +1,18 @@
-Install dependencies:
+## Install dependencies:
 
 `pip install -r requirements.txt`
 
 
-Run tests:
+## Run tests:
 
 `pytest`
+
+
+## Start notebook
+`jupyter notebook`
+
+
+## Development
 
 Each stats operation should be defined in its own module and should be functional.
 
