@@ -1,7 +1,7 @@
 # ---
 # jupyter:
 #   jupytext:
-#     formats: ipynb,md,py:light
+#     formats: ipynb,py:light
 #     text_representation:
 #       extension: .py
 #       format_name: light
@@ -18,10 +18,6 @@
 
 import ipytest
 ipytest.autoconfig()
-# -
-
-# Parameters
-base_file_path = %pwd
 
 # +
 # Import our dependencies
@@ -39,7 +35,7 @@ from pandas.testing import assert_frame_equal
 module_path = os.path.abspath(os.path.join('../'))
 if module_path not in sys.path:
     sys.path.append(module_path)
-    
+
 from weighting.weighting import apply_weighting
 # -
 
