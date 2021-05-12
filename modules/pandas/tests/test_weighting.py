@@ -13,7 +13,7 @@
 #     name: python3
 # ---
 
-# +
+# + hide_input=true
 # Setup ipytest extension
 def type_of_script():
     try:
@@ -24,7 +24,7 @@ def type_of_script():
     except:
         pass
 
-# +
+# + hide_input=true
 # Import our dependencies
 
 import os
@@ -34,7 +34,7 @@ import pytest
 import pandas
 from pandas.testing import assert_frame_equal
 
-# +
+# + hide_input=true
 # Import our data model
 
 module_path = os.path.abspath(os.path.join('../'))

@@ -4,3 +4,4 @@ notebook==6.3.0
 ipytest==0.9.1
 papermill==2.3.3
 jupytext==1.11.2
+jupyter_contrib_nbextensions==0.5.1
