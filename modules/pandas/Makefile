@@ -17,8 +17,7 @@ setup:
 	jupyter contrib nbextension install --user
 
 test:
-	cd tests
-	pytest
+	cd tests && pytest
 
 
 start: setup

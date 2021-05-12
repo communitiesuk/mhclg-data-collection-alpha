@@ -11,9 +11,7 @@ We use Jupytext to pair Jupyter Notebooks (.ipynb files) to markdown so that we 
 
 ## Run tests:
 
-```cd tests
-pytest```
-
+`make test`
 
 ## Start notebook
 `jupyter notebook`
