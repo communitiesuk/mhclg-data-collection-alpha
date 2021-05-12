@@ -1,9 +1,9 @@
 # Experiment aims
 Replace some of the SQL/SPSS based statistics models currently being manually run on collected data sets with functional Python Pandas models. Use Jupyter Notebooks with Pytest to facilitate a TDD approach with a UI.
 
-Papermill is used to run notebooks programmatically.
+We use Jupytext to pair Jupyter Notebooks (.ipynb files) to .py lightscript so that we can git version just the script files (ipynb files will be automatically recreated from them when running the notebook locally). This also allows us to run pytest on and notebook visualisation on the same script.
 
-We use Jupytext to pair Jupyter Notebooks (.ipynb files) to markdown so that we can git version just the markdown files (ipynb files will be automatically recreated from them when running the notebook locally)
+Papermill can be used to run notebooks programmatically.
 
 ## Install dependencies:
 
@@ -27,8 +27,8 @@ Each module should have a fixture folder with an expected `input.csv` and `expec
 
 
 ### References
-https://jupyter.org/
-https://github.com/chmp/ipytest
-https://docs.pytest.org/en/6.2.x/
-https://github.com/nteract/papermill
-https://pandas.pydata.org/
+https://jupyter.org/<br />
+https://github.com/chmp/ipytest<br />
+https://docs.pytest.org/en/6.2.x/<br />
+https://github.com/nteract/papermill<br />
+https://pandas.pydata.org/<br />
