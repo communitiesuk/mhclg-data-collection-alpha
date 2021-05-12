@@ -15,9 +15,14 @@
 
 # +
 # Setup ipytest extension
-
-import ipytest
-ipytest.autoconfig()
+def type_of_script():
+    try:
+        ipy_str = str(type(get_ipython()))
+        if 'zmqshell' in ipy_str or 'terminal' in ipy_str:
+            import ipytest
+            ipytest.autoconfig()
+    except:
+        pass
 
 # +
 # Import our dependencies
@@ -68,5 +73,3 @@ actual_result
 def test_apply_weighting():
     assert_frame_equal(actual_result, expected_result)
 # -
-
-
