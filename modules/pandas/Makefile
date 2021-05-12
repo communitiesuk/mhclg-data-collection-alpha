@@ -13,6 +13,9 @@ setup:
 	jupyter nbextension install --py jupytext --user
 	jupyter nbextension enable --py jupytext --user
 
+# Install contrib extensions. This lets you enable the hide input extension so we can hide setup cells from the UI.
+	jupyter contrib nbextension install --user
+
 test:
 	cd tests
 	pytest
@@ -22,4 +25,4 @@ start: setup
 	jupyter notebook &
 
 stop:
-	pkill jupyter-noteboo
+	pkill jupyter-notebook
