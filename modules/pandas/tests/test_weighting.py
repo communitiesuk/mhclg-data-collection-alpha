@@ -37,14 +37,15 @@ from pandas.testing import assert_frame_equal
 # + hide_input=true
 # Import our data model
 
-module_path = os.path.abspath(os.path.join('../'))
+module_path = os.path.abspath('../')
 if module_path not in sys.path:
     sys.path.append(module_path)
 
 from weighting.weighting import apply_weighting
 
 # + hide_input=true
-path = os.path.normpath(os.path.join(Path().absolute(), '../weighting/fixtures'))
+def get_path(filename):
+    return os.path.join(module_path, 'weighting/fixtures', filename)
 
 # +
 # apply_weighting??
@@ -52,13 +53,13 @@ path = os.path.normpath(os.path.join(Path().absolute(), '../weighting/fixtures')
 # +
 # Set up our input data from a CSV fixture
 
-input_data = pandas.read_csv(path + '/input.csv', index_col=0)
+input_data = pandas.read_csv(get_path('input.csv'), index_col=0)
 input_data
 
 # +
 # Set up our expected result from a CSV fixture
 
-expected_result = pandas.read_csv(path + '/expected_result.csv', index_col=0)
+expected_result = pandas.read_csv(get_path('expected_result.csv'), index_col=0)
 expected_result
 
 # +
