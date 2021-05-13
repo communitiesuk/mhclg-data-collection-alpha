@@ -24,4 +24,4 @@ start: setup
 	jupyter notebook &
 
 stop:
-	pkill jupyter-notebook
+	pkill jupyter*

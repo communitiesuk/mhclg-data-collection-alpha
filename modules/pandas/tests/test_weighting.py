@@ -47,6 +47,9 @@ from weighting.weighting import apply_weighting
 path = os.path.normpath(os.path.join(Path().absolute(), '../weighting/fixtures'))
 
 # +
+# apply_weighting??
+
+# +
 # Set up our input data from a CSV fixture
 
 input_data = pandas.read_csv(path + '/input.csv', index_col=0)
@@ -72,3 +75,6 @@ actual_result
 
 def test_apply_weighting():
     assert_frame_equal(actual_result, expected_result)
+# -
+
+
