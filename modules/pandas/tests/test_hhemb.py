@@ -38,16 +38,16 @@ module_path = os.path.abspath('../')
 if module_path not in sys.path:
     sys.path.append(module_path)
 
-from weighting.weighting import apply_weighting
+from derived_variables.hhemb import count_household_members
 
 def get_path(filename):
-    return os.path.join(module_path, 'weighting/fixtures', filename)
+    return os.path.join(module_path, 'derived_variables/fixtures', filename)
 
 # -
 # ## Show function definition
 
 # +
-# apply_weighting??
+# count_household_members??
 # -
 
 # ## Set up our input data from a CSV fixture
@@ -57,6 +57,8 @@ def get_path(filename):
 input_data = pandas.read_csv(get_path('input.csv'), index_col=0)
 input_data
 
+input_data[["sex1","sex2"]]
+
 # ## Set up our expected result from a CSV fixture
 
 expected_result = pandas.read_csv(get_path('expected_result.csv'), index_col=0)
@@ -64,7 +66,7 @@ expected_result
 
 # ## Run the model
 
-actual_result = apply_weighting(input_data)
+actual_result = count_household_members(input_data)
 actual_result
 
 
@@ -75,4 +77,10 @@ actual_result
 
 def test_apply_weighting():
     assert_frame_equal(actual_result, expected_result)
+
+
+
+# -
+
+__name__
 
