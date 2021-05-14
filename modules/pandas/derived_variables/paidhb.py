@@ -23,13 +23,19 @@ NON_DEPENDENT_DEDUCTION_CAP = 163.45
 
 CHILD_ALLOWANCE = 66.33
 
+PERSONAL_ALLOWANCE_TYPE1 = 57.35
+PERSONAL_ALLOWANCE_TYPE2 = 72.40
+PERSONAL_ALLOWANCE_TYPE3 = 86.65
+PERSONAL_ALLOWANCE_TYPE4 = 113.70
+
+
 def calculate_paid_housing_benefit(dataframe):
     """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
 
     dataframe["non_dependent_deductions"] = non_dependent_deductions(dataframe)
     dataframe["rent_hb"] = rent_hb(dataframe)
-    import ipdb; ipdb.set_trace()
     dataframe["paid_hb"] = paid_hb(dataframe)
+    import ipdb; ipdb.set_trace()
 
 
 
@@ -43,34 +49,41 @@ def paid_hb(dataframe):
         ((dataframe["RELAT7"] == 'C') & ((dataframe["AGE7"] >= 0) & (dataframe["AGE7"] <= 19))) * 1 + \
         ((dataframe["RELAT8"] == 'C') & ((dataframe["AGE8"] >= 0) & (dataframe["AGE8"] <= 19))) * 1) * CHILD_ALLOWANCE
 
-        #     PERSONAL_ALLOWANCE =
+    dataframe["personal_allowance"] = 0
 
-        #     Count number of children * CHILD_ALLOWANCE
+    # Single Adult under 25
+    dataframe.loc[(dataframe["AGE1"] < 25) & (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] == 0), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE1
 
-        #     Count number of Adults (already derived in input)
+    # Single Parent aged 16-17
+    dataframe.loc[(dataframe["AGE1"] >= 16) & (dataframe["AGE1"] <= 17) & (dataframe["TOTCHILD"] > 0), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE1
 
-        #     if lead tenant and no children
-        #         if age < 25
-        #             ptype = 1
-        #         else
-        #             ptype = 2
-        #     if lead tenant and > 0 children
-        #         if age 16 or 17
-        #             ptype = 1
-        #         else
-        #             ptype = 2
-        #     if lead tenant and partner
-        #         if both < 18
-        #             ptype3
-        #         if one > 18
-        #             ptype4
+    # Single adult over 25
+    dataframe.loc[(dataframe["AGE1"] >= 25) & (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] == 0), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE2
 
-        #     IF (personaltype=0) personalallowance=0.
-        # IF (personaltype=1) personalallowance=57.35.
-        # IF (personaltype=2) personalallowance=72.40.
-        # IF (personaltype=3) personalallowance=86.65.
-        # IF (personaltype=4) personalallowance=113.70.
-    return dataframe
+    # Single Parent aged 18+
+    dataframe.loc[(dataframe["AGE1"] >= 18) & (dataframe["TOTCHILD"] > 1), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE2
+
+    # Couple, both under 18
+    dataframe.loc[ \
+        ((dataframe["AGE1"] < 18) & (dataframe["AGE2"] < 18) & (dataframe["RELAT2"] == "P")) | \
+        ((dataframe["AGE1"] < 18) & (dataframe["AGE3"] < 18) & (dataframe["RELAT3"] == "P")) | \
+        ((dataframe["AGE1"] < 18) & (dataframe["AGE4"] < 18) & (dataframe["RELAT4"] == "P")) | \
+        ((dataframe["AGE1"] < 18) & (dataframe["AGE5"] < 18) & (dataframe["RELAT5"] == "P")) | \
+        ((dataframe["AGE1"] < 18) & (dataframe["AGE6"] < 18) & (dataframe["RELAT6"] == "P")) | \
+        ((dataframe["AGE1"] < 18) & (dataframe["AGE7"] < 18) & (dataframe["RELAT7"] == "P")) | \
+        ((dataframe["AGE1"] < 18) & (dataframe["AGE8"] < 18) & (dataframe["RELAT8"] == "P")), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE3
+
+    # Couple, at least one over 18
+    dataframe.loc[ \
+        (((dataframe["AGE1"] > 18) | (dataframe["AGE2"] > 18)) & (dataframe["RELAT2"] == "P")) | \
+        (((dataframe["AGE1"] > 18) | (dataframe["AGE3"] > 18)) & (dataframe["RELAT3"] == "P")) | \
+        (((dataframe["AGE1"] > 18) | (dataframe["AGE4"] > 18)) & (dataframe["RELAT4"] == "P")) | \
+        (((dataframe["AGE1"] > 18) | (dataframe["AGE5"] > 18)) & (dataframe["RELAT5"] == "P")) | \
+        (((dataframe["AGE1"] > 18) | (dataframe["AGE6"] > 18)) & (dataframe["RELAT6"] == "P")) | \
+        (((dataframe["AGE1"] > 18) | (dataframe["AGE7"] > 18)) & (dataframe["RELAT7"] == "P")) | \
+        (((dataframe["AGE1"] > 18) | (dataframe["AGE8"] > 18)) & (dataframe["RELAT8"] == "P")), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE4
+
+    return dataframe["personal_allowance"]
 
 def rent_hb(dataframe):
     dataframe["wrent_deduced"] = dataframe["WRENT"]
@@ -147,16 +160,3 @@ def non_dependent_deductions(dataframe):
         (dataframe["RELAT8"] == "P") & (dataframe["AGE8"] >= 65), ["non_dependent_deductions"]] = 0
 
     return dataframe["non_dependent_deductions"]
-
-
-
-
-
-
-
-
-
-
-
-
-# What the hell is ecstat9?!
