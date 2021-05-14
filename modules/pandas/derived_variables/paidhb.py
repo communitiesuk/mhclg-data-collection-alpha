@@ -1,5 +1,20 @@
 # Paid Housing Benefit
 
+# Relat field values
+# C = Child
+# P = Partner
+# X = Other
+
+# ECSTAT = Economic Status
+# 1 = Full-Time work
+# 2 = Part Time work
+# 3 = Government training
+# 4 = Job Seeker
+# 5 = Retired
+# 6 = Not seeking work
+# 7 = Student
+# 8 = Sick or disabled
+
 NON_DEPENDENT_FULL_TIME_DEDUCTION = 23.35
 NON_DEPENDENT_PART_TIME_DEDUCTION = 17.00
 NON_DEPENDENT_OTHER_DEDUCTION = 7.40
@@ -9,40 +24,53 @@ NON_DEPENDENT_DEDUCTION_CAP = 163.45
 def calculate_paid_housing_benefit(dataframe):
     """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
 
-    import ipdb; ipdb.set_trace()
-    # RELAT field values
-    # C = Child
-    # P = Partner
-    # X = Other
+    # Count number of other adults in full time work
+    dataframe["nondep1"] = \
+    ((dataframe["RELAT2"] == 'X') & (dataframe["ECSTAT2"] == 1)) * 1 + \
+    ((dataframe["RELAT3"] == 'X') & (dataframe["ECSTAT3"] == 1)) * 1 + \
+    ((dataframe["RELAT4"] == 'X') & (dataframe["ECSTAT4"] == 1)) * 1 + \
+    ((dataframe["RELAT5"] == 'X') & (dataframe["ECSTAT5"] == 1)) * 1 + \
+    ((dataframe["RELAT6"] == 'X') & (dataframe["ECSTAT6"] == 1)) * 1 + \
+    ((dataframe["RELAT7"] == 'X') & (dataframe["ECSTAT7"] == 1)) * 1 + \
+    ((dataframe["RELAT8"] == 'X') & (dataframe["ECSTAT8"] == 1)) * 1
 
-    # Check if any relation is partner
-    # RELAT2,3,4,5,6,7,8 = 'P'
-    # If Age of main tenant or of partner is >= 65
-    non_dependent_deductions = 0
+    # Count number of other adults in part time work
+    dataframe["nondep2"] = \
+    ((dataframe["RELAT2"] == 'X') & (dataframe["ECSTAT2"] == 2)) * 1 + \
+    ((dataframe["RELAT3"] == 'X') & (dataframe["ECSTAT3"] == 2)) * 1 + \
+    ((dataframe["RELAT4"] == 'X') & (dataframe["ECSTAT4"] == 2)) * 1 + \
+    ((dataframe["RELAT5"] == 'X') & (dataframe["ECSTAT5"] == 2)) * 1 + \
+    ((dataframe["RELAT6"] == 'X') & (dataframe["ECSTAT6"] == 2)) * 1 + \
+    ((dataframe["RELAT7"] == 'X') & (dataframe["ECSTAT7"] == 2)) * 1 + \
+    ((dataframe["RELAT8"] == 'X') & (dataframe["ECSTAT8"] == 2)) * 1
 
-    # OTHERWISE:
+    # Count number of other adults non-dependent for other reasons
+    dataframe["nondep3"] = \
+    ((dataframe["RELAT2"] == 'X') & (dataframe["ECSTAT2"].isin([3,4,5,6,8,9]))) * 1 + \
+    ((dataframe["RELAT3"] == 'X') & (dataframe["ECSTAT3"].isin([3,4,5,6,8,9]))) * 1 + \
+    ((dataframe["RELAT4"] == 'X') & (dataframe["ECSTAT4"].isin([3,4,5,6,8,9]))) * 1 + \
+    ((dataframe["RELAT5"] == 'X') & (dataframe["ECSTAT5"].isin([3,4,5,6,8,9]))) * 1 + \
+    ((dataframe["RELAT6"] == 'X') & (dataframe["ECSTAT6"].isin([3,4,5,6,8,9]))) * 1 + \
+    ((dataframe["RELAT7"] == 'X') & (dataframe["ECSTAT7"].isin([3,4,5,6,8,9]))) * 1 + \
+    ((dataframe["RELAT8"] == 'X') & (dataframe["ECSTAT8"].isin([3,4,5,6,8,9]))) * 1
 
-        # ECSTAT = Economic Status
-        # 1 = Full-Time work
-        # 2 = Part Time work
-        # 3 = Government training
-        # 4 = Job Seeker
-        # 5 = Retired
-        # 6 = Not seeking work
-        # 7 = Student
-        # 8 = Sick or disabled
+    dataframe["non_dependent_deductions"] = \
+        dataframe["nondep1"] * NON_DEPENDENT_FULL_TIME_DEDUCTION + \
+        dataframe["nondep2"] * NON_DEPENDENT_PART_TIME_DEDUCTION + \
+        dataframe["nondep3"] * NON_DEPENDENT_OTHER_DEDUCTION
 
-        # Nondep1 = How many adults in household in full time work, relation other
 
-        # Nondep2 = how many adults in household in part time work, relation other
-
-        # Nondep3 = Adults X with status 3, 4, 5, 6 or 8
-
-        non_dependent_deductions =
-            (nondep1 * NON_DEPENDENT_FULL_TIME_DEDUCTION) +
-            (Nondep2 * NON_DEPENDENT_PART_TIME_DEDUCTION) +
-            (Nondep3 * NON_DEPENDENT_OTHER_DEDUCTION)
-
+    # If any relation is a partner and the lead tenant or the tenant is 65+,
+    # they are not eligbible for non dependent deductions
+    relat_columns = ["RELAT2", "RELAT3", "RELAT4", "RELAT5", "RELAT6", "RELAT6", "RELAT7", "RELAT8"]
+    dataframe.loc[(dataframe[relat_columns].eq('P').any(axis=1) & dataframe["AGE1"] >= 65) | \
+        (dataframe["RELAT2"] == "P") & (dataframe["AGE2"] >= 65) | \
+        (dataframe["RELAT3"] == "P") & (dataframe["AGE3"] >= 65) | \
+        (dataframe["RELAT4"] == "P") & (dataframe["AGE4"] >= 65) | \
+        (dataframe["RELAT5"] == "P") & (dataframe["AGE5"] >= 65) | \
+        (dataframe["RELAT6"] == "P") & (dataframe["AGE6"] >= 65) | \
+        (dataframe["RELAT7"] == "P") & (dataframe["AGE7"] >= 65) | \
+        (dataframe["RELAT8"] == "P") & (dataframe["AGE8"] >= 65), ["non_dependent_deductions"]] = 0
 
 
 
