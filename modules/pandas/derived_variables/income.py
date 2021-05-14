@@ -6,5 +6,7 @@
 
 def derive_income(dataframe):
     """Return dataframe with derived income added"""
-
+    # Convert all earnings to weekly
+    dataframe.loc[dataframe['income_frequency'] == 'monthly', ['earnings']] *= 12 / 52
+    dataframe.loc[dataframe['income_frequency'] == 'annual', ['earnings']] /= 52
     return 1

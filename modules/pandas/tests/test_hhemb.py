@@ -13,7 +13,7 @@
 #     name: python3
 # ---
 
-# + hide_input=true
+# + hide_input=false
 # Setup ipytest extension
 try:
     ipy_str = str(type(get_ipython()))
@@ -24,7 +24,7 @@ except:
     pass
 
 
-# + hide_input=true
+# + hide_input=false
 # Import our dependencies
 
 import os
@@ -43,7 +43,7 @@ from derived_variables.hhemb import count_household_members
 def get_path(filename):
     return os.path.join(module_path, 'tests/fixtures', filename)
 
-# -
+# + [markdown] hide_input=false
 # ## Show function definition
 
 # +
@@ -78,6 +78,9 @@ def test_apply_weighting():
 
 
 
+
+# + hide_input=true
+__name__
 # -
 
-__name__
+
