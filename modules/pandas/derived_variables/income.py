@@ -8,7 +8,7 @@ FIRST_CHILD_BENEFIT = 21.05
 SUBSEQUENT_CHILD_BENEFIT = 13.95
 
 def derive_income(dataframe):
-    """Return dataframe with derived income added"""
+    """Return dataframe with child benefit and derived income"""
     # Convert all earnings to weekly
     dataframe.loc[dataframe['incfreq'] == 'monthly', ['earnings']] *= 12 / 52
     dataframe.loc[dataframe['incfreq'] == 'annual', ['earnings']] /= 52
