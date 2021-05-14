@@ -61,7 +61,7 @@ input_data[["sex1","sex2"]]
 
 # ## Set up our expected result from a CSV fixture
 
-expected_result = pandas.read_csv(get_path('expected_result.csv'), index_col=0)
+expected_result = pandas.read_csv(get_path('expected_result_hhemb.csv'), index_col=0)
 expected_result
 
 # ## Run the model
@@ -83,4 +83,3 @@ def test_apply_weighting():
 # -
 
 __name__
-
