@@ -26,8 +26,45 @@ def calculate_paid_housing_benefit(dataframe):
 
     dataframe["non_dependent_deductions"] = non_dependent_deductions(dataframe)
     dataframe["rent_hb"] = rent_hb(dataframe)
+    import ipdb; ipdb.set_trace()
+    dataframe["paid_hb"] = paid_hb(dataframe)
+
+    #     ############# Paid Housing benefit
+    #     CHILD_ALLOWANCE = 66.33
+    #     PERSONAL_ALLOWANCE =
+
+    #     Count number of children * CHILD_ALLOWANCE
+
+    #     Count number of Adults (already derived in input)
+
+    #     if lead tenant and no children
+    #         if age < 25
+    #             ptype = 1
+    #         else
+    #             ptype = 2
+    #     if lead tenant and > 0 children
+    #         if age 16 or 17
+    #             ptype = 1
+    #         else
+    #             ptype = 2
+    #     if lead tenant and partner
+    #         if both < 18
+    #             ptype3
+    #         if one > 18
+    #             ptype4
+
+    #     IF (personaltype=0) personalallowance=0.
+    # IF (personaltype=1) personalallowance=57.35.
+    # IF (personaltype=2) personalallowance=72.40.
+    # IF (personaltype=3) personalallowance=86.65.
+    # IF (personaltype=4) personalallowance=113.70.
+
+def paid_hb(dataframe):
+    return dataframe
 
 def rent_hb(dataframe):
+    dataframe["wrent_deduced"] = dataframe["WRENT"]
+
     # If property has more bedrooms than needed according the bedroom standard eligible rent is reduced
     # For one extra bedroom reduction is 14%
     dataframe.loc[(dataframe['BED_MINUS_BEDSTANDARD'] == 1), ["wrent_deduced"]] = dataframe["WRENT"] * 0.86
@@ -35,11 +72,18 @@ def rent_hb(dataframe):
     # For more than one extra bedroom rent reduction is 25%
     dataframe.loc[(dataframe['BED_MINUS_BEDSTANDARD'] > 1), ["wrent_deduced"]] = dataframe["WRENT"] * 0.75
 
-    dataframe["rent_hb"] = dataframe["wrent_deduced"] + dataframe["WSCHARGE"] + dataframe["non_dependent_deductions"]
+    dataframe["rent_hb"] = dataframe["wrent_deduced"] + dataframe["WSCHARGE"] - dataframe["non_dependent_deductions"]
 
     # If supported housing (NEEDSTYPE == 2) or
-    #  Weekly Rent or Weekly Charge are missing no rent housing benefit is calculated
-    dataframe.loc[(dataframe["NEEDSTYPE"] == 2) | (dataframe["WRENT"].isnull()) | (dataframe["WSCHARGE"].isnull()), ["rent_hb"]] = None
+    # Weekly Rent or Weekly Charge are missing or
+    # number of bedrooms are missing or Economic status has been refused (10) then
+    # no rent housing benefit is calculated
+    dataframe.loc[ \
+    (dataframe["NEEDSTYPE"] == 2) | \
+    (dataframe["WRENT"].isnull()) | \
+    (dataframe["WSCHARGE"].isnull()) | \
+    (dataframe["BED_MINUS_BEDSTANDARD"].isnull()) | \
+    (dataframe["ECSTAT1"].eq(10)), ["rent_hb"]] = None
 
     return dataframe["rent_hb"]
 
@@ -100,42 +144,9 @@ def non_dependent_deductions(dataframe):
 
 
 
-#     ############# Paid Housing benefit
-#     CHILD_ALLOWANCE = 66.33
-#     PERSONAL_ALLOWANCE =
 
-#     Count number of children * CHILD_ALLOWANCE
-
-#     Count number of Adults (already derived in input)
-
-#     if lead tenant and no children
-#         if age < 25
-#             ptype = 1
-#         else
-#             ptype = 2
-#     if lead tenant and > 0 children
-#         if age 16 or 17
-#             ptype = 1
-#         else
-#             ptype = 2
-#     if lead tenant and partner
-#         if both < 18
-#             ptype3
-#         if one > 18
-#             ptype4
-
-#     IF (personaltype=0) personalallowance=0.
-# IF (personaltype=1) personalallowance=57.35.
-# IF (personaltype=2) personalallowance=72.40.
-# IF (personaltype=3) personalallowance=86.65.
-# IF (personaltype=4) personalallowance=113.70.
 
 
 
 
 # What the hell is ecstat9?!
-
-if __name__ == "__main__":
-    import sys
-    df = pandas.read_csv(sys.argv[1], index_col=0)
-    calculate_paid_housing_benefit(df)
