@@ -21,6 +21,8 @@ NON_DEPENDENT_OTHER_DEDUCTION = 7.40
 
 NON_DEPENDENT_DEDUCTION_CAP = 163.45
 
+CHILD_ALLOWANCE = 66.33
+
 def calculate_paid_housing_benefit(dataframe):
     """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
 
@@ -29,37 +31,45 @@ def calculate_paid_housing_benefit(dataframe):
     import ipdb; ipdb.set_trace()
     dataframe["paid_hb"] = paid_hb(dataframe)
 
-    #     ############# Paid Housing benefit
-    #     CHILD_ALLOWANCE = 66.33
-    #     PERSONAL_ALLOWANCE =
 
-    #     Count number of children * CHILD_ALLOWANCE
-
-    #     Count number of Adults (already derived in input)
-
-    #     if lead tenant and no children
-    #         if age < 25
-    #             ptype = 1
-    #         else
-    #             ptype = 2
-    #     if lead tenant and > 0 children
-    #         if age 16 or 17
-    #             ptype = 1
-    #         else
-    #             ptype = 2
-    #     if lead tenant and partner
-    #         if both < 18
-    #             ptype3
-    #         if one > 18
-    #             ptype4
-
-    #     IF (personaltype=0) personalallowance=0.
-    # IF (personaltype=1) personalallowance=57.35.
-    # IF (personaltype=2) personalallowance=72.40.
-    # IF (personaltype=3) personalallowance=86.65.
-    # IF (personaltype=4) personalallowance=113.70.
 
 def paid_hb(dataframe):
+    dataframe["child_allowance"] = \
+        (((dataframe["RELAT2"] == 'C') & ((dataframe["AGE2"] >= 0) & (dataframe["AGE2"] <= 19))) * 1 + \
+        ((dataframe["RELAT3"] == 'C') & ((dataframe["AGE3"] >= 0) & (dataframe["AGE3"] <= 19))) * 1 + \
+        ((dataframe["RELAT4"] == 'C') & ((dataframe["AGE4"] >= 0) & (dataframe["AGE4"] <= 19))) * 1 + \
+        ((dataframe["RELAT5"] == 'C') & ((dataframe["AGE5"] >= 0) & (dataframe["AGE5"] <= 19))) * 1 + \
+        ((dataframe["RELAT6"] == 'C') & ((dataframe["AGE6"] >= 0) & (dataframe["AGE6"] <= 19))) * 1 + \
+        ((dataframe["RELAT7"] == 'C') & ((dataframe["AGE7"] >= 0) & (dataframe["AGE7"] <= 19))) * 1 + \
+        ((dataframe["RELAT8"] == 'C') & ((dataframe["AGE8"] >= 0) & (dataframe["AGE8"] <= 19))) * 1) * CHILD_ALLOWANCE
+
+        #     PERSONAL_ALLOWANCE =
+
+        #     Count number of children * CHILD_ALLOWANCE
+
+        #     Count number of Adults (already derived in input)
+
+        #     if lead tenant and no children
+        #         if age < 25
+        #             ptype = 1
+        #         else
+        #             ptype = 2
+        #     if lead tenant and > 0 children
+        #         if age 16 or 17
+        #             ptype = 1
+        #         else
+        #             ptype = 2
+        #     if lead tenant and partner
+        #         if both < 18
+        #             ptype3
+        #         if one > 18
+        #             ptype4
+
+        #     IF (personaltype=0) personalallowance=0.
+        # IF (personaltype=1) personalallowance=57.35.
+        # IF (personaltype=2) personalallowance=72.40.
+        # IF (personaltype=3) personalallowance=86.65.
+        # IF (personaltype=4) personalallowance=113.70.
     return dataframe
 
 def rent_hb(dataframe):
