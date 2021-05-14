@@ -7,3 +7,4 @@ def count_household_members(dataframe):
     dataframe['household_member_count'] = gender_columns.count(axis=1)
 
     return dataframe
+

@@ -78,9 +78,3 @@ actual_result
 def test_apply_weighting():
     assert_frame_equal(actual_result, expected_result)
 
-
-
-# -
-
-__name__
-

@@ -19,6 +19,8 @@ setup:
 test:
 	cd tests && pytest
 
+testx:
+	find . -path ./.env -prune -false -o -name "*.py" | entr make test
 
 start: setup
 	jupyter notebook &
