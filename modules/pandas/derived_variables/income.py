@@ -4,6 +4,9 @@
 # income_frequency is the frequency of the self-reported net household income (annual, monthly, weekly)
 # child_benefit is the number of children in the household multiplied by the external monetary value from the DWP website
 
+FIRST_CHILD_BENEFIT = 21.05
+SUBSEQUENT_CHILD_BENEFIT = 13.95
+
 def derive_income(dataframe):
     """Return dataframe with derived income added"""
     # Convert all earnings to weekly
@@ -19,13 +22,7 @@ def derive_income(dataframe):
     return dataframe[['childben', 'income']]
 
 def dwp_benefit_value(number_of_children):
-    return {
-        0: 0.0,
-        1: 21.05,
-        2: 35.00,
-        3: 48.95,
-        4: 62.90,
-        5: 76.85,
-        6: 90.80,
-        7: 104.75
-    }[number_of_children]
+    if number_of_children == 0:
+        return 0.0
+
+    return FIRST_CHILD_BENEFIT + ((number_of_children - 1) * SUBSEQUENT_CHILD_BENEFIT)
