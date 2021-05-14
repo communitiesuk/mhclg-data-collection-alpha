@@ -1,4 +1,4 @@
-id,sex1,sex2,sex3,sex4,sex5,sex6,sex7,sex8,earnings,income_frequency,household_member_count
-10230,M,M,F,,,,,,10000,annual,3
-10227,F,,,,,,,,500,monthly,1
-63531,M,F,M,M,F,,,,200,weekly,5
+id,household_member_count
+10230,3
+10227,1
+63531,5

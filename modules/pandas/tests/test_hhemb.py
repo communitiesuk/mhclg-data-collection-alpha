@@ -32,7 +32,7 @@ import sys
 from pathlib import Path
 import pytest
 import pandas
-from pandas.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal, assert_series_equal
 
 module_path = os.path.abspath('../')
 if module_path not in sys.path:
@@ -57,11 +57,9 @@ def get_path(filename):
 input_data = pandas.read_csv(get_path('input.csv'), index_col=0)
 input_data
 
-input_data[["sex1","sex2"]]
-
 # ## Set up our expected result from a CSV fixture
 
-expected_result = pandas.read_csv(get_path('expected_result_hhemb.csv'), index_col=0)
+expected_result = pandas.read_csv(get_path('expected_result_hhemb.csv'), index_col=0, squeeze=True)
 expected_result
 
 # ## Run the model
@@ -76,7 +74,7 @@ actual_result
 # Check that our actual result matches our expected result
 
 def test_apply_weighting():
-    assert_frame_equal(actual_result, expected_result)
+    assert_series_equal(actual_result, expected_result)
 
 
 
