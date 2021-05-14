@@ -1,4 +1,4 @@
-# ---
+ ---
 # jupyter:
 #   jupytext:
 #     formats: ipynb,py:light
@@ -74,7 +74,7 @@ actual_result
 # Check that our actual result matches our expected result
 
 def test_apply_weighting():
-    assert_series_equal(actual_result, expected_result)
+    assert_frame_equal(actual_result, expected_result)
 
 
 
