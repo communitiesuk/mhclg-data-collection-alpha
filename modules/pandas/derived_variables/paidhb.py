@@ -38,7 +38,8 @@ def calculate_paid_housing_benefit(dataframe):
     dataframe["personal_allowance"] = personal_allowance(dataframe)
     dataframe["hb_earnings_disregard"] = hb_earnings_disregard(dataframe)
     dataframe["PAIDHB"] = paid_hb(dataframe)
-    import ipdb; ipdb.set_trace()
+    dataframe["RENTHB"] = dataframe["RENTHB"].round(2)
+    dataframe["PAIDHB"] = dataframe["PAIDHB"].round(2)
     return dataframe[["RENTHB", "PAIDHB"]]
 
 
