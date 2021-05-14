@@ -1,0 +1,8 @@
+id,earnings,incfreq,relat2,relat3
+200,250,weekly,,
+201,1000,monthly,,
+202,15000,annual,,
+203,,,,
+204,250,weekly,P,C
+205,1000,monthly,C,C
+206,250,weekly,P,

@@ -1,0 +1,8 @@
+id,sex1,sex2,sex3,sex4,sex5,sex6,sex7,sex8,relat2,relat3,earnings,income_frequency
+100,M,,,,,,,,,,250,weekly
+101,M,F,F,,,,,,,,1000,monthly
+102,R,R,M,X,,,,,,,15000,annual
+203,,,,,,,,,,,,
+204,,,,,,,,,P,C,250,weekly
+205,,,,,,,,,C,C,1000,monthly
+206,,,,,,,,,P,,250,weekly

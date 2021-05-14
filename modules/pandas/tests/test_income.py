@@ -38,7 +38,7 @@ module_path = os.path.abspath('../')
 if module_path not in sys.path:
     sys.path.append(module_path)
 
-from derived_variables.hhemb import count_household_members
+from derived_variables.income import derive_income
 
 def get_path(filename):
     return os.path.join(module_path, 'tests/fixtures', filename)
@@ -47,24 +47,24 @@ def get_path(filename):
 # ## Show function definition
 
 # +
-# count_household_members??
+# derive_income??
 # -
 
 # ## Set up our input data from a CSV fixture
 # This reads in a CSV of values and loads it into memory
 #
 
-input_data = pandas.read_csv(get_path('input_hhemb.csv'), index_col=0)
+input_data = pandas.read_csv(get_path('input_income.csv'), index_col=0)
 input_data
 
 # ## Set up our expected result from a CSV fixture
 
-expected_result = pandas.read_csv(get_path('expected_result_hhemb.csv'), index_col=0, squeeze=True)
+expected_result = pandas.read_csv(get_path('expected_result_income.csv'), index_col=0, squeeze=True)
 expected_result
 
 # ## Run the model
 
-actual_result = count_household_members(input_data)
+actual_result = derive_income(input_data)
 actual_result
 
 
@@ -74,8 +74,10 @@ actual_result
 # Check that our actual result matches our expected result
 
 def test_apply_weighting():
-    assert_series_equal(actual_result, expected_result)
+    assert_frame_equal(actual_result, expected_result)
+
+
 
 
 # + hide_input=true
-# -
+__name__
