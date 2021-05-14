@@ -54,7 +54,7 @@ def get_path(filename):
 # This reads in a CSV of values and loads it into memory
 #
 
-input_data = pandas.read_csv(get_path('input.csv'), index_col=0)
+input_data = pandas.read_csv(get_path('input_hhemb.csv'), index_col=0)
 input_data
 
 # ## Set up our expected result from a CSV fixture
@@ -82,5 +82,3 @@ def test_apply_weighting():
 # + hide_input=true
 __name__
 # -
-
-
