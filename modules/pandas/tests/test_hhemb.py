@@ -41,7 +41,7 @@ if module_path not in sys.path:
 from derived_variables.hhemb import count_household_members
 
 def get_path(filename):
-    return os.path.join(module_path, 'derived_variables/fixtures', filename)
+    return os.path.join(module_path, 'tests/fixtures', filename)
 
 # -
 # ## Show function definition
