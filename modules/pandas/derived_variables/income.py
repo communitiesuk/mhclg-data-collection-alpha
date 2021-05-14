@@ -7,22 +7,20 @@
 def derive_income(dataframe):
     """Return dataframe with derived income added"""
     # Convert all earnings to weekly
-    dataframe.loc[dataframe['income_frequency'] == 'monthly', ['earnings']] *= 12 / 52
-    dataframe.loc[dataframe['income_frequency'] == 'annual', ['earnings']] /= 52
+    dataframe.loc[dataframe['incfreq'] == 'monthly', ['earnings']] *= 12 / 52
+    dataframe.loc[dataframe['incfreq'] == 'annual', ['earnings']] /= 52
 
     relat_columns = dataframe[["relat2", "relat3"]]
     number_of_children = dataframe[relat_columns == 'C'].count(axis=1)
 
-    dwp_benefit_value = 5
-
-    dataframe['childben'] = number_of_children * dwp_benefit_value
+    dataframe['childben'] = number_of_children.apply(dwp_benefit_value)
     dataframe['income'] = dataframe['earnings'] + dataframe['childben']
 
     return dataframe[['childben', 'income']]
 
-
-def dwp_benefit_values():
+def dwp_benefit_value(number_of_children):
     return {
+        0: 0.0,
         1: 21.05,
         2: 35.00,
         3: 48.95,
@@ -30,4 +28,4 @@ def dwp_benefit_values():
         5: 76.85,
         6: 90.80,
         7: 104.75
-    }
+    }[number_of_children]
