@@ -9,12 +9,12 @@ SUBSEQUENT_CHILD_BENEFIT = 13.95
 
 def derive_income(dataframe):
     """Return dataframe with child benefit and derived income"""
+
     # Convert all earnings to weekly
     dataframe.loc[dataframe['incfreq'] == 'monthly', ['earnings']] *= 12 / 52
     dataframe.loc[dataframe['incfreq'] == 'annual', ['earnings']] /= 52
 
-    relat_columns = dataframe[["relat2", "relat3"]]
-    number_of_children = dataframe[relat_columns == 'C'].count(axis=1)
+    number_of_children = dataframe[dataframe[["relat2", "relat3"]] == 'C'].count(axis=1)
 
     dataframe['childben'] = number_of_children.apply(dwp_benefit_value)
     dataframe['income'] = dataframe['earnings'] + dataframe['childben']
