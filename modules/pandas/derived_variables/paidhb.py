@@ -38,11 +38,13 @@ def calculate_paid_housing_benefit(dataframe):
     dataframe["personal_allowance"] = personal_allowance(dataframe)
     dataframe["hb_earnings_disregard"] = hb_earnings_disregard(dataframe)
     dataframe["PAIDHB"] = paid_hb(dataframe)
+    import ipdb; ipdb.set_trace()
     return dataframe[["RENTHB", "PAIDHB"]]
 
 
 def paid_hb(dataframe):
-    dataframe["PAIDHB"] = dataframe["RENTHB"] - (dataframe["INCOME"] - (dataframe["child_allowance"] + dataframe["personal_allowance"]) * 0.65) + dataframe["hb_earnings_disregard"]
+    dataframe["monetary_allowance"] = (dataframe["child_allowance"] + dataframe["personal_allowance"])
+    dataframe["PAIDHB"] = dataframe["RENTHB"] - ((dataframe["INCOME"] - dataframe["monetary_allowance"]) * 0.65) + dataframe["hb_earnings_disregard"]
 
     # Can't have negative value
     dataframe.loc[(dataframe["PAIDHB"] < 0), ["PAIDHB"]] = 0
@@ -62,6 +64,8 @@ def paid_hb(dataframe):
 
 
 def hb_earnings_disregard(dataframe):
+    dataframe["hb_earnings_disregard"] = 0
+
     dataframe.loc[(dataframe["HHMEMB"] == 1), ["hb_earnings_disregard"]] = 5
 
     dataframe.loc[ \
