@@ -33,13 +33,52 @@ def calculate_paid_housing_benefit(dataframe):
     """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
 
     dataframe["non_dependent_deductions"] = non_dependent_deductions(dataframe)
-    dataframe["rent_hb"] = rent_hb(dataframe)
-    dataframe["paid_hb"] = paid_hb(dataframe)
-    import ipdb; ipdb.set_trace()
-
+    dataframe["RENTHB"] = rent_hb(dataframe)
+    dataframe["child_allowance"] = child_allowance(dataframe)
+    dataframe["personal_allowance"] = personal_allowance(dataframe)
+    dataframe["hb_earnings_disregard"] = hb_earnings_disregard(dataframe)
+    dataframe["PAIDHB"] = paid_hb(dataframe)
+    return dataframe[["RENTHB", "PAIDHB"]]
 
 
 def paid_hb(dataframe):
+    dataframe["PAIDHB"] = dataframe["RENTHB"] - (dataframe["INCOME"] - (dataframe["child_allowance"] + dataframe["personal_allowance"]) * 0.65) + dataframe["hb_earnings_disregard"]
+
+    # Can't have negative value
+    dataframe.loc[(dataframe["PAIDHB"] < 0), ["PAIDHB"]] = 0
+
+    # Overwrite PAID_HB as missing if not actually receiving HB (as indicated on log)
+    dataframe.loc[(dataframe["HB"].isin([6,7,9])), ["PAIDHB"]] = None
+
+    # Overwrite PAID_HB as missing if Supported Housing (don't calculate as no beds info)
+    dataframe.loc[(dataframe["NEEDSTYPE"] == 2), ["PAIDHB"]] = None
+
+    # Overwrite PAID_HB as missing if components missing
+    dataframe.loc[ \
+    (dataframe["RENTHB"].isnull()) | \
+    (dataframe["INCOME"].isnull()), ["PAIDHB"]] = None
+
+    return dataframe["PAIDHB"]
+
+
+def hb_earnings_disregard(dataframe):
+    dataframe.loc[(dataframe["HHMEMB"] == 1), ["hb_earnings_disregard"]] = 5
+
+    dataframe.loc[ \
+        (dataframe["TOTADULT"] == 2) & ((dataframe["RELAT2"] == "P") | \
+            (dataframe["RELAT3"] == "P") | \
+            (dataframe["RELAT4"] == "P") | \
+            (dataframe["RELAT5"] == "P") | \
+            (dataframe["RELAT6"] == "P") | \
+            (dataframe["RELAT7"] == "P") | \
+            (dataframe["RELAT8"] == "P")), ["hb_earnings_disregard"]] = 10
+
+    dataframe.loc[(dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] > 0), ["hb_earnings_disregard"]] = 25
+
+    return dataframe["hb_earnings_disregard"]
+
+
+def child_allowance(dataframe):
     dataframe["child_allowance"] = \
         (((dataframe["RELAT2"] == 'C') & ((dataframe["AGE2"] >= 0) & (dataframe["AGE2"] <= 19))) * 1 + \
         ((dataframe["RELAT3"] == 'C') & ((dataframe["AGE3"] >= 0) & (dataframe["AGE3"] <= 19))) * 1 + \
@@ -49,6 +88,10 @@ def paid_hb(dataframe):
         ((dataframe["RELAT7"] == 'C') & ((dataframe["AGE7"] >= 0) & (dataframe["AGE7"] <= 19))) * 1 + \
         ((dataframe["RELAT8"] == 'C') & ((dataframe["AGE8"] >= 0) & (dataframe["AGE8"] <= 19))) * 1) * CHILD_ALLOWANCE
 
+    return dataframe["child_allowance"]
+
+
+def personal_allowance(dataframe):
     dataframe["personal_allowance"] = 0
 
     # Single Adult under 25
@@ -85,6 +128,7 @@ def paid_hb(dataframe):
 
     return dataframe["personal_allowance"]
 
+
 def rent_hb(dataframe):
     dataframe["wrent_deduced"] = dataframe["WRENT"]
 
@@ -95,7 +139,7 @@ def rent_hb(dataframe):
     # For more than one extra bedroom rent reduction is 25%
     dataframe.loc[(dataframe['BED_MINUS_BEDSTANDARD'] > 1), ["wrent_deduced"]] = dataframe["WRENT"] * 0.75
 
-    dataframe["rent_hb"] = dataframe["wrent_deduced"] + dataframe["WSCHARGE"] - dataframe["non_dependent_deductions"]
+    dataframe["RENTHB"] = dataframe["wrent_deduced"] + dataframe["WSCHARGE"] - dataframe["non_dependent_deductions"]
 
     # If supported housing (NEEDSTYPE == 2) or
     # Weekly Rent or Weekly Charge are missing or
@@ -106,9 +150,9 @@ def rent_hb(dataframe):
     (dataframe["WRENT"].isnull()) | \
     (dataframe["WSCHARGE"].isnull()) | \
     (dataframe["BED_MINUS_BEDSTANDARD"].isnull()) | \
-    (dataframe["ECSTAT1"].eq(10)), ["rent_hb"]] = None
+    (dataframe["ECSTAT1"].eq(10)), ["RENTHB"]] = None
 
-    return dataframe["rent_hb"]
+    return dataframe["RENTHB"]
 
 
 def non_dependent_deductions(dataframe):
