@@ -1,5 +1,4 @@
 # Paid Housing Benefit
-import pandas
 
 # Relat field values
 # C = Child
@@ -25,6 +24,27 @@ NON_DEPENDENT_DEDUCTION_CAP = 163.45
 def calculate_paid_housing_benefit(dataframe):
     """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
 
+    dataframe["non_dependent_deductions"] = non_dependent_deductions(dataframe)
+    dataframe["rent_hb"] = rent_hb(dataframe)
+
+def rent_hb(dataframe):
+    # If property has more bedrooms than needed according the bedroom standard eligible rent is reduced
+    # For one extra bedroom reduction is 14%
+    dataframe.loc[(dataframe['BED_MINUS_BEDSTANDARD'] == 1), ["wrent_deduced"]] = dataframe["WRENT"] * 0.86
+
+    # For more than one extra bedroom rent reduction is 25%
+    dataframe.loc[(dataframe['BED_MINUS_BEDSTANDARD'] > 1), ["wrent_deduced"]] = dataframe["WRENT"] * 0.75
+
+    dataframe["rent_hb"] = dataframe["wrent_deduced"] + dataframe["WSCHARGE"] + dataframe["non_dependent_deductions"]
+
+    # If supported housing (NEEDSTYPE == 2) or
+    #  Weekly Rent or Weekly Charge are missing no rent housing benefit is calculated
+    dataframe.loc[(dataframe["NEEDSTYPE"] == 2) | (dataframe["WRENT"].isnull()) | (dataframe["WSCHARGE"].isnull()), ["rent_hb"]] = None
+
+    return dataframe["rent_hb"]
+
+
+def non_dependent_deductions(dataframe):
     # Count number of other adults in full time work
     dataframe["nondep1"] = \
     ((dataframe["RELAT2"] == 'X') & (dataframe["ECSTAT2"] == 1)) * 1 + \
@@ -60,7 +80,6 @@ def calculate_paid_housing_benefit(dataframe):
         dataframe["nondep2"] * NON_DEPENDENT_PART_TIME_DEDUCTION + \
         dataframe["nondep3"] * NON_DEPENDENT_OTHER_DEDUCTION
 
-
     # If any relation is a partner and the lead tenant or the tenant is 65+,
     # they are not eligbible for non dependent deductions
     relat_columns = ["RELAT2", "RELAT3", "RELAT4", "RELAT5", "RELAT6", "RELAT6", "RELAT7", "RELAT8"]
@@ -73,22 +92,10 @@ def calculate_paid_housing_benefit(dataframe):
         (dataframe["RELAT7"] == "P") & (dataframe["AGE7"] >= 65) | \
         (dataframe["RELAT8"] == "P") & (dataframe["AGE8"] >= 65), ["non_dependent_deductions"]] = 0
 
+    return dataframe["non_dependent_deductions"]
 
 
 
-#     If NEEDSTYPE = 2 (supported housing)
-
-#     OR wrent or wscharge is missing then rent_hb = None
-
-#     # If flat has more bedrooms than needed according the bedroom standard eligible rent is reduced
-#     if BED_MINUS_BEDSTANDARD is 1
-#         # eligbible weekly rent reduced by 14%
-#         wrent_deduced = wrent * 0.86
-#     if BED_MINUS_BEDSTANDARD > 1
-#         # eligible weekly rent reduced by 25%
-#         wrent_deduced = wrent * 0.75
-
-#     rent_housing_benefit (rent_hb_long) = wrent_deduced + weekly service charge (wscharge) + non_dependent_deductions
 
 
 
