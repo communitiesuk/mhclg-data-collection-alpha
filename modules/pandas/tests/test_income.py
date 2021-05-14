@@ -47,7 +47,7 @@ def get_path(filename):
 # ## Show function definition
 
 # +
-# count_household_members??
+# derive_income??
 # -
 
 # ## Set up our input data from a CSV fixture
