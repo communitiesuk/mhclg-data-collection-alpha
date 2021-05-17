@@ -36,7 +36,7 @@ PARTNER = 'P'
 OTHER = 'X'
 
 
-def for_each_tenant(function, dataframe):
+def each_tenant(function, dataframe):
     return [function(dataframe, tenant_no) for tenant_no in range(2, 9)]
 
 
@@ -101,7 +101,7 @@ def hb_earnings_disregard(dataframe):
     return dataframe["hb_earnings_disregard"]
 
 
-def count_children(dataframe, tenant_number):
+def who_is_a_child(dataframe, tenant_number):
     """Returns 0 if this tenant is an adult, 1 if a child"""
     relationship = dataframe["RELAT%s" % tenant_number]
     age = dataframe["AGE%s" % tenant_number]
@@ -113,12 +113,12 @@ def count_children(dataframe, tenant_number):
 
 
 def child_allowance(dataframe):
-    child_count_per_row = for_each_tenant(count_children, dataframe)
+    child_count_per_row = each_tenant(who_is_a_child, dataframe)
     number_of_children = sum(child_count_per_row)
     return number_of_children * CHILD_ALLOWANCE
 
 
-def are_a_couple_and_both_are_under_18(dataframe, tenant_number):
+def who_are_a_couple_and_both_are_under_18(dataframe, tenant_number):
     lead_tenant_under_18 = dataframe["AGE1"] < 18
     this_tenant_under_18 = dataframe["AGE%s" % tenant_number] < 18
     this_tenant_is_partner = dataframe["RELAT%s" % tenant_number] == "P"
@@ -126,7 +126,7 @@ def are_a_couple_and_both_are_under_18(dataframe, tenant_number):
     return lead_tenant_under_18 & this_tenant_under_18 & this_tenant_is_partner
 
 
-def are_a_couple_and_one_is_over_18(dataframe, tenant_number):
+def who_are_a_couple_and_one_is_over_18(dataframe, tenant_number):
     lead_tenant_over_18 = dataframe["AGE1"] >= 18
     this_tenant_over_18 = dataframe["AGE%s" % tenant_number] >= 18
     this_tenant_is_partner = dataframe["RELAT%s" % tenant_number] == "P"
@@ -147,11 +147,11 @@ def personal_allowance(dataframe):
     type_two_filter = single_adult_over_25 | single_parent_over_18
     set_column_for_matching_rows_to(dataframe, "personal_allowance", type_two_filter, PERSONAL_ALLOWANCE_TYPE2)
 
-    possible_young_couples = for_each_tenant(are_a_couple_and_both_are_under_18, dataframe)
+    possible_young_couples = each_tenant(who_are_a_couple_and_both_are_under_18, dataframe)
     young_couple = any_of(possible_young_couples)
     set_column_for_matching_rows_to(dataframe, "personal_allowance", young_couple, PERSONAL_ALLOWANCE_TYPE3)
 
-    possible_couples = for_each_tenant(are_a_couple_and_one_is_over_18, dataframe)
+    possible_couples = each_tenant(who_are_a_couple_and_one_is_over_18, dataframe)
     couple = any_of(possible_couples)
     set_column_for_matching_rows_to(dataframe, "personal_allowance", couple, PERSONAL_ALLOWANCE_TYPE4)
 
@@ -190,7 +190,7 @@ def whose_work_is(work_types):
     return _filter
 
 
-def are_a_couple_and_one_is_over_65(dataframe, tenant_number):
+def who_are_a_couple_and_one_is_over_65(dataframe, tenant_number):
     lead_tenant_over_65 = dataframe["AGE1"] >= 65
     this_tenant_over_65 = dataframe["AGE%s" % tenant_number] >= 65
     this_tenant_is_partner = dataframe["RELAT%s" % tenant_number] == "P"
@@ -199,18 +199,18 @@ def are_a_couple_and_one_is_over_65(dataframe, tenant_number):
 
 
 def add_non_dependent_deductions(dataframe):
-    full_time_tenant_counts = for_each_tenant(whose_work_is(FULLTIME), dataframe)
+    full_time_tenant_counts = each_tenant(whose_work_is(FULLTIME), dataframe)
     full_time_tenant_deductions = sum(full_time_tenant_counts) * NON_DEPENDENT_FULL_TIME_DEDUCTION 
 
-    part_time_tenant_counts = for_each_tenant(whose_work_is(PARTTIME), dataframe)
+    part_time_tenant_counts = each_tenant(whose_work_is(PARTTIME), dataframe)
     part_time_tenant_deductions = sum(part_time_tenant_counts) * NON_DEPENDENT_PART_TIME_DEDUCTION
 
-    other_tenant_counts = for_each_tenant(whose_work_is(NOT_FULL_OR_PART_TIME), dataframe)
+    other_tenant_counts = each_tenant(whose_work_is(NOT_FULL_OR_PART_TIME), dataframe)
     other_tenant_deductions = sum(other_tenant_counts) * NON_DEPENDENT_OTHER_DEDUCTION
 
     dataframe["non_dependent_deductions"] = sum([full_time_tenant_deductions, part_time_tenant_deductions, other_tenant_deductions])
 
-    old_couple_filter = for_each_tenant(are_a_couple_and_one_is_over_65, dataframe)
+    old_couple_filter = each_tenant(who_are_a_couple_and_one_is_over_65, dataframe)
     set_column_for_matching_rows_to(dataframe, "non_dependent_deductions", any_of(old_couple_filter), 0)
 
     return dataframe["non_dependent_deductions"]
