@@ -16,6 +16,9 @@
 # 8 = Sick or disabled
 # 9 = Child under 16
 
+from numpy import sin
+
+
 NON_DEPENDENT_FULL_TIME_DEDUCTION = 23.35
 NON_DEPENDENT_PART_TIME_DEDUCTION = 17.00
 NON_DEPENDENT_OTHER_DEDUCTION = 7.40
@@ -95,36 +98,44 @@ def child_count(dataframe, tenant_number):
 
     return (is_child & has_been_born & is_under_20) * 1
 
+
 def child_allowance(dataframe):
     child_count_per_row = [child_count(dataframe, tenant_no) for tenant_no in range(2,9)]
     number_of_children = sum(child_count_per_row)
     return number_of_children * CHILD_ALLOWANCE
 
 
+def couple_and_both_are_under_18(dataframe, tenant_number):
+    lead_tenant_under_18 = dataframe["AGE1"] < 18
+    this_tenant_under_18 = dataframe["AGE%s" % tenant_number] < 18 
+    this_tenant_is_partner = dataframe["RELAT2"] == "P"
+
+    return lead_tenant_under_18 & this_tenant_under_18 & this_tenant_is_partner
+
 def personal_allowance(dataframe):
     dataframe["personal_allowance"] = 0
 
-    # Single Adult under 25
-    dataframe.loc[(dataframe["AGE1"] < 25) & (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] == 0), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE1
+    single_adult_under_25 = (dataframe["AGE1"] < 25) & (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] == 0)
+    dataframe.loc[single_adult_under_25, ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE1
 
-    # Single Parent aged 16-17
-    dataframe.loc[(dataframe["AGE1"] >= 16) & (dataframe["AGE1"] <= 17) & (dataframe["TOTCHILD"] > 0), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE1
+    single_parent_age_16_17 = (dataframe["AGE1"] >= 16) & (dataframe["AGE1"] <= 17) & (dataframe["TOTCHILD"] > 0)
+    dataframe.loc[single_parent_age_16_17, ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE1
 
-    # Single adult over 25
-    dataframe.loc[(dataframe["AGE1"] >= 25) & (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] == 0), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE2
+    single_adult_over_25 = (dataframe["AGE1"] >= 25) & (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] == 0)
+    dataframe.loc[single_adult_over_25, ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE2
 
-    # Single Parent aged 18+
-    dataframe.loc[(dataframe["AGE1"] >= 18) & (dataframe["TOTCHILD"] > 1), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE2
+    single_parent_over_18 = (dataframe["AGE1"] >= 18) & (dataframe["TOTCHILD"] > 1)
+    dataframe.loc[single_parent_over_18, ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE2
 
     # Couple, both under 18
     dataframe.loc[ \
-        ((dataframe["AGE1"] < 18) & (dataframe["AGE2"] < 18) & (dataframe["RELAT2"] == "P")) | \
-        ((dataframe["AGE1"] < 18) & (dataframe["AGE3"] < 18) & (dataframe["RELAT3"] == "P")) | \
-        ((dataframe["AGE1"] < 18) & (dataframe["AGE4"] < 18) & (dataframe["RELAT4"] == "P")) | \
-        ((dataframe["AGE1"] < 18) & (dataframe["AGE5"] < 18) & (dataframe["RELAT5"] == "P")) | \
-        ((dataframe["AGE1"] < 18) & (dataframe["AGE6"] < 18) & (dataframe["RELAT6"] == "P")) | \
-        ((dataframe["AGE1"] < 18) & (dataframe["AGE7"] < 18) & (dataframe["RELAT7"] == "P")) | \
-        ((dataframe["AGE1"] < 18) & (dataframe["AGE8"] < 18) & (dataframe["RELAT8"] == "P")), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE3
+        couple_and_both_are_under_18(dataframe, 2) | \
+        couple_and_both_are_under_18(dataframe, 3) | \
+        couple_and_both_are_under_18(dataframe, 4) | \
+        couple_and_both_are_under_18(dataframe, 5) | \
+        couple_and_both_are_under_18(dataframe, 6) | \
+        couple_and_both_are_under_18(dataframe, 7) | \
+        couple_and_both_are_under_18(dataframe, 8), ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE3
 
     # Couple, at least one over 18
     dataframe.loc[ \
