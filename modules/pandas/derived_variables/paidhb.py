@@ -14,6 +14,7 @@
 # 6 = Not seeking work
 # 7 = Student
 # 8 = Sick or disabled
+# 9 = Child under 16
 
 NON_DEPENDENT_FULL_TIME_DEDUCTION = 23.35
 NON_DEPENDENT_PART_TIME_DEDUCTION = 17.00
