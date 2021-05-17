@@ -34,6 +34,11 @@ PERSONAL_ALLOWANCE_TYPE4 = 113.70
 
 CHILD = 'C'
 
+
+def for_each_tenant(function, dataframe):
+    return [function(dataframe, tenant_no) for tenant_no in range(2, 9)]
+
+
 def calculate_paid_housing_benefit(dataframe):
     """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
 
@@ -88,7 +93,7 @@ def hb_earnings_disregard(dataframe):
     return dataframe["hb_earnings_disregard"]
 
 
-def child_count(dataframe, tenant_number):
+def count_children(dataframe, tenant_number):
     """Returns 0 if this tenant is an adult, 1 if a child"""
     relationship = dataframe["RELAT%s" % tenant_number]
     age = dataframe["AGE%s" % tenant_number]
@@ -100,12 +105,12 @@ def child_count(dataframe, tenant_number):
 
 
 def child_allowance(dataframe):
-    child_count_per_row = [child_count(dataframe, tenant_no) for tenant_no in range(2,9)]
+    child_count_per_row = for_each_tenant(count_children, dataframe)
     number_of_children = sum(child_count_per_row)
     return number_of_children * CHILD_ALLOWANCE
 
 
-def couple_and_both_are_under_18(dataframe, tenant_number):
+def are_a_couple_and_both_are_under_18(dataframe, tenant_number):
     lead_tenant_under_18 = dataframe["AGE1"] < 18
     this_tenant_under_18 = dataframe["AGE%s" % tenant_number] < 18 
     this_tenant_is_partner = dataframe["RELAT2"] == "P"
@@ -113,7 +118,7 @@ def couple_and_both_are_under_18(dataframe, tenant_number):
     return lead_tenant_under_18 & this_tenant_under_18 & this_tenant_is_partner
 
 
-def couple_and_one_is_over_18(dataframe, tenant_number):
+def are_a_couple_and_one_is_over_18(dataframe, tenant_number):
     lead_tenant_over_18 = dataframe["AGE1"] >= 18
     this_tenant_over_18 = dataframe["AGE%s" % tenant_number] >= 18 
     this_tenant_is_partner = dataframe["RELAT2"] == "P"
@@ -138,7 +143,7 @@ def personal_allowance(dataframe):
 
     set_personal_allowance(dataframe, single_adult_over_25 | single_parent_over_18, PERSONAL_ALLOWANCE_TYPE2)
 
-    possible_young_couples = [couple_and_both_are_under_18(dataframe, tenant_no) for tenant_no in range(2, 9)]
+    possible_young_couples = for_each_tenant(are_a_couple_and_both_are_under_18, dataframe)
 
     young_couple = possible_young_couples[0]
 
@@ -147,7 +152,7 @@ def personal_allowance(dataframe):
 
     set_personal_allowance(dataframe, young_couple, PERSONAL_ALLOWANCE_TYPE3)
 
-    possible_couples = [couple_and_one_is_over_18(dataframe, tenant_no) for tenant_no in range(2, 9)]
+    possible_couples = for_each_tenant(are_a_couple_and_one_is_over_18, dataframe)
 
     couple = possible_couples[0]
 
