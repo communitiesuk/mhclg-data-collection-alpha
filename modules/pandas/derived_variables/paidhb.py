@@ -16,8 +16,6 @@
 # 8 = Sick or disabled
 # 9 = Child under 16
 
-from numpy import sin
-
 
 NON_DEPENDENT_FULL_TIME_DEDUCTION = 23.35
 NON_DEPENDENT_PART_TIME_DEDUCTION = 17.00
@@ -113,7 +111,7 @@ def child_allowance(dataframe):
 def are_a_couple_and_both_are_under_18(dataframe, tenant_number):
     lead_tenant_under_18 = dataframe["AGE1"] < 18
     this_tenant_under_18 = dataframe["AGE%s" % tenant_number] < 18 
-    this_tenant_is_partner = dataframe["RELAT2"] == "P"
+    this_tenant_is_partner = dataframe["RELAT%s" % tenant_number] == "P"
 
     return lead_tenant_under_18 & this_tenant_under_18 & this_tenant_is_partner
 
