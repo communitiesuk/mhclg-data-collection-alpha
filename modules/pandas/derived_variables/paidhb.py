@@ -40,6 +40,7 @@ OTHER = 'X'
 # Housing Data
 SUPPORTED_HOUSING = 2
 
+NO_HOUSING_BENEFIT = [6,7,9]
 
 def calculate_paid_housing_benefit(dataframe):
     """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
@@ -76,17 +77,17 @@ def set_paid_hb(dataframe):
     set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["PAIDHB"] < 0, 0)
 
     # Overwrite PAID_HB as missing if not actually receiving HB (as indicated on log)
-    set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["HB"].isin([6,7,9]), None)
+    set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["HB"].isin(NO_HOUSING_BENEFIT), None)
 
     # Overwrite PAID_HB as missing if Supported Housing (don't calculate as no beds info)
-    set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["NEEDSTYPE"] == 2, None)
+    set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["NEEDSTYPE"] == SUPPORTED_HOUSING, None)
 
     # Overwrite PAID_HB as missing if components missing
     set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["RENTHB"].isnull() | dataframe["INCOME"].isnull(), None)
 
 
 def who_are_a_couple(dataframe, tenant_number):
-    return dataframe["RELAT%s" % tenant_number] == "P"
+    return dataframe["RELAT%s" % tenant_number] == PARTNER
 
 
 def set_hb_earnings_disregard(dataframe):
