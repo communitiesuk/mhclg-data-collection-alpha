@@ -119,7 +119,7 @@ def are_a_couple_and_both_are_under_18(dataframe, tenant_number):
 def are_a_couple_and_one_is_over_18(dataframe, tenant_number):
     lead_tenant_over_18 = dataframe["AGE1"] >= 18
     this_tenant_over_18 = dataframe["AGE%s" % tenant_number] >= 18 
-    this_tenant_is_partner = dataframe["RELAT2"] == "P"
+    this_tenant_is_partner = dataframe["RELAT%s" % tenant_number] == "P"
 
     return (lead_tenant_over_18 | this_tenant_over_18) & this_tenant_is_partner
 
