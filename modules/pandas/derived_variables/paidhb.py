@@ -124,7 +124,7 @@ def personal_allowance(dataframe):
     single_adult_over_25 = (dataframe["AGE1"] >= 25) & (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] == 0)
     dataframe.loc[single_adult_over_25, ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE2
 
-    single_parent_over_18 = (dataframe["AGE1"] >= 18) & (dataframe["TOTCHILD"] > 1)
+    single_parent_over_18 = (dataframe["AGE1"] >= 18) & (dataframe["TOTCHILD"] > 0)
     dataframe.loc[single_parent_over_18, ["personal_allowance"]] = PERSONAL_ALLOWANCE_TYPE2
 
     # Couple, both under 18
