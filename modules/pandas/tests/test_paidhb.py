@@ -67,7 +67,6 @@ expected_result
 actual_result = calculate_paid_housing_benefit(input_data)
 actual_result
 
-
 # +
 # %%run_pytest[clean]
 

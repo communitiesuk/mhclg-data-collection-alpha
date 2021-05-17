@@ -1,13 +1,10 @@
+from functools import reduce
+
 # Paid Housing Benefit
 
-# Relat field values
-# C = Child
-# P = Partner
-# X = Other
-
 # ECSTAT = Economic Status
-# 1 = Full-Time work
-# 2 = Part Time work
+# 1 = Full time
+# 2 = Part time
 # 3 = Government training
 # 4 = Job Seeker
 # 5 = Retired
@@ -15,6 +12,9 @@
 # 7 = Student
 # 8 = Sick or disabled
 # 9 = Child under 16
+FULLTIME = [1]
+PARTTIME = [2]
+NOT_FULL_OR_PART_TIME = [3,4,5,6,7,8,9]
 
 
 NON_DEPENDENT_FULL_TIME_DEDUCTION = 23.35
@@ -30,17 +30,27 @@ PERSONAL_ALLOWANCE_TYPE2 = 72.40
 PERSONAL_ALLOWANCE_TYPE3 = 86.65
 PERSONAL_ALLOWANCE_TYPE4 = 113.70
 
+# Relat field values
 CHILD = 'C'
+PARTNER = 'P'
+OTHER = 'X'
 
 
 def for_each_tenant(function, dataframe):
     return [function(dataframe, tenant_no) for tenant_no in range(2, 9)]
 
 
+def any_of(filters):
+    return reduce(lambda x, y: x | y, filters)
+
+
+def set_column_for_matching_rows_to(dataframe, column, filter, value):
+    dataframe.loc[filter, column] = value
+
 def calculate_paid_housing_benefit(dataframe):
     """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
 
-    dataframe["non_dependent_deductions"] = non_dependent_deductions(dataframe)
+    add_non_dependent_deductions(dataframe)
     dataframe["RENTHB"] = rent_hb(dataframe)
     dataframe["child_allowance"] = child_allowance(dataframe)
     dataframe["personal_allowance"] = personal_allowance(dataframe)
@@ -129,23 +139,21 @@ def personal_allowance(dataframe):
 
     single_adult_under_25 = (dataframe["AGE1"] < 25) & (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] == 0)
     single_parent_age_16_17 = (dataframe["AGE1"] >= 16) & (dataframe["AGE1"] <= 17) & (dataframe["TOTCHILD"] > 0)
-    dataframe.loc[single_adult_under_25 | single_parent_age_16_17, "personal_allowance"] = PERSONAL_ALLOWANCE_TYPE1
+    type_one_filter = single_adult_under_25 | single_parent_age_16_17
+    set_column_for_matching_rows_to(dataframe, "personal_allowance", type_one_filter, PERSONAL_ALLOWANCE_TYPE1)
 
     single_adult_over_25 = (dataframe["AGE1"] >= 25) & (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] == 0)
     single_parent_over_18 = (dataframe["AGE1"] >= 18) & (dataframe["TOTCHILD"] > 0)
-    dataframe.loc[single_adult_over_25 | single_parent_over_18, "personal_allowance"] = PERSONAL_ALLOWANCE_TYPE2
+    type_two_filter = single_adult_over_25 | single_parent_over_18
+    set_column_for_matching_rows_to(dataframe, "personal_allowance", type_two_filter, PERSONAL_ALLOWANCE_TYPE2)
 
     possible_young_couples = for_each_tenant(are_a_couple_and_both_are_under_18, dataframe)
-    young_couple = possible_young_couples[0]
-    for possible_couple in possible_young_couples[1:]:
-        young_couple = young_couple | possible_couple
-    dataframe.loc[young_couple, "personal_allowance"] = PERSONAL_ALLOWANCE_TYPE3
+    young_couple = any_of(possible_young_couples)
+    set_column_for_matching_rows_to(dataframe, "personal_allowance", young_couple, PERSONAL_ALLOWANCE_TYPE3)
 
     possible_couples = for_each_tenant(are_a_couple_and_one_is_over_18, dataframe)
-    couple = possible_couples[0]
-    for possible_couple in possible_couples[1:]:
-        couple = couple | possible_couple
-    dataframe.loc[couple, "personal_allowance"] = PERSONAL_ALLOWANCE_TYPE4
+    couple = any_of(possible_couples)
+    set_column_for_matching_rows_to(dataframe, "personal_allowance", couple, PERSONAL_ALLOWANCE_TYPE4)
 
     return dataframe["personal_allowance"]
 
@@ -176,52 +184,33 @@ def rent_hb(dataframe):
     return dataframe["RENTHB"]
 
 
-def non_dependent_deductions(dataframe):
-    # Count number of other adults in full time work
-    dataframe["nondep1"] = \
-    ((dataframe["RELAT2"] == 'X') & (dataframe["ECSTAT2"] == 1)) * 1 + \
-    ((dataframe["RELAT3"] == 'X') & (dataframe["ECSTAT3"] == 1)) * 1 + \
-    ((dataframe["RELAT4"] == 'X') & (dataframe["ECSTAT4"] == 1)) * 1 + \
-    ((dataframe["RELAT5"] == 'X') & (dataframe["ECSTAT5"] == 1)) * 1 + \
-    ((dataframe["RELAT6"] == 'X') & (dataframe["ECSTAT6"] == 1)) * 1 + \
-    ((dataframe["RELAT7"] == 'X') & (dataframe["ECSTAT7"] == 1)) * 1 + \
-    ((dataframe["RELAT8"] == 'X') & (dataframe["ECSTAT8"] == 1)) * 1
+def whose_work_is(work_types):
+    def _filter(dataframe, tenant_no):
+        return ((dataframe["RELAT2"] == OTHER) & (dataframe["ECSTAT%s" % tenant_no].isin(work_types))) * 1
+    return _filter
 
-    # Count number of other adults in part time work
-    dataframe["nondep2"] = \
-    ((dataframe["RELAT2"] == 'X') & (dataframe["ECSTAT2"] == 2)) * 1 + \
-    ((dataframe["RELAT3"] == 'X') & (dataframe["ECSTAT3"] == 2)) * 1 + \
-    ((dataframe["RELAT4"] == 'X') & (dataframe["ECSTAT4"] == 2)) * 1 + \
-    ((dataframe["RELAT5"] == 'X') & (dataframe["ECSTAT5"] == 2)) * 1 + \
-    ((dataframe["RELAT6"] == 'X') & (dataframe["ECSTAT6"] == 2)) * 1 + \
-    ((dataframe["RELAT7"] == 'X') & (dataframe["ECSTAT7"] == 2)) * 1 + \
-    ((dataframe["RELAT8"] == 'X') & (dataframe["ECSTAT8"] == 2)) * 1
 
-    # Count number of other adults non-dependent for other reasons
-    dataframe["nondep3"] = \
-    ((dataframe["RELAT2"] == 'X') & (dataframe["ECSTAT2"].isin([3,4,5,6,8,9]))) * 1 + \
-    ((dataframe["RELAT3"] == 'X') & (dataframe["ECSTAT3"].isin([3,4,5,6,8,9]))) * 1 + \
-    ((dataframe["RELAT4"] == 'X') & (dataframe["ECSTAT4"].isin([3,4,5,6,8,9]))) * 1 + \
-    ((dataframe["RELAT5"] == 'X') & (dataframe["ECSTAT5"].isin([3,4,5,6,8,9]))) * 1 + \
-    ((dataframe["RELAT6"] == 'X') & (dataframe["ECSTAT6"].isin([3,4,5,6,8,9]))) * 1 + \
-    ((dataframe["RELAT7"] == 'X') & (dataframe["ECSTAT7"].isin([3,4,5,6,8,9]))) * 1 + \
-    ((dataframe["RELAT8"] == 'X') & (dataframe["ECSTAT8"].isin([3,4,5,6,8,9]))) * 1
+def are_a_couple_and_one_is_over_65(dataframe, tenant_number):
+    lead_tenant_over_65 = dataframe["AGE1"] >= 65
+    this_tenant_over_65 = dataframe["AGE%s" % tenant_number] >= 65
+    this_tenant_is_partner = dataframe["RELAT%s" % tenant_number] == "P"
 
-    dataframe["non_dependent_deductions"] = \
-        dataframe["nondep1"] * NON_DEPENDENT_FULL_TIME_DEDUCTION + \
-        dataframe["nondep2"] * NON_DEPENDENT_PART_TIME_DEDUCTION + \
-        dataframe["nondep3"] * NON_DEPENDENT_OTHER_DEDUCTION
+    return (lead_tenant_over_65 | this_tenant_over_65) & this_tenant_is_partner
 
-    # If any relation is a partner and the lead tenant or the tenant is 65+,
-    # they are not eligbible for non dependent deductions
-    relat_columns = ["RELAT2", "RELAT3", "RELAT4", "RELAT5", "RELAT6", "RELAT6", "RELAT7", "RELAT8"]
-    dataframe.loc[(dataframe[relat_columns].eq('P').any(axis=1) & dataframe["AGE1"] >= 65) | \
-        (dataframe["RELAT2"] == "P") & (dataframe["AGE2"] >= 65) | \
-        (dataframe["RELAT3"] == "P") & (dataframe["AGE3"] >= 65) | \
-        (dataframe["RELAT4"] == "P") & (dataframe["AGE4"] >= 65) | \
-        (dataframe["RELAT5"] == "P") & (dataframe["AGE5"] >= 65) | \
-        (dataframe["RELAT6"] == "P") & (dataframe["AGE6"] >= 65) | \
-        (dataframe["RELAT7"] == "P") & (dataframe["AGE7"] >= 65) | \
-        (dataframe["RELAT8"] == "P") & (dataframe["AGE8"] >= 65), ["non_dependent_deductions"]] = 0
+
+def add_non_dependent_deductions(dataframe):
+    full_time_tenant_counts = for_each_tenant(whose_work_is(FULLTIME), dataframe)
+    full_time_tenant_deductions = sum(full_time_tenant_counts) * NON_DEPENDENT_FULL_TIME_DEDUCTION 
+
+    part_time_tenant_counts = for_each_tenant(whose_work_is(PARTTIME), dataframe)
+    part_time_tenant_deductions = sum(part_time_tenant_counts) * NON_DEPENDENT_PART_TIME_DEDUCTION
+
+    other_tenant_counts = for_each_tenant(whose_work_is(NOT_FULL_OR_PART_TIME), dataframe)
+    other_tenant_deductions = sum(other_tenant_counts) * NON_DEPENDENT_OTHER_DEDUCTION
+
+    dataframe["non_dependent_deductions"] = sum([full_time_tenant_deductions, part_time_tenant_deductions, other_tenant_deductions])
+
+    old_couple_filter = for_each_tenant(are_a_couple_and_one_is_over_65, dataframe)
+    set_column_for_matching_rows_to(dataframe, "non_dependent_deductions", any_of(old_couple_filter), 0)
 
     return dataframe["non_dependent_deductions"]
