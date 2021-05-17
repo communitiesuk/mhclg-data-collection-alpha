@@ -77,8 +77,6 @@ def test_apply_weighting():
     assert_frame_equal(actual_result, expected_result)
 
 
-
-
 # + hide_input=true
 __name__
 # -
