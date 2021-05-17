@@ -12,9 +12,11 @@ from functools import reduce
 # 7 = Student
 # 8 = Sick or disabled
 # 9 = Child under 16
+# 10 = Refused
 FULLTIME = [1]
 PARTTIME = [2]
 NOT_FULL_OR_PART_TIME = [3,4,5,6,7,8,9]
+REFUSED = [10]
 
 
 NON_DEPENDENT_FULL_TIME_DEDUCTION = 23.35
@@ -35,6 +37,8 @@ CHILD = 'C'
 PARTNER = 'P'
 OTHER = 'X'
 
+# Housing Data
+SUPPORTED_HOUSING = 2
 
 def each_tenant(function, dataframe):
     return [function(dataframe, tenant_no) for tenant_no in range(2, 9)]
@@ -46,6 +50,7 @@ def any_of(filters):
 
 def set_column_for_matching_rows_to(dataframe, column, filter, value):
     dataframe.loc[filter, column] = value
+
 
 def calculate_paid_housing_benefit(dataframe):
     """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
@@ -66,37 +71,34 @@ def paid_hb(dataframe):
     dataframe["PAIDHB"] = dataframe["RENTHB"] - ((dataframe["INCOME"] - dataframe["monetary_allowance"]) * 0.65) + dataframe["hb_earnings_disregard"]
 
     # Can't have negative value
-    dataframe.loc[(dataframe["PAIDHB"] < 0), ["PAIDHB"]] = 0
+    set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["PAIDHB"] < 0, 0)
 
     # Overwrite PAID_HB as missing if not actually receiving HB (as indicated on log)
-    dataframe.loc[(dataframe["HB"].isin([6,7,9])), ["PAIDHB"]] = None
+    set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["HB"].isin([6,7,9]), None)
 
     # Overwrite PAID_HB as missing if Supported Housing (don't calculate as no beds info)
-    dataframe.loc[(dataframe["NEEDSTYPE"] == 2), ["PAIDHB"]] = None
+    set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["NEEDSTYPE"] == 2, None)
 
     # Overwrite PAID_HB as missing if components missing
-    dataframe.loc[ \
-    (dataframe["RENTHB"].isnull()) | \
-    (dataframe["INCOME"].isnull()), ["PAIDHB"]] = None
+    set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["RENTHB"].isnull() | dataframe["INCOME"].isnull(), None)
 
     return dataframe["PAIDHB"]
+
+
+def who_are_a_couple(dataframe, tenant_number):
+    return dataframe["RELAT%s" % tenant_number] == "P"
 
 
 def hb_earnings_disregard(dataframe):
     dataframe["hb_earnings_disregard"] = 0
 
-    dataframe.loc[(dataframe["HHMEMB"] == 1), ["hb_earnings_disregard"]] = 5
+    set_column_for_matching_rows_to(dataframe, "hb_earnings_disregard", dataframe["HHMEMB"] == 1, 5)
 
-    dataframe.loc[ \
-        (dataframe["TOTADULT"] == 2) & ((dataframe["RELAT2"] == "P") | \
-            (dataframe["RELAT3"] == "P") | \
-            (dataframe["RELAT4"] == "P") | \
-            (dataframe["RELAT5"] == "P") | \
-            (dataframe["RELAT6"] == "P") | \
-            (dataframe["RELAT7"] == "P") | \
-            (dataframe["RELAT8"] == "P")), ["hb_earnings_disregard"]] = 10
+    tenants_are_a_couple = any_of(each_tenant(who_are_a_couple, dataframe))
+    set_column_for_matching_rows_to(dataframe, "hb_earnings_disregard", tenants_are_a_couple, 10)
 
-    dataframe.loc[(dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] > 0), ["hb_earnings_disregard"]] = 25
+    single_occupant = (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] > 0)
+    set_column_for_matching_rows_to(dataframe, "hb_earnings_disregard", single_occupant, 25)
 
     return dataframe["hb_earnings_disregard"]
 
@@ -163,30 +165,31 @@ def rent_hb(dataframe):
 
     # If property has more bedrooms than needed according the bedroom standard eligible rent is reduced
     # For one extra bedroom reduction is 14%
-    dataframe.loc[(dataframe['BED_MINUS_BEDSTANDARD'] == 1), ["wrent_deduced"]] = dataframe["WRENT"] * 0.86
+    has_one_extra_bedroom = dataframe['BED_MINUS_BEDSTANDARD'] == 1
+    set_column_for_matching_rows_to(dataframe, "wrent_deduced", has_one_extra_bedroom, dataframe["WRENT"] * 0.86)
 
     # For more than one extra bedroom rent reduction is 25%
-    dataframe.loc[(dataframe['BED_MINUS_BEDSTANDARD'] > 1), ["wrent_deduced"]] = dataframe["WRENT"] * 0.75
+    has_two_or_more_extra_bedrooms = dataframe['BED_MINUS_BEDSTANDARD'] > 1
+    set_column_for_matching_rows_to(dataframe, "wrent_deduced", has_two_or_more_extra_bedrooms, dataframe["WRENT"] * 0.75)
 
     dataframe["RENTHB"] = dataframe["wrent_deduced"] + dataframe["WSCHARGE"] - dataframe["non_dependent_deductions"]
 
-    # If supported housing (NEEDSTYPE == 2) or
-    # Weekly Rent or Weekly Charge are missing or
-    # number of bedrooms are missing or Economic status has been refused (10) then
-    # no rent housing benefit is calculated
-    dataframe.loc[ \
-    (dataframe["NEEDSTYPE"] == 2) | \
-    (dataframe["WRENT"].isnull()) | \
-    (dataframe["WSCHARGE"].isnull()) | \
-    (dataframe["BED_MINUS_BEDSTANDARD"].isnull()) | \
-    (dataframe["ECSTAT1"].eq(10)), ["RENTHB"]] = None
+    no_housing_benefit_calc = any_of([
+        dataframe["NEEDSTYPE"] == SUPPORTED_HOUSING,
+        dataframe["WRENT"].isnull(),
+        dataframe["WSCHARGE"].isnull(),
+        dataframe["BED_MINUS_BEDSTANDARD"].isnull(),
+        dataframe["ECSTAT1"].isin(REFUSED)
+    ])
+
+    set_column_for_matching_rows_to(dataframe, "RENTHB", no_housing_benefit_calc, None)
 
     return dataframe["RENTHB"]
 
 
 def whose_work_is(work_types):
     def _filter(dataframe, tenant_no):
-        return ((dataframe["RELAT2"] == OTHER) & (dataframe["ECSTAT%s" % tenant_no].isin(work_types))) * 1
+        return ((dataframe["RELAT%s" % tenant_no] == OTHER) & (dataframe["ECSTAT%s" % tenant_no].isin(work_types))) * 1
     return _filter
 
 
@@ -212,5 +215,3 @@ def add_non_dependent_deductions(dataframe):
 
     old_couple_filter = each_tenant(who_are_a_couple_and_one_is_over_65, dataframe)
     set_column_for_matching_rows_to(dataframe, "non_dependent_deductions", any_of(old_couple_filter), 0)
-
-    return dataframe["non_dependent_deductions"]
