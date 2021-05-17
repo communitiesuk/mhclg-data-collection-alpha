@@ -29,6 +29,7 @@ PERSONAL_ALLOWANCE_TYPE2 = 72.40
 PERSONAL_ALLOWANCE_TYPE3 = 86.65
 PERSONAL_ALLOWANCE_TYPE4 = 113.70
 
+CHILD = 'C'
 
 def calculate_paid_housing_benefit(dataframe):
     """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
@@ -84,17 +85,20 @@ def hb_earnings_disregard(dataframe):
     return dataframe["hb_earnings_disregard"]
 
 
-def child_allowance(dataframe):
-    dataframe["child_allowance"] = \
-        (((dataframe["RELAT2"] == 'C') & ((dataframe["AGE2"] >= 0) & (dataframe["AGE2"] <= 19))) * 1 + \
-        ((dataframe["RELAT3"] == 'C') & ((dataframe["AGE3"] >= 0) & (dataframe["AGE3"] <= 19))) * 1 + \
-        ((dataframe["RELAT4"] == 'C') & ((dataframe["AGE4"] >= 0) & (dataframe["AGE4"] <= 19))) * 1 + \
-        ((dataframe["RELAT5"] == 'C') & ((dataframe["AGE5"] >= 0) & (dataframe["AGE5"] <= 19))) * 1 + \
-        ((dataframe["RELAT6"] == 'C') & ((dataframe["AGE6"] >= 0) & (dataframe["AGE6"] <= 19))) * 1 + \
-        ((dataframe["RELAT7"] == 'C') & ((dataframe["AGE7"] >= 0) & (dataframe["AGE7"] <= 19))) * 1 + \
-        ((dataframe["RELAT8"] == 'C') & ((dataframe["AGE8"] >= 0) & (dataframe["AGE8"] <= 19))) * 1) * CHILD_ALLOWANCE
+def child_count(dataframe, tenant_number):
+    """Returns 0 if this tenant is an adult, 1 if a child"""
+    relationship = dataframe["RELAT%s" % tenant_number]
+    age = dataframe["AGE%s" % tenant_number]
+    is_child = relationship == CHILD
+    has_been_born = age >= 0
+    is_under_20 = age <= 19
 
-    return dataframe["child_allowance"]
+    return (is_child & has_been_born & is_under_20) * 1
+
+def child_allowance(dataframe):
+    child_count_per_row = [child_count(dataframe, tenant_no) for tenant_no in range(2,9)]
+    number_of_children = sum(child_count_per_row)
+    return number_of_children * CHILD_ALLOWANCE
 
 
 def personal_allowance(dataframe):
