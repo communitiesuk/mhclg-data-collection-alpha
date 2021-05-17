@@ -40,6 +40,22 @@ OTHER = 'X'
 # Housing Data
 SUPPORTED_HOUSING = 2
 
+
+def calculate_paid_housing_benefit(dataframe):
+    """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
+
+    add_non_dependent_deductions(dataframe)
+    set_rent_hb(dataframe)
+    set_child_allowance(dataframe)
+    set_personal_allowance(dataframe)
+    set_hb_earnings_disregard(dataframe)
+    set_paid_hb(dataframe)
+    dataframe["RENTHB"] = dataframe["RENTHB"].round(2)
+    dataframe["PAIDHB"] = dataframe["PAIDHB"].round(2)
+
+    return dataframe[["RENTHB", "PAIDHB"]]
+
+
 def each_tenant(function, dataframe):
     return [function(dataframe, tenant_no) for tenant_no in range(2, 9)]
 
@@ -52,21 +68,7 @@ def set_column_for_matching_rows_to(dataframe, column, filter, value):
     dataframe.loc[filter, column] = value
 
 
-def calculate_paid_housing_benefit(dataframe):
-    """Return dataframe of rent eligible for housing benefit and paid housing benefit"""
-
-    add_non_dependent_deductions(dataframe)
-    dataframe["RENTHB"] = rent_hb(dataframe)
-    dataframe["child_allowance"] = child_allowance(dataframe)
-    dataframe["personal_allowance"] = personal_allowance(dataframe)
-    dataframe["hb_earnings_disregard"] = hb_earnings_disregard(dataframe)
-    dataframe["PAIDHB"] = paid_hb(dataframe)
-    dataframe["RENTHB"] = dataframe["RENTHB"].round(2)
-    dataframe["PAIDHB"] = dataframe["PAIDHB"].round(2)
-    return dataframe[["RENTHB", "PAIDHB"]]
-
-
-def paid_hb(dataframe):
+def set_paid_hb(dataframe):
     dataframe["monetary_allowance"] = (dataframe["child_allowance"] + dataframe["personal_allowance"])
     dataframe["PAIDHB"] = dataframe["RENTHB"] - ((dataframe["INCOME"] - dataframe["monetary_allowance"]) * 0.65) + dataframe["hb_earnings_disregard"]
 
@@ -82,14 +84,12 @@ def paid_hb(dataframe):
     # Overwrite PAID_HB as missing if components missing
     set_column_for_matching_rows_to(dataframe, "PAIDHB", dataframe["RENTHB"].isnull() | dataframe["INCOME"].isnull(), None)
 
-    return dataframe["PAIDHB"]
-
 
 def who_are_a_couple(dataframe, tenant_number):
     return dataframe["RELAT%s" % tenant_number] == "P"
 
 
-def hb_earnings_disregard(dataframe):
+def set_hb_earnings_disregard(dataframe):
     dataframe["hb_earnings_disregard"] = 0
 
     set_column_for_matching_rows_to(dataframe, "hb_earnings_disregard", dataframe["HHMEMB"] == 1, 5)
@@ -99,8 +99,6 @@ def hb_earnings_disregard(dataframe):
 
     single_occupant = (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] > 0)
     set_column_for_matching_rows_to(dataframe, "hb_earnings_disregard", single_occupant, 25)
-
-    return dataframe["hb_earnings_disregard"]
 
 
 def who_is_a_child(dataframe, tenant_number):
@@ -114,10 +112,10 @@ def who_is_a_child(dataframe, tenant_number):
     return (is_child & has_been_born & is_under_20) * 1
 
 
-def child_allowance(dataframe):
+def set_child_allowance(dataframe):
     child_count_per_row = each_tenant(who_is_a_child, dataframe)
     number_of_children = sum(child_count_per_row)
-    return number_of_children * CHILD_ALLOWANCE
+    dataframe["child_allowance"] = number_of_children * CHILD_ALLOWANCE
 
 
 def who_are_a_couple_and_both_are_under_18(dataframe, tenant_number):
@@ -136,7 +134,7 @@ def who_are_a_couple_and_one_is_over_18(dataframe, tenant_number):
     return (lead_tenant_over_18 | this_tenant_over_18) & this_tenant_is_partner
 
 
-def personal_allowance(dataframe):
+def set_personal_allowance(dataframe):
     dataframe["personal_allowance"] = 0
 
     single_adult_under_25 = (dataframe["AGE1"] < 25) & (dataframe["TOTADULT"] == 1) & (dataframe["TOTCHILD"] == 0)
@@ -157,10 +155,8 @@ def personal_allowance(dataframe):
     couple = any_of(possible_couples)
     set_column_for_matching_rows_to(dataframe, "personal_allowance", couple, PERSONAL_ALLOWANCE_TYPE4)
 
-    return dataframe["personal_allowance"]
 
-
-def rent_hb(dataframe):
+def set_rent_hb(dataframe):
     dataframe["wrent_deduced"] = dataframe["WRENT"]
 
     # If property has more bedrooms than needed according the bedroom standard eligible rent is reduced
@@ -183,8 +179,6 @@ def rent_hb(dataframe):
     ])
 
     set_column_for_matching_rows_to(dataframe, "RENTHB", no_housing_benefit_calc, None)
-
-    return dataframe["RENTHB"]
 
 
 def whose_work_is(work_types):
