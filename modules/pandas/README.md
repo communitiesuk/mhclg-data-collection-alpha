@@ -5,16 +5,28 @@ We use Jupytext to pair Jupyter Notebooks (.ipynb files) to .py lightscript so t
 
 Papermill can be used to run notebooks programmatically.
 
-## Install dependencies:
+## Setup:
+
+`make pyenv`
+
+This will create a virtual environment to install and run the python code in and ask you to run `. activate` to activate it. That needs to be done each time you re-open the console/terminal.
 
 `make setup`
+
+This will install the dependencies.
 
 ## Run tests:
 
 `make test`
 
+This will run the automated tests for all the data models in the console/terminal.
+
 ## Start notebook
 `jupyter notebook`
+
+This will open the Jupyter Notebook home page in your default browser and allow you to step through the unit test notebooks.
+
+To verify the models against a different input/output simply change the corresponding csv files and re-run.
 
 
 ## Development

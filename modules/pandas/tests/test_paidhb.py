@@ -78,4 +78,3 @@ def test_apply_weighting():
 
 # + hide_input=true
 __name__
-# -
