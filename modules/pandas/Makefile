@@ -1,5 +1,5 @@
 pyenv:
-	python -m venv .env
+	python3 -m venv .env
 	echo "Now run: '. activate'"
 
 setup:
