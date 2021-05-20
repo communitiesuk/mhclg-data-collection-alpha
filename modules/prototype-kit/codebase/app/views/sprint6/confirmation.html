@@ -17,11 +17,10 @@ block beforeContent %}
         <p class="govuk-body govuk-!-margin-top-7">We have sent you a confirmation email.</p>
 
 
-  <div style="background-color:lightsalmon;">
-    <p>===</p>
-    Tenancy Code: {{ data['tenancy-code'] }}
-    <p>===</p>
-    Radio: {{ data['changed-name']}}
+  <div style="background-color:lightsalmon; display: none">
+      {% for k, v in data %}
+        {{ k }}: {{ v }}
+      {% endfor %}
   </div>
 <form class="form" action="/sprint6/step3" method="POST">
 

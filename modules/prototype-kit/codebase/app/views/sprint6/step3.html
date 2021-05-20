@@ -4,14 +4,6 @@
 {{ govukHeader() }} {% endblock %} {% block beforeContent %}
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
-<script src="https://unpkg.com/@flatfile/adapter/build/dist/index.min.js"></script>
-<script src="/public/javascripts/previous_tenure.js"></script>
-<script src="/public/javascripts/gender_validations.js"></script>
-<script src="/public/javascripts/postcode_validations.js"></script>
-<script src="/public/javascripts/homeless_validations.js"></script>
-<script src="/public/javascripts/time_in_tenancy_validations.js"></script>
-<script src="/public/javascripts/start_date_validations.js"></script>
-<script src="/public/javascripts/flatfile.js"></script>
 
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
@@ -48,26 +40,26 @@
     <div class="govuk-radios__item">
       <input
         class="govuk-radios__input"
-        id="changed-name"
-        name="changed-name"
+        id="starter-tenancy-yes"
+        name="starter-tenancy"
         type="radio"
         value="yes"
-        {{ 'checked' if data['changed-name'] == 'yes' else '' }}
+        {{ 'checked' if data['starter-tenancy'] == 'yes' else '' }}
       />
-      <label class="govuk-label govuk-radios__label" for="changed-name">
+      <label class="govuk-label govuk-radios__label" for="starter-tenancy">
         Yes
       </label>
     </div>
     <div class="govuk-radios__item">
       <input
         class="govuk-radios__input"
-        id="changed-name-2"
-        name="changed-name"
+        id="starter-tenancy-no"
+        name="starter-tenancy"
         type="radio"
         value="no"
-        {{ 'checked' if data['changed-name'] == 'no' else '' }}
+        {{ 'checked' if data['starter-tenancy'] == 'no' else '' }}
       />
-      <label class="govuk-label govuk-radios__label" for="changed-name-2">
+      <label class="govuk-label govuk-radios__label" for="starter-tenancy-2">
         No
       </label>
     </div>

@@ -4,7 +4,6 @@ endblock %} {% block header %}
 {{ govukHeader() }} {% endblock %} {% block beforeContent %}
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
-<script src="/public/javascripts/previous_tenure.js"></script>
 
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
@@ -22,6 +21,7 @@ endblock %} {% block header %}
 {% endblock %} {% block content %}
 <div class="govuk-form-group">
   {# Tenency start date input #}
+<form class="form" action="/sprint6/step2" method="POST">
   <fieldset
     class="govuk-fieldset"
     role="group"
@@ -31,10 +31,10 @@ endblock %} {% block header %}
       <h2 class="govuk-fieldset__heading">Which year are you completing this log for?</h2>
     </legend>
     <div class="govuk-form-group">
-      <label class="govuk-label" for="sort"> Year: </label>
-      <select class="govuk-select" id="sort" name="sort">
-        <option value="2021">2020/2021</option>
-        <option value="2022" selected>2021/2022</option>
+      <label class="govuk-label" for="completion-year"> Year: </label>
+      <select class="govuk-select" id="completion-year" name="completion-year">
+        <option value="2021" {{ 'selected' if data['completion-year'] == '2021' }}>2020/2021</option>
+        <option value="2022" {{ 'selected' if not data['completion-year'] or data['completion-year'] == '2022' }}>2021/2022</option>
       </select>
     </div>
   </fieldset>
@@ -47,15 +47,15 @@ endblock %} {% block header %}
       <h2 class="govuk-fieldset__heading">Which form are you completing?</h2>
     </legend>
     <div class="govuk-form-group">
-      <label class="govuk-label" for="sort"> Form: </label>
-      <select class="govuk-select" id="sort" name="sort">
-        <option value="social-general">Social Rent General Needs</option>
-        <option value="social-supported" selected>Social Rent Supported Housing</option>
-        <option value="affordable-general">Affordable Rent General Needs</option>
-        <option value="affordable-supported">Affordable Rent Supported Housing</option>
-        <option value="rtb-general">Rent To Buy General Needs</option>
-        <option value="rtb-supported">Rent To Buy Supported Housing</option>
-        <option value="sales-log">Sales Log</option>
+      <label class="govuk-label" for="form-name"> Form: </label>
+      <select class="govuk-select" id="form-name" name="form-name">
+        <option value="social-general" {{ 'selected' if data['form-name'] == 'social-general' }}>Social Rent General Needs</option>
+        <option value="social-supported" {{ 'selected' if data['form-name'] == 'social-supported' }}>Social Rent Supported Housing</option>
+        <option value="affordable-general" {{ 'selected' if data['form-name'] == 'affordable-general' }}>Affordable Rent General Needs</option>
+        <option value="affordable-supported" {{ 'selected' if data['form-name'] == 'affordable-supported' }}>Affordable Rent Supported Housing</option>
+        <option value="rtb-general" {{ 'selected' if data['form-name'] == 'rtb-general' }}>Rent To Buy General Needs</option>
+        <option value="rtb-supported" {{ 'selected' if data['form-name'] == 'rtb-supported' }}>Rent To Buy Supported Housing</option>
+        <option value="sales-log" {{ 'selected' if data['form-name'] == 'sales-log' }}>Sales Log</option>
       </select>
     </div>
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -65,14 +65,14 @@ endblock %} {% block header %}
     </legend>
     <div class="govuk-radios govuk-radios--inline">
       <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="changed-name" name="changed-name" type="radio" value="yes">
-        <label class="govuk-label govuk-radios__label" for="changed-name">
+        <input class="govuk-radios__input" id="gdpr-yes" name="gdpr" type="radio" value="yes" {{ 'checked' if data['gdpr'] == 'yes' }}>
+        <label class="govuk-label govuk-radios__label" for="gdpr">
           Yes
         </label>
       </div>
       <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="changed-name-2" name="changed-name" type="radio" value="no">
-        <label class="govuk-label govuk-radios__label" for="changed-name-2">
+        <input class="govuk-radios__input" id="gdpr-no" name="gdpr" type="radio" value="no" {{ 'checked' if data['gdpr'] == 'no' }}>
+        <label class="govuk-label govuk-radios__label" for="gdpr-2">
           No
         </label>
       </div>
@@ -80,27 +80,19 @@ endblock %} {% block header %}
   </fieldset>
 </div>
 
-<a
-  href="/sprint6/step2"
-  role="button"
-  draggable="false"
-  class="
-    govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8
-    govuk-button--start
-  "
-  data-module="govuk-button"
->
-  Continue
-  <svg
-    class="govuk-button__start-icon"
-    xmlns="http://www.w3.org/2000/svg"
-    width="17.5"
-    height="19"
-    viewBox="0 0 33 40"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-  </svg>
-</a>
+  <button class="govuk-button" data-module="govuk-button">
+    Continue
+    <svg
+      class="govuk-button__start-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="17.5"
+      height="19"
+      viewBox="0 0 33 40"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+    </svg>
+  </button>
+</form>
 {% endblock %}
