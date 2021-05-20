@@ -105,45 +105,93 @@ endblock %} {% block header %}
       <h2 class="govuk-fieldset__heading">Provider</h2>
     </legend>
     <div class="govuk-form-group">
-      <label class="govuk-label" for="type-dd">Type of provider</label>
-      <select class="govuk-select" id="sort" name="type-dd">
-        <option value="1">Private Registered Provider</option>
-        <option value="2">Local Authority</option>
-      </select>
-    </div>
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="landlord-dd">
-        Who is the Landlord on the tenancy agreement?
-      </label>
-      <select
-        class="govuk-select"
-        id="landlord-dd"
-        name="landlord-dd"
-        onchange="check()"
-      >
-        <option value="1">This Landlord</option>
-        <option value="2">Another RP (HA/LA)</option>
-      </select>
-    </div>
-    <div class="govuk-grid-row" id="rp-name">
-      <div class="govuk-grid-column-one-half">
-        <div>
-          <h1 class="govuk-label-wrapper">
-            <label class="govuk-label govuk-label--l" for="rp-name">
-              RP (HA/LA)Name
-            </label>
-          </h1>
-          <input class="govuk-input" name="rp-name" type="text" />
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">Type of provider</h1>
+      </legend>
+      <div class="govuk-radios govuk-radios--inline">
+        <div class="govuk-radios__item">
+          <input
+            class="govuk-radios__input"
+            id="changed-name"
+            name="changed-name"
+            type="radio"
+            value="yes"
+          />
+          <label class="govuk-label govuk-radios__label" for="changed-name">
+            Private Registered Provider
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input
+            class="govuk-radios__input"
+            id="changed-name-2"
+            name="changed-name"
+            type="radio"
+            value="no"
+          />
+          <label class="govuk-label govuk-radios__label" for="changed-name-2">
+            Local Authority
+          </label>
         </div>
       </div>
-      <div class="govuk-grid-column-one-half">
-        <div id="core-code">
-          <h1 class="govuk-label-wrapper">
-            <label class="govuk-label govuk-label--l" for="core-code">
-              CORE code
-            </label>
-          </h1>
-          <input class="govuk-input" name="core-code" type="text" />
+    </div>
+
+    <div class="govuk-form-group">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">Status</h1>
+      </legend>
+      <div class="govuk-radios govuk-radios--inline">
+        <div class="govuk-radios__item">
+          <input
+            class="govuk-radios__input"
+            id="ll-status__this"
+            name="ll-status"
+            type="radio"
+            value="this"
+          />
+          <label class="govuk-label govuk-radios__label" for="ll-status__this">
+            This Landlord
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input
+            class="govuk-radios__input"
+            id="ll-status__another"
+            name="ll-status"
+            type="radio"
+            value="another"
+          />
+          <label
+            class="govuk-label govuk-radios__label"
+            for="ll-status__another"
+          >
+            Another RP (HA/LA)
+          </label>
+        </div>
+      </div>
+    </div>
+    <div id="rp-name">
+      <div class="govuk-grid-row govuk-!-margin-bottom-6">
+        <div class="govuk-grid-column-one-half">
+            <h1 class="govuk-label-wrapper">
+              <label class="govuk-label govuk-label--l" for="rp-name">
+                RP (HA/LA)Name
+              </label>
+            </h1>
+            <input class="govuk-input" name="rp-name" type="text" />
+        </div>
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <div id="core-code">
+            <h1 class="govuk-label-wrapper">
+              <label class="govuk-label govuk-label--l" for="core-code">
+                CORE code
+              </label>
+            </h1>
+            <input class="govuk-input" name="core-code" type="text" />
+          </div>
         </div>
       </div>
     </div>
@@ -152,16 +200,21 @@ endblock %} {% block header %}
 
 {# conditional render check and style#}
 <script>
-  function check() {
-    var val = document.getElementById("landlord-dd").value;
-    if (val == 2) {
-      document.getElementById("rp-name").style.display = "block";
-      document.getElementById("rp-name").style.opacity = 1;
-    } else {
-      document.getElementById("rp-name").style.display = "none";
-      document.getElementById("rp-name").style.opacity = 0;
+  document.body.addEventListener("change", function (e) {
+    let target = e.target;
+    let message;
+    console.log(e.target.value);
+    switch (target.value) {
+      case "this":
+        document.getElementById("rp-name").style.display = "none";
+        document.getElementById("rp-name").style.opacity = 0;
+        break;
+      case "another":
+        document.getElementById("rp-name").style.display = "block";
+        document.getElementById("rp-name").style.opacity = 1;
+        break;
     }
-  }
+  });
 </script>
 
 <style>

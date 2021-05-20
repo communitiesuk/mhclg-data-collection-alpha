@@ -34,7 +34,7 @@
 </div>
 {% endblock %} {% block content %}
 <fieldset
-  class="govuk-fieldset govuk-!-margin-top-6"
+  class="govuk-fieldset"
   role="group"
   aria-describedby="passport-issued-hint"
 >
@@ -109,21 +109,51 @@
     </div>
   </div>
   <h2 class="govuk-label-wrapper">
-    <label class="govuk-label govuk-label--l" for="rp-name">
-      Tenant code
-    </label>
-  </h2>
-  <input class="govuk-input" name="rp-name" type="text" />
-  <h2 class="govuk-label-wrapper govuk-!-margin-top-6">
-    <label class="govuk-label govuk-label--l" for="rp-name">
-      If the main tenancy is a fixed term tenancy, please provide the length of
-      the fixed term (to the nearest year) excluding any starter/introductory
-      period
-    </label>
-  </h2>
-  <input class="govuk-input" name="rp-name" type="text" />
-  
+        <label class="govuk-label govuk-label--l" for="tenancy-code">
+          Tenant code
+        </label>
+      </h2>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <input class="govuk-input" name="tenancy-code" type="text" />
+    </div>
   </div>
+  <h2 class="govuk-label-wrapper govuk-!-margin-top-6">
+        <label class="govuk-label govuk-label--l" for="length-fixed-term">
+          If the main tenancy is a fixed term tenancy, please provide the length
+          of the fixed term (to the nearest year) excluding any
+          starter/introductory period
+        </label>
+      </h2>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <input class="govuk-input" name="length-fixed-term" type="text" />
+    </div>
+  </div>
+
+  <a
+    href="/sprint6/confirmation"
+    role="button"
+    draggable="false"
+    class="
+      govuk-button govuk-!-margin-top-6 govuk-!-margin-bottom-8
+      govuk-button--start
+    "
+    data-module="govuk-button"
+  >
+    Continue
+    <svg
+      class="govuk-button__start-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="17.5"
+      height="19"
+      viewBox="0 0 33 40"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+    </svg>
+  </a>
 </fieldset>
 
 {# conditional render check and style#}
@@ -148,27 +178,4 @@
   }
 </style>
 
-<a
-  href="/sprint6/confirmation"
-  role="button"
-  draggable="false"
-  class="
-    govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8
-    govuk-button--start
-  "
-  data-module="govuk-button"
->
-  Continue
-  <svg
-    class="govuk-button__start-icon"
-    xmlns="http://www.w3.org/2000/svg"
-    width="17.5"
-    height="19"
-    viewBox="0 0 33 40"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-  </svg>
-</a>
 {% endblock %}
