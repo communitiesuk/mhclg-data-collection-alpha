@@ -16,6 +16,30 @@ block beforeContent %}
 
         <p class="govuk-body govuk-!-margin-top-7">We have sent you a confirmation email.</p>
 
+
+  <div style="background-color:lightsalmon;">
+    <p>===</p>
+    Tenancy Code: {{ data['tenancy-code'] }}
+    <p>===</p>
+    Radio: {{ data['changed-name']}}
+  </div>
+<form class="form" action="/sprint6/step3" method="POST">
+
+  <button class="govuk-button" data-module="govuk-button">
+    Take me back
+    <svg
+      class="govuk-button__start-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="17.5"
+      height="19"
+      viewBox="0 0 33 40"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+    </svg>
+  </button>
+  </form>
         <h2 class="govuk-heading-m">What happens next</h2>
 
         <p class="govuk-body">

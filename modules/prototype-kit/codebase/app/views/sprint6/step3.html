@@ -33,6 +33,7 @@
   </ol>
 </div>
 {% endblock %} {% block content %}
+<form class="form" action="/sprint6/confirmation" method="POST">
 <fieldset
   class="govuk-fieldset"
   role="group"
@@ -51,6 +52,7 @@
         name="changed-name"
         type="radio"
         value="yes"
+        {{ 'checked' if data['changed-name'] == 'yes' else '' }}
       />
       <label class="govuk-label govuk-radios__label" for="changed-name">
         Yes
@@ -63,6 +65,7 @@
         name="changed-name"
         type="radio"
         value="no"
+        {{ 'checked' if data['changed-name'] == 'no' else '' }}
       />
       <label class="govuk-label govuk-radios__label" for="changed-name-2">
         No
@@ -87,13 +90,13 @@
       name="tenancy-type"
       onchange="check()"
     >
-      <option value="secure-including-flexible" selected>
+      <option value="secure-including-flexible" {{ 'selected' if data['tenancy-type'] == 'secure-including-flexible' else '' }}>
         Secure including flexible
       </option>
-      <option value="Assured">Assured</option>
-      <option value="afssured-shorthold">Assured shorthold</option>
-      <option value="license-agreement">License agreement</option>
-      <option value="other">Other</option>
+      <option value="assured" {{ 'selected' if data['tenancy-type'] == 'assured' else '' }}>Assured</option>
+      <option value="assured-shorthold" {{ 'selected' if data['tenancy-type'] == 'assured-shorthold' else '' }}>Assured shorthold</option>
+      <option value="license-agreement" {{ 'selected' if data['tenancy-type'] == 'license-agreement' else '' }}>License agreement</option>
+      <option value="other" {{ 'selected' if data['tenancy-type'] == 'other' else '' }}>Other</option>
     </select>
   </div>
   <div class="govuk-grid-row" id="rp-name">
@@ -115,8 +118,10 @@
       </h2>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
-      <input class="govuk-input" name="tenancy-code" type="text" />
+      <input class="govuk-input" name="tenancy-code" type="text" value="{{ data['tenancy-code'] }}"/>
     </div>
+  </div>
+  <div style="background-color: aquamarine;">
   </div>
   <h2 class="govuk-label-wrapper govuk-!-margin-top-6">
         <label class="govuk-label govuk-label--l" for="length-fixed-term">
@@ -131,16 +136,7 @@
     </div>
   </div>
 
-  <a
-    href="/sprint6/confirmation"
-    role="button"
-    draggable="false"
-    class="
-      govuk-button govuk-!-margin-top-6 govuk-!-margin-bottom-8
-      govuk-button--start
-    "
-    data-module="govuk-button"
-  >
+  <button class="govuk-button" data-module="govuk-button">
     Continue
     <svg
       class="govuk-button__start-icon"
@@ -153,9 +149,9 @@
     >
       <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
     </svg>
-  </a>
+  </button>
 </fieldset>
-
+</form>
 {# conditional render check and style#}
 <script>
   function check() {
