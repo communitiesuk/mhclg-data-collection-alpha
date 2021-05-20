@@ -25,34 +25,37 @@ endblock %} {% block header %}
 {% endblock %} {% block content %}
 <h1 class="govuk-heading-l">Section one</h1>
 <div class="govuk-form-group">
-  {# Tenency start date input #}
+  {# Tenancy start date input #}
+
+<form class="form" action="/sprint6/step3" method="POST">
   <fieldset
     class="govuk-fieldset"
     role="group"
-    aria-describedby="passport-issued-hint"
+    aria-describedby="tenancy-hint"
   >
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h2 class="govuk-fieldset__heading">Tenency start date</h2>
+      <h2 class="govuk-fieldset__heading">Tenancy start date</h2>
     </legend>
-    <div id="passport-issued-hint" class="govuk-hint">
+    <div id="tenancy-hint" class="govuk-hint">
       For example, 12 11 2007
     </div>
-    <div class="govuk-date-input" id="passport-issued">
+    <div class="govuk-date-input" id="tenancy">
       <div class="govuk-date-input__item">
         <div class="govuk-form-group">
           <label
             class="govuk-label govuk-date-input__label"
-            for="passport-issued-day"
+            for="tenancy-day"
           >
             Day
           </label>
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2"
-            id="passport-issued-day"
-            name="passport-issued-day"
+            id="tenancy-day"
+            name="tenancy-day"
             type="text"
             pattern="[0-9]*"
             inputmode="numeric"
+            value="{{ data['tenancy-day'] }}"
           />
         </div>
       </div>
@@ -60,17 +63,18 @@ endblock %} {% block header %}
         <div class="govuk-form-group">
           <label
             class="govuk-label govuk-date-input__label"
-            for="passport-issued-month"
+            for="tenancy-month"
           >
             Month
           </label>
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2"
-            id="passport-issued-month"
-            name="passport-issued-month"
+            id="tenancy-month"
+            name="tenancy-month"
             type="text"
             pattern="[0-9]*"
             inputmode="numeric"
+            value="{{ data['tenancy-month'] }}"
           />
         </div>
       </div>
@@ -78,17 +82,18 @@ endblock %} {% block header %}
         <div class="govuk-form-group">
           <label
             class="govuk-label govuk-date-input__label"
-            for="passport-issued-year"
+            for="tenancy-year"
           >
             Year
           </label>
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-4"
-            id="passport-issued-year"
-            name="passport-issued-year"
+            id="tenancy-year"
+            name="tenancy-year"
             type="text"
             pattern="[0-9]*"
             inputmode="numeric"
+            value="{{ data['tenancy-year'] }}"
           />
         </div>
       </div>
@@ -99,7 +104,7 @@ endblock %} {% block header %}
   <fieldset
     class="govuk-fieldset govuk-!-margin-top-6"
     role="group"
-    aria-describedby="passport-issued-hint"
+    aria-describedby="tenancy-hint"
   >
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
       <h2 class="govuk-fieldset__heading">Provider</h2>
@@ -112,24 +117,26 @@ endblock %} {% block header %}
         <div class="govuk-radios__item">
           <input
             class="govuk-radios__input"
-            id="changed-name"
-            name="changed-name"
+            id="private-registered"
+            name="provider"
             type="radio"
-            value="yes"
+            value="private"
+            {{ 'checked' if data['provider'] == 'yes' else '' }}
           />
-          <label class="govuk-label govuk-radios__label" for="changed-name">
+          <label class="govuk-label govuk-radios__label" for="private-registered">
             Private Registered Provider
           </label>
         </div>
         <div class="govuk-radios__item">
           <input
             class="govuk-radios__input"
-            id="changed-name-2"
-            name="changed-name"
+            id="local-authority"
+            name="provider"
             type="radio"
-            value="no"
+            value="la"
+            {{ 'checked' if data['provider'] == 'no' else '' }}
           />
-          <label class="govuk-label govuk-radios__label" for="changed-name-2">
+          <label class="govuk-label govuk-radios__label" for="local-authority">
             Local Authority
           </label>
         </div>
@@ -148,6 +155,7 @@ endblock %} {% block header %}
             name="ll-status"
             type="radio"
             value="this"
+            {{ 'checked' if data['ll-status'] == 'this' else '' }}
           />
           <label class="govuk-label govuk-radios__label" for="ll-status__this">
             This Landlord
@@ -160,6 +168,7 @@ endblock %} {% block header %}
             name="ll-status"
             type="radio"
             value="another"
+            {{ 'checked' if data['ll-status'] == 'another' else '' }}
           />
           <label
             class="govuk-label govuk-radios__label"
@@ -178,7 +187,7 @@ endblock %} {% block header %}
                 RP (HA/LA)Name
               </label>
             </h1>
-            <input class="govuk-input" name="rp-name" type="text" />
+            <input class="govuk-input" name="rp-name" type="text" value="{{ data['rp-name'] }}"/>
         </div>
       </div>
 
@@ -190,7 +199,7 @@ endblock %} {% block header %}
                 CORE code
               </label>
             </h1>
-            <input class="govuk-input" name="core-code" type="text" />
+            <input class="govuk-input" name="core-code" type="text" value="{{ data['core-code'] }}" />
           </div>
         </div>
       </div>
@@ -225,27 +234,19 @@ endblock %} {% block header %}
   }
 </style>
 
-<a
-  href="/sprint6/step3"
-  role="button"
-  draggable="false"
-  class="
-    govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8
-    govuk-button--start
-  "
-  data-module="govuk-button"
->
-  Continue
-  <svg
-    class="govuk-button__start-icon"
-    xmlns="http://www.w3.org/2000/svg"
-    width="17.5"
-    height="19"
-    viewBox="0 0 33 40"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-  </svg>
-</a>
+  <button class="govuk-button" data-module="govuk-button">
+    Continue
+    <svg
+      class="govuk-button__start-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="17.5"
+      height="19"
+      viewBox="0 0 33 40"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+    </svg>
+  </button>
+</form>
 {% endblock %}
