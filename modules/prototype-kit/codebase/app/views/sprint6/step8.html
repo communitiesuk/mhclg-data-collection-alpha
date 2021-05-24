@@ -44,12 +44,10 @@
 <form class="form" action="/sprint6/summary" method="POST">
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">
+      <label class="govuk-label govuk-label--m" for="bedrooms">
           Number of bedrooms (if shared accommodation, enter number of bedrooms occupied by this household; a bed-sit
           has 1 bedroom)
-        </h1>
-      </legend>
+      </label>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
           <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="bedrooms" name="bedrooms"
@@ -69,11 +67,9 @@
     </fieldset>
   </div>
 
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-    <h1 class="govuk-fieldset__heading">
+  <label class="govuk-label govuk-label--m" for="unit-type">
       Type of unit
-    </h1>
-  </legend>
+  </label>
   <div class="govuk-form-group">
     <select class="govuk-select" id="unit-type" name="unit-type" onchange="check()">
       <option value="flat" {{ 'selected' if data['unit-type']=='flat' }}>
@@ -103,11 +99,9 @@
     </select>
   </div>
 
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-    <h1 class="govuk-fieldset__heading">
+  <label class="govuk-label govuk-label--m" for="unit-type">
       Type of building
-    </h1>
-  </legend>
+  </label>
   <div class="govuk-radios govuk-radios--inline">
     <div class="govuk-radios__item">
       <input class="govuk-radios__input" id="building-type-purpose-built" name="building-type" type="radio"
@@ -125,11 +119,9 @@
     </div>
   </div>
 
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-    <h1 class="govuk-fieldset__heading">
+  <label class="govuk-label govuk-label--m" for="unit-type">
       Is property built or adapted to be wheelchair accessible?
-    </h1>
-  </legend>
+  </label>
   <div class="govuk-radios govuk-radios--inline">
     <div class="govuk-radios__item">
       <input class="govuk-radios__input" id="wheelchair-access-yes" name="wheelchair-access" type="radio" value="yes"
@@ -147,11 +139,10 @@
     </div>
   </div>
 
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-    <h1 class="govuk-fieldset__heading">
+  <label class="govuk-label govuk-label--m" for="unit-type">
       If this is a relet, was the property most recently let on..
     </h1>
-  </legend>
+  </label>
   <div class="govuk-radios govuk-radios--inline">
     <div class="govuk-radios__item">
       <input class="govuk-radios__input" id="relet-social-rent" name="relet" type="radio" value="social-rent"
@@ -183,11 +174,9 @@
     </div>
   </div>
 
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-    <h1 class="govuk-fieldset__heading">
+  <label class="govuk-label govuk-label--m" for="unit-type">
       Reason for vacancy
-    </h1>
-  </legend>
+  </label>
   <div class="govuk-form-group">
     <select class="govuk-select" id="reason-for-vacancy" name="reason-for-vacancy" onchange="check()">
       <option value="arrears" {{ 'selected' if data['reason-for-vacancy']=='arrears' }}>Relet - tenant evicted due to
@@ -215,6 +204,29 @@
       <option value="first-let-leased" {{ 'selected' if data['reason-for-vacancy']=='first-let-leased' }}>First let of
         leased property</option>
     </select>
+  </div>
+
+  <label class="govuk-label govuk-label--m" for="unit-type">
+    Location of property
+  </label>
+
+  <div class="govuk-form-group">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">
+        <label class="govuk-label govuk-label--1" for="postal-code-out">Postcode first part</label>
+        <input class="govuk-input" name="postal-code-out" type="text" value="{{ data['postal-code-out'] }}" />
+      </div>
+      <div class="govuk-grid-column-one-quarter">
+        <label class="govuk-label govuk-label--1" for="postal-code-out">Postcode second part</label>
+        <input class="govuk-input" name="postal-code-in" type="text" value="{{ data['postal-code-in'] }}" />
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">
+        <label class="govuk-label govuk-label--1" for="ons-la-code">ONS LA Code</label>
+        <input class="govuk-input" name="ons-la-code" type="text" value="{{ data['ons-la-code'] }}" />
+      </div>
   </div>
 
   <script>
