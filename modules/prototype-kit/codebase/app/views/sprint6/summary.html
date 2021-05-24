@@ -1,3 +1,4 @@
+{% import "./mhclg.html" as mhclg %}
 {% extends "layout.html" %} {% block pageTitle %} Summary {% endblock %} 
 {% block header %} {{ govukHeader() }} {% endblock %} 
 {% block beforeContent %}
@@ -263,6 +264,19 @@
             </dd>
           </div>
 
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Reason for vacancy
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ mhclg.reason_for_vacancy[data['reason-for-vacancy']] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/sprint6/step8#reason-for-vacancy">
+                Change<span class="govuk-visually-hidden"> reason</span>
+              </a>
+            </dd>
+          </div>
         </dl>
 
 

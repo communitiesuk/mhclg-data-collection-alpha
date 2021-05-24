@@ -1,0 +1,20 @@
+{% 
+  set reason_for_vacancy = {
+      "arrears": "Relet - tenant evicted due to arrears",
+      "asb": "Relet - tenant evicted due to ASB or other reason",
+      "died": "Relet - tenant died (no succession) ",
+      "moved-to-social": "Relet - tenant moved to other social housing provider",
+      "abandoned": "Relet - tenant abandoned property",
+      "moved-to-private": "Relet - tenant moved to private sector or other accommodation",
+      "from-temoprary": "Relet - to tenant who occupied same property as temporary accommodation",
+      "internal-transfer": "Relet – internal transfer (excluding renewals of a fixed-term tenancy)",
+      "renewal": "Relet – renewal of fixed-term tenancy",
+      "first-let-new-build": "First let of newbuild property",
+      "first-let-conversion": "First let of conversion/rehabilitation/acquired property",
+      "first-let-leased": "First let of leased property"
+  }
+%}
+
+{% macro option(data, name, value) %}
+      <option value="{{ value }}" {{ 'selected' if data['reason-for-vacancy'] == value }}>{{ name }}</option>
+{% endmacro %}
