@@ -1,0 +1,363 @@
+{% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
+%} {% block header %}
+<!-- Blank header with no service name for the start page -->
+{{ govukHeader() }} {% endblock %} {% block beforeContent %}
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
+
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="index">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6/step1">Step 1</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6/step2">Step 2</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6/step3">Step 3</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6/step4">Step 4</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" >Step 5</a>
+    </li>
+  </ol>
+</div>
+{% endblock %} {% block content %}
+<h1 class="govuk-heading-l">Tenant details</h1>
+<form class="form" action="/sprint6/summary" method="POST">
+
+  {# armed forces input #}
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Has anyone in the household ever served in the UK Armed Forces as a regular or a reserve? (Excluding National Service)
+        </h1>
+      </legend>
+      <div class="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="armed-forces" name="armed-forces" type="radio" value="Regular">
+          <label class="govuk-label govuk-radios__label" for="armed-forces">
+            Yes - Regular
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="armed-forces-2" name="armed-forces" type="radio" value="Reserve">
+          <label class="govuk-label govuk-radios__label" for="armed-forces-2">
+            Yes - Reserve
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="armed-forces-3" name="armed-forces" type="radio" value="No">
+          <label class="govuk-label govuk-radios__label" for="armed-forces-3">      
+            No
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="armed-forces-4" name="armed-forces" type="radio" value="Refused">
+          <label class="govuk-label govuk-radios__label" for="armed-forces-4">
+            Refused
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+        If they've ever served as a regular, did they leave... ?
+        </h1>
+      </legend>
+      <div class="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="regular-service" name="regular-service" type="radio" value="Up to and including 5 years ago">
+          <label class="govuk-label govuk-radios__label" for="regular-service">
+            Up to and including 5 years ago
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="regular-service-2" name="regular-service" type="radio" value="More than 5 years ago">
+          <label class="govuk-label govuk-radios__label" for="regular-service-2">
+            More than 5 years ago
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="regular-service-3" name="regular-service" type="radio" value="Still Serving">
+          <label class="govuk-label govuk-radios__label" for="regular-service-3">
+            Are still serving
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="regular-service-4" name="regular-service" type="radio" value="Refused">
+          <label class="govuk-label govuk-radios__label" for="regular-service-4">
+            Refused
+          </label>
+        </div>
+      </div>
+
+    </fieldset>
+  </div>
+
+  {# health input #}
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?
+        </h1>
+      </legend>
+      <div class="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="injury-illness" name="injury-illness" type="radio" value="Yes">
+          <label class="govuk-label govuk-radios__label" for="injury-illness">
+            Yes
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="injury-illness-2" name="injury-illness" type="radio" value="No">
+          <label class="govuk-label govuk-radios__label" for="injury-illness-2">
+            No
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="injury-illness-3" name="injury-illness" type="radio" value="Refused">
+          <label class="govuk-label govuk-radios__label" for="injury-illness-3">
+            Refused
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Does the household contain a pregnant person?
+        </h1>
+      </legend>
+      <div class="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnancy" name="pregnancy" type="radio" value="Yes">
+          <label class="govuk-label govuk-radios__label" for="pregnancy">
+            Yes
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnancy-2" name="pregnancy" type="radio" value="No">
+          <label class="govuk-label govuk-radios__label" for="pregnancy-2">
+            No
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="pregnancy-3" name="pregnancy" type="radio" value="Refused">
+          <label class="govuk-label govuk-radios__label" for="pregnancy-3">
+            Refused
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  {# benefits Input #}
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Is the tenant in receipt of or likely to be in receipt of the following
+        </h1>
+      </legend>
+      <div class="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="benefits" name="benefits" type="radio" value="Housing Benefit">
+          <label class="govuk-label govuk-radios__label" for="benefits">
+            Housing Benefit (If not in receipt of universal credit)
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="benefits-2" name="benefits" type="radio" value="Not in Receipt">
+          <label class="govuk-label govuk-radios__label" for="benefits-2">
+            Not in receipt of either UC or HB
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="benefits-3" name="benefits" type="radio" value="Don't Know">
+          <label class="govuk-label govuk-radios__label" for="benefits-3">
+            Don't know
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="benefits-4" name="benefits" type="radio" value="UC with housing">
+          <label class="govuk-label govuk-radios__label" for="benefits-4">
+            UC - With housing element (and not in receipt of housing benefit)
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="benefits-5" name="benefits" type="radio" value="UC without housing">
+          <label class="govuk-label govuk-radios__label" for="benefits-5">
+            UC- Without housing element (not in receipt of HB and tenants not eligible for housing support e.g residential care home)
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="benefits-6" name="benefits" type="radio" value="UC Without housing element (and in receipt of HB)">
+          <label class="govuk-label govuk-radios__label" for="benefits-6">
+            UC - Without housing element (and in receipt of HB)
+          </label>
+        </div>
+      </div>
+
+    </fieldset>
+  </div>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Where do you live?
+        </h1>
+      </legend>
+      <div class="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="benefit-proportion" name="benefit-proportion" type="radio" value="All">
+          <label class="govuk-label govuk-radios__label" for="benefit-proportion">
+            All
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="benefit-proportion-2" name="benefit-proportion" type="radio" value="Some">
+          <label class="govuk-label govuk-radios__label" for="benefit-proportion-2">
+            Some
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="benefit-proportion-3" name="benefit-proportion" type="radio" value="None">
+          <label class="govuk-label govuk-radios__label" for="benefit-proportion-3">
+            None
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="benefit-proportion-4" name="benefit-proportion" type="radio" value="Dont know">
+          <label class="govuk-label govuk-radios__label" for="benefit-proportion-4">
+          Don't know
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="govuk-form-group">
+    <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="income">
+        Tenant’s or tenant and partner’s net income (after tax deductions) For those receiving Universal Credit, please enter net income from employment, pensions and Universal Credit. Please exclude child benefit, housing element of universal credit and council tax support. For those not receiving Universal Credit, please enter net income from employment, pensions and other benefits. Please exclude housing benefit, child benefit and council tax support.
+      </label>
+    </h1>
+    <span class="govuk-caption-l">Round to nearest £</span>
+    <input class="govuk-input" id="income" name="income" type="text">
+  </div>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Is the income...?
+        </h1>
+      </legend>
+      <div class="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="regularity" name="regularity" type="radio" value="Weekly">
+          <label class="govuk-label govuk-radios__label" for="regularity">
+            Weekly
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="regularity-2" name="regularity" type="radio" value="Monthly">
+          <label class="govuk-label govuk-radios__label" for="regularity-2">
+            Monthly
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="regularity-3" name="regularity" type="radio" value="Annual">
+          <label class="govuk-label govuk-radios__label" for="regularity-3">
+            Annual
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="reason-for-leaving-previous">
+      In the tenant’s view what was the main reason the household left their last settled home?
+    </label>
+    <select class="govuk-select" id="reason-for-leaving-previous" name="reason-for-leaving-previous">
+      <option value="Permanently decanted from another property owned by this landlord" selected>Permanently decanted from another property owned by this landlord</option>
+      <option value="Left home country as refugee">Left home country as refugee</option>
+      <option value="Discharged from prison or from long stay hospital or other institution">Discharged from prison or from long stay hospital or other institution</option>
+      <option value="Loss of tied accommodation">Loss of tied accommodation</option>
+      <option value="Domestic abuse">Domestic abuse</option>
+      <option value="(Non-violent) relationship breakdown with partner">(Non-violent) relationship breakdown with partner</option>
+      <option value="Asked to leave by family or friends">Asked to leave by family or friends</option>
+      <option value="Racial harassment">Racial harassment</option>
+      <option value="Other problems with neighbours">Other problems with neighbours</option>
+      <option value="Property unsuitable because of overcrowding">Property unsuitable because of overcrowding</option>
+      <option value="End of assured shorthold tenancy – no fault">End of assured shorthold tenancy – no fault</option>
+      <option value="End of assured shorthold tenancy- tenant’s fault">End of assured shorthold tenancy- tenant’s fault</option>
+      <option value="End of fixed term tenancy – no fault">End of fixed term tenancy – no fault</option>
+      <option value="End of fixed term tenancy – tenant’s fault">End of fixed term tenancy – tenant’s fault</option>
+      <option value="Repossession">Repossession</option>
+      <option value="Under occupation - offered incentive to downsize">Under occupation - offered incentive to downsize</option>
+      <option value="Under occupation - no incentive">Under occupation - no incentive</option>
+      <option value="Property unsuitable because of ill health / disability">Property unsuitable because of ill health / disability</option>
+      <option value="Property unsuitable because of poor condition">Property unsuitable because of poor condition</option>
+      <option value="Couldn’t afford fees attached to renewing the tenancy">Couldn’t afford fees attached to renewing the tenancy</option>
+      <option value="Couldn’t afford the increase in rent">Couldn’t afford the increase in rent</option>
+      <option value="Couldn’t afford rent or mortgage – welfare reforms">Couldn’t afford rent or mortgage – welfare reforms</option>
+      <option value="Couldn’t afford rent or mortgage – employment">Couldn’t afford rent or mortgage – employment</option>
+      <option value="Couldn’t afford rent or mortgage – othe">Couldn’t afford rent or mortgage – other</option>
+      <option value="To move nearer to family / friends / school">To move nearer to family / friends / school</option>
+      <option value="To move nearer to work">To move nearer to work</option>
+      <option value="To move to accommodation with support">To move to accommodation with support</option>
+      <option value="To move to independent accommodation">To move to independent accommodation</option>
+      <option value="Hate crime">Hate crime</option>
+      <option value="Other">Other</option>
+      <option value="Don’t know">Don’t know</option>
+    </select>
+  </div>
+
+  <div class="govuk-form-group">
+  <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="other-reason-for-leaving-previous">
+      please state the reason for leaving last settled home
+    </label>
+  </h1>
+  <input class="govuk-input" id="other-reason-for-leaving-previous" name="other-reason-for-leaving-previous" type="text">
+</div>
+
+  <button class="govuk-button" data-module="govuk-button">
+    Continue
+    <svg
+      class="govuk-button__start-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="17.5"
+      height="19"
+      viewBox="0 0 33 40"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+    </svg>
+  </button>
+</form>
+
+{% endblock %}

@@ -4,126 +4,232 @@ block beforeContent %}
 <div class="govuk-width-container">
   <a href="#" class="govuk-back-link">Back</a>
 
+  <div style="background-color:lightsalmon;">
+    <dl>
+      {% for k, v in data %}
+        <dt>{{ k }}</dt>
+        <dd>{{ v }}</dd>
+      {% endfor %}
+    </dl>
+  </div>
+
   <main class="govuk-main-wrapper " id="main-content" role="main">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds-from-desktop">
 
         <h1 class="govuk-heading-l">Check your answers before submitting your log</h1>
 
-        <h2 class="govuk-heading-m">Input details</h2>
+        {# Step One Answers #}
+        <h2 class="govuk-heading-m">Step One</h2>
 
         <dl class="govuk-summary-list govuk-!-margin-bottom-9">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Name
+              Which year are you completing this log for?
             </dt>
             <dd class="govuk-summary-list__value">
-              Sarah Philips
+              {{ data['completion-year'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
+              <a class="govuk-link" href="/sprint6/step1">
                 Change<span class="govuk-visually-hidden"> name</span>
               </a>
             </dd>
           </div>
+          
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Date of birth
+              Which form are you completing?
             </dt>
             <dd class="govuk-summary-list__value">
-              5 January 1978
+              {{ data['form-name'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> date of birth</span>
+              <a class="govuk-link" href="/sprint6/step1">
+                Change<span class="govuk-visually-hidden"> name</span>
               </a>
             </dd>
           </div>
+
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Address
+              GDPR?
             </dt>
             <dd class="govuk-summary-list__value">
-              72 Guild Street<br>London<br>SE23 6FH
+              {{ data['gdpr'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> address</span>
+              <a class="govuk-link" href="/sprint6/step1">
+                Change<span class="govuk-visually-hidden"> name</span>
               </a>
             </dd>
           </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Contact details
-            </dt>
-            <dd class="govuk-summary-list__value">
-              <p class="govuk-body">07700 900457</p>
-              <p class="govuk-body">sarah.phillips@example.com</p>
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> contact details</span>
-              </a>
-            </dd>
-          </div>
+
         </dl>
 
-        <h2 class="govuk-heading-m">Application details</h2>
+        {# Step Two Answers #}
+        <h2 class="govuk-heading-m">Step Two</h2>
 
         <dl class="govuk-summary-list govuk-!-margin-bottom-9">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Previous application number
+              Tenancy start date
             </dt>
             <dd class="govuk-summary-list__value">
-              502135326
+              {{ data['tenancy-day'] }}/{{data['tenancy-month']}}/{{data['tenancy-year'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> previous application number</span>
+              <a class="govuk-link" href="/sprint6/step2">
+                Change<span class="govuk-visually-hidden"> name</span>
               </a>
             </dd>
           </div>
+          
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Licence type
+              Type of provider
             </dt>
             <dd class="govuk-summary-list__value">
-              For personal use
+              {{ data['provider'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> licence type</span>
+              <a class="govuk-link" href="/sprint6/step2">
+                Change<span class="govuk-visually-hidden"> name</span>
               </a>
             </dd>
           </div>
+
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Home address
+              Status
             </dt>
             <dd class="govuk-summary-list__value">
-              72 Guild Street<br>London<br>SE23 6FH
+              {{ data['ll-status'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> home address</span>
+              <a class="govuk-link" href="/sprint6/step2">
+                Change<span class="govuk-visually-hidden"> name</span>
               </a>
             </dd>
           </div>
+
+          {% if data['ll-status'] == "another" %}
+
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              RP (HA/LA)Name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['rp-name'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/sprint6/step2">
+                Change<span class="govuk-visually-hidden"> name</span>
+              </a>
+            </dd>
+          </div>
+
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Licence period
+              CORE code
             </dt>
             <dd class="govuk-summary-list__value">
-              Valid for 6 months
+              {{ data['core-code'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> licence period</span>
+              <a class="govuk-link" href="/sprint6/step2">
+                Change<span class="govuk-visually-hidden"> name</span>
               </a>
             </dd>
           </div>
+
+          {% endif %}
+
         </dl>
+
+        {# Step Three Answers #}
+        <h2 class="govuk-heading-m">Step Three</h2>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Is this a starter/introductory tenancy?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['starter-tenancy'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/sprint6/step3">
+                Change<span class="govuk-visually-hidden"> name</span>
+              </a>
+            </dd>
+          </div>
+          
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Type of main tenancy (after any starter/introductory period)
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['tenancy-type'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/sprint6/step3">
+                Change<span class="govuk-visually-hidden"> name</span>
+              </a>
+            </dd>
+          </div>
+
+          {% if data['tenancy-type'] == "other" %}
+
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Tenancy Type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['tenancy-type-other'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/sprint6/step3">
+                Change<span class="govuk-visually-hidden"> name</span>
+              </a>
+            </dd>
+          </div>
+
+          {% endif %}
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Tenant code
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['tenancy-code'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/sprint6/step3">
+                Change<span class="govuk-visually-hidden"> name</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              If the main tenancy is a fixed term tenancy, please provide the length
+          of the fixed term (to the nearest year) excluding any
+          starter/introductory period
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['length-fixed-term'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/sprint6/step3">
+                Change<span class="govuk-visually-hidden"> name</span>
+              </a>
+            </dd>
+          </div>
+
+        </dl>
+
+
 
         <h2 class="govuk-heading-m">Now send your application</h2>
 

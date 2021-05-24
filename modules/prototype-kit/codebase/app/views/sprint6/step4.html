@@ -1,104 +1,205 @@
-{% extends "layout.html" %}
-{% block pageTitle %}
-  Start page example
-{% endblock %}
-{% block header %}
-  <!-- Blank header with no service name for the start page -->
-  {{ govukHeader() }}
-{% endblock %}
-{% block beforeContent %}
-  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-  <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
-  <script src="https://unpkg.com/@flatfile/adapter/build/dist/index.min.js"></script>
-  <script src="/public/javascripts/previous_tenure.js"></script>
-  <script src="/public/javascripts/gender_validations.js"></script>
-  <script src="/public/javascripts/postcode_validations.js"></script>
-  <script src="/public/javascripts/homeless_validations.js"></script>
-  <script src="/public/javascripts/time_in_tenancy_validations.js"></script>
-  <script src="/public/javascripts/start_date_validations.js"></script>
-  <script src="/public/javascripts/flatfile.js"></script>
+{% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
+%} {% block header %}
+<!-- Blank header with no service name for the start page -->
+{{ govukHeader() }} {% endblock %} {% block beforeContent %}
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-  <div class="govuk-breadcrumbs">
-    <ol class="govuk-breadcrumbs__list">
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="index">Home</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step1">Step 1</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step2">Step 2</a>
-      </li>
-     <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step3">Step 3</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link">Step 4</a>
-      </li>
-    </ol>
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="index">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6/step1">Step 1</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6/step2">Step 2</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6/step3">Step 3</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" >Step 4</a>
+    </li>
+  </ol>
+</div>
+{% endblock %} {% block content %}
+<h1 class="govuk-heading-l">Tenant details</h1>
+<form class="form" action="/sprint6/step5" method="POST">
+<fieldset
+  class="govuk-fieldset"
+  role="group"
+  aria-describedby="Tenant age and gender"
+>
+
+  {# age input #}
+  <div class="govuk-date-input__item">
+    <div class="govuk-form-group">
+      <h2 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="tenancy-age">
+          Age
+        </label>
+      </h2>
+      <input class="govuk-input" name="tenancy-age" type="number" value="{{ data['tenancy-age'] }}"/>
+    </div>
   </div>
-{% endblock %}
-{% block content %}
-    {% from "govuk/components/input/macro.njk" import govukInput %}
-    {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
 
-    {% call govukFieldset({
-    legend: {
-        text: "What is your address?",
-        classes: "govuk-fieldset__legend--l",
-        isPageHeading: true
-    }
-    }) %}
+  {# gender input #}
 
-    {{ govukInput({
-        label: {
-        html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>'
-        },
-        id: "address-line-1",
-        name: "address-line-1"
-    }) }}
+  <div class="govuk-date-input__item">
+    <div class="govuk-form-group">
+      <h2 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="tenant-gender">
+          Gender
+        </label>
+      </h2>
+          <select
+          class="govuk-select"
+          id="tenant-gender"
+          name="tenant-gender"
+          >
+            <option value="Male" {{ 'selected' if data['tenant-gender'] == 'Male' else '' }}>
+              Male
+            </option>
+            <option value="Female" {{ 'selected' if data['tenant-gender'] == 'Female' else '' }}>Female</option>
+            <option value="Other" {{ 'selected' if data['tenant-gender'] == 'Other' else '' }}>Other</option>
+            <option value="Refused" {{ 'selected' if data['tenant-gender'] == 'Refused' else '' }}>Refuse</option>
+          </select>
+    </div>
+  </div>
+  </fieldset>
 
-    {{ govukInput({
-        label: {
-        html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>'
-        },
-        id: "address-line-2",
-        name: "address-line-2"
-    }) }}
 
-    {{ govukInput({
-        label: {
-        text: "Town or city"
-        },
-        classes: "govuk-!-width-two-thirds",
-        id: "address-town",
-        name: "address-town"
-    }) }}
+  {# economic status input #}
 
-    {{ govukInput({
-        label: {
-        text: "County"
-        },
-        classes: "govuk-!-width-two-thirds",
-        id: "address-county",
-        name: "address-county"
-    }) }}
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="Tenant economic status"
+  >
+    <div class="govuk-date-input__item">
+      <div class="govuk-form-group">
+        <h2 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--l" for="tenant-economic-status">
+            Tenant economic status
+          </label>
+        </h2>
+            <select
+            class="govuk-select"
+            id="tenant-economic-status"
+            name="tenant-economic-status"
+            >
+              <option value="Part-time (Less than 30 hrs)" {{ 'selected' if data['tenant-economic-status'] == 'Part-time (Less than 30 hrs)' else '' }}>
+                Part-time (Less than 30 hrs)
+              </option>
+              <option value="Full-time (30 hrs or more) Not seeking work Government training/New deal" {{ 'selected' if data['tenant-economic-status'] == 'Full-time (30 hrs or more) Not seeking work Government training/New deal' else '' }}>Full-time (30 hrs or more) Not seeking work Government training/New deal</option>
+              <option value="Full-time student Jobseeker Child under 16 Retired" {{ 'selected' if data['tenant-economic-status'] == 'Full-time student Jobseeker Child under 16 Retired' else '' }}>Full-time student Jobseeker Child under 16 Retired</option>
+              <option value="Unable to work/long term sick or disability" {{ 'selected' if data['tenant-economic-status'] == 'Unable to work/long term sick or disability' else '' }}>Unable to work/long term sick or disability</option>
+              <option value="Other adult" {{ 'selected' if data['tenant-economic-status'] == 'Other adult' else '' }}>Other adult</option>
+            </select>
+      </div>
+    </div>
+  </fieldset>
 
-    {{ govukInput({
-        label: {
-        text: "Postcode"
-        },
-        classes: "govuk-input--width-10",
-        id: "address-postcode",
-        name: "address-postcode"
-    }) }}
 
-    {% endcall %}
+  {# Ethnicity input #}
 
-    <a href="/sprint6/confirmation" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
-        Finish
-    </a>
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="Ethnicity options"
+  >
+    <div class="govuk-date-input__item">
+      <div class="govuk-form-group">
+        <h2 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--l" for="ethnicity-options">
+            Ethnicity options
+          </label>
+        </h2>
+            <select
+            class="govuk-select"
+            id="ethnicity-options"
+            name="ethnicity-options"
+            >
+              <option value="White: British" {{ 'selected' if data['ethnicity-options'] == 'White: British' else '' }}>White: British</option>
+              <option value="White: Irish" {{ 'selected' if data['ethnicity-options'] == 'White: Irish' else '' }}>White: Irish</option>
+              <option value="White: Gypsy/Irish Traveller" {{ 'selected' if data['ethnicity-options'] == 'White: Gypsy/Irish Traveller' else '' }}>White: Gypsy/Irish Traveller</option>
+              <option value="White: Other" {{ 'selected' if data['ethnicity-options'] == 'White: Other' else '' }}>White: Other</option>
+              <option value="Mixed: White and Black Caribbean" {{ 'selected' if data['ethnicity-options'] == 'Mixed: White and Black Caribbean' else '' }}>Mixed: White and Black Caribbean</option>
+              <option value="Mixed: Other" {{ 'selected' if data['ethnicity-options'] == 'Mixed: Other' else '' }}>Mixed: Other</option>
+              <option value="Mixed: White and Asian" {{ 'selected' if data['ethnicity-options'] == 'Mixed: White and Asian' else '' }}>Mixed: White and Asian</option>
+              <option value="Asian or Asian British: Indian" {{ 'selected' if data['ethnicity-options'] == 'Asian or Asian British: Indian' else '' }}>Asian or Asian British: Indian</option>
+              <option value="Asian or Asian British: Pakistani" {{ 'selected' if data['ethnicity-options'] == 'Asian or Asian British: Pakistani' else '' }}>Asian or Asian British: Pakistani</option>
+              <option value="Asian or Asian British: Bangladeshi" {{ 'selected' if data['ethnicity-options'] == 'Asian or Asian British: Bangladeshi' else '' }}>Asian or Asian British: Bangladeshi</option>
+              <option value="Asian or Asian British: Chinese" {{ 'selected' if data['ethnicity-options'] == 'Asian or Asian British: Chinese' else '' }}>Asian or Asian British: Chinese</option>
+              <option value="Asian or Asian British: Other" {{ 'selected' if data['ethnicity-options'] == 'Asian or Asian British: Other' else '' }}>Asian or Asian British: Other</option>
+              <option value="Black: Caribbean" {{ 'selected' if data['ethnicity-options'] == 'Black: Caribbean' else '' }}>Black: Caribbean</option>
+              <option value="Black: African" {{ 'selected' if data['ethnicity-options'] == 'Black: African' else '' }}>Black: African</option>
+              <option value="Black: Other" {{ 'selected' if data['ethnicity-options'] == 'Black: Other' else '' }}>Black: Other</option>
+              <option value="Other: Arab" {{ 'selected' if data['ethnicity-options'] == 'Other: Arab' else '' }}>Other: Arab</option>
+            </select>
+      </div>
+    </div>
+  </fieldset>
+
+  {# Nationality input #}
+
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="Nationality options"
+  >
+    <div class="govuk-date-input__item">
+      <div class="govuk-form-group">
+        <h2 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--l" for="nationality-options">
+            Nationality options
+          </label>
+        </h2>
+            <select
+            class="govuk-select"
+            id="nationality-options"
+            name="nationality-options"
+            >
+              <option value="UK national resident in UK" {{ 'selected' if data['nationality-options'] == 'UK national resident in UK' else '' }}>UK national resident in UK</option>
+              <option value="UK national returning from residence overseas" {{ 'selected' if data['nationality-options'] == 'UK national returning from residence overseas' else '' }}>UK national returning from residence overseas</option>
+              <option value="Czech Republic" {{ 'selected' if data['nationality-options'] == 'Czech Republic' else '' }}>Czech Republic</option>
+              <option value="Estonia" {{ 'selected' if data['nationality-options'] == 'Estonia' else '' }}>Estonia</option>
+              <option value="Hungary" {{ 'selected' if data['nationality-options'] == 'Hungary' else '' }}>Hungary</option>
+              <option value="Lithuania" {{ 'selected' if data['nationality-options'] == 'Lithuania' else '' }}>Lithuania</option>
+              <option value="Poland" {{ 'selected' if data['nationality-options'] == 'Poland' else '' }}>Poland</option>
+              <option value="Slovakia" {{ 'selected' if data['nationality-options'] == 'Slovakia' else '' }}>Slovakia</option>
+              <option value="Slovenia" {{ 'selected' if data['nationality-options'] == 'Slovenia' else '' }}>Slovenia</option>
+              <option value="Bulgaria" {{ 'selected' if data['nationality-options'] == 'Bulgaria' else '' }}>Bulgaria</option>
+              <option value="Romania" {{ 'selected' if data['nationality-options'] == 'Romania' else '' }}>Romania</option>
+              <option value="Croatia" {{ 'selected' if data['nationality-options'] == 'Croatia' else '' }}>Croatia</option>
+              <option value="Ireland" {{ 'selected' if data['nationality-options'] == 'Ireland' else '' }}>Ireland</option>
+              <option value="Other EU Economic Area EEA Country" {{ 'selected' if data['nationality-options'] == 'Other EU Economic Area EEA Country' else '' }}>Other EU Economic Area EEA Country</option>
+              <option value="Any other country" {{ 'selected' if data['nationality-options'] == 'Any other country' else '' }}>Any other country</option>
+            </select>
+      </div>
+    </div>
+  </fieldset>
+
+
+  <button class="govuk-button" data-module="govuk-button">
+    Continue
+    <svg
+      class="govuk-button__start-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="17.5"
+      height="19"
+      viewBox="0 0 33 40"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+    </svg>
+  </button>
+</form>
+
 {% endblock %}
