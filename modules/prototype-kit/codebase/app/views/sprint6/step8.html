@@ -161,8 +161,8 @@
       </label>
     </div>
     <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="relet-affordable" name="relet" type="radio" value="affordable"
-        {{ 'checked' if data['relet']=='affordable' }} />
+      <input class="govuk-radios__input" id="relet-affordable" name="relet" type="radio" value="affordable" {{ 'checked'
+        if data['relet']=='affordable' }} />
       <label class="govuk-label govuk-radios__label" for="relet-affordable">
         An affordable rent basis
       </label>
@@ -175,12 +175,46 @@
       </label>
     </div>
     <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="relet-unknown" name="relet" type="radio" value="unknown"
-        {{ 'checked' if data['relet']=='unknown' }} />
+      <input class="govuk-radios__input" id="relet-unknown" name="relet" type="radio" value="unknown" {{ 'checked' if
+        data['relet']=='unknown' }} />
       <label class="govuk-label govuk-radios__label" for="relet-unknown">
         Don't know
       </label>
     </div>
+  </div>
+
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+    <h1 class="govuk-fieldset__heading">
+      Reason for vacancy
+    </h1>
+  </legend>
+  <div class="govuk-form-group">
+    <select class="govuk-select" id="reason-for-vacancy" name="reason-for-vacancy" onchange="check()">
+      <option value="arrears" {{ 'selected' if data['reason-for-vacancy']=='arrears' }}>Relet - tenant evicted due to
+        arrears</option>
+      <option value="asb" {{ 'selected' if data['reason-for-vacancy']=='asb' }}>Relet - tenant evicted due to ASB or
+        other reason</option>
+      <option value="died" {{ 'selected' if data['reason-for-vacancy']=='died' }}>Relet - tenant died (no succession)
+      </option>
+      <option value="moved-to-social" {{ 'selected' if data['reason-for-vacancy']=='moved-to-social' }}>Relet - tenant
+        moved to other social housing provider</option>
+      <option value="abandoned" {{ 'selected' if data['reason-for-vacancy']=='abandoned' }}>Relet - tenant abandoned
+        property</option>
+      <option value="moved-to-private" {{ 'selected' if data['reason-for-vacancy']=='moved-to-private' }}>Relet - tenant
+        moved to private sector or other accommodation</option>
+      <option value="from-temoprary" {{ 'selected' if data['reason-for-vacancy']=='from-temoprary' }}>Relet - to tenant
+        who occupied same property as temporary accommodation</option>
+      <option value="internal-transfer" {{ 'selected' if data['reason-for-vacancy']=='internal-transfer' }}>Relet –
+        internal transfer (excluding renewals of a fixed-term tenancy)</option>
+      <option value="renewal" {{ 'selected' if data['reason-for-vacancy']=='renewal' }}>Relet – renewal of fixed-term
+        tenancy</option>
+      <option value="first-let-new-build" {{ 'selected' if data['reason-for-vacancy']=='first-let-new-build' }}>First
+        let of newbuild property</option>
+      <option value="first-let-conversion" {{ 'selected' if data['reason-for-vacancy']=='first-let-conversion' }}>First
+        let of conversion/rehabilitation/acquired property</option>
+      <option value="first-let-leased" {{ 'selected' if data['reason-for-vacancy']=='first-let-leased' }}>First let of
+        leased property</option>
+    </select>
   </div>
 
   <script>
