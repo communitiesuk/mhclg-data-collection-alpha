@@ -73,30 +73,9 @@
   </label>
   <div class="govuk-form-group">
     <select class="govuk-select" id="unit-type" name="unit-type" onchange="check()">
-      <option value="flat" {{ 'selected' if data['unit-type']=='flat' }}>
-        Flat / maisonette
-      </option>
-      <option value="bedsit" {{ 'selected' if data['unit-type']=='bedsit' }}>
-        Bed-sit
-      </option>
-      <option value="house" {{ 'selected' if data['unit-type']=='house' }}>
-        House
-      </option>
-      <option value="bungalow" {{ 'selected' if data['unit-type']=='bungalow' }}>
-        Bungalow
-      </option>
-      <option value="maisonette" {{ 'selected' if data['unit-type']=='maisonette' }}>
-        Shared flat / maisonette
-      </option>
-      <option value="shared-house" {{ 'selected' if data['unit-type']=='shared-house' }}>
-        Shared house
-      </option>
-      <option value="shared-bungalow" {{ 'selected' if data['unit-type']=='shared-bungalow' }}>
-        Shared bungalow
-      </option>
-      <option value="other" {{ 'selected' if data['unit-type']=='other' }}>
-        Other
-      </option>
+      {% for value, name in mhclg.unit_type %}
+        {{ mhclg.option(data['unit-type'], name, value) }}
+      {% endfor %}
     </select>
   </div>
 
@@ -181,7 +160,7 @@
   <div class="govuk-form-group">
     <select class="govuk-select" id="reason-for-vacancy" name="reason-for-vacancy">
       {% for value, name in mhclg.reason_for_vacancy %}
-        {{ mhclg.option(data, name, value) }}
+        {{ mhclg.option(data['reason-for-vacancy'], name, value) }}
       {% endfor %}
     </select>
   </div>

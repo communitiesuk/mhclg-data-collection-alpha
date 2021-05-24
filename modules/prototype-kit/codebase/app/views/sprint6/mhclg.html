@@ -15,6 +15,19 @@
   }
 %}
 
-{% macro option(data, name, value) %}
-      <option value="{{ value }}" {{ 'selected' if data['reason-for-vacancy'] == value }}>{{ name }}</option>
+{%
+  set unit_type = {
+      "flat": "Flat / maisonette",
+      "bedsit": "Bed-sit",
+      "house": "House",
+      "bungalow": "Bungalow",
+      "maisonette": "Shared flat / maisonette",
+      "shared-house": "Shared house",
+      "shared-bungalow": "Shared bungalow",
+      "other": "Other"
+  }
+%}
+
+{% macro option(current_value, name, value) %}
+      <option value="{{ value }}" {{ 'selected' if current_value == value }}>{{ name }}</option>
 {% endmacro %}
