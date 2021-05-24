@@ -47,23 +47,21 @@
         </h1>
       </legend>
       <div class="govuk-form-group">
-        <label class="govuk-label" for="time-in-la"> Form: </label>
         <select class="govuk-select" id="time-in-la" name="time-in-la" onchange="check()">
-          <option value="0" {{ 'selected' if data['time-in-la']=='0'
-            else '' }}>
+          <option value="0" {{ 'selected' if data['time-in-la']=='0' else '' }}>
             Just moved to Local Authority area
           </option>
           <option value="<1" {{ 'selected' if data['time-in-la']=='<1' else '' }}>
             Less than 1 year
           </option>
           <option value="<2" {{ 'selected' if data['time-in-la']=='<2' else '' }}>
-            1 year but under 2 years 
+            1 year but under 2 years
           </option>
           <option value="<3" {{ 'selected' if data['time-in-la']=='<3' else '' }}>
-            2 years but under 3 years 
+            2 years but under 3 years
           </option>
           <option value="<4" {{ 'selected' if data['time-in-la']=='<4' else '' }}>
-            3 years but under 4 years 
+            3 years but under 4 years
           </option>
           <option value="<5" {{ 'selected' if data['time-in-la']=='<5' else '' }}>
             4 years but under 5 years
@@ -76,6 +74,76 @@
           </option>
         </select>
       </div>
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          How long has the household been in the local authority waiting list where the new letting is located?
+        </h1>
+      </legend>
+      <div class="govuk-form-group">
+        <select class="govuk-select" id="time-waiting" name="time-waiting" onchange="check()">
+          <option value="0" {{ 'selected' if data['time-waiting']=='0' else '' }}>
+            Just moved to Local Authority area
+          </option>
+          <option value="<1" {{ 'selected' if data['time-waiting']=='<1' else '' }}>
+            Less than 1 year
+          </option>
+          <option value="<2" {{ 'selected' if data['time-waiting']=='<2' else '' }}>
+            1 year but under 2 years
+          </option>
+          <option value="<3" {{ 'selected' if data['time-waiting']=='<3' else '' }}>
+            2 years but under 3 years
+          </option>
+          <option value="<4" {{ 'selected' if data['time-waiting']=='<4' else '' }}>
+            3 years but under 4 years
+          </option>
+          <option value="<5" {{ 'selected' if data['time-waiting']=='<5' else '' }}>
+            4 years but under 5 years
+          </option>
+          <option value=">5" {{ 'selected' if data['time-waiting']=='>5' else '' }}>
+            5 years or more
+          </option>
+          <option value="?" {{ 'selected' if data['time-waiting']=='?' else '' }}>
+            Don't Know
+          </option>
+        </select>
+      </div>
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Immediately prior to this letting, was this household ...?
+        </h1>
+      </legend>
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?
+        </h1>
+      </legend>
+      <div class="govuk-radios govuk-radios--inline">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="reasonable-preference-yes" name="reasonable-preference" type="radio" value="yes"
+            {{ 'checked' if data['reasonable-preference']=='yes' else '' }} />
+          <label class="govuk-label govuk-radios__label" for="reasonable-preference">
+            Yes
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="reasonable-preference-no" name="reasonable-preference" type="radio" value="no"
+            {{ 'checked' if data['reasonable-preference']=='no' else '' }} />
+          <label class="govuk-label govuk-radios__label" for="reasonable-preference-2">
+            No
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="reasonable-preference-dont-know" name="reasonable-preference" type="radio" value="dont-know"
+            {{ 'checked' if data['reasonable-preference']=='dont-know' else '' }} />
+          <label class="govuk-label govuk-radios__label" for="reasonable-preference-2">
+            Don't know
+          </label>
+        </div>
+      </div>
+
     </fieldset>
   </div>
 
