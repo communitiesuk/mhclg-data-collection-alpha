@@ -32,38 +32,429 @@
       <a class="govuk-breadcrumbs__link" href="/sprint6/step6">Step 6</a>
     </li>
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" >Step 7</a>
+      <a class="govuk-breadcrumbs__link">Step 7</a>
     </li>
   </ol>
 </div>
 {% endblock %} {% block content %}
-<h1 class="govuk-heading-l">Tenant details</h1>
+<h1 class="govuk-heading-l">Rental details and charges</h1>
 <form class="form" action="/sprint6/step8" method="POST">
-
-  {# armed forces input #}
+  {# Rental details input #}
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">
-          CHANGEME
-        </h1>
-      </legend>
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--m" for="rental-period">
+          Over what period are rent and other charges due
+        </label>
+        <select class="govuk-select" id="sort" name="rental-period">
+          <option value="Fortnightly">Fortnightly</option>
+          <option value="Four-weekly">Four-weekly</option>
+          <option value="Calendar monthly">Calendar monthly</option>
+          <option value="Weekly for 46 weeks">Weekly for 46 weeks</option>
+          <option value="Weekly for 47 weeks">Weekly for 47 weeks</option>
+          <option value="Weekly for 48 weeks">Weekly for 48 weeks</option>
+          <option value="Weekly for 49 weeks">Weekly for 49 weeks</option>
+          <option value="Weekly for 50 weeks">Weekly for 50 weeks</option>
+          <option value="Weekly for 51 weeks">Weekly for 51 weeks</option>
+          <option value="Weekly for 52 weeks">Weekly for 52 weeks</option>
+          <option value="Weekly for 53 weeks">Weekly for 53 weeks</option>
+        </select>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--m" for="basic-rent">
+      Basic rent (eligible for Housing Benefit or Universal Credit ) (for period
+      shown in above)
+    </label>
+    <span class="govuk-caption-m">Round to nearest £</span>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <input
+          class="govuk-input"
+          id="basic-rent"
+          name="basic-rent"
+          type="number"
+          min="1"
+          step="any"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--m" for="service-charge">
+      Service charge (eligible for HB or UC)
+    </label>
+    <span class="govuk-caption-m">Round to nearest £</span>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <input
+          class="govuk-input"
+          id="service-charge"
+          name="service-charge"
+          type="number"
+          min="1"
+          step="any"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--m" for="personal-service-charge">
+      Personal service charge (not eligible for HB or UC e.g. heating, hot water
+      excluding water rates)
+    </label>
+    <span class="govuk-caption-m">Round to nearest £</span>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <input
+          class="govuk-input"
+          id="personal-service-charge"
+          name="personal-service-charge"
+          type="number"
+          min="1"
+          step="any"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--m" for="support-charge">
+      Support charge (charges made to fund housing related support services
+      included in the tenancy agreement)
+    </label>
+    <span class="govuk-caption-m">Round to nearest £</span>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <input
+          class="govuk-input"
+          id="support-charge"
+          name="support-charge"
+          type="number"
+          min="1"
+          step="1"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--m" for="total-charge">
+      TOTAL CHARGE
+    </label>
+    <span class="govuk-caption-m" id="total-charge">£ 0</span>
+  </div>
+
+  <script>
+    document.body.addEventListener("change", function (e) {
+      let target = e.target;
+      document.getElementById("total-charge").innerHTML = `£ ${
+        Number(document.getElementById("basic-rent").value) +
+        Number(document.getElementById("service-charge").value) +
+        Number(document.getElementById("personal-service-charge").value) +
+        Number(document.getElementById("support-charge").value)
+      }`;
+    });
+  </script>
+
+  <hr class="govuk-!-margin-bottom-6" />
+
+  {# rent after UC #}
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <label class="govuk-label govuk-label--m">
+        After housing benefit and/or housing element of UC payment is received,
+        will there be an outstanding amount for basic rent (18ai) and/or benefit
+        eligible charges (18aii)?
+      </label>
       <div class="govuk-radios">
         <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="armed-forces" name="armed-forces" type="radio" value="Regular">
-          <label class="govuk-label govuk-radios__label" for="armed-forces">
+          <input
+            class="govuk-radios__input"
+            id="outstanding-after-uc"
+            name="outstanding-after-uc"
+            type="radio"
+            value="Yes"
+          />
+          <label
+            class="govuk-label govuk-radios__label"
+            for="outstanding-after-uc"
+          >
             Yes
           </label>
         </div>
         <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="armed-forces-2" name="armed-forces" type="radio" value="Reserve">
-          <label class="govuk-label govuk-radios__label" for="armed-forces-2">
+          <input
+            class="govuk-radios__input"
+            id="outstanding-after-uc-2"
+            name="outstanding-after-uc"
+            type="radio"
+            value="No"
+          />
+          <label
+            class="govuk-label govuk-radios__label"
+            for="outstanding-after-uc-2"
+          >
             No
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input
+            class="govuk-radios__input"
+            id="outstanding-after-uc-3"
+            name="outstanding-after-uc"
+            type="radio"
+            value="Don't Know"
+          />
+          <label
+            class="govuk-label govuk-radios__label"
+            for="outstanding-after-uc-3"
+          >
+            Don't Know
           </label>
         </div>
       </div>
     </fieldset>
+  </div>
+
+  <div class="govuk-form-group" id="outstanding-amount">
+    <div class="govuk-grid-row govuk-!-margin-bottom-6">
+      <div class="govuk-grid-column-one-half">
+        <label class="govuk-label govuk-label--m" for="outstanding-amount">
+          Outstanding amount
+        </label>
+        <input
+          class="govuk-input"
+          name="outstanding-amount"
+          type="text"
+          value="{{ data['outstanding-amount'] }}"
+        />
+      </div>
+    </div>
+  </div>
+
+  {# rent after UC conditional render check and style#}
+  <script>
+    document.body.addEventListener("change", function (e) {
+      let target = $('input[name="outstanding-after-uc"]:checked').val();
+      switch (target) {
+        case "Yes":
+          document.getElementById("outstanding-amount").style.display = "block";
+          document.getElementById("outstanding-amount").style.opacity = 1;
+          break;
+        default:
+          document.getElementById("outstanding-amount").style.display = "none";
+          document.getElementById("outstanding-amount").style.opacity = 0;
+          break;
+      }
+    });
+  </script>
+
+  <style>
+    #outstanding-amount {
+      display: none;
+      opacity: 0;
+      transition: opacity 2s;
+    }
+  </style>
+
+  {# Void date #}
+
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="void-date-hint"
+  >
+    <label class="govuk-label govuk-label--m">
+      <h2 class="govuk-fieldset__heading">
+        Void (or new build handover / renewal) date
+      </h2>
+    </label>
+    <div id="void-date-hint" class="govuk-hint">For example, 01 01 2021</div>
+    <div class="govuk-date-input" id="void-date">
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="void-date-day"
+          >
+            Day
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-2"
+            id="void-date-day"
+            name="void-date-day"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['void-date-day'] }}"
+          />
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="void-date-month"
+          >
+            Month
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-2"
+            id="void-date-month"
+            name="void-date-month"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['void-date-month'] }}"
+          />
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="void-date-year"
+          >
+            Year
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-4"
+            id="void-date-year"
+            name="void-date-year"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['void-date-year'] }}"
+          />
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="repairs-completion-date-hint"
+  >
+    <label class="govuk-label govuk-label--m">
+      <h2 class="govuk-fieldset__heading">
+        Major repairs completion date (if major repairs carried out during void
+        period)
+      </h2>
+    </label>
+    <div id="repairs-completion-date-hint" class="govuk-hint">
+      For example, 01 01 2021
+    </div>
+    <div class="govuk-date-input" id="repairs-completion-date">
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="repairs-completion-date-day"
+          >
+            Day
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-2"
+            id="repairs-completion-date-day"
+            name="repairs-completion-date-day"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['repairs-completion-date-day'] }}"
+          />
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="repairs-completion-date-month"
+          >
+            Month
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-2"
+            id="repairs-completion-date-month"
+            name="repairs-completion-date-month"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['repairs-completion-date-month'] }}"
+          />
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="repairs-completion-date-year"
+          >
+            Year
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-4"
+            id="repairs-completion-date-year"
+            name="repairs-completion-date-year"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['repairs-completion-date-year'] }}"
+          />
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--m" for="more-detail">
+      How many times has this property been previously offered for rent ? From
+      the end of the previous tenancy or the first let? For an Affordable Rent
+      or Rent To Buy Letting, only include number of offers as that type.
+    </label>
+    <div id="more-detail-hint" class="govuk-hint">
+      (for a property let at the first attempt enter ‘0’ )
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <input
+          class="govuk-input govuk-!-margin-bottom-3"
+          id="event-name"
+          name="event-name"
+          type="text"
+        />
+      </div>
+    </div>
+    <div id="more-detail-hint" class="govuk-hint">Property reference</div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <input
+          class="govuk-input govuk-!-margin-bottom-3"
+          id="event-name"
+          name="event-name"
+          type="text"
+        />
+      </div>
+    </div>
+    <div id="more-detail-hint" class="govuk-hint">
+      UPRN (Unique Property Reference Number)
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <input
+          class="govuk-input govuk-!-margin-bottom-3"
+          id="event-name"
+          name="event-name"
+          type="text"
+        />
+      </div>
+    </div>
   </div>
 
   <button class="govuk-button" data-module="govuk-button">
