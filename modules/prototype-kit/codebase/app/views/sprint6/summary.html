@@ -1,18 +1,54 @@
-{% extends "layout.html" %} {% block pageTitle %} Summary {% endblock %} {%
-block beforeContent %}
-{% endblock %} {% block content %}
+{% extends "layout.html" %} {% block pageTitle %} Summary {% endblock %} 
+{% block header %} {{ govukHeader() }} {% endblock %} 
+{% block beforeContent %}
 <div class="govuk-width-container">
   <a href="#" class="govuk-back-link">Back</a>
+
+  <div class="govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="index">Home</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/sprint6/step1">Step 1</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/sprint6/step2">Step 2</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/sprint6/step3">Step 3</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/sprint6/step4">Step 4</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/sprint6/step5">Step 5</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/sprint6/step6">Step 6</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/sprint6/step7">Step 7</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/sprint6/step8">Step 8</a>
+      </li>
+    </ol>
+  </div>
 
   <div style="background-color:lightsalmon;">
     <dl>
       {% for k, v in data %}
-        <dt>{{ k }}</dt>
-        <dd>{{ v }}</dd>
+      <dt>{{ k }}</dt>
+      <dd>{{ v }}</dd>
       {% endfor %}
     </dl>
   </div>
 
+{% endblock %} {% block content %}
   <main class="govuk-main-wrapper " id="main-content" role="main">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds-from-desktop">
@@ -36,7 +72,7 @@ block beforeContent %}
               </a>
             </dd>
           </div>
-          
+
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Which form are you completing?
@@ -84,7 +120,7 @@ block beforeContent %}
               </a>
             </dd>
           </div>
-          
+
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Type of provider
@@ -115,7 +151,7 @@ block beforeContent %}
 
           {% if data['ll-status'] == "another" %}
 
-            <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               RP (HA/LA)Name
             </dt>
@@ -164,7 +200,7 @@ block beforeContent %}
               </a>
             </dd>
           </div>
-          
+
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Type of main tenancy (after any starter/introductory period)
@@ -181,7 +217,7 @@ block beforeContent %}
 
           {% if data['tenancy-type'] == "other" %}
 
-            <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Tenancy Type
             </dt>
@@ -214,8 +250,8 @@ block beforeContent %}
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               If the main tenancy is a fixed term tenancy, please provide the length
-          of the fixed term (to the nearest year) excluding any
-          starter/introductory period
+              of the fixed term (to the nearest year) excluding any
+              starter/introductory period
             </dt>
             <dd class="govuk-summary-list__value">
               {{ data['length-fixed-term'] }}
@@ -233,7 +269,8 @@ block beforeContent %}
 
         <h2 class="govuk-heading-m">Now send your application</h2>
 
-        <p class="govuk-body">By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.</p>
+        <p class="govuk-body">By submitting this notification you are confirming that, to the best of your knowledge,
+          the details you are providing are correct.</p>
 
         <form action="/form-handler" method="post" novalidate>
 
