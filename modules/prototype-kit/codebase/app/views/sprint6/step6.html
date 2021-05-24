@@ -114,6 +114,46 @@
           Immediately prior to this letting, was this household ...?
         </h1>
       </legend>
+      <div class="govuk-radios govuk-radios--inline">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="prior-status-not-homeless" name="prior-status" type="radio"
+            value="not-homeless" {{ 'checked' if data['prior-status']=='not-homeless' else '' }} />
+          <label class="govuk-label govuk-radios__label" for="prior-status">
+            Not homeless
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="prior-status-threatened-homeless" name="prior-status" type="radio"
+            value="threatened-homeless" {{ 'checked' if data['prior-status']=='threatened-homeless' else '' }} />
+          <label class="govuk-label govuk-radios__label" for="prior-status">
+            Assessed as threatened with homelessness within 56 days by a LA and owed prevention duty
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="prior-status-homeless-owed-relief-duty" name="prior-status"
+            type="radio" value="homeless-owed-relief-duty" {{ 'checked' if
+            data['prior-status']=='homeless-owed-relief-duty' else '' }} />
+          <label class="govuk-label govuk-radios__label" for="prior-status">
+            Assessed as homeless by a LA and owed a relief duty
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="prior-status-unintentionally-homeless" name="prior-status" type="radio"
+            value="unintentionally-homeless" {{ 'checked' if data['prior-status']=='unintentionally-homeless' else ''
+            }} />
+          <label class="govuk-label govuk-radios__label" for="prior-status">
+            Assessed as unintentionally homeless and having priority need by a LA and owed a homeless main duty
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="prior-status-other-homeless" name="prior-status" type="radio"
+            value="other-homeless" {{ 'checked' if data['prior-status']=='other-homeless' else '' }} />
+          <label class="govuk-label govuk-radios__label" for="prior-status">
+            Other homelessness i.e. not found statutorily homeless by a housing authority but considered to be homeless
+            by the letting landlord
+          </label>
+        </div>
+      </div>
 
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
         <h1 class="govuk-fieldset__heading">
@@ -122,38 +162,141 @@
       </legend>
       <div class="govuk-radios govuk-radios--inline">
         <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="reasonable-preference-yes" name="reasonable-preference" type="radio" value="yes"
-            {{ 'checked' if data['reasonable-preference']=='yes' else '' }} />
+          <input class="govuk-radios__input" id="reasonable-preference-yes" name="reasonable-preference" type="radio"
+            value="yes" {{ 'checked' if data['reasonable-preference']=='yes' else '' }} />
           <label class="govuk-label govuk-radios__label" for="reasonable-preference">
             Yes
           </label>
         </div>
         <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="reasonable-preference-no" name="reasonable-preference" type="radio" value="no"
-            {{ 'checked' if data['reasonable-preference']=='no' else '' }} />
+          <input class="govuk-radios__input" id="reasonable-preference-no" name="reasonable-preference" type="radio"
+            value="no" {{ 'checked' if data['reasonable-preference']=='no' else '' }} />
           <label class="govuk-label govuk-radios__label" for="reasonable-preference-2">
             No
           </label>
         </div>
         <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="reasonable-preference-dont-know" name="reasonable-preference" type="radio" value="dont-know"
-            {{ 'checked' if data['reasonable-preference']=='dont-know' else '' }} />
+          <input class="govuk-radios__input" id="reasonable-preference-dont-know" name="reasonable-preference"
+            type="radio" value="dont-know" {{ 'checked' if data['reasonable-preference']=='dont-know' else '' }} />
           <label class="govuk-label govuk-radios__label" for="reasonable-preference-2">
             Don't know
           </label>
         </div>
       </div>
 
-    </fieldset>
-  </div>
+      <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--m">
+            Which of the following reasons for Reasonable Preference apply?
+          </label>
+          <div id="reasonable-preference-reasons-hint" class="govuk-hint">
+            Select all that apply.
+          </div>
+          <div class="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-1" name="reasonable-preference-reasons" type="checkbox"
+                {{ 'checked' if 'homeless' in data['reasonable-preference-reasons'] else '' }} value="homeless">
+              <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-1">
+                Homeless or about to lose their home (within 56 days)
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-2" name="reasonable-preference-reasons" type="checkbox"
+                {{ 'checked' if 'insanitary' in data['reasonable-preference-reasons'] else '' }} value="insanitary">
+              <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-2">
+                Living in insanitary or overcrowded or unsatisfactory housing
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-3" name="reasonable-preference-reasons" type="checkbox"
+                {{ 'checked' if 'medical' in data['reasonable-preference-reasons'] else '' }} value="medical">
+              <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-3">
+                A need to move on medical and welfare grounds (including a reasonable-preference-reasons)
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-4" name="reasonable-preference-reasons" type="checkbox"
+                {{ 'checked' if 'hardship' in data['reasonable-preference-reasons'] else '' }} value="hardship">
+              <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-4">
+                A need to move to avoid hardship to themselves or others
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-5" name="reasonable-preference-reasons" type="checkbox"
+                {{ 'checked' if 'unknown' in data['reasonable-preference-reasons'] else '' }} value="unknown">
+              <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-5">
+                Don't know
+              </label>
+            </div>
+          </div>
 
-  <button class="govuk-button" data-module="govuk-button">
-    Continue
-    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
-      viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-    </svg>
-  </button>
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Was the letting made under any of the following allocations systems? Select Yes or No for each allocation
+              system.
+            </h1>
+          </legend>
+          <div class="govuk-radios govuk-radios--inline">
+            <label class="govuk-label" for="allocations-cbl">Choice-based lettings (CBL):</label>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="allocations-cbl-yes" name="allocations-cbl" type="radio"
+                value="yes" {{ 'checked' if data['allocations-cbl']=='yes' else '' }} />
+              <label class="govuk-label govuk-radios__label" for="allocations-cbl">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="allocations-cbl-no" name="allocations-cbl" type="radio" value="no"
+                {{ 'checked' if data['allocations-cbl']=='no' else '' }} />
+              <label class="govuk-label govuk-radios__label" for="allocations-cbl-2">
+                No
+              </label>
+            </div>
+          </div>
+          <div class="govuk-radios govuk-radios--inline">
+            <label class="govuk-label" for="allocations-chr">Common housing register (CHR):</label>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="allocations-chr-yes" name="allocations-chr" type="radio"
+                value="yes" {{ 'checked' if data['allocations-chr']=='yes' else '' }} />
+              <label class="govuk-label govuk-radios__label" for="allocations-chr">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="allocations-chr-no" name="allocations-chr" type="radio" value="no"
+                {{ 'checked' if data['allocations-chr']=='no' else '' }} />
+              <label class="govuk-label govuk-radios__label" for="allocations-chr-2">
+                No
+              </label>
+            </div>
+          </div>
+          <div class="govuk-radios govuk-radios--inline">
+            <label class="govuk-label" for="allocations-cap">Common Allocation Policy (CAP):</label>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="allocations-cap-yes" name="allocations-cap" type="radio"
+                value="yes" {{ 'checked' if data['allocations-cap']=='yes' else '' }} />
+              <label class="govuk-label govuk-radios__label" for="allocations-cap">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="allocations-cap-no" name="allocations-cap" type="radio" value="no"
+                {{ 'checked' if data['allocations-cap']=='no' else '' }} />
+              <label class="govuk-label govuk-radios__label" for="allocations-cap-2">
+                No
+              </label>
+            </div>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <button class="govuk-button" data-module="govuk-button">
+        Continue
+        <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
+          viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+        </svg>
+      </button>
 </form>
 
 {% endblock %}
