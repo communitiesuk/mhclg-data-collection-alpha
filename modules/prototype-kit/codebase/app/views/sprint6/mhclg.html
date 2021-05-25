@@ -110,6 +110,25 @@
   }  
 %}
 
+{%
+  set completion_year = {
+    "2021": "2020/2021",
+    "2022": "2021/2022"
+  }
+%}
+
+{%
+  set form_type = {
+        "social-general": "Social Rent General Needs",
+        "social-supported": "Social Rent Supported Housing",
+        "affordable-general": "Affordable Rent General Needs",
+        "affordable-supported": "Affordable Rent Supported Housing",
+        "rtb-general": "Rent To Buy General Needs",
+        "rtb-supported": "Rent To Buy Supported Housing",
+        "sales-log": "Sales Log"
+  }
+%}
+
 {% macro option(label, answers, data, group) %}
   <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
   <div class="govuk-form-group">
