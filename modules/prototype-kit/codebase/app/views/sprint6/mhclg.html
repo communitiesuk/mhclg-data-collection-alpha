@@ -28,6 +28,41 @@
   }
 %}
 
+{%
+  set building_type = {
+    "purpose-built": "Purpose built",
+    "converted": "Converted from previous residential or non-residential property"
+  }
+%}
+
+{%
+  set yes_no = {
+    "yes": "Yes",
+    "no": "No"
+  }
+%}
+
+{%
+  set relet = {
+      "social-rent": "A social rent basis",
+      "affordable": "An affordable rent basis",
+      "rent-to-buy": "A rent to buy basis",
+      "unknown": "Don't know"
+  }
+%}
+
+
+
 {% macro option(current_value, name, value) %}
       <option value="{{ value }}" {{ 'selected' if current_value == value }}>{{ name }}</option>
+{% endmacro %}
+
+{% macro radio(data, group, name, value) %}
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
+        value="{{ value }}" {{ 'checked' if data[group] == value }} />
+      <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ value }}">
+        {{ name }}
+      </label>
+    </div>
 {% endmacro %}

@@ -83,40 +83,18 @@
       Type of building
   </label>
   <div class="govuk-radios govuk-radios--inline">
-    <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="building-type-purpose-built" name="building-type" type="radio"
-        value="purpose-built" {{ 'checked' if data['building-type']=='purpose-built' }} />
-      <label class="govuk-label govuk-radios__label" for="building-type-purpose-built">
-        Purpose built
-      </label>
-    </div>
-    <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="building-type-converted" name="building-type" type="radio"
-        value="converted" {{ 'checked' if data['building-type']=='converted' }} />
-      <label class="govuk-label govuk-radios__label" for="building-type-converted">
-        Converted from previous residential or non-residential property
-      </label>
-    </div>
+      {% for value, name in mhclg.building_type %}
+        {{ mhclg.radio(data, "building-type", name, value) }}
+      {% endfor %}
   </div>
 
   <label class="govuk-label govuk-label--m" for="unit-type">
       Is property built or adapted to be wheelchair accessible?
   </label>
   <div class="govuk-radios govuk-radios--inline">
-    <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="wheelchair-access-yes" name="wheelchair-access" type="radio" value="yes"
-        {{ 'checked' if data['wheelchair-access']=='yes' }} />
-      <label class="govuk-label govuk-radios__label" for="wheelchair-access-yes">
-        Yes
-      </label>
-    </div>
-    <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="wheelchair-access-no" name="wheelchair-access" type="radio" value="no"
-        {{ 'checked' if data['wheelchair-access']=='no' }} />
-      <label class="govuk-label govuk-radios__label" for="wheelchair-access-no">
-        No
-      </label>
-    </div>
+      {% for value, name in mhclg.yes_no %}
+        {{ mhclg.radio(data, "wheelchair-access", name, value) }}
+      {% endfor %}
   </div>
 
   <label class="govuk-label govuk-label--m" for="unit-type">
@@ -124,34 +102,9 @@
     </h1>
   </label>
   <div class="govuk-radios govuk-radios--inline">
-    <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="relet-social-rent" name="relet" type="radio" value="social-rent"
-        {{ 'checked' if data['relet']=='social-rent' }} />
-      <label class="govuk-label govuk-radios__label" for="relet-social-rent">
-        A social rent basis
-      </label>
-    </div>
-    <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="relet-affordable" name="relet" type="radio" value="affordable" {{ 'checked'
-        if data['relet']=='affordable' }} />
-      <label class="govuk-label govuk-radios__label" for="relet-affordable">
-        An affordable rent basis
-      </label>
-    </div>
-    <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="relet-rent-to-buy" name="relet" type="radio" value="rent-to-buy"
-        {{ 'checked' if data['relet']=='rent-to-buy' }} />
-      <label class="govuk-label govuk-radios__label" for="relet-rent-to-buy">
-        A rent to buy basis
-      </label>
-    </div>
-    <div class="govuk-radios__item">
-      <input class="govuk-radios__input" id="relet-unknown" name="relet" type="radio" value="unknown" {{ 'checked' if
-        data['relet']=='unknown' }} />
-      <label class="govuk-label govuk-radios__label" for="relet-unknown">
-        Don't know
-      </label>
-    </div>
+      {% for value, name in mhclg.relet %}
+        {{ mhclg.radio(data, "relet", name, value) }}
+      {% endfor %}
   </div>
 
   <label class="govuk-label govuk-label--m" for="unit-type">
