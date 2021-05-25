@@ -44,13 +44,23 @@
 
 {%
   set relet = {
-      "social-rent": "A social rent basis",
-      "affordable": "An affordable rent basis",
-      "rent-to-buy": "A rent to buy basis",
-      "unknown": "Don't know"
+    "social-rent": "A social rent basis",
+    "affordable": "An affordable rent basis",
+    "rent-to-buy": "A rent to buy basis",
+    "unknown": "Don't know"
   }
 %}
 
+{%
+  set reasonable_preference = {
+    'homeless': 'Homeless or about to lose their home (within 56 days)',
+    'insanitary': 'Living in insanitary or overcrowded or unsatisfactory housing',
+    'medical': 'A need to move on medical and welfare grounds (including a reasonable-preference-reasons)',
+    'hardship': 'A need to move to avoid hardship to themselves or others',
+    'unknown': "Don't know"
+  }
+
+%}
 
 
 {% macro option(label, answers, data, group) %}
@@ -77,4 +87,22 @@
     </div>
       {% endfor %}
   </div>
+{% endmacro %}
+
+{% macro checkboxes(label, hint, answers, data, group) %}
+      <div class="govuk-form-group" id="{{ group }}-section">
+        <label class="govuk-label govuk-label--s">{{ label }}</label>
+        <div id="{{ group }}-hint" class="govuk-hint">{{ hint }}</div>
+        <div class="govuk-checkboxes">
+          {% for value, name in answers %}
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="{{ group }}-{{value}}"
+              name="{{ group }}" type="checkbox" 
+              {{ 'checked' if data[group] and value in data[group] else '' }} 
+              value="{{ value }}">
+            <label class="govuk-label govuk-checkboxes__label" for="{{ group }}-{{value}}">{{ name }}</label>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
 {% endmacro %}

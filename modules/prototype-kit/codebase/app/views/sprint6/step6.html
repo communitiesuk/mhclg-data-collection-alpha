@@ -1,3 +1,4 @@
+{% import "./mhclg.html" as mhclg %}
 {% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
 %} {% block header %}
 <!-- Blank header with no service name for the start page -->
@@ -36,9 +37,6 @@
 {% endblock %} {% block content %}
 <h1 class="govuk-heading-l">Tenant details</h1>
 <form class="form" action="/sprint6/step7" method="POST">
-
-  {# armed forces input #}
-
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
       <label class="govuk-label govuk-label--m" for="time-in-la">
@@ -177,56 +175,8 @@
         </div>
       </div>
 
-      <div class="govuk-form-group" id="reasonable-preference-reasons-section">
-        <label class="govuk-label govuk-label--s">
-          Which of the following reasons for Reasonable Preference apply?
-        </label>
-        <div id="reasonable-preference-reasons-hint" class="govuk-hint">
-          Select all that apply.
-        </div>
-        <div class="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-1"
-              name="reasonable-preference-reasons" type="checkbox" {{ 'checked' if data['reasonable-preference-reasons']
-              and 'homeless' in data['reasonable-preference-reasons'] else '' }} value="homeless">
-            <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-1">
-              Homeless or about to lose their home (within 56 days)
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-2"
-              name="reasonable-preference-reasons" type="checkbox" {{ 'checked' if data['reasonable-preference-reasons']
-              and 'insanitary' in data['reasonable-preference-reasons'] else '' }} value="insanitary">
-            <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-2">
-              Living in insanitary or overcrowded or unsatisfactory housing
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-3"
-              name="reasonable-preference-reasons" type="checkbox" {{ 'checked' if data['reasonable-preference-reasons']
-              and 'medical' in data['reasonable-preference-reasons'] else '' }} value="medical">
-            <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-3">
-              A need to move on medical and welfare grounds (including a reasonable-preference-reasons)
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-4"
-              name="reasonable-preference-reasons" type="checkbox" {{ 'checked' if data['reasonable-preference-reasons']
-              and 'hardship' in data['reasonable-preference-reasons'] else '' }} value="hardship">
-            <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-4">
-              A need to move to avoid hardship to themselves or others
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-5"
-              name="reasonable-preference-reasons" type="checkbox" {{ 'checked' if data['reasonable-preference-reasons']
-              and 'unknown' in data['reasonable-preference-reasons'] else '' }} value="unknown">
-            <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-5">
-              Don't know
-            </label>
-          </div>
-        </div>
-      </div>
+      {{ mhclg.checkboxes('Which of the following reasons for Reasonable Preference apply?', 'Select all that apply.', mhclg.reasonable_preference, data, 'reasonable-preference-reasons') }}
+
       <script>
         function check() {
           var val = document.getElementById("reasonable-preference-yes").checked;
