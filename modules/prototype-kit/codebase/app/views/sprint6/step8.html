@@ -68,55 +68,15 @@
     </fieldset>
   </div>
 
-  <label class="govuk-label govuk-label--m" for="unit-type">
-      Type of unit
-  </label>
-  <div class="govuk-form-group">
-    <select class="govuk-select" id="unit-type" name="unit-type" onchange="check()">
-      {% for value, name in mhclg.unit_type %}
-        {{ mhclg.option(data['unit-type'], name, value) }}
-      {% endfor %}
-    </select>
-  </div>
+  {{ mhclg.option("Type of unit", mhclg.unit_type, data, 'unit-type') }}
 
-  <label class="govuk-label govuk-label--m" for="unit-type">
-      Type of building
-  </label>
-  <div class="govuk-radios govuk-radios--inline">
-      {% for value, name in mhclg.building_type %}
-        {{ mhclg.radio(data, "building-type", name, value) }}
-      {% endfor %}
-  </div>
+  {{ mhclg.radio("Type of building", mhclg.building_type, data, 'building-type') }}
 
-  <label class="govuk-label govuk-label--m" for="unit-type">
-      Is property built or adapted to be wheelchair accessible?
-  </label>
-  <div class="govuk-radios govuk-radios--inline">
-      {% for value, name in mhclg.yes_no %}
-        {{ mhclg.radio(data, "wheelchair-access", name, value) }}
-      {% endfor %}
-  </div>
+  {{ mhclg.radio("Is property built or adapted to be wheelchair accessible?", mhclg.yes_no, data, 'wheelchair-access') }}
 
-  <label class="govuk-label govuk-label--m" for="unit-type">
-      If this is a relet, was the property most recently let on..
-    </h1>
-  </label>
-  <div class="govuk-radios govuk-radios--inline">
-      {% for value, name in mhclg.relet %}
-        {{ mhclg.radio(data, "relet", name, value) }}
-      {% endfor %}
-  </div>
+  {{ mhclg.radio("If this is a relet, was the property most recently let on..", mhclg.relet, data, 'relet') }}
 
-  <label class="govuk-label govuk-label--m" for="unit-type">
-      Reason for vacancy
-  </label>
-  <div class="govuk-form-group">
-    <select class="govuk-select" id="reason-for-vacancy" name="reason-for-vacancy">
-      {% for value, name in mhclg.reason_for_vacancy %}
-        {{ mhclg.option(data['reason-for-vacancy'], name, value) }}
-      {% endfor %}
-    </select>
-  </div>
+  {{ mhclg.option("Reason for vacancy", mhclg.reason_for_vacancy, data, 'reason-for-vacancy') }}
 
   <label class="govuk-label govuk-label--m" for="unit-type">
     Location of property

@@ -53,11 +53,21 @@
 
 
 
-{% macro option(current_value, name, value) %}
-      <option value="{{ value }}" {{ 'selected' if current_value == value }}>{{ name }}</option>
+{% macro option(label, answers, data, group) %}
+  <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
+  <div class="govuk-form-group">
+    <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="check()">
+      {% for value, name in answers %}
+      <option value="{{ value }}" {{ 'selected' if data[group] == value }}>{{ name }}</option>
+      {% endfor %}
+    </select>
+  </div>
 {% endmacro %}
 
-{% macro radio(data, group, name, value) %}
+{% macro radio(label, answers, data, group) %}
+  <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
+  <div class="govuk-radios govuk-radios--inline">
+      {% for value, name in answers %}
     <div class="govuk-radios__item">
       <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
         value="{{ value }}" {{ 'checked' if data[group] == value }} />
@@ -65,4 +75,6 @@
         {{ name }}
       </label>
     </div>
+      {% endfor %}
+  </div>
 {% endmacro %}
