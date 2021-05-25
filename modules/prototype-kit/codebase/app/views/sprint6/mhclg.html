@@ -51,6 +51,14 @@
 %}
 
 {%
+  set yes_no_ref = {
+    "yes": "Yes",
+    "no": "No",
+    "refused": "Refused"
+  }
+%}
+
+{%
   set relet = {
     "social-rent": "A social rent basis",
     "affordable": "An affordable rent basis",
@@ -213,6 +221,137 @@
   }
 %}
 
+{%
+  set armed_forces = {
+          "regular": "Yes - Regular",
+          "reserve": "Yes - Reserve",
+          "no": "No",
+          "refused": "Refused"
+  }
+%}
+
+{%
+  set regular_service = {
+    "Up to and including 5 years ago": "Up to and including 5 years ago",
+    "More than 5 years ago": "More than 5 years ago",
+    "Are still serving": "Are still serving",
+    "Refused": "Refused"
+  }
+%}
+
+{%
+  set benefits = {
+    "Housing Benefit (If not in receipt of universal credit)": "Housing Benefit (If not in receipt of universal credit)", 
+    "Not in receipt of either UC or HB": "Not in receipt of either UC or HB", 
+    "Don't know": "Don't know", 
+    "UC - With housing element (and not in receipt of housing benefit)": "UC - With housing element (and not in receipt of housing benefit)", 
+    "UC - Without housing element (not in receipt of HB and tenants not eligible for housing support e.g residential care home)": "UC - Without housing element (not in receipt of HB and tenants not eligible for housing support e.g residential care home)", 
+    "UC - Without housing element (and in receipt of HB)": "UC - Without housing element (and in receipt of HB)"
+  }
+%}
+
+{%
+  set benefit_proportion = {
+    "all": "All",
+    "some": "Some",
+    "none": "None",
+    "unknown": "Don't know"
+  }
+%}
+
+{%
+  set regularity = {
+    "Weekly": "Weekly",
+    "Monthly": "Monthly",
+    "Annual": "Annual"
+  }
+%}
+
+{%
+  set reason_for_leaving_previous = {
+      "Permanently decanted from another property owned by this landlord": "Permanently decanted from another property owned by this landlord",
+      "Left home country as refugee": "Left home country as refugee",
+      "Discharged from prison or from long stay hospital or other institution": "Discharged from prison or from long stay hospital or other institution",
+      "Loss of tied accommodation": "Loss of tied accommodation",
+      "Domestic abuse": "Domestic abuse",
+      "(Non-violent) relationship breakdown with partner": "(Non-violent) relationship breakdown with partner",
+      "Asked to leave by family or friends": "Asked to leave by family or friends",
+      "Racial harassment": "Racial harassment",
+      "Other problems with neighbours": "Other problems with neighbours",
+      "Property unsuitable because of overcrowding": "Property unsuitable because of overcrowding",
+      "End of assured shorthold tenancy – no fault": "End of assured shorthold tenancy – no fault",
+      "End of assured shorthold tenancy- tenant’s fault": "End of assured shorthold tenancy- tenant’s fault",
+      "End of fixed term tenancy – no fault": "End of fixed term tenancy – no fault",
+      "End of fixed term tenancy – tenant’s fault": "End of fixed term tenancy – tenant’s fault",
+      "Repossession": "Repossession",
+      "Under occupation - offered incentive to downsize": "Under occupation - offered incentive to downsize",
+      "Under occupation - no incentive": "Under occupation - no incentive",
+      "Property unsuitable because of ill health / disability": "Property unsuitable because of ill health / disability",
+      "Property unsuitable because of poor condition": "Property unsuitable because of poor condition",
+      "Couldn’t afford fees attached to renewing the tenancy": "Couldn’t afford fees attached to renewing the tenancy",
+      "Couldn’t afford the increase in rent": "Couldn’t afford the increase in rent",
+      "Couldn’t afford rent or mortgage – welfare reforms": "Couldn’t afford rent or mortgage – welfare reforms",
+      "Couldn’t afford rent or mortgage – employment": "Couldn’t afford rent or mortgage – employment",
+      "Couldn’t afford rent or mortgage – other": "Couldn’t afford rent or mortgage – other",
+      "To move nearer to family / friends / school": "To move nearer to family / friends / school",
+      "To move nearer to work": "To move nearer to work",
+      "To move to accommodation with support": "To move to accommodation with support",
+      "To move to independent accommodation": "To move to independent accommodation",
+      "Hate crime": "Hate crime",
+      "Other": "Other",
+      "Don’t know": "Don’t know"
+  }
+%}
+
+{%
+  set subsidy_cap = {
+    "Yes: Removal or spar bedroom subsidy": "Yes: Removal or spar bedroom subsidy",
+    "Yes: Benefit cap": "Yes: Benefit cap",
+    "Yes: both": "Yes: both",
+    "No": "No",
+    "Don't know": "Don't know"
+  }
+%}
+
+{%
+  set disability = {
+    "Fully wheelchair accessible housing": "Fully wheelchair accessible housing",
+    "Wheelchair access to essential rooms": "Wheelchair access to essential rooms",
+    "Level access housing": "Level access housing",
+    "Other disability requirements.": "Other disability requirements.",
+    "No disability requirements": "No disability requirements",
+    "Don’t know": "Don’t know"
+  }
+%}
+
+{%
+  set previous_situation = {
+      "Owner occupation (private)": "Owner occupation (private)",
+      "Owner occupation (low cost home ownership)": "Owner occupation (low cost home ownership)",
+      "Private sector tenancy": "Private sector tenancy",
+      "Tied housing or rented with job": "Tied housing or rented with job",
+      "Supported housing": "Supported housing",
+      "Sheltered accommodation": "Sheltered accommodation",
+      "Residential care home": "Residential care home",
+      "Living with friends or family": "Living with friends or family",
+      "Refuge": "Refuge",
+      "Hospital": "Hospital",
+      "Prison / Approved Probation Hostel": "Prison / Approved Probation Hostel",
+      "Direct access hostel": "Direct access hostel",
+      "Bed and Breakfast": "Bed and Breakfast",
+      "Mobile home / caravan": "Mobile home / caravan",
+      "Any other temporary accommodation": "Any other temporary accommodation",
+      "Home Office Asylum Support": "Home Office Asylum Support",
+      "Children’s home / foster care": "Children’s home / foster care",
+      "Rough sleeping": "Rough sleeping",
+      "Fixed term Local Authority General Needs tenancy": "Fixed term Local Authority General Needs tenancy",
+      "Lifetime Local Authority General Needs tenancy": "Lifetime Local Authority General Needs tenancy",
+      "Fixed term PRP General Needs tenancy": "Fixed term PRP General Needs tenancy",
+      "Lifetime PRP General Needs tenancy": "Lifetime PRP General Needs tenancy",
+      "Other": "Other"
+  }
+%}
+
 {% macro option(label, answers, data, group, onchange) %}
   <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
   <div class="govuk-form-group">
@@ -224,13 +363,13 @@
   </div>
 {% endmacro %}
 
-{% macro radio(label, answers, data, group, onchange, subdued) %}
+{% macro radio(label, answers, data, group, changefn, subdued) %}
   <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ label }}</label>
-  <div class="govuk-radios govuk-radios--inline">
+  <div class="govuk-radios">
       {% for value, name in answers %}
     <div class="govuk-radios__item">
       <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
-        onchange="{{ onchange }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
+        onchange="{{ changefn }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
       <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ value }}">
         {{ name }}
       </label>
