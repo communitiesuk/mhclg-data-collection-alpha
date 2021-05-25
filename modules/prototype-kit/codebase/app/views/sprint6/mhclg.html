@@ -43,6 +43,14 @@
 %}
 
 {%
+  set yes_no_dk = {
+    "yes": "Yes",
+    "no": "No",
+    "dont-know": "Don't know"
+  }
+%}
+
+{%
   set relet = {
     "social-rent": "A social rent basis",
     "affordable": "An affordable rent basis",
@@ -74,13 +82,13 @@
   </div>
 {% endmacro %}
 
-{% macro radio(label, answers, data, group) %}
+{% macro radio(label, answers, data, group, onchange) %}
   <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
   <div class="govuk-radios govuk-radios--inline">
       {% for value, name in answers %}
     <div class="govuk-radios__item">
       <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
-        value="{{ value }}" {{ 'checked' if data[group] == value }} />
+        onchange="{{ onchange }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
       <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ value }}">
         {{ name }}
       </label>

@@ -147,33 +147,8 @@
         </div>
       </div>
 
-      <label class="govuk-label govuk-label--m" for="unit-type">
-        Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?
-      </label>
-      <div class="govuk-radios govuk-radios--inline">
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="reasonable-preference-yes" name="reasonable-preference" type="radio"
-            onchange="check()" value="yes" {{ 'checked' if data['reasonable-preference']=='yes' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="reasonable-preference">
-            Yes
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="reasonable-preference-no" name="reasonable-preference" type="radio"
-            onchange="check()" value="no" {{ 'checked' if data['reasonable-preference']=='no' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="reasonable-preference-2">
-            No
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="reasonable-preference-dont-know" name="reasonable-preference"
-            onchange="check()" type="radio" value="dont-know" {{ 'checked' if data['reasonable-preference']=='dont-know'
-            else '' }} />
-          <label class="govuk-label govuk-radios__label" for="reasonable-preference-2">
-            Don't know
-          </label>
-        </div>
-      </div>
+      {{ mhclg.radio("Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?",
+               mhclg.yes_no_dk, data, 'reasonable-preference', 'check()') }}
 
       {{ mhclg.checkboxes('Which of the following reasons for Reasonable Preference apply?', 'Select all that apply.', mhclg.reasonable_preference, data, 'reasonable-preference-reasons') }}
 
