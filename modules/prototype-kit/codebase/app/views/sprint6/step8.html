@@ -1,3 +1,4 @@
+{% import "./mhclg.html" as mhclg %}
 {% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
 %} {% block header %}
 <!-- Blank header with no service name for the start page -->
@@ -35,51 +36,177 @@
       <a class="govuk-breadcrumbs__link" href="/sprint6/step7">Step 7</a>
     </li>
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" >Step 8</a>
+      <a class="govuk-breadcrumbs__link">Step 8</a>
     </li>
   </ol>
 </div>
 {% endblock %} {% block content %}
-<h1 class="govuk-heading-l">Tenant details</h1>
+<h1 class="govuk-heading-l">Property details</h1>
 <form class="form" action="/sprint6/summary" method="POST">
-
-  {# armed forces input #}
-
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">
-          CHANGEME
-        </h1>
-      </legend>
-      <div class="govuk-radios">
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="armed-forces" name="armed-forces" type="radio" value="Regular">
-          <label class="govuk-label govuk-radios__label" for="armed-forces">
-            Yes
-          </label>
+      <label class="govuk-label govuk-label--m" for="bedrooms">
+          Number of bedrooms (if shared accommodation, enter number of bedrooms occupied by this household; a bed-sit
+          has 1 bedroom)
+      </label>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="bedrooms" name="bedrooms"
+            type="number" pattern="[0-9]*" inputmode="numeric" value="{{ data['bedrooms'] }}" onkeyup="check()" />
         </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="armed-forces-2" name="armed-forces" type="radio" value="Reserve">
-          <label class="govuk-label govuk-radios__label" for="armed-forces-2">
-            No
+      </div>
+      <div class="govuk-checkboxes" id="bedrooms-override-section">
+        <div class="govuk-checkboxes__item">
+          <p></p>
+          <input class="govuk-checkboxes__input" id="bedrooms-override" name="bedrooms-override" type="checkbox"
+            {{ 'checked' if data['bedrooms-override'] and data['bedrooms-override']=='override' }} value="override">
+          <label class="govuk-label govuk-checkboxes__label" for="bedrooms-override">
+            Override
           </label>
         </div>
       </div>
     </fieldset>
   </div>
 
+  <label class="govuk-label govuk-label--m" for="unit-type">
+      Type of unit
+  </label>
+  <div class="govuk-form-group">
+    <select class="govuk-select" id="unit-type" name="unit-type" onchange="check()">
+      {% for value, name in mhclg.unit_type %}
+        {{ mhclg.option(data['unit-type'], name, value) }}
+      {% endfor %}
+    </select>
+  </div>
+
+  <label class="govuk-label govuk-label--m" for="unit-type">
+      Type of building
+  </label>
+  <div class="govuk-radios govuk-radios--inline">
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="building-type-purpose-built" name="building-type" type="radio"
+        value="purpose-built" {{ 'checked' if data['building-type']=='purpose-built' }} />
+      <label class="govuk-label govuk-radios__label" for="building-type-purpose-built">
+        Purpose built
+      </label>
+    </div>
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="building-type-converted" name="building-type" type="radio"
+        value="converted" {{ 'checked' if data['building-type']=='converted' }} />
+      <label class="govuk-label govuk-radios__label" for="building-type-converted">
+        Converted from previous residential or non-residential property
+      </label>
+    </div>
+  </div>
+
+  <label class="govuk-label govuk-label--m" for="unit-type">
+      Is property built or adapted to be wheelchair accessible?
+  </label>
+  <div class="govuk-radios govuk-radios--inline">
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="wheelchair-access-yes" name="wheelchair-access" type="radio" value="yes"
+        {{ 'checked' if data['wheelchair-access']=='yes' }} />
+      <label class="govuk-label govuk-radios__label" for="wheelchair-access-yes">
+        Yes
+      </label>
+    </div>
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="wheelchair-access-no" name="wheelchair-access" type="radio" value="no"
+        {{ 'checked' if data['wheelchair-access']=='no' }} />
+      <label class="govuk-label govuk-radios__label" for="wheelchair-access-no">
+        No
+      </label>
+    </div>
+  </div>
+
+  <label class="govuk-label govuk-label--m" for="unit-type">
+      If this is a relet, was the property most recently let on..
+    </h1>
+  </label>
+  <div class="govuk-radios govuk-radios--inline">
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="relet-social-rent" name="relet" type="radio" value="social-rent"
+        {{ 'checked' if data['relet']=='social-rent' }} />
+      <label class="govuk-label govuk-radios__label" for="relet-social-rent">
+        A social rent basis
+      </label>
+    </div>
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="relet-affordable" name="relet" type="radio" value="affordable" {{ 'checked'
+        if data['relet']=='affordable' }} />
+      <label class="govuk-label govuk-radios__label" for="relet-affordable">
+        An affordable rent basis
+      </label>
+    </div>
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="relet-rent-to-buy" name="relet" type="radio" value="rent-to-buy"
+        {{ 'checked' if data['relet']=='rent-to-buy' }} />
+      <label class="govuk-label govuk-radios__label" for="relet-rent-to-buy">
+        A rent to buy basis
+      </label>
+    </div>
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="relet-unknown" name="relet" type="radio" value="unknown" {{ 'checked' if
+        data['relet']=='unknown' }} />
+      <label class="govuk-label govuk-radios__label" for="relet-unknown">
+        Don't know
+      </label>
+    </div>
+  </div>
+
+  <label class="govuk-label govuk-label--m" for="unit-type">
+      Reason for vacancy
+  </label>
+  <div class="govuk-form-group">
+    <select class="govuk-select" id="reason-for-vacancy" name="reason-for-vacancy">
+      {% for value, name in mhclg.reason_for_vacancy %}
+        {{ mhclg.option(data['reason-for-vacancy'], name, value) }}
+      {% endfor %}
+    </select>
+  </div>
+
+  <label class="govuk-label govuk-label--m" for="unit-type">
+    Location of property
+  </label>
+
+  <div class="govuk-form-group">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">
+        <label class="govuk-label govuk-label--1" for="postal-code-out">Postcode first part</label>
+        <input class="govuk-input" name="postal-code-out" type="text" value="{{ data['postal-code-out'] }}" />
+      </div>
+      <div class="govuk-grid-column-one-quarter">
+        <label class="govuk-label govuk-label--1" for="postal-code-out">Postcode second part</label>
+        <input class="govuk-input" name="postal-code-in" type="text" value="{{ data['postal-code-in'] }}" />
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">
+        <label class="govuk-label govuk-label--1" for="ons-la-code">ONS LA Code</label>
+        <input class="govuk-input" name="ons-la-code" type="text" value="{{ data['ons-la-code'] }}" />
+      </div>
+  </div>
+
+  <script>
+    function check() {
+      var val = document.getElementById("bedrooms").value;
+      console.log("VAL: " + val + "; ON: " + (val > 7))
+      if (val > 7) {
+        document.getElementById("bedrooms-override-section").style.display = "block";
+        document.getElementById("bedrooms-override-section").style.opacity = 1;
+      } else {
+        document.getElementById("bedrooms-override-section").style.display = "none";
+        document.getElementById("bedrooms-override-section").style.opacity = 0;
+        document.getElementById("bedrooms-override").checked = false;
+      }
+    }
+    check();
+  </script>
   <button class="govuk-button" data-module="govuk-button">
     Continue
-    <svg
-      class="govuk-button__start-icon"
-      xmlns="http://www.w3.org/2000/svg"
-      width="17.5"
-      height="19"
-      viewBox="0 0 33 40"
-      aria-hidden="true"
-      focusable="false"
-    >
+    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
+      viewBox="0 0 33 40" aria-hidden="true" focusable="false">
       <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
     </svg>
   </button>
