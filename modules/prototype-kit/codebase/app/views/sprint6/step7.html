@@ -48,17 +48,17 @@
           Over what period are rent and other charges due
         </label>
         <select class="govuk-select" id="sort" name="rental-period">
-          <option value="Fortnightly">Fortnightly</option>
-          <option value="Four-weekly">Four-weekly</option>
-          <option value="Calendar monthly">Calendar monthly</option>
-          <option value="Weekly for 46 weeks">Weekly for 46 weeks</option>
-          <option value="Weekly for 47 weeks">Weekly for 47 weeks</option>
-          <option value="Weekly for 48 weeks">Weekly for 48 weeks</option>
-          <option value="Weekly for 49 weeks">Weekly for 49 weeks</option>
-          <option value="Weekly for 50 weeks">Weekly for 50 weeks</option>
-          <option value="Weekly for 51 weeks">Weekly for 51 weeks</option>
-          <option value="Weekly for 52 weeks">Weekly for 52 weeks</option>
-          <option value="Weekly for 53 weeks">Weekly for 53 weeks</option>
+          <option value="Fortnightly" {{ 'selected' if data['rental-period'] == 'Fortnightly' else '' }}>Fortnightly</option>
+          <option value="Four-weekly" {{ 'selected' if data['rental-period'] == 'Four-weekly' else '' }}>Four-weekly</option>
+          <option value="Calendar monthly" {{ 'selected' if data['rental-period'] == 'Calendar monthly' else '' }}>Calendar monthly</option>
+          <option value="Weekly for 46 weeks" {{ 'selected' if data['rental-period'] == 'Weekly for 46 weeks' else '' }}>Weekly for 46 weeks</option>
+          <option value="Weekly for 47 weeks" {{ 'selected' if data['rental-period'] == 'Weekly for 47 weeks' else '' }}>Weekly for 47 weeks</option>
+          <option value="Weekly for 48 weeks" {{ 'selected' if data['rental-period'] == 'Weekly for 48 weeks' else '' }}>Weekly for 48 weeks</option>
+          <option value="Weekly for 49 weeks" {{ 'selected' if data['rental-period'] == 'Weekly for 49 weeks' else '' }}>Weekly for 49 weeks</option>
+          <option value="Weekly for 50 weeks" {{ 'selected' if data['rental-period'] == 'Weekly for 50 weeks' else '' }}>Weekly for 50 weeks</option>
+          <option value="Weekly for 51 weeks" {{ 'selected' if data['rental-period'] == 'Weekly for 51 weeks' else '' }}>Weekly for 51 weeks</option>
+          <option value="Weekly for 52 weeks" {{ 'selected' if data['rental-period'] == 'Weekly for 52 weeks' else '' }}>Weekly for 52 weeks</option>
+          <option value="Weekly for 53 weeks" {{ 'selected' if data['rental-period'] == 'Weekly for 53 weeks' else '' }}>Weekly for 53 weeks</option>
         </select>
       </div>
     </fieldset>
@@ -82,6 +82,7 @@
             type="number"
             min="1"
             step="any"
+            value="{{ data['basic-rent'] }}"
           />
         </div>
       </div>
@@ -104,6 +105,7 @@
           type="number"
           min="1"
           step="any"
+          value="{{ data['service-charge'] }}"
         />
         </div>
       </div>
@@ -127,6 +129,7 @@
           type="number"
           min="1"
           step="any"
+          value="{{ data['personal-service-charge'] }}"
         />
         </div>
       </div>
@@ -150,6 +153,7 @@
           type="number"
           min="1"
           step="1"
+          value="{{ data['support-charge'] }}"
         />
         </div>
       </div>
@@ -193,6 +197,7 @@
             name="outstanding-after-uc"
             type="radio"
             value="Yes"
+            {{ 'checked' if data['outstanding-after-uc'] == 'Yes' else '' }}
           />
           <label
             class="govuk-label govuk-radios__label"
@@ -208,6 +213,7 @@
             name="outstanding-after-uc"
             type="radio"
             value="No"
+            {{ 'checked' if data['outstanding-after-uc'] == 'No' else '' }}
           />
           <label
             class="govuk-label govuk-radios__label"
@@ -222,7 +228,8 @@
             id="outstanding-after-uc-3"
             name="outstanding-after-uc"
             type="radio"
-            value="Don't Know"
+            value="Don't know"
+            {{ 'checked' if data['outstanding-after-uc'] == "Don't know" else '' }}
           />
           <label
             class="govuk-label govuk-radios__label"
