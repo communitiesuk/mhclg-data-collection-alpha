@@ -1,3 +1,4 @@
+{% import "./mhclg.html" as mhclg %}
 {% extends "layout.html" %} {% block pageTitle %} Log Creation | Step 1 {%
 endblock %} {% block header %}
 <!-- Blank header with no service name for the start page -->
@@ -26,203 +27,95 @@ endblock %} {% block header %}
 <div class="govuk-form-group">
   {# Tenancy start date input #}
 
-<form class="form" action="/sprint6/step3" method="POST">
-  <fieldset
-    class="govuk-fieldset"
-    role="group"
-    aria-describedby="tenancy-hint"
-  >
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h2 class="govuk-fieldset__heading">Tenancy start date</h2>
-    </legend>
-    <div id="tenancy-hint" class="govuk-hint">
-      For example, 12 11 2007
-    </div>
-    <div class="govuk-date-input" id="tenancy">
-      <div class="govuk-date-input__item">
-        <div class="govuk-form-group">
-          <label
-            class="govuk-label govuk-date-input__label"
-            for="tenancy-day"
-          >
-            Day
-          </label>
-          <input
-            class="govuk-input govuk-date-input__input govuk-input--width-2"
-            id="tenancy-day"
-            name="tenancy-day"
-            type="number"
-            pattern="[0-9]*"
-            inputmode="numeric"
-            value="{{ data['tenancy-day'] }}"
-          />
-        </div>
-      </div>
-      <div class="govuk-date-input__item">
-        <div class="govuk-form-group">
-          <label
-            class="govuk-label govuk-date-input__label"
-            for="tenancy-month"
-          >
-            Month
-          </label>
-          <input
-            class="govuk-input govuk-date-input__input govuk-input--width-2"
-            id="tenancy-month"
-            name="tenancy-month"
-            type="number"
-            pattern="[0-9]*"
-            inputmode="numeric"
-            value="{{ data['tenancy-month'] }}"
-          />
-        </div>
-      </div>
-      <div class="govuk-date-input__item">
-        <div class="govuk-form-group">
-          <label
-            class="govuk-label govuk-date-input__label"
-            for="tenancy-year"
-          >
-            Year
-          </label>
-          <input
-            class="govuk-input govuk-date-input__input govuk-input--width-4"
-            id="tenancy-year"
-            name="tenancy-year"
-            type="number"
-            pattern="[0-9]*"
-            inputmode="numeric"
-            value="{{ data['tenancy-year'] }}"
-          />
-        </div>
-      </div>
-    </div>
-  </fieldset>
-
-  {# Provider and landlord #}
-  <fieldset
-    class="govuk-fieldset govuk-!-margin-top-6"
-    role="group"
-    aria-describedby="tenancy-hint"
-  >
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h2 class="govuk-fieldset__heading">Provider</h2>
-    </legend>
-    <div class="govuk-form-group">
+  <form class="form" action="/sprint6/step3" method="POST">
+    <fieldset class="govuk-fieldset" role="group" aria-describedby="tenancy-hint">
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">Type of provider</h1>
+        <h2 class="govuk-fieldset__heading">Tenancy start date</h2>
       </legend>
-      <div class="govuk-radios govuk-radios--inline">
-        <div class="govuk-radios__item">
-          <input
-            class="govuk-radios__input"
-            id="private-registered"
-            name="provider"
-            type="radio"
-            value="private"
-            {{ 'checked' if data['provider'] == 'yes' else '' }}
-          />
-          <label class="govuk-label govuk-radios__label" for="private-registered">
-            Private Registered Provider
-          </label>
+      <div id="tenancy-hint" class="govuk-hint">
+        For example, 12 11 2007
+      </div>
+      <div class="govuk-date-input" id="tenancy">
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="tenancy-day">
+              Day
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-day" name="tenancy-day"
+              type="number" pattern="[0-9]*" inputmode="numeric" value="{{ data['tenancy-day'] }}" />
+          </div>
         </div>
-        <div class="govuk-radios__item">
-          <input
-            class="govuk-radios__input"
-            id="local-authority"
-            name="provider"
-            type="radio"
-            value="la"
-            {{ 'checked' if data['provider'] == 'no' else '' }}
-          />
-          <label class="govuk-label govuk-radios__label" for="local-authority">
-            Local Authority
-          </label>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="tenancy-month">
+              Month
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-month"
+              name="tenancy-month" type="number" pattern="[0-9]*" inputmode="numeric"
+              value="{{ data['tenancy-month'] }}" />
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="tenancy-year">
+              Year
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="tenancy-year"
+              name="tenancy-year" type="number" pattern="[0-9]*" inputmode="numeric"
+              value="{{ data['tenancy-year'] }}" />
+          </div>
         </div>
       </div>
-    </div>
+    </fieldset>
 
-    <div class="govuk-form-group">
+    {# Provider and landlord #}
+    <fieldset class="govuk-fieldset govuk-!-margin-top-6" role="group" aria-describedby="tenancy-hint">
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">Status</h1>
+        <h2 class="govuk-fieldset__heading">Provider</h2>
       </legend>
-      <div class="govuk-radios govuk-radios--inline">
-        <div class="govuk-radios__item">
-          <input
-            class="govuk-radios__input"
-            id="ll-status__this"
-            name="ll-status"
-            type="radio"
-            value="this"
-            {{ 'checked' if data['ll-status'] == 'this' else '' }}
-          />
-          <label class="govuk-label govuk-radios__label" for="ll-status__this">
-            This Landlord
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input
-            class="govuk-radios__input"
-            id="ll-status__another"
-            name="ll-status"
-            type="radio"
-            value="another"
-            {{ 'checked' if data['ll-status'] == 'another' else '' }}
-          />
-          <label
-            class="govuk-label govuk-radios__label"
-            for="ll-status__another"
-          >
-            Another RP (HA/LA)
-          </label>
-        </div>
-      </div>
-    </div>
-    <div id="rp-name">
-      <div class="govuk-grid-row govuk-!-margin-bottom-6">
-        <div class="govuk-grid-column-one-half">
+      {{ mhclg.radio("Type of provider", mhclg.provider, data, 'provider') }}
+      {{ mhclg.radio("Status", mhclg.ll_status, data, 'll-status', "check()") }}
+
+      <div id="rp-name">
+        <div class="govuk-grid-row govuk-!-margin-bottom-6">
+          <div class="govuk-grid-column-one-half">
             <h1 class="govuk-label-wrapper">
               <label class="govuk-label govuk-label--l" for="rp-name">
                 RP (HA/LA)Name
               </label>
             </h1>
-            <input class="govuk-input" name="rp-name" type="text" value="{{ data['rp-name'] }}"/>
+            <input class="govuk-input" name="rp-name" type="text" value="{{ data['rp-name'] }}" />
+          </div>
         </div>
-      </div>
 
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-half">
-          <div id="core-code">
-            <h1 class="govuk-label-wrapper">
-              <label class="govuk-label govuk-label--l" for="core-code">
-                CORE code
-              </label>
-            </h1>
-            <input class="govuk-input" name="core-code" type="text" value="{{ data['core-code'] }}" />
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+            <div id="core-code">
+              <h1 class="govuk-label-wrapper">
+                <label class="govuk-label govuk-label--l" for="core-code">
+                  CORE code
+                </label>
+              </h1>
+              <input class="govuk-input" name="core-code" type="text" value="{{ data['core-code'] }}" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </fieldset>
+    </fieldset>
 </div>
 
 {# conditional render check and style#}
 <script>
-  document.body.addEventListener("change", function (e) {
-    let target = e.target;
-    let message;
-    console.log(e.target.value);
-    switch (target.value) {
-      case "this":
-        document.getElementById("rp-name").style.display = "none";
-        document.getElementById("rp-name").style.opacity = 0;
-        break;
-      case "another":
-        document.getElementById("rp-name").style.display = "block";
-        document.getElementById("rp-name").style.opacity = 1;
-        break;
+  function check() {
+    if (document.getElementById("ll-status-another").checked) {
+      document.getElementById("rp-name").style.display = "block";
+      document.getElementById("rp-name").style.opacity = 1;
+    } else {
+      document.getElementById("rp-name").style.display = "none";
+      document.getElementById("rp-name").style.opacity = 0;
     }
-  });
+  }
+  check();
 </script>
 
 <style>
@@ -233,19 +126,12 @@ endblock %} {% block header %}
   }
 </style>
 
-  <button class="govuk-button" data-module="govuk-button">
-    Continue
-    <svg
-      class="govuk-button__start-icon"
-      xmlns="http://www.w3.org/2000/svg"
-      width="17.5"
-      height="19"
-      viewBox="0 0 33 40"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-    </svg>
-  </button>
+<button class="govuk-button" data-module="govuk-button">
+  Continue
+  <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40"
+    aria-hidden="true" focusable="false">
+    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+  </svg>
+</button>
 </form>
 {% endblock %}

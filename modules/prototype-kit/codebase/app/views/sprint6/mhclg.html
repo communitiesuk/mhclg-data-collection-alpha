@@ -129,6 +129,20 @@
   }
 %}
 
+{%
+  set provider = {
+    "private-registered": "Private Registered Provider",
+    "local-authority": "Local Authority"
+  }
+%}
+
+{%
+  set ll_status = {
+    "this": "This Landlord",
+    "another": "Another RP (HA/LA)"
+  }
+%}
+
 {% macro option(label, answers, data, group) %}
   <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
   <div class="govuk-form-group">
