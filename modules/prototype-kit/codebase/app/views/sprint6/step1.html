@@ -1,3 +1,4 @@
+{% import "./mhclg.html" as mhclg %}
 {% extends "layout.html" %} {% block pageTitle %} Log Creation | Step 1 {%
 endblock %} {% block header %}
 <!-- Blank header with no service name for the start page -->
@@ -27,56 +28,9 @@ endblock %} {% block header %}
     role="group"
     aria-describedby="passport-issued-hint"
   >
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h2 class="govuk-fieldset__heading">Which year are you completing this log for?</h2>
-    </legend>
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="completion-year"> Year: </label>
-      <select class="govuk-select" id="completion-year" name="completion-year">
-        <option value="2021" {{ 'selected' if data['completion-year'] == '2021' }}>2020/2021</option>
-        <option value="2022" {{ 'selected' if not data['completion-year'] or data['completion-year'] == '2022' }}>2021/2022</option>
-      </select>
-    </div>
-  </fieldset>
-    <fieldset
-    class="govuk-fieldset govuk-!-margin-top-6"
-    role="group"
-    aria-describedby="passport-issued-hint"
-  >
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h2 class="govuk-fieldset__heading">Which form are you completing?</h2>
-    </legend>
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="form-name"> Form: </label>
-      <select class="govuk-select" id="form-name" name="form-name">
-        <option value="social-general" {{ 'selected' if data['form-name'] == 'social-general' }}>Social Rent General Needs</option>
-        <option value="social-supported" {{ 'selected' if data['form-name'] == 'social-supported' }}>Social Rent Supported Housing</option>
-        <option value="affordable-general" {{ 'selected' if data['form-name'] == 'affordable-general' }}>Affordable Rent General Needs</option>
-        <option value="affordable-supported" {{ 'selected' if data['form-name'] == 'affordable-supported' }}>Affordable Rent Supported Housing</option>
-        <option value="rtb-general" {{ 'selected' if data['form-name'] == 'rtb-general' }}>Rent To Buy General Needs</option>
-        <option value="rtb-supported" {{ 'selected' if data['form-name'] == 'rtb-supported' }}>Rent To Buy Supported Housing</option>
-        <option value="sales-log" {{ 'selected' if data['form-name'] == 'sales-log' }}>Sales Log</option>
-      </select>
-    </div>
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h1 class="govuk-fieldset__heading">
-        GDPR?
-      </h1>
-    </legend>
-    <div class="govuk-radios govuk-radios--inline">
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="gdpr-yes" name="gdpr" type="radio" value="yes" {{ 'checked' if data['gdpr'] == 'yes' }}>
-        <label class="govuk-label govuk-radios__label" for="gdpr">
-          Yes
-        </label>
-      </div>
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="gdpr-no" name="gdpr" type="radio" value="no" {{ 'checked' if data['gdpr'] == 'no' }}>
-        <label class="govuk-label govuk-radios__label" for="gdpr-2">
-          No
-        </label>
-      </div>
-    </div>
+    {{ mhclg.option("Which year is this log for?", mhclg.completion_year, data, 'completion-year') }}
+    {{ mhclg.option("Which form are you completing?", mhclg.form_type, data, 'form-name') }}
+    {{ mhclg.radio("GDPR", mhclg.yes_no, data, 'gdpr') }}
   </fieldset>
 </div>
 

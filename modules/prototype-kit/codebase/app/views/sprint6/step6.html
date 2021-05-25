@@ -1,3 +1,4 @@
+{% import "./mhclg.html" as mhclg %}
 {% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
 %} {% block header %}
 <!-- Blank header with no service name for the start page -->
@@ -36,313 +37,46 @@
 {% endblock %} {% block content %}
 <h1 class="govuk-heading-l">Tenant details</h1>
 <form class="form" action="/sprint6/step7" method="POST">
-
-  {# armed forces input #}
-
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      <label class="govuk-label govuk-label--m" for="time-in-la">
-        For how long has the household continuously lived in the local authority area where the new letting is located?
-      </label>
-      <div class="govuk-form-group">
-        <select class="govuk-select" id="time-in-la" name="time-in-la" onchange="check()">
-          <option value="0" {{ 'selected' if data['time-in-la']=='0' else '' }}>
-            Just moved to Local Authority area
-          </option>
-          <option value="<1" {{ 'selected' if data['time-in-la']=='<1' else '' }}>
-            Less than 1 year
-          </option>
-          <option value="<2" {{ 'selected' if data['time-in-la']=='<2' else '' }}>
-            1 year but under 2 years
-          </option>
-          <option value="<3" {{ 'selected' if data['time-in-la']=='<3' else '' }}>
-            2 years but under 3 years
-          </option>
-          <option value="<4" {{ 'selected' if data['time-in-la']=='<4' else '' }}>
-            3 years but under 4 years
-          </option>
-          <option value="<5" {{ 'selected' if data['time-in-la']=='<5' else '' }}>
-            4 years but under 5 years
-          </option>
-          <option value=">5" {{ 'selected' if data['time-in-la']=='>5' else '' }}>
-            5 years or more
-          </option>
-          <option value="?" {{ 'selected' if data['time-in-la']=='?' else '' }}>
-            Don't Know
-          </option>
-        </select>
-      </div>
+      {{ mhclg.option("For how long has the household continuously lived in the local authority area where the new letting is located?",
+               mhclg.time_range, data, 'time-in-la') }}
 
-      <label class="govuk-label govuk-label--m" for="time-waiting">
-        For how long was the household on the local authority waiting list where the new letting is located?
-      </label>
-      <div class="govuk-form-group">
-        <select class="govuk-select" id="time-waiting" name="time-waiting" onchange="check()">
-          <option value="0" {{ 'selected' if data['time-waiting']=='0' else '' }}>
-            Just moved to Local Authority area
-          </option>
-          <option value="<1" {{ 'selected' if data['time-waiting']=='<1' else '' }}>
-            Less than 1 year
-          </option>
-          <option value="<2" {{ 'selected' if data['time-waiting']=='<2' else '' }}>
-            1 year but under 2 years
-          </option>
-          <option value="<3" {{ 'selected' if data['time-waiting']=='<3' else '' }}>
-            2 years but under 3 years
-          </option>
-          <option value="<4" {{ 'selected' if data['time-waiting']=='<4' else '' }}>
-            3 years but under 4 years
-          </option>
-          <option value="<5" {{ 'selected' if data['time-waiting']=='<5' else '' }}>
-            4 years but under 5 years
-          </option>
-          <option value=">5" {{ 'selected' if data['time-waiting']=='>5' else '' }}>
-            5 years or more
-          </option>
-          <option value="?" {{ 'selected' if data['time-waiting']=='?' else '' }}>
-            Don't Know
-          </option>
-        </select>
-      </div>
+      {{ mhclg.option("For how long was the household on the local authority waiting list where the new letting is located?",
+               mhclg.time_range, data, 'time-waiting') }}
 
-      <label class="govuk-label govuk-label--m" for="prior-status">
-        Immediately prior to this letting, was this household ...?
-      </label>
-      <div class="govuk-radios govuk-radios--inline">
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="prior-status-not-homeless" name="prior-status" type="radio"
-            value="not-homeless" {{ 'checked' if data['prior-status']=='not-homeless' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="prior-status">
-            Not homeless
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="prior-status-threatened-homeless" name="prior-status" type="radio"
-            value="threatened-homeless" {{ 'checked' if data['prior-status']=='threatened-homeless' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="prior-status">
-            Assessed as threatened with homelessness within 56 days by a LA and owed prevention duty
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="prior-status-homeless-owed-relief-duty" name="prior-status"
-            type="radio" value="homeless-owed-relief-duty" {{ 'checked' if
-            data['prior-status']=='homeless-owed-relief-duty' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="prior-status">
-            Assessed as homeless by a LA and owed a relief duty
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="prior-status-unintentionally-homeless" name="prior-status" type="radio"
-            value="unintentionally-homeless" {{ 'checked' if data['prior-status']=='unintentionally-homeless' else ''
-            }} />
-          <label class="govuk-label govuk-radios__label" for="prior-status">
-            Assessed as unintentionally homeless and having priority need by a LA and owed a homeless main duty
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="prior-status-other-homeless" name="prior-status" type="radio"
-            value="other-homeless" {{ 'checked' if data['prior-status']=='other-homeless' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="prior-status">
-            Other homelessness i.e. not found statutorily homeless by a housing authority but considered to be homeless
-            by the letting landlord
-          </label>
-        </div>
-      </div>
+      {{ mhclg.radio("Immediately prior to this letting, was this household ...?", mhclg.homeless, data, 'prior-status') }}
 
-      <label class="govuk-label govuk-label--m" for="unit-type">
-        Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?
-      </label>
-      <div class="govuk-radios govuk-radios--inline">
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="reasonable-preference-yes" name="reasonable-preference" type="radio"
-            onchange="check()" value="yes" {{ 'checked' if data['reasonable-preference']=='yes' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="reasonable-preference">
-            Yes
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="reasonable-preference-no" name="reasonable-preference" type="radio"
-            onchange="check()" value="no" {{ 'checked' if data['reasonable-preference']=='no' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="reasonable-preference-2">
-            No
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="reasonable-preference-dont-know" name="reasonable-preference"
-            onchange="check()" type="radio" value="dont-know" {{ 'checked' if data['reasonable-preference']=='dont-know'
-            else '' }} />
-          <label class="govuk-label govuk-radios__label" for="reasonable-preference-2">
-            Don't know
-          </label>
-        </div>
-      </div>
+      {{ mhclg.radio("Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?",
+               mhclg.yes_no_dk, data, 'reasonable-preference', 'check()') }}
 
-      <div class="govuk-form-group" id="reasonable-preference-reasons-section">
-        <label class="govuk-label govuk-label--s">
-          Which of the following reasons for Reasonable Preference apply?
-        </label>
-        <div id="reasonable-preference-reasons-hint" class="govuk-hint">
-          Select all that apply.
-        </div>
-        <div class="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-1"
-              name="reasonable-preference-reasons" type="checkbox" {{ 'checked' if data['reasonable-preference-reasons']
-              and 'homeless' in data['reasonable-preference-reasons'] else '' }} value="homeless">
-            <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-1">
-              Homeless or about to lose their home (within 56 days)
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-2"
-              name="reasonable-preference-reasons" type="checkbox" {{ 'checked' if data['reasonable-preference-reasons']
-              and 'insanitary' in data['reasonable-preference-reasons'] else '' }} value="insanitary">
-            <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-2">
-              Living in insanitary or overcrowded or unsatisfactory housing
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-3"
-              name="reasonable-preference-reasons" type="checkbox" {{ 'checked' if data['reasonable-preference-reasons']
-              and 'medical' in data['reasonable-preference-reasons'] else '' }} value="medical">
-            <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-3">
-              A need to move on medical and welfare grounds (including a reasonable-preference-reasons)
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-4"
-              name="reasonable-preference-reasons" type="checkbox" {{ 'checked' if data['reasonable-preference-reasons']
-              and 'hardship' in data['reasonable-preference-reasons'] else '' }} value="hardship">
-            <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-4">
-              A need to move to avoid hardship to themselves or others
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="reasonable-preference-reasons-5"
-              name="reasonable-preference-reasons" type="checkbox" {{ 'checked' if data['reasonable-preference-reasons']
-              and 'unknown' in data['reasonable-preference-reasons'] else '' }} value="unknown">
-            <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reasons-5">
-              Don't know
-            </label>
-          </div>
-        </div>
-      </div>
-      <script>
-        function check() {
-          var val = document.getElementById("reasonable-preference-yes").checked;
-          if (val) {
-            document.getElementById("reasonable-preference-reasons-section").style.display = "block";
-            document.getElementById("reasonable-preference-reasons-section").style.opacity = 1;
-          } else {
-            document.getElementById("reasonable-preference-reasons-section").style.display = "none";
-            document.getElementById("reasonable-preference-reasons-section").style.opacity = 0;
-          }
-        }
-        check();
-      </script>
+      {{ mhclg.checkboxes('Which of the following reasons for Reasonable Preference apply?', 'Select all that apply.', mhclg.reasonable_preference, data, 'reasonable-preference-reasons') }}
 
       <label class="govuk-label govuk-label--m" for="unit-type">
         Was the letting made under any of the following allocations systems? Select Yes or No for each allocation
         system.
       </label>
-      <div class="govuk-radios govuk-radios--inline">
-        <label class="govuk-label" for="allocations-cbl">Choice-based lettings (CBL):</label>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="allocations-cbl-yes" name="allocations-cbl" type="radio" value="yes"
-            {{ 'checked' if data['allocations-cbl']=='yes' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="allocations-cbl-yes">
-            Yes
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="allocations-cbl-no" name="allocations-cbl" type="radio" value="no"
-            {{ 'checked' if data['allocations-cbl']=='no' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="allocations-cbl-no">
-            No
-          </label>
-        </div>
-      </div>
-      <div class="govuk-radios govuk-radios--inline">
-        <label class="govuk-label" for="allocations-chr">Common housing register (CHR):</label>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="allocations-chr-yes" name="allocations-chr" type="radio" value="yes"
-            {{ 'checked' if data['allocations-chr']=='yes' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="allocations-chr-yes">
-            Yes
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="allocations-chr-no" name="allocations-chr" type="radio" value="no"
-            {{ 'checked' if data['allocations-chr']=='no' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="allocations-chr-no">
-            No
-          </label>
-        </div>
-      </div>
-      <div class="govuk-radios govuk-radios--inline">
-        <label class="govuk-label" for="allocations-cap">Common Allocation Policy (CAP):</label>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="allocations-cap-yes" name="allocations-cap" type="radio" value="yes"
-            {{ 'checked' if data['allocations-cap']=='yes' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="allocations-cap-yes">
-            Yes
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="allocations-cap-no" name="allocations-cap" type="radio" value="no"
-            {{ 'checked' if data['allocations-cap']=='no' else '' }} />
-          <label class="govuk-label govuk-radios__label" for="allocations-cap-no">
-            No
-          </label>
-        </div>
-      </div>
+      {{ mhclg.radio("Choice-based lettings (CBL):", mhclg.yes_no, data, 'allocations-cbl', "", true) }}
+      {{ mhclg.radio("Common housing register (CHR):", mhclg.yes_no, data, 'allocations-chr', "", true) }}
+      {{ mhclg.radio("Common Allocation Policy (CAP):", mhclg.yes_no, data, 'allocations-cap', "", true) }}
 
-      <label class="govuk-label govuk-label--m" for="unit-type">
-        Who referred the household for this letting?
-      </label>
-      <div class="govuk-form-group">
-        <select class="govuk-select" id="referral-by" name="referral-by" onchange="check()">
-          <option value="internal-transfer" {{ 'selected' if data['referral-by']=='internal-transfer' else '' }}>
-            Internal transfer
-          </option>
-          <option value="applied-direct" {{ 'selected' if data['referral-by']=='applied-direct' else '' }}>
-            Tenant applied direct (no referral or nomination)
-          </option>
-          <option value="la-nominated" {{ 'selected' if data['referral-by']=='la-nominated' else '' }}>
-            PRP lettings only - nominated by a local housing authority
-          </option>
-          <option value="housing-mobility" {{ 'selected' if data['referral-by']=='housing-mobility' else '' }}>
-            Relocated through recognised national/regional or sub-regional housing mobility scheme
-          </option>
-          <option value="social-landlord" {{ 'selected' if data['referral-by']=='social-landlord' else '' }}>
-            Other social landlord
-          </option>
-          <option value="social-services" {{ 'selected' if data['referral-by']=='social-services' else '' }}>
-            Social services
-          </option>
-          <option value="police-etc" {{ 'selected' if data['referral-by']=='police-etc' else '' }}>
-            Police/probation/prison
-          </option>
-          <option value="youth-offending-team" {{ 'selected' if data['referral-by']=='youth-offending-team' else '' }}>
-            Youth offending team
-          </option>
-          <option value="mental-health-team" {{ 'selected' if data['referral-by']=='mental-health-team' else '' }}>
-            Community mental health team
-          </option>
-          <option value="health-service" {{ 'selected' if data['referral-by']=='health-service' else '' }}>
-            Health service
-          </option>
-          <option value="voluntary-agency" {{ 'selected' if data['referral-by']=='voluntary-agency' else '' }}>
-            Voluntary agency
-          </option>
-          <option value="other" {{ 'selected' if data['referral-by']=='other' else '' }}>
-            Other
-          </option>
-        </select>
-      </div>
-
+      {{ mhclg.option("Who referred the household for this letting?", mhclg.referral_by, data, 'referral-by') }}
     </fieldset>
   </div>
+
+  <script>
+    function check() {
+      var val = document.getElementById("reasonable-preference-yes").checked;
+      if (val) {
+        document.getElementById("reasonable-preference-reasons-section").style.display = "block";
+        document.getElementById("reasonable-preference-reasons-section").style.opacity = 1;
+      } else {
+        document.getElementById("reasonable-preference-reasons-section").style.display = "none";
+        document.getElementById("reasonable-preference-reasons-section").style.opacity = 0;
+      }
+    }
+    check();
+  </script>
 
   <button class="govuk-button" data-module="govuk-button">
     Continue

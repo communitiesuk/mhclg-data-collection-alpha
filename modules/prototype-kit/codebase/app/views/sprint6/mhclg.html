@@ -28,6 +28,161 @@
   }
 %}
 
-{% macro option(current_value, name, value) %}
-      <option value="{{ value }}" {{ 'selected' if current_value == value }}>{{ name }}</option>
+{%
+  set building_type = {
+    "purpose-built": "Purpose built",
+    "converted": "Converted from previous residential or non-residential property"
+  }
+%}
+
+{%
+  set yes_no = {
+    "yes": "Yes",
+    "no": "No"
+  }
+%}
+
+{%
+  set yes_no_dk = {
+    "yes": "Yes",
+    "no": "No",
+    "dont-know": "Don't know"
+  }
+%}
+
+{%
+  set relet = {
+    "social-rent": "A social rent basis",
+    "affordable": "An affordable rent basis",
+    "rent-to-buy": "A rent to buy basis",
+    "unknown": "Don't know"
+  }
+%}
+
+{%
+  set reasonable_preference = {
+    'homeless': 'Homeless or about to lose their home (within 56 days)',
+    'insanitary': 'Living in insanitary or overcrowded or unsatisfactory housing',
+    'medical': 'A need to move on medical and welfare grounds (including a reasonable-preference-reasons)',
+    'hardship': 'A need to move to avoid hardship to themselves or others',
+    'unknown': "Don't know"
+  }
+
+%}
+
+{%
+  set time_range = {
+          "0": "Just moved to Local Authority area",
+          "<1": "Less than 1 year",
+          "<2": "1 year but under 2 years",
+          "<3": "2 years but under 3 years",
+          "<4": "3 years but under 4 years",
+          "<5": "4 years but under 5 years",
+          ">5": "5 years or more",
+          "?": "Don't Know"
+  }
+%}
+
+{%
+  set homeless = {
+    "not-homeless": "Not homeless",
+    "threatened-homeless": "Assessed as threatened with homelessness within 56 days by a LA and owed prevention duty",
+    "homeless-owed-relief-duty": "Assessed as homeless by a LA and owed a relief duty",
+    "unintentionally-homeless": "Assessed as unintentionally homeless and having priority need by a LA and owed a homeless main duty",
+    "other-homeless": "Other homelessness i.e. not found statutorily homeless by a housing authority but considered to be homeless by the letting landlord"
+  }
+%}
+
+{%
+  set referral_by = {
+          "internal-transfer": "Internal transfer",
+          "applied-direct": "Tenant applied direct (no referral or nomination)",
+          "la-nominated": "PRP lettings only - nominated by a local housing authority",
+          "housing-mobility": "Relocated through recognised national/regional or sub-regional housing mobility scheme",
+          "social-landlord": "Other social landlord",
+          "social-services": "Social services",
+          "police-etc": "Police/probation/prison",
+          "youth-offending-team": "Youth offending team",
+          "mental-health-team": "Community mental health team",
+          "health-service": "Health service",
+          "voluntary-agency": "Voluntary agency",
+          "other": "Other"
+  }  
+%}
+
+{%
+  set completion_year = {
+    "2021": "2020/2021",
+    "2022": "2021/2022"
+  }
+%}
+
+{%
+  set form_type = {
+        "social-general": "Social Rent General Needs",
+        "social-supported": "Social Rent Supported Housing",
+        "affordable-general": "Affordable Rent General Needs",
+        "affordable-supported": "Affordable Rent Supported Housing",
+        "rtb-general": "Rent To Buy General Needs",
+        "rtb-supported": "Rent To Buy Supported Housing",
+        "sales-log": "Sales Log"
+  }
+%}
+
+{%
+  set provider = {
+    "private-registered": "Private Registered Provider",
+    "local-authority": "Local Authority"
+  }
+%}
+
+{%
+  set ll_status = {
+    "this": "This Landlord",
+    "another": "Another RP (HA/LA)"
+  }
+%}
+
+{% macro option(label, answers, data, group) %}
+  <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
+  <div class="govuk-form-group">
+    <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="check()">
+      {% for value, name in answers %}
+      <option value="{{ value }}" {{ 'selected' if data[group] == value }}>{{ name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+{% endmacro %}
+
+{% macro radio(label, answers, data, group, onchange, subdued) %}
+  <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ label }}</label>
+  <div class="govuk-radios govuk-radios--inline">
+      {% for value, name in answers %}
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
+        onchange="{{ onchange }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
+      <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ value }}">
+        {{ name }}
+      </label>
+    </div>
+      {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro checkboxes(label, hint, answers, data, group) %}
+      <div class="govuk-form-group" id="{{ group }}-section">
+        <label class="govuk-label govuk-label--s">{{ label }}</label>
+        <div id="{{ group }}-hint" class="govuk-hint">{{ hint }}</div>
+        <div class="govuk-checkboxes">
+          {% for value, name in answers %}
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="{{ group }}-{{value}}"
+              name="{{ group }}" type="checkbox" 
+              {{ 'checked' if data[group] and value in data[group] else '' }} 
+              value="{{ value }}">
+            <label class="govuk-label govuk-checkboxes__label" for="{{ group }}-{{value}}">{{ name }}</label>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
 {% endmacro %}
