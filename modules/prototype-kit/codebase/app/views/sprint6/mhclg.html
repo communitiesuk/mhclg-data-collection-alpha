@@ -143,10 +143,80 @@
   }
 %}
 
-{% macro option(label, answers, data, group) %}
+{%
+  set tenancy_type = {
+      "secure-including-flexible": "Secure including flexible",
+      "assured": "Assured",
+      "assured-shorthold": "Assured shorthold",
+      "license-agreement": "License agreement",
+      "other": "Other"
+  }
+%}
+
+{%
+  set gender = {
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "refused": "Refused"
+  }
+%}
+
+{%
+  set economic_status = {
+    "part-time": "Part-time (Less than 30 hrs)",      
+    "full-time": "Full-time (30 hrs or more) Not seeking work Government training/New deal",
+    "student": "Full-time student Jobseeker Child under 16 Retired",
+    "unable-to-work": "Unable to work/long term sick or disability",
+    "other": "Other adult"
+  }
+%}
+
+{%
+  set ethnicity = {
+    "White: British": "White: British",
+    "White: Irish": "White: Irish",
+    "White: Gypsy/Irish Traveller": "White: Gypsy/Irish Traveller",
+    "White: Other": "White: Other",
+    "Mixed: White and Black Caribbean": "Mixed: White and Black Caribbean",
+    "Mixed: Other": "Mixed: Other",
+    "Mixed: White and Asian": "Mixed: White and Asian",
+    "Asian or Asian British: Indian": "Asian or Asian British: Indian",
+    "Asian or Asian British: Pakistani": "Asian or Asian British: Pakistani",
+    "Asian or Asian British: Bangladeshi": "Asian or Asian British: Bangladeshi",
+    "Asian or Asian British: Chinese": "Asian or Asian British: Chinese",
+    "Asian or Asian British: Other": "Asian or Asian British: Other",
+    "Black: Caribbean": "Black: Caribbean",
+    "Black: African": "Black: African",
+    "Black: Other": "Black: Other",
+    "Other: Arab": "Other: Arab"
+  }
+%}
+
+{%
+  set nationality = {
+    "UK national resident in UK": "UK national resident in UK",
+    "UK national returning from residence overseas": "UK national returning from residence overseas",
+    "Czech Republic": "Czech Republic",
+    "Estonia": "Estonia",
+    "Hungary": "Hungary",
+    "Lithuania": "Lithuania",
+    "Poland": "Poland",
+    "Slovakia": "Slovakia",
+    "Slovenia": "Slovenia",
+    "Bulgaria": "Bulgaria",
+    "Romania": "Romania",
+    "Croatia": "Croatia",
+    "Ireland": "Ireland",
+    "Other EU Economic Area EEA Country": "Other EU Economic Area EEA Country",
+    "Any other country": "Any other country"
+  }
+%}
+
+{% macro option(label, answers, data, group, onchange) %}
   <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
   <div class="govuk-form-group">
-    <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="check()">
+    <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="{{ onchange }}">
       {% for value, name in answers %}
       <option value="{{ value }}" {{ 'selected' if data[group] == value }}>{{ name }}</option>
       {% endfor %}

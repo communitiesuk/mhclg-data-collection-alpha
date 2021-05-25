@@ -1,3 +1,4 @@
+{% import "./mhclg.html" as mhclg %}
 {% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
 %} {% block header %}
 <!-- Blank header with no service name for the start page -->
@@ -25,72 +26,17 @@
   </ol>
 </div>
 {% endblock %} {% block content %}
+<h1 class="govuk-heading-l">Tenancy details</h1>
 <form class="form" action="/sprint6/step4" method="POST">
 <fieldset
   class="govuk-fieldset"
   role="group"
   aria-describedby="Tenancy Details"
 >
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-    <h2 class="govuk-fieldset__heading">
-      Is this a starter/introductory tenancy?
-    </h2>
-  </legend>
-  <div class="govuk-radios govuk-radios--inline">
-    <div class="govuk-radios__item">
-      <input
-        class="govuk-radios__input"
-        id="starter-tenancy-yes"
-        name="starter-tenancy"
-        type="radio"
-        value="yes"
-        {{ 'checked' if data['starter-tenancy'] == 'yes' else '' }}
-      />
-      <label class="govuk-label govuk-radios__label" for="starter-tenancy">
-        Yes
-      </label>
-    </div>
-    <div class="govuk-radios__item">
-      <input
-        class="govuk-radios__input"
-        id="starter-tenancy-no"
-        name="starter-tenancy"
-        type="radio"
-        value="no"
-        {{ 'checked' if data['starter-tenancy'] == 'no' else '' }}
-      />
-      <label class="govuk-label govuk-radios__label" for="starter-tenancy-2">
-        No
-      </label>
-    </div>
-  </div>
-  <legend
-    class="
-      govuk-fieldset__legend govuk-fieldset__legend--l
-      govuk-!-margin-top-6
-    "
-  >
-    <h2 class="govuk-fieldset__heading">
-      Type of main tenancy (after any starter/introductory period)
-    </h2>
-  </legend>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="tenancy-type"> Form: </label>
-    <select
-      class="govuk-select"
-      id="tenancy-type"
-      name="tenancy-type"
-      onchange="check()"
-    >
-      <option value="secure-including-flexible" {{ 'selected' if data['tenancy-type'] == 'secure-including-flexible' else '' }}>
-        Secure including flexible
-      </option>
-      <option value="assured" {{ 'selected' if data['tenancy-type'] == 'assured' else '' }}>Assured</option>
-      <option value="assured-shorthold" {{ 'selected' if data['tenancy-type'] == 'assured-shorthold' else '' }}>Assured shorthold</option>
-      <option value="license-agreement" {{ 'selected' if data['tenancy-type'] == 'license-agreement' else '' }}>License agreement</option>
-      <option value="other" {{ 'selected' if data['tenancy-type'] == 'other' else '' }}>Other</option>
-    </select>
-  </div>
+  {{ mhclg.radio("Is this a starter/introductory tenancy?", mhclg.yes_no, data, 'starter-tenancy') }}
+
+  {{ mhclg.option("Type of main tenancy (after any starter/introductory period)", mhclg.tenancy_type, data, 'tenancy-type', "check()") }}
+
   <div class="govuk-grid-row" id="tenancy-type-other">
     <div class="govuk-grid-column-one-half">
       <div>

@@ -1,3 +1,4 @@
+{% import "./mhclg.html" as mhclg %}
 {% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
 %} {% block header %}
 <!-- Blank header with no service name for the start page -->
@@ -40,7 +41,7 @@
   <div class="govuk-date-input__item">
     <div class="govuk-form-group">
       <h2 class="govuk-label-wrapper">
-        <label class="govuk-label govuk-label--l" for="tenancy-age">
+        <label class="govuk-label govuk-label--m" for="tenancy-age">
           Age
         </label>
       </h2>
@@ -51,25 +52,7 @@
   {# gender input #}
 
   <div class="govuk-date-input__item">
-    <div class="govuk-form-group">
-      <h2 class="govuk-label-wrapper">
-        <label class="govuk-label govuk-label--l" for="tenant-gender">
-          Gender
-        </label>
-      </h2>
-          <select
-          class="govuk-select"
-          id="tenant-gender"
-          name="tenant-gender"
-          >
-            <option value="Male" {{ 'selected' if data['tenant-gender'] == 'Male' else '' }}>
-              Male
-            </option>
-            <option value="Female" {{ 'selected' if data['tenant-gender'] == 'Female' else '' }}>Female</option>
-            <option value="Other" {{ 'selected' if data['tenant-gender'] == 'Other' else '' }}>Other</option>
-            <option value="Refused" {{ 'selected' if data['tenant-gender'] == 'Refused' else '' }}>Refuse</option>
-          </select>
-    </div>
+    {{ mhclg.option("Gender", mhclg.gender, data, 'tenant-gender') }}
   </div>
   </fieldset>
 
@@ -82,26 +65,7 @@
     aria-describedby="Tenant economic status"
   >
     <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--l" for="tenant-economic-status">
-            Tenant economic status
-          </label>
-        </h2>
-            <select
-            class="govuk-select"
-            id="tenant-economic-status"
-            name="tenant-economic-status"
-            >
-              <option value="Part-time (Less than 30 hrs)" {{ 'selected' if data['tenant-economic-status'] == 'Part-time (Less than 30 hrs)' else '' }}>
-                Part-time (Less than 30 hrs)
-              </option>
-              <option value="Full-time (30 hrs or more) Not seeking work Government training/New deal" {{ 'selected' if data['tenant-economic-status'] == 'Full-time (30 hrs or more) Not seeking work Government training/New deal' else '' }}>Full-time (30 hrs or more) Not seeking work Government training/New deal</option>
-              <option value="Full-time student Jobseeker Child under 16 Retired" {{ 'selected' if data['tenant-economic-status'] == 'Full-time student Jobseeker Child under 16 Retired' else '' }}>Full-time student Jobseeker Child under 16 Retired</option>
-              <option value="Unable to work/long term sick or disability" {{ 'selected' if data['tenant-economic-status'] == 'Unable to work/long term sick or disability' else '' }}>Unable to work/long term sick or disability</option>
-              <option value="Other adult" {{ 'selected' if data['tenant-economic-status'] == 'Other adult' else '' }}>Other adult</option>
-            </select>
-      </div>
+      {{ mhclg.option("Tenant economic status", mhclg.economic_status, data, 'tenant-economic-status') }}
     </div>
   </fieldset>
 
@@ -114,35 +78,7 @@
     aria-describedby="Ethnicity options"
   >
     <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--l" for="ethnicity-options">
-            Ethnicity options
-          </label>
-        </h2>
-            <select
-            class="govuk-select"
-            id="ethnicity-options"
-            name="ethnicity-options"
-            >
-              <option value="White: British" {{ 'selected' if data['ethnicity-options'] == 'White: British' else '' }}>White: British</option>
-              <option value="White: Irish" {{ 'selected' if data['ethnicity-options'] == 'White: Irish' else '' }}>White: Irish</option>
-              <option value="White: Gypsy/Irish Traveller" {{ 'selected' if data['ethnicity-options'] == 'White: Gypsy/Irish Traveller' else '' }}>White: Gypsy/Irish Traveller</option>
-              <option value="White: Other" {{ 'selected' if data['ethnicity-options'] == 'White: Other' else '' }}>White: Other</option>
-              <option value="Mixed: White and Black Caribbean" {{ 'selected' if data['ethnicity-options'] == 'Mixed: White and Black Caribbean' else '' }}>Mixed: White and Black Caribbean</option>
-              <option value="Mixed: Other" {{ 'selected' if data['ethnicity-options'] == 'Mixed: Other' else '' }}>Mixed: Other</option>
-              <option value="Mixed: White and Asian" {{ 'selected' if data['ethnicity-options'] == 'Mixed: White and Asian' else '' }}>Mixed: White and Asian</option>
-              <option value="Asian or Asian British: Indian" {{ 'selected' if data['ethnicity-options'] == 'Asian or Asian British: Indian' else '' }}>Asian or Asian British: Indian</option>
-              <option value="Asian or Asian British: Pakistani" {{ 'selected' if data['ethnicity-options'] == 'Asian or Asian British: Pakistani' else '' }}>Asian or Asian British: Pakistani</option>
-              <option value="Asian or Asian British: Bangladeshi" {{ 'selected' if data['ethnicity-options'] == 'Asian or Asian British: Bangladeshi' else '' }}>Asian or Asian British: Bangladeshi</option>
-              <option value="Asian or Asian British: Chinese" {{ 'selected' if data['ethnicity-options'] == 'Asian or Asian British: Chinese' else '' }}>Asian or Asian British: Chinese</option>
-              <option value="Asian or Asian British: Other" {{ 'selected' if data['ethnicity-options'] == 'Asian or Asian British: Other' else '' }}>Asian or Asian British: Other</option>
-              <option value="Black: Caribbean" {{ 'selected' if data['ethnicity-options'] == 'Black: Caribbean' else '' }}>Black: Caribbean</option>
-              <option value="Black: African" {{ 'selected' if data['ethnicity-options'] == 'Black: African' else '' }}>Black: African</option>
-              <option value="Black: Other" {{ 'selected' if data['ethnicity-options'] == 'Black: Other' else '' }}>Black: Other</option>
-              <option value="Other: Arab" {{ 'selected' if data['ethnicity-options'] == 'Other: Arab' else '' }}>Other: Arab</option>
-            </select>
-      </div>
+      {{ mhclg.option("Ethnicity options", mhclg.ethnicity, data, 'ethnicity-options') }}
     </div>
   </fieldset>
 
@@ -154,34 +90,7 @@
     aria-describedby="Nationality options"
   >
     <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--l" for="nationality-options">
-            Nationality options
-          </label>
-        </h2>
-            <select
-            class="govuk-select"
-            id="nationality-options"
-            name="nationality-options"
-            >
-              <option value="UK national resident in UK" {{ 'selected' if data['nationality-options'] == 'UK national resident in UK' else '' }}>UK national resident in UK</option>
-              <option value="UK national returning from residence overseas" {{ 'selected' if data['nationality-options'] == 'UK national returning from residence overseas' else '' }}>UK national returning from residence overseas</option>
-              <option value="Czech Republic" {{ 'selected' if data['nationality-options'] == 'Czech Republic' else '' }}>Czech Republic</option>
-              <option value="Estonia" {{ 'selected' if data['nationality-options'] == 'Estonia' else '' }}>Estonia</option>
-              <option value="Hungary" {{ 'selected' if data['nationality-options'] == 'Hungary' else '' }}>Hungary</option>
-              <option value="Lithuania" {{ 'selected' if data['nationality-options'] == 'Lithuania' else '' }}>Lithuania</option>
-              <option value="Poland" {{ 'selected' if data['nationality-options'] == 'Poland' else '' }}>Poland</option>
-              <option value="Slovakia" {{ 'selected' if data['nationality-options'] == 'Slovakia' else '' }}>Slovakia</option>
-              <option value="Slovenia" {{ 'selected' if data['nationality-options'] == 'Slovenia' else '' }}>Slovenia</option>
-              <option value="Bulgaria" {{ 'selected' if data['nationality-options'] == 'Bulgaria' else '' }}>Bulgaria</option>
-              <option value="Romania" {{ 'selected' if data['nationality-options'] == 'Romania' else '' }}>Romania</option>
-              <option value="Croatia" {{ 'selected' if data['nationality-options'] == 'Croatia' else '' }}>Croatia</option>
-              <option value="Ireland" {{ 'selected' if data['nationality-options'] == 'Ireland' else '' }}>Ireland</option>
-              <option value="Other EU Economic Area EEA Country" {{ 'selected' if data['nationality-options'] == 'Other EU Economic Area EEA Country' else '' }}>Other EU Economic Area EEA Country</option>
-              <option value="Any other country" {{ 'selected' if data['nationality-options'] == 'Any other country' else '' }}>Any other country</option>
-            </select>
-      </div>
+      {{ mhclg.option("Nationality options", mhclg.nationality, data, 'nationality-options') }}
     </div>
   </fieldset>
 
