@@ -135,14 +135,12 @@
 %}
 
 {%
-  set completion_year = {
-    "2021": "2020/2021",
-    "2022": "2021/2022"
-  }
-%}
-
-{%
-  set form_type = {
+  set data_lookups = {
+   "completion-year": {
+      "2021": "2020/2021",
+      "2022": "2021/2022"
+    },
+    "form-name": {
         "social-general": "Social Rent General Needs",
         "social-supported": "Social Rent Supported Housing",
         "affordable-general": "Affordable Rent General Needs",
@@ -150,20 +148,16 @@
         "rtb-general": "Rent To Buy General Needs",
         "rtb-supported": "Rent To Buy Supported Housing",
         "sales-log": "Sales Log"
-  }
-%}
-
-{%
-  set provider = {
-    "private-registered": "Private Registered Provider",
-    "local-authority": "Local Authority"
-  }
-%}
-
-{%
-  set ll_status = {
-    "this": "This Landlord",
-    "another": "Another RP (HA/LA)"
+    },
+    "gdpr": yes_no,
+    "provider": {
+      "private-registered": "Private Registered Provider",
+      "local-authority": "Local Authority"
+    },
+    "ll-status": {
+      "this": "This Landlord",
+      "another": "Another RP (HA/LA)"
+    }
   }
 %}
 
@@ -369,10 +363,12 @@
 %}
 
 {% macro option(label, answers, data, group, onchange) %}
+
+  {% set actual_answers = data_lookups[group] if data_lookups[group] else answers %}
   <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
   <div class="govuk-form-group">
     <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="{{ onchange }}">
-      {% for value, name in answers %}
+      {% for value, name in actual_answers %}
       <option value="{{ value }}" {{ 'selected' if data[group] == value }}>{{ name }}</option>
       {% endfor %}
     </select>
@@ -380,9 +376,10 @@
 {% endmacro %}
 
 {% macro radio(label, answers, data, group, changefn, subdued) %}
+  {% set actual_answers = data_lookups[group] if data_lookups[group] else answers %}
   <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ label }}</label>
   <div class="govuk-radios">
-      {% for value, name in answers %}
+      {% for value, name in actual_answers %}
     <div class="govuk-radios__item">
       <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
         onchange="{{ changefn }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
@@ -395,11 +392,12 @@
 {% endmacro %}
 
 {% macro checkboxes(label, hint, answers, data, group) %}
+  {% set actual_answers = data_lookups[group] if data_lookups[group] else answers %}
       <div class="govuk-form-group" id="{{ group }}-section">
         <label class="govuk-label govuk-label--s">{{ label }}</label>
         <div id="{{ group }}-hint" class="govuk-hint">{{ hint }}</div>
         <div class="govuk-checkboxes">
-          {% for value, name in answers %}
+          {% for value, name in actual_answers %}
           <div class="govuk-checkboxes__item">
             <input class="govuk-checkboxes__input" id="{{ group }}-{{value}}"
               name="{{ group }}" type="checkbox" 

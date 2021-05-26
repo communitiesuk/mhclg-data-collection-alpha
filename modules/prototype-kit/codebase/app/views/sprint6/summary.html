@@ -1,4 +1,5 @@
 {% import "./mhclg.html" as mhclg %}
+{% import "./form_titles.html" as titles %}
 {% extends "layout.html" %} {% block pageTitle %} Summary {% endblock %} 
 {% block header %} {{ govukHeader() }} {% endblock %} 
 {% block beforeContent %}
@@ -57,22 +58,34 @@
         <h1 class="govuk-heading-l">Check your answers before submitting your log</h1>
 
         {# Step One Answers #}
-        <h2 class="govuk-heading-m">Step One</h2>
+        {% for step, step_info in titles.form_titles %}
+          <h2 class="govuk-heading-m">{{ step_info.name }}</h2>
+          <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          {% for group, question in step_info.questions %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                {{ question }}
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if mhclg.data_lookups[group][data[group]] %}
+                  {{ mhclg.data_lookups[group][data[group]] }}
+                {% else %}
+                  {{ data[group] }}
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/sprint6/{{ step }}">
+                  Change<span class="govuk-visually-hidden"> name</span>
+                </a>
+              </dd>
+            </div>
+          {% endfor %}
+          </dl>
+        {% endfor %}
 
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Which year are you completing this log for?
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['completion-year'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step1">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
+        <hr>
+        <hr>
+
 
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
