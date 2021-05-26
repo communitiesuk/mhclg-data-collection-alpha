@@ -362,27 +362,11 @@
   </fieldset>
 
   <div class="govuk-form-group">
-    {{ mhclg.textbox(
-      "How many times has this property been previously offered for rent ? From the end of the previous tenancy or the first let? For an Affordable Rent or Rent To Buy Letting, only include number of offers as that type.",
-      "(for a property let at the first attempt enter ‘0’ )",
-      data,
-      "previously-offered",
-      "number"
-    ) }}
+    {{ mhclg.textbox( "step7", "(for a property let at the first attempt enter ‘0’ )", data, "previously-offered", "number") }}
 
-    {{ mhclg.textbox(
-      "Property reference",
-      "",
-      data,
-      "property-ref"
-    ) }}
+    {{ mhclg.textbox( "step7", "", data, "property-ref") }}
 
-    {{ mhclg.textbox(
-      "UPRN (Unique Property Reference Number)",
-      "",
-      data,
-      "uprn"
-    ) }}
+    {{ mhclg.textbox( "step7", "", data, "uprn") }}
   </div>
 
   <button class="govuk-button" data-module="govuk-button">

@@ -455,10 +455,10 @@
 {% endmacro %}
 
 
-{% macro textbox(label, hint, data, group, type) %}
+{% macro textbox(step, hint, data, group, type) %}
   {% set fieldtype = type if type else "text" %}
   <label class="govuk-label govuk-label--m" for="{{ group }}">
-    {{ label }}
+    {{ form_titles[step].questions[group] }}
   </label>
   <span class="govuk-caption-m">{{ hint }}</span>
   <div class="govuk-grid-row">
