@@ -22,7 +22,7 @@ endblock %} {% block header %}
 {% endblock %} {% block content %}
 <div class="govuk-form-group">
   {# Tenency start date input #}
-<form class="form" action="/sprint6/step2" method="POST">
+<form class="form" action= "{{ '/sprint6/summary' if data['summary'] else '/sprint6/step2' }}" method="POST">
   <fieldset
     class="govuk-fieldset"
     role="group"

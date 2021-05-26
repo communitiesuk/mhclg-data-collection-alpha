@@ -158,6 +158,25 @@
 %}
 
 {%
+  set gender = {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other",
+      "refused": "Refused"
+  }
+%}
+
+{%
+  set economic_status = {
+      "part-time": "Part-time (Less than 30 hrs)",
+      "full-time": "Full-time (30 hrs or more) Not seeking work Government training/New deal",
+      "student": "Full-time student Jobseeker Child under 16 Retired",
+      "unable-to-work": "Unable to work/long term sick or disability",
+      "other": "Other adult"
+    }
+%}
+
+{%
   set data_lookups = {
    "completion-year": {
       "2021": "2020/2021",
@@ -189,19 +208,22 @@
       "other": "Other"
     },
     "starter-tenancy": yes_no,
-    "tenant-gender": {
-      "male": "Male",
-      "female": "Female",
-      "other": "Other",
-      "refused": "Refused"
-    },
-    "tenant-economic-status": {
-      "part-time": "Part-time (Less than 30 hrs)",
-      "full-time": "Full-time (30 hrs or more) Not seeking work Government training/New deal",
-      "student": "Full-time student Jobseeker Child under 16 Retired",
-      "unable-to-work": "Unable to work/long term sick or disability",
-      "other": "Other adult"
-    },
+    "tenant-gender": gender,
+    "tenant-gender-person-1": gender,
+    "tenant-gender-person-2": gender,
+    "tenant-gender-person-3": gender,
+    "tenant-gender-person-4": gender,
+    "tenant-gender-person-5": gender,
+    "tenant-gender-person-6": gender,
+    "tenant-gender-person-7": gender,
+    "tenant-economic-status": economic_status,
+    "tenant-economic-status-1": economic_status,
+    "tenant-economic-status-2": economic_status,
+    "tenant-economic-status-3": economic_status,
+    "tenant-economic-status-4": economic_status,
+    "tenant-economic-status-5": economic_status,
+    "tenant-economic-status-6": economic_status,
+    "tenant-economic-status-7": economic_status,
     "ethnicity-options": {
       "white-british": "White: British",
       "white-irish": "White: Irish",
