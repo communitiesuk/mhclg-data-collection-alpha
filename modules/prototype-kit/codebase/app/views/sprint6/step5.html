@@ -118,8 +118,7 @@
   </div>
 
   <div class="govuk-form-group">
-      {{ mhclg.option("In the tenant’s view what was the main reason the household left their last settled home?",
-            mhclg.reason_for_leaving_previous, data, 'reason-for-leaving-previous', 'checkReasonForLeaving()') }}
+      {{ mhclg.option("step5", data, 'reason-for-leaving-previous', 'checkReasonForLeaving()') }}
   </div>
 
   <div class="govuk-form-group" id="reason-for-leaving">
@@ -167,7 +166,7 @@
   </div>
 
   <div class="govuk-form-group">
-    {{ mhclg.option("The housing situation for this household immediately before this letting", mhclg.previous_situation, data, 'previous-situation') }}
+    {{ mhclg.option("step5", data, 'previous-situation') }}
   </div>
 
   <button class="govuk-button" data-module="govuk-button">

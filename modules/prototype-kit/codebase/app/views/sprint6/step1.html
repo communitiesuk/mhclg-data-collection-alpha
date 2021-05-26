@@ -28,8 +28,8 @@ endblock %} {% block header %}
     role="group"
     aria-describedby="passport-issued-hint"
   >
-    {{ mhclg.option("Which year is this log for?", mhclg.completion_year, data, 'completion-year') }}
-    {{ mhclg.option("Which form are you completing?", mhclg.form_type, data, 'form-name') }}
+    {{ mhclg.option("step1", data, 'completion-year') }}
+    {{ mhclg.option("step1", data, 'form-name') }}
     {{ mhclg.radio("GDPR", mhclg.yes_no, data, 'gdpr') }}
   </fieldset>
 </div>

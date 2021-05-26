@@ -67,7 +67,7 @@
             "allocations-chr": "Common housing register (CHR):",
             "allocations-cap": "Common Allocation Policy (CAP):",
             "referral-by": "Who referred the household for this letting?"
-        }
+          }
         },
         "step7": {
           "name": "Step 7",
@@ -159,22 +159,6 @@
           "<5": "4 years but under 5 years",
           ">5": "5 years or more",
           "unknown": "Don't Know"
-  }
-%}
-
-{%
-  set rental_period = {
-          "fortnight": "Fortnightly",
-          "four-weekly": "Four-weekly",
-          "monthly": "Calendar monthly",
-          "46-weekly": "Weekly for 46 weeks",
-          "47-weekly": "Weekly for 47 weeks",
-          "48-weekly": "Weekly for 48 weeks",
-          "49-weekly": "Weekly for 49 weeks",
-          "50-weekly": "Weekly for 50 weeks",
-          "51-weekly": "Weekly for 51 weeks",
-          "52-weekly": "Weekly for 52 weeks",
-          "53-weekly": "Weekly for 53 weeks"
   }
 %}
 
@@ -408,16 +392,28 @@
     "voluntary-agency": "Voluntary agency",
     "other": "Other"
   },
-  "outstanding-after-uc": yes_no_dk
-}
+  "outstanding-after-uc": yes_no_dk,
+  "rental-period": {
+    "fortnight": "Fortnightly",
+    "four-weekly": "Four-weekly",
+    "monthly": "Calendar monthly",
+    "46-weekly": "Weekly for 46 weeks",
+    "47-weekly": "Weekly for 47 weeks",
+    "48-weekly": "Weekly for 48 weeks",
+    "49-weekly": "Weekly for 49 weeks",
+    "50-weekly": "Weekly for 50 weeks",
+    "51-weekly": "Weekly for 51 weeks",
+    "52-weekly": "Weekly for 52 weeks",
+    "53-weekly": "Weekly for 53 weeks"
+  }
+t }
 %}
 
-{% macro option(label, answers, data, group, onchange) %}
-  {% set actual_answers = data_lookups[group] if data_lookups[group] else answers %}
-  <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
+{% macro option(step, data, group, onchange) %}
+  <label class="govuk-label govuk-label--m" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
   <div class="govuk-form-group">
     <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="{{ onchange }}">
-      {% for value, name in actual_answers %}
+      {% for value, name in data_lookups[group] %}
       <option value="{{ value }}" {{ 'selected' if data[group] == value }}>{{ name }}</option>
       {% endfor %}
     </select>
