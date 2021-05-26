@@ -41,15 +41,6 @@
     </ol>
   </div>
 
-  <div style="background-color:lightsalmon;">
-    <dl>
-      {% for k, v in data %}
-      <dt>{{ k }}</dt>
-      <dd>{{ v }}</dd>
-      {% endfor %}
-    </dl>
-  </div>
-
 {% endblock %} {% block content %}
   <main class="govuk-main-wrapper " id="main-content" role="main">
     <div class="govuk-grid-row">
@@ -83,217 +74,6 @@
           </dl>
         {% endfor %}
 
-        <hr>
-        <hr>
-
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Which form are you completing?
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['form-name'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step1">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              GDPR?
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['gdpr'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step1">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-        </dl>
-
-        {# Step Two Answers #}
-        <h2 class="govuk-heading-m">Step Two</h2>
-
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Tenancy start date
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['tenancy-day'] }}/{{data['tenancy-month']}}/{{data['tenancy-year'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step2">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Type of provider
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['provider'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step2">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Status
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['ll-status'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step2">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          {% if data['ll-status'] == "another" %}
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              RP (HA/LA)Name
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['rp-name'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step2">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              CORE code
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['core-code'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step2">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          {% endif %}
-
-        </dl>
-
-        {# Step Three Answers #}
-        <h2 class="govuk-heading-m">Step Three</h2>
-
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Is this a starter/introductory tenancy?
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['starter-tenancy'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step3">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Type of main tenancy (after any starter/introductory period)
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['tenancy-type'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step3">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          {% if data['tenancy-type'] == "other" %}
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Tenancy Type
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['tenancy-type-other'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step3">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          {% endif %}
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Tenant code
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['tenancy-code'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step3">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              If the main tenancy is a fixed term tenancy, please provide the length
-              of the fixed term (to the nearest year) excluding any
-              starter/introductory period
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data['length-fixed-term'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step3">
-                Change<span class="govuk-visually-hidden"> name</span>
-              </a>
-            </dd>
-          </div>
-
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Reason for vacancy
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ mhclg.reason_for_vacancy[data['reason-for-vacancy']] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="/sprint6/step8#reason-for-vacancy">
-                Change<span class="govuk-visually-hidden"> reason</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
-
-
-
         <h2 class="govuk-heading-m">Now send your application</h2>
 
         <p class="govuk-body">By submitting this notification you are confirming that, to the best of your knowledge,
@@ -313,5 +93,14 @@
     </div>
   </main>
 </div>
+
+  <div style="background-color:lightsalmon;">
+    <dl>
+      {% for k, v in data %}
+      <dt>{{ k }}</dt>
+      <dd>{{ v }}</dd>
+      {% endfor %}
+    </dl>
+  </div>
 
 {% endblock %}

@@ -361,7 +361,6 @@
 %}
 
 {% macro option(label, answers, data, group, onchange) %}
-
   {% set actual_answers = data_lookups[group] if data_lookups[group] else answers %}
   <label class="govuk-label govuk-label--m" for="{{ group }}">{{ label }}</label>
   <div class="govuk-form-group">
