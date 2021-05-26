@@ -39,28 +39,25 @@
 <form class="form" action="/sprint6/step7" method="POST">
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      {{ mhclg.option("For how long has the household continuously lived in the local authority area where the new letting is located?",
-               mhclg.time_range, data, 'time-in-la') }}
+      {{ mhclg.option("step6", data, 'time-in-la') }}
 
-      {{ mhclg.option("For how long was the household on the local authority waiting list where the new letting is located?",
-               mhclg.time_range, data, 'time-waiting') }}
+      {{ mhclg.option("step6", data, 'time-waiting') }}
 
-      {{ mhclg.radio("Immediately prior to this letting, was this household ...?", mhclg.homeless, data, 'prior-status') }}
+      {{ mhclg.radio("step6", data, 'prior-status') }}
 
-      {{ mhclg.radio("Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?",
-               mhclg.yes_no_dk, data, 'reasonable-preference', 'check()') }}
+      {{ mhclg.radio("step6", data, 'reasonable-preference', 'check()') }}
 
-      {{ mhclg.checkboxes('Which of the following reasons for Reasonable Preference apply?', 'Select all that apply.', mhclg.reasonable_preference, data, 'reasonable-preference-reasons') }}
+      {{ mhclg.checkboxes("step6", "Select all that apply.", data, 'reasonable-preference-reasons') }}
 
       <label class="govuk-label govuk-label--m" for="unit-type">
         Was the letting made under any of the following allocations systems? Select Yes or No for each allocation
         system.
       </label>
-      {{ mhclg.radio("Choice-based lettings (CBL):", mhclg.yes_no, data, 'allocations-cbl', "", true) }}
-      {{ mhclg.radio("Common housing register (CHR):", mhclg.yes_no, data, 'allocations-chr', "", true) }}
-      {{ mhclg.radio("Common Allocation Policy (CAP):", mhclg.yes_no, data, 'allocations-cap', "", true) }}
+      {{ mhclg.radio("step6", data, 'allocations-cbl', "", true) }}
+      {{ mhclg.radio("step6", data, 'allocations-chr', "", true) }}
+      {{ mhclg.radio("step6", data, 'allocations-cap', "", true) }}
 
-      {{ mhclg.option("Who referred the household for this letting?", mhclg.referral_by, data, 'referral-by') }}
+      {{ mhclg.option("step6", data, 'referral-by') }}
     </fieldset>
   </div>
 

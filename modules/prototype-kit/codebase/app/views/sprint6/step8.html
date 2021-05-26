@@ -68,15 +68,15 @@
     </fieldset>
   </div>
 
-  {{ mhclg.option("Type of unit", mhclg.unit_type, data, 'unit-type') }}
+  {{ mhclg.option("step8", data, 'unit-type') }}
 
-  {{ mhclg.radio("Type of building", mhclg.building_type, data, 'building-type') }}
+  {{ mhclg.radio("step8", data, 'building-type') }}
 
-  {{ mhclg.radio("Is property built or adapted to be wheelchair accessible?", mhclg.yes_no, data, 'wheelchair-access') }}
+  {{ mhclg.radio("step8", data, 'wheelchair-access') }}
 
-  {{ mhclg.radio("If this is a relet, was the property most recently let on..", mhclg.relet, data, 'relet') }}
+  {{ mhclg.radio("step8", data, 'relet') }}
 
-  {{ mhclg.option("Reason for vacancy", mhclg.reason_for_vacancy, data, 'reason-for-vacancy') }}
+  {{ mhclg.option("step8", data, 'reason-for-vacancy') }}
 
   <label class="govuk-label govuk-label--m" for="unit-type">
     Location of property

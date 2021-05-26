@@ -52,7 +52,7 @@
   {# gender input #}
 
   <div class="govuk-date-input__item">
-    {{ mhclg.option("Gender", mhclg.gender, data, 'tenant-gender') }}
+    {{ mhclg.option("step4", data, 'tenant-gender') }}
   </div>
 
   {# economic status input #}
@@ -63,7 +63,7 @@
     aria-describedby="Tenant economic status"
   >
     <div class="govuk-date-input__item">
-      {{ mhclg.option("Tenant economic status", mhclg.economic_status, data, 'tenant-economic-status') }}
+      {{ mhclg.option("step4", data, 'tenant-economic-status') }}
     </div>
   </fieldset>
 
@@ -76,7 +76,7 @@
     aria-describedby="Ethnicity options"
   >
     <div class="govuk-date-input__item">
-      {{ mhclg.option("Ethnicity options", mhclg.ethnicity, data, 'ethnicity-options') }}
+      {{ mhclg.option("step4", data, 'ethnicity-options') }}
     </div>
   </fieldset>
 
@@ -88,7 +88,7 @@
     aria-describedby="Nationality options"
   >
     <div class="govuk-date-input__item">
-      {{ mhclg.option("Nationality options", mhclg.nationality, data, 'nationality-options') }}
+      {{ mhclg.option("step4", data, 'nationality-options') }}
     </div>
   </fieldset>
 

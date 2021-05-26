@@ -33,9 +33,9 @@
   role="group"
   aria-describedby="Tenancy Details"
 >
-  {{ mhclg.radio("Is this a starter/introductory tenancy?", mhclg.yes_no, data, 'starter-tenancy') }}
+  {{ mhclg.radio("step3", data, 'starter-tenancy') }}
 
-  {{ mhclg.option("Type of main tenancy (after any starter/introductory period)", mhclg.tenancy_type, data, 'tenancy-type', "check()") }}
+  {{ mhclg.option("step3", data, 'tenancy-type', "check()") }}
 
   <div class="govuk-grid-row" id="tenancy-type-other">
     <div class="govuk-grid-column-one-half">

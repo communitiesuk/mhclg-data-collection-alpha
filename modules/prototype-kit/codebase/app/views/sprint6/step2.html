@@ -73,8 +73,8 @@ endblock %} {% block header %}
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
         <h2 class="govuk-fieldset__heading">Provider</h2>
       </legend>
-      {{ mhclg.radio("Type of provider", mhclg.provider, data, 'provider') }}
-      {{ mhclg.radio("Status", mhclg.ll_status, data, 'll-status', "check()") }}
+      {{ mhclg.radio("step2", data, 'provider') }}
+      {{ mhclg.radio("step2", data, 'll-status', "check()") }}
 
       <div id="rp-name">
         <div class="govuk-grid-row govuk-!-margin-bottom-6">
