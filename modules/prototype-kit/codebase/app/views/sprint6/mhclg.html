@@ -53,7 +53,22 @@
             "disability": "Does anyone in the household require: (Please tick those that apply)",
             "previous-situation": "The housing situation for this household immediately before this letting"
           }
+        },
+        "step6": {
+          "name": "Step 6",
+          "questions": {
+            "time-in-la": "For how long has the household continuously lived in the local authority area where the new letting is located?",
+            "time-waiting": "For how long was the household on the local authority waiting list where the new letting is located?",
+            "prior-status": "Immediately prior to this letting, was this household ...?",
+            "reasonable-preference": "Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?",
+            "reasonable-preference-reasons": "Which of the following reasons for Reasonable Preference apply?",
+            "unit-type": " Was the letting made under any of the following allocations systems? Select Yes or No for each allocation system.",
+            "allocations-cbl": "Choice-based lettings (CBL):",
+            "allocations-chr": "Common housing register (CHR):",
+            "allocations-cap": "Common Allocation Policy (CAP):",
+            "referral-by": "Who referred the household for this letting?"
         }
+      }
     }
 %}
 
@@ -71,19 +86,6 @@
       "first-let-new-build": "First let of newbuild property",
       "first-let-conversion": "First let of conversion/rehabilitation/acquired property",
       "first-let-leased": "First let of leased property"
-  }
-%}
-
-{%
-  set unit_type = {
-      "flat": "Flat / maisonette",
-      "bedsit": "Bed-sit",
-      "house": "House",
-      "bungalow": "Bungalow",
-      "maisonette": "Shared flat / maisonette",
-      "shared-house": "Shared house",
-      "shared-bungalow": "Shared bungalow",
-      "other": "Other"
   }
 %}
 
@@ -127,17 +129,6 @@
 %}
 
 {%
-  set reasonable_preference = {
-    'homeless': 'Homeless or about to lose their home (within 56 days)',
-    'insanitary': 'Living in insanitary or overcrowded or unsatisfactory housing',
-    'medical': 'A need to move on medical and welfare grounds (including a reasonable-preference-reasons)',
-    'hardship': 'A need to move to avoid hardship to themselves or others',
-    'unknown': "Don't know"
-  }
-
-%}
-
-{%
   set time_range = {
           "0": "Just moved to Local Authority area",
           "<1": "Less than 1 year",
@@ -164,33 +155,6 @@
           "52-weekly": "Weekly for 52 weeks",
           "53-weekly": "Weekly for 53 weeks"
   }
-%}
-
-{%
-  set homeless = {
-    "not-homeless": "Not homeless",
-    "threatened-homeless": "Assessed as threatened with homelessness within 56 days by a LA and owed prevention duty",
-    "homeless-owed-relief-duty": "Assessed as homeless by a LA and owed a relief duty",
-    "unintentionally-homeless": "Assessed as unintentionally homeless and having priority need by a LA and owed a homeless main duty",
-    "other-homeless": "Other homelessness i.e. not found statutorily homeless by a housing authority but considered to be homeless by the letting landlord"
-  }
-%}
-
-{%
-  set referral_by = {
-          "internal-transfer": "Internal transfer",
-          "applied-direct": "Tenant applied direct (no referral or nomination)",
-          "la-nominated": "PRP lettings only - nominated by a local housing authority",
-          "housing-mobility": "Relocated through recognised national/regional or sub-regional housing mobility scheme",
-          "social-landlord": "Other social landlord",
-          "social-services": "Social services",
-          "police-etc": "Police/probation/prison",
-          "youth-offending-team": "Youth offending team",
-          "mental-health-team": "Community mental health team",
-          "health-service": "Health service",
-          "voluntary-agency": "Voluntary agency",
-          "other": "Other"
-  }  
 %}
 
 {%
@@ -339,21 +303,26 @@
       "Fixed term PRP General Needs tenancy": "Fixed term PRP General Needs tenancy",
       "Lifetime PRP General Needs tenancy": "Lifetime PRP General Needs tenancy",
       "Other": "Other"
-  }
-}
-%}
-
-{%
-  set regular_service = {
+  },
+  "unit-type": {
+      "flat": "Flat / maisonette",
+      "bedsit": "Bed-sit",
+      "house": "House",
+      "bungalow": "Bungalow",
+      "maisonette": "Shared flat / maisonette",
+      "shared-house": "Shared house",
+      "shared-bungalow": "Shared bungalow",
+      "other": "Other"
+  },
+  "time-in-la": time_range,
+  "time-waiting": time_range,
+  "regular-service": {
     "Up to and including 5 years ago": "Up to and including 5 years ago",
     "More than 5 years ago": "More than 5 years ago",
     "Are still serving": "Are still serving",
     "Refused": "Refused"
-  }
-%}
-
-{%
-  set reason_for_leaving_previous = {
+  },
+  "reason-for-leaving-previous": {
       "Permanently decanted from another property owned by this landlord": "Permanently decanted from another property owned by this landlord",
       "Left home country as refugee": "Left home country as refugee",
       "Discharged from prison or from long stay hospital or other institution": "Discharged from prison or from long stay hospital or other institution",
@@ -385,9 +354,41 @@
       "Hate crime": "Hate crime",
       "Other": "Other",
       "Don’t know": "Don’t know"
+  },
+  "reasonable-preference": yes_no_dk,
+  "reasonable-preference-reasons": {
+    'homeless': 'Homeless or about to lose their home (within 56 days)',
+    'insanitary': 'Living in insanitary or overcrowded or unsatisfactory housing',
+    'medical': 'A need to move on medical and welfare grounds (including a reasonable-preference-reasons)',
+    'hardship': 'A need to move to avoid hardship to themselves or others',
+    'unknown': "Don't know"
+  },
+  "prior-status": {
+    "not-homeless": "Not homeless",
+    "threatened-homeless": "Assessed as threatened with homelessness within 56 days by a LA and owed prevention duty",
+    "homeless-owed-relief-duty": "Assessed as homeless by a LA and owed a relief duty",
+    "unintentionally-homeless": "Assessed as unintentionally homeless and having priority need by a LA and owed a homeless main duty",
+    "other-homeless": "Other homelessness i.e. not found statutorily homeless by a housing authority but considered to be homeless by the letting landlord"
+  },
+  "allocations-cbl":  yes_no,
+  "allocations-chr":  yes_no,
+  "allocations-cap":  yes_no,
+  "referral-by": {
+    "internal-transfer": "Internal transfer",
+    "applied-direct": "Tenant applied direct (no referral or nomination)",
+    "la-nominated": "PRP lettings only - nominated by a local housing authority",
+    "housing-mobility": "Relocated through recognised national/regional or sub-regional housing mobility scheme",
+    "social-landlord": "Other social landlord",
+    "social-services": "Social services",
+    "police-etc": "Police/probation/prison",
+    "youth-offending-team": "Youth offending team",
+    "mental-health-team": "Community mental health team",
+    "health-service": "Health service",
+    "voluntary-agency": "Voluntary agency",
+    "other": "Other"
   }
+}
 %}
-
 
 {% macro option(label, answers, data, group, onchange) %}
   {% set actual_answers = data_lookups[group] if data_lookups[group] else answers %}
