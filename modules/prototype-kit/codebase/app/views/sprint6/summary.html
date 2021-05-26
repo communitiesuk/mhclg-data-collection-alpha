@@ -49,7 +49,7 @@
         <h1 class="govuk-heading-l">Check your answers before submitting your log</h1>
 
         {# Step One Answers #}
-        {% for step, step_info in titles.form_titles %}
+        {% for step, step_info in mhclg.form_titles %}
           <h2 class="govuk-heading-m">{{ step_info.name }}</h2>
           <dl class="govuk-summary-list govuk-!-margin-bottom-9">
           {% for group, question in step_info.questions %}

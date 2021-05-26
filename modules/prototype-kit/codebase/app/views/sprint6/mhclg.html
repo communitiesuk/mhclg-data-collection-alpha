@@ -1,3 +1,62 @@
+{%
+    set form_titles = {
+        "step1": {
+            "name": "Form Selection",
+            "questions": {
+                "completion-year": "Which year is this log for?",
+                "form-name": "Which form are you completing?",
+                "gdpr": "GDPR"
+            }
+        },
+        "step2": {
+            "name": "Tenancy Details",
+            "questions": {
+                "provider": "Type of provider",
+                "ll-status": "Status",
+                "rp-name": "RP (HA/LA)Name",
+                "core-code": "CORE code"
+            }
+        },
+        "step3": {
+            "name": "Household Details",
+            "questions": {
+                "starter-tenancy": "Is this a starter/introductory tenancy?",
+                "tenancy-type": "Type of main tenancy (after any starter/introductory period)",
+                "tenancy-type-other": "Please state tenancy type",
+                "tenancy-code": "Tenant code",
+                "length-fixed-term": "If the main tenancy is a fixed term tenancy, please provide the length of the fixed term (to the nearest year) excluding any starter/introductory period"
+            }
+        },
+        "step4": {
+          "name": "Step 4",
+          "questions": {
+            "tenancy-age": "Age",
+            "tenant-gender": "Gender",
+            "tenant-economic-status": "Tenant economic status",
+            "ethnicity-options": "Ethnicity options",
+            "nationality-options": "Nationality options"
+          }
+        },
+        "step5": {
+          "name": "Step 5",
+          "questions": {
+            "armed-forces": "Has anyone in the household ever served in the UK Armed Forces as a regular or a reserve? (Excluding National Service)",
+            "injury-illness": "Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?",
+            "pregnancy": "Does the household contain a pregnant person?",
+            "benefits": "Is the tenant in receipt of or likely to be in receipt of the following",
+            "benefit-proportion": "How much of your income comes from Universal Credit , state pensions or benefits? (excluding child & housing benefit, Universal Credit  housing element, council tax support or tax credits)",
+            "income": "Tenant’s or tenant and partner’s net income (after tax deductions) For those receiving Universal Credit, please enter net income from employment, pensions and Universal Credit. Please exclude child benefit, housing element of universal credit and council tax support. For those not receiving Universal Credit, please enter net income from employment, pensions and other benefits. Please exclude housing benefit, child benefit and council tax support.",
+            "regularity": "Is the income...?",
+            "reason-for-leaving-previous": "In the tenant’s view what was the main reason the household left their last settled home?",
+            "other-reason-for-leaving-previous": "please state the reason for leaving last settled home",
+            "subsidy-cap": "Was the reason for leaving a direct result of the removal of the spare room subsidy or benefit cap introduced from 2013? (this is most likely to apply if options 1, 29, 30, 33, 34 or 37 were selected for Q09a)", 
+            "disability": "Does anyone in the household require: (Please tick those that apply)",
+            "previous-situation": "The housing situation for this household immediately before this letting"
+          }
+        }
+    }
+%}
+
 {% 
   set reason_for_vacancy = {
       "arrears": "Relet - tenant evicted due to arrears",
@@ -165,77 +224,123 @@
       "license-agreement": "License agreement",
       "other": "Other"
     },
-    "starter-tenancy": yes_no
+    "starter-tenancy": yes_no,
+    "tenant-gender": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other",
+      "refused": "Refused"
+    },
+    "tenant-economic-status": {
+      "part-time": "Part-time (Less than 30 hrs)",      
+      "full-time": "Full-time (30 hrs or more) Not seeking work Government training/New deal",
+      "student": "Full-time student Jobseeker Child under 16 Retired",
+      "unable-to-work": "Unable to work/long term sick or disability",
+      "other": "Other adult"
+    },
+    "ethnicity-options": {
+      "White: British": "White: British",
+      "White: Irish": "White: Irish",
+      "White: Gypsy/Irish Traveller": "White: Gypsy/Irish Traveller",
+      "White: Other": "White: Other",
+      "Mixed: White and Black Caribbean": "Mixed: White and Black Caribbean",
+      "Mixed: Other": "Mixed: Other",
+      "Mixed: White and Asian": "Mixed: White and Asian",
+      "Asian or Asian British: Indian": "Asian or Asian British: Indian",
+      "Asian or Asian British: Pakistani": "Asian or Asian British: Pakistani",
+      "Asian or Asian British: Bangladeshi": "Asian or Asian British: Bangladeshi",
+      "Asian or Asian British: Chinese": "Asian or Asian British: Chinese",
+      "Asian or Asian British: Other": "Asian or Asian British: Other",
+      "Black: Caribbean": "Black: Caribbean",
+      "Black: African": "Black: African",
+      "Black: Other": "Black: Other",
+      "Other: Arab": "Other: Arab"
+    },
+    "nationality-options": {
+      "UK national resident in UK": "UK national resident in UK",
+      "UK national returning from residence overseas": "UK national returning from residence overseas",
+      "Czech Republic": "Czech Republic",
+      "Estonia": "Estonia",
+      "Hungary": "Hungary",
+      "Lithuania": "Lithuania",
+      "Poland": "Poland",
+      "Slovakia": "Slovakia",
+      "Slovenia": "Slovenia",
+      "Bulgaria": "Bulgaria",
+      "Romania": "Romania",
+      "Croatia": "Croatia",
+      "Ireland": "Ireland",
+      "Other EU Economic Area EEA Country": "Other EU Economic Area EEA Country",
+      "Any other country": "Any other country"
+    },
+    "armed-forces": {
+      "regular": "Yes - Regular",
+      "reserve": "Yes - Reserve",
+      "no": "No",
+      "refused": "Refused"
+    },
+    "injury-illness": yes_no_ref,
+    "pregnancy": yes_no_ref,
+    "benefits": {
+      "Housing Benefit (If not in receipt of universal credit)": "Housing Benefit (If not in receipt of universal credit)", 
+      "Not in receipt of either UC or HB": "Not in receipt of either UC or HB", 
+      "Don't know": "Don't know", 
+      "UC - With housing element (and not in receipt of housing benefit)": "UC - With housing element (and not in receipt of housing benefit)", 
+      "UC - Without housing element (not in receipt of HB and tenants not eligible for housing support e.g residential care home)": "UC - Without housing element (not in receipt of HB and tenants not eligible for housing support e.g residential care home)", 
+      "UC - Without housing element (and in receipt of HB)": "UC - Without housing element (and in receipt of HB)"
+    },
+    "benefit-proportion": {
+      "all": "All",
+      "some": "Some",
+      "none": "None",
+      "unknown": "Don't know"
+    },
+    "regularity": {
+      "Weekly": "Weekly",
+      "Monthly": "Monthly",
+      "Annual": "Annual"
+    },
+    "subsidy-cap": {
+      "Yes: Removal or spar bedroom subsidy": "Yes: Removal or spar bedroom subsidy",
+      "Yes: Benefit cap": "Yes: Benefit cap",
+      "Yes: both": "Yes: both",
+      "No": "No",
+      "Don't know": "Don't know"
+    },
+    "disability": {
+      "Fully wheelchair accessible housing": "Fully wheelchair accessible housing",
+      "Wheelchair access to essential rooms": "Wheelchair access to essential rooms",
+      "Level access housing": "Level access housing",
+      "Other disability requirements.": "Other disability requirements.",
+      "No disability requirements": "No disability requirements",
+      "Don’t know": "Don’t know"
+    },
+    "previous-situation": {
+      "Owner occupation (private)": "Owner occupation (private)",
+      "Owner occupation (low cost home ownership)": "Owner occupation (low cost home ownership)",
+      "Private sector tenancy": "Private sector tenancy",
+      "Tied housing or rented with job": "Tied housing or rented with job",
+      "Supported housing": "Supported housing",
+      "Sheltered accommodation": "Sheltered accommodation",
+      "Residential care home": "Residential care home",
+      "Living with friends or family": "Living with friends or family",
+      "Refuge": "Refuge",
+      "Hospital": "Hospital",
+      "Prison / Approved Probation Hostel": "Prison / Approved Probation Hostel",
+      "Direct access hostel": "Direct access hostel",
+      "Bed and Breakfast": "Bed and Breakfast",
+      "Mobile home / caravan": "Mobile home / caravan",
+      "Any other temporary accommodation": "Any other temporary accommodation",
+      "Home Office Asylum Support": "Home Office Asylum Support",
+      "Children’s home / foster care": "Children’s home / foster care",
+      "Rough sleeping": "Rough sleeping",
+      "Fixed term Local Authority General Needs tenancy": "Fixed term Local Authority General Needs tenancy",
+      "Lifetime Local Authority General Needs tenancy": "Lifetime Local Authority General Needs tenancy",
+      "Fixed term PRP General Needs tenancy": "Fixed term PRP General Needs tenancy",
+      "Lifetime PRP General Needs tenancy": "Lifetime PRP General Needs tenancy",
+      "Other": "Other"
   }
-%}
-
-{%
-  set gender = {
-    "male": "Male",
-    "female": "Female",
-    "other": "Other",
-    "refused": "Refused"
-  }
-%}
-
-{%
-  set economic_status = {
-    "part-time": "Part-time (Less than 30 hrs)",      
-    "full-time": "Full-time (30 hrs or more) Not seeking work Government training/New deal",
-    "student": "Full-time student Jobseeker Child under 16 Retired",
-    "unable-to-work": "Unable to work/long term sick or disability",
-    "other": "Other adult"
-  }
-%}
-
-{%
-  set ethnicity = {
-    "White: British": "White: British",
-    "White: Irish": "White: Irish",
-    "White: Gypsy/Irish Traveller": "White: Gypsy/Irish Traveller",
-    "White: Other": "White: Other",
-    "Mixed: White and Black Caribbean": "Mixed: White and Black Caribbean",
-    "Mixed: Other": "Mixed: Other",
-    "Mixed: White and Asian": "Mixed: White and Asian",
-    "Asian or Asian British: Indian": "Asian or Asian British: Indian",
-    "Asian or Asian British: Pakistani": "Asian or Asian British: Pakistani",
-    "Asian or Asian British: Bangladeshi": "Asian or Asian British: Bangladeshi",
-    "Asian or Asian British: Chinese": "Asian or Asian British: Chinese",
-    "Asian or Asian British: Other": "Asian or Asian British: Other",
-    "Black: Caribbean": "Black: Caribbean",
-    "Black: African": "Black: African",
-    "Black: Other": "Black: Other",
-    "Other: Arab": "Other: Arab"
-  }
-%}
-
-{%
-  set nationality = {
-    "UK national resident in UK": "UK national resident in UK",
-    "UK national returning from residence overseas": "UK national returning from residence overseas",
-    "Czech Republic": "Czech Republic",
-    "Estonia": "Estonia",
-    "Hungary": "Hungary",
-    "Lithuania": "Lithuania",
-    "Poland": "Poland",
-    "Slovakia": "Slovakia",
-    "Slovenia": "Slovenia",
-    "Bulgaria": "Bulgaria",
-    "Romania": "Romania",
-    "Croatia": "Croatia",
-    "Ireland": "Ireland",
-    "Other EU Economic Area EEA Country": "Other EU Economic Area EEA Country",
-    "Any other country": "Any other country"
-  }
-%}
-
-{%
-  set armed_forces = {
-          "regular": "Yes - Regular",
-          "reserve": "Yes - Reserve",
-          "no": "No",
-          "refused": "Refused"
-  }
+}
 %}
 
 {%
@@ -244,34 +349,6 @@
     "More than 5 years ago": "More than 5 years ago",
     "Are still serving": "Are still serving",
     "Refused": "Refused"
-  }
-%}
-
-{%
-  set benefits = {
-    "Housing Benefit (If not in receipt of universal credit)": "Housing Benefit (If not in receipt of universal credit)", 
-    "Not in receipt of either UC or HB": "Not in receipt of either UC or HB", 
-    "Don't know": "Don't know", 
-    "UC - With housing element (and not in receipt of housing benefit)": "UC - With housing element (and not in receipt of housing benefit)", 
-    "UC - Without housing element (not in receipt of HB and tenants not eligible for housing support e.g residential care home)": "UC - Without housing element (not in receipt of HB and tenants not eligible for housing support e.g residential care home)", 
-    "UC - Without housing element (and in receipt of HB)": "UC - Without housing element (and in receipt of HB)"
-  }
-%}
-
-{%
-  set benefit_proportion = {
-    "all": "All",
-    "some": "Some",
-    "none": "None",
-    "unknown": "Don't know"
-  }
-%}
-
-{%
-  set regularity = {
-    "Weekly": "Weekly",
-    "Monthly": "Monthly",
-    "Annual": "Annual"
   }
 %}
 
@@ -311,54 +388,6 @@
   }
 %}
 
-{%
-  set subsidy_cap = {
-    "Yes: Removal or spar bedroom subsidy": "Yes: Removal or spar bedroom subsidy",
-    "Yes: Benefit cap": "Yes: Benefit cap",
-    "Yes: both": "Yes: both",
-    "No": "No",
-    "Don't know": "Don't know"
-  }
-%}
-
-{%
-  set disability = {
-    "Fully wheelchair accessible housing": "Fully wheelchair accessible housing",
-    "Wheelchair access to essential rooms": "Wheelchair access to essential rooms",
-    "Level access housing": "Level access housing",
-    "Other disability requirements.": "Other disability requirements.",
-    "No disability requirements": "No disability requirements",
-    "Don’t know": "Don’t know"
-  }
-%}
-
-{%
-  set previous_situation = {
-      "Owner occupation (private)": "Owner occupation (private)",
-      "Owner occupation (low cost home ownership)": "Owner occupation (low cost home ownership)",
-      "Private sector tenancy": "Private sector tenancy",
-      "Tied housing or rented with job": "Tied housing or rented with job",
-      "Supported housing": "Supported housing",
-      "Sheltered accommodation": "Sheltered accommodation",
-      "Residential care home": "Residential care home",
-      "Living with friends or family": "Living with friends or family",
-      "Refuge": "Refuge",
-      "Hospital": "Hospital",
-      "Prison / Approved Probation Hostel": "Prison / Approved Probation Hostel",
-      "Direct access hostel": "Direct access hostel",
-      "Bed and Breakfast": "Bed and Breakfast",
-      "Mobile home / caravan": "Mobile home / caravan",
-      "Any other temporary accommodation": "Any other temporary accommodation",
-      "Home Office Asylum Support": "Home Office Asylum Support",
-      "Children’s home / foster care": "Children’s home / foster care",
-      "Rough sleeping": "Rough sleeping",
-      "Fixed term Local Authority General Needs tenancy": "Fixed term Local Authority General Needs tenancy",
-      "Lifetime Local Authority General Needs tenancy": "Lifetime Local Authority General Needs tenancy",
-      "Fixed term PRP General Needs tenancy": "Fixed term PRP General Needs tenancy",
-      "Lifetime PRP General Needs tenancy": "Lifetime PRP General Needs tenancy",
-      "Other": "Other"
-  }
-%}
 
 {% macro option(label, answers, data, group, onchange) %}
   {% set actual_answers = data_lookups[group] if data_lookups[group] else answers %}
