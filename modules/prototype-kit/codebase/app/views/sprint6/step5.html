@@ -160,8 +160,7 @@
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset" aria-describedby="disability-hint">
       <p>{{ data['disability'] }}</p>
-      {{ mhclg.checkboxes('Does anyone in the household require: (Please tick those that apply)', 'Select all that apply.',
-       mhclg.disability, data, 'disability') }}
+      {{ mhclg.checkboxes('step5', 'Select all that apply.', data, 'disability') }}
     </fieldset>
   </div>
 

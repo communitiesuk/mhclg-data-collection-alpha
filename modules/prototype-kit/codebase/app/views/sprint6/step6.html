@@ -48,7 +48,7 @@
       {{ mhclg.radio("Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?",
                mhclg.yes_no_dk, data, 'reasonable-preference', 'check()') }}
 
-      {{ mhclg.checkboxes('Which of the following reasons for Reasonable Preference apply?', 'Select all that apply.', mhclg.reasonable_preference, data, 'reasonable-preference-reasons') }}
+      {{ mhclg.checkboxes("step6", "Select all that apply.", data, 'reasonable-preference-reasons') }}
 
       <label class="govuk-label govuk-label--m" for="unit-type">
         Was the letting made under any of the following allocations systems? Select Yes or No for each allocation
