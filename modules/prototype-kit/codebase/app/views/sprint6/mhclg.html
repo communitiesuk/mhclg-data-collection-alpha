@@ -420,11 +420,10 @@
   </div>
 {% endmacro %}
 
-{% macro radio(label, answers, data, group, changefn, subdued) %}
-  {% set actual_answers = data_lookups[group] if data_lookups[group] else answers %}
-  <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ label }}</label>
+{% macro radio(step, data, group, changefn, subdued) %}
+  <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
   <div class="govuk-radios">
-      {% for value, name in actual_answers %}
+      {% for value, name in data_lookups[group]  %}
     <div class="govuk-radios__item" id="{{ group }}">
       <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
         onchange="{{ changefn }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />

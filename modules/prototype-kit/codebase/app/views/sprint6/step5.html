@@ -39,14 +39,13 @@
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      {% set armed_forces_lable = "Has anyone in the household ever served in the UK Armed Forces as a regular or a reserve? (Excluding National Service)" %}
-      {{ mhclg.radio(armed_forces_lable, mhclg.armed_forces, data, 'armed-forces', 'checkRegular()') }}
+      {{ mhclg.radio("step5", data, 'armed-forces', 'checkRegular()') }}
     </fieldset>
   </div>
 
   <div class="govuk-form-group" id="regular-service-group">
     <fieldset class="govuk-fieldset">
-      {{ mhclg.radio("If they've ever served as a regular, did they leave... ?", mhclg.regular_service, data, 'regular-service') }}
+      {{ mhclg.radio("step5", data, 'regular-service') }}
     </fieldset>
   </div>
 
@@ -77,14 +76,13 @@
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      {{ mhclg.radio("Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?",
-            mhclg.yes_no_ref, data, 'injury-illness') }}
+      {{ mhclg.radio("step5", data, 'injury-illness') }}
     </fieldset>
   </div>
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      {{ mhclg.radio("Does the household contain a pregnant person?", mhclg.yes_no_ref, data, 'pregnancy') }}
+      {{ mhclg.radio("step5", data, 'pregnancy') }}
     </fieldset>
   </div>
 
@@ -92,14 +90,13 @@
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      {{ mhclg.radio("Is the tenant in receipt of or likely to be in receipt of the following", mhclg.benefits, data, 'benefits') }}
+      {{ mhclg.radio("step5", data, 'benefits') }}
     </fieldset>
   </div>
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      {{ mhclg.radio("How much of your income comes from Universal Credit , state pensions or benefits? (excluding child & housing benefit, Universal Credit  housing element, council tax support or tax credits)",
-            mhclg.benefit_proportion, data, 'benefit-proportion') }}
+      {{ mhclg.radio("step5", data, 'benefit-proportion') }}
     </fieldset>
   </div>
 
@@ -113,7 +110,7 @@
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      {{ mhclg.radio("Is the income...?", mhclg.regularity, data, 'regularity') }}
+      {{ mhclg.radio("step5", data, 'regularity') }}
     </fieldset>
   </div>
 
@@ -152,14 +149,12 @@
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      {{ mhclg.radio("Was the reason for leaving a direct result of the removal of the spare room subsidy or benefit cap introduced from 2013? (this is most likely to apply if options 1, 29, 30, 33, 34 or 37 were selected for Q09a)", 
-          mhclg.subsidy_cap, data, 'subsidy-cap') }}
+      {{ mhclg.radio("step5", data, 'subsidy-cap') }}
     </fieldset>
   </div>
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset" aria-describedby="disability-hint">
-      <p>{{ data['disability'] }}</p>
       {{ mhclg.checkboxes('step5', 'Select all that apply.', data, 'disability') }}
     </fieldset>
   </div>

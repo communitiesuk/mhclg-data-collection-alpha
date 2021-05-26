@@ -33,7 +33,7 @@
   role="group"
   aria-describedby="Tenancy Details"
 >
-  {{ mhclg.radio("Is this a starter/introductory tenancy?", mhclg.yes_no, data, 'starter-tenancy') }}
+  {{ mhclg.radio("step3", data, 'starter-tenancy') }}
 
   {{ mhclg.option("step3", data, 'tenancy-type', "check()") }}
 
