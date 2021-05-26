@@ -1,3 +1,4 @@
+{% import "./mhclg.html" as mhclg %}
 {% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
 %} {% block header %}
 <!-- Blank header with no service name for the start page -->
@@ -43,6 +44,9 @@
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
+    {{ mhclg.option("Over what period are rent and other charges due",
+               mhclg.time_range, data, 'rental-period') }}
+
       <div class="govuk-form-group">
         <label class="govuk-label govuk-label--m" for="rental-period">
           Over what period are rent and other charges due
@@ -184,63 +188,10 @@
   {# rent after UC #}
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      <label class="govuk-label govuk-label--m">
-        After housing benefit and/or housing element of UC payment is received,
+
+      {{ mhclg.radio("After housing benefit and/or housing element of UC payment is received,
         will there be an outstanding amount for basic rent (18ai) and/or benefit
-        eligible charges (18aii)?
-      </label>
-      <div class="govuk-radios">
-        <div class="govuk-radios__item">
-          <input
-            class="govuk-radios__input"
-            id="outstanding-after-uc"
-            name="outstanding-after-uc"
-            type="radio"
-            value="Yes"
-            {{ 'checked' if data['outstanding-after-uc'] == 'Yes' else '' }}
-          />
-          <label
-            class="govuk-label govuk-radios__label"
-            for="outstanding-after-uc"
-          >
-            Yes
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input
-            class="govuk-radios__input"
-            id="outstanding-after-uc-2"
-            name="outstanding-after-uc"
-            type="radio"
-            value="No"
-            {{ 'checked' if data['outstanding-after-uc'] == 'No' else '' }}
-          />
-          <label
-            class="govuk-label govuk-radios__label"
-            for="outstanding-after-uc-2"
-          >
-            No
-          </label>
-        </div>
-        <div class="govuk-radios__item">
-          <input
-            class="govuk-radios__input"
-            id="outstanding-after-uc-3"
-            name="outstanding-after-uc"
-            type="radio"
-            value="Don't know"
-            {{ 'checked' if data['outstanding-after-uc'] == "Don't know" else '' }}
-          />
-          <label
-            class="govuk-label govuk-radios__label"
-            for="outstanding-after-uc-3"
-          >
-            Don't Know
-          </label>
-        </div>
-      </div>
-    </fieldset>
-  </div>
+        eligible charges (18aii)?", mhclg.yes_no_dk, data, 'outstanding-after-uc', 'check()') }}
 
   <div class="govuk-form-group" id="outstanding-amount">
     <div class="govuk-grid-row govuk-!-margin-bottom-6">
@@ -260,19 +211,18 @@
 
   {# rent after UC conditional render check and style#}
   <script>
-    document.body.addEventListener("change", function (e) {
-      let target = $('input[name="outstanding-after-uc"]:checked').val();
-      switch (target) {
-        case "Yes":
-          document.getElementById("outstanding-amount").style.display = "block";
-          document.getElementById("outstanding-amount").style.opacity = 1;
-          break;
-        default:
-          document.getElementById("outstanding-amount").style.display = "none";
-          document.getElementById("outstanding-amount").style.opacity = 0;
-          break;
+
+  function check() {
+      var val = document.getElementById("outstanding-after-uc-yes").checked;
+      if (val) {
+        document.getElementById("outstanding-amount").style.display = "block";
+        document.getElementById("outstanding-amount").style.opacity = 1;
+      } else {
+        document.getElementById("outstanding-amount").style.display = "none";
+        document.getElementById("outstanding-amount").style.opacity = 0;
       }
-    });
+    }
+    check();
   </script>
 
   <style>
