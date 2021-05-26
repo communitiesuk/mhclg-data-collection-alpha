@@ -295,8 +295,7 @@
   >
     <label class="govuk-label govuk-label--m">
       <h2 class="govuk-fieldset__heading">
-        Major repairs completion date (if major repairs carried out during void
-        period)
+        Major repairs completion date (if major repairs carried out during void period)
       </h2>
     </label>
     <div id="repairs-completion-date-hint" class="govuk-hint">
@@ -364,48 +363,27 @@
   </fieldset>
 
   <div class="govuk-form-group">
-    <label class="govuk-label govuk-label--m" for="more-detail">
-      How many times has this property been previously offered for rent ? From
-      the end of the previous tenancy or the first let? For an Affordable Rent
-      or Rent To Buy Letting, only include number of offers as that type.
-    </label>
-    <div id="more-detail-hint" class="govuk-hint">
-      (for a property let at the first attempt enter ‘0’ )
-    </div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-half">
-        <input
-          class="govuk-input govuk-!-margin-bottom-3"
-          id="event-name"
-          name="event-name"
-          type="text"
-        />
-      </div>
-    </div>
-    <div id="more-detail-hint" class="govuk-hint">Property reference</div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-half">
-        <input
-          class="govuk-input govuk-!-margin-bottom-3"
-          id="event-name"
-          name="event-name"
-          type="text"
-        />
-      </div>
-    </div>
-    <div id="more-detail-hint" class="govuk-hint">
-      UPRN (Unique Property Reference Number)
-    </div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-half">
-        <input
-          class="govuk-input govuk-!-margin-bottom-3"
-          id="event-name"
-          name="event-name"
-          type="text"
-        />
-      </div>
-    </div>
+    {{ mhclg.textbox(
+      "How many times has this property been previously offered for rent ? From the end of the previous tenancy or the first let? For an Affordable Rent or Rent To Buy Letting, only include number of offers as that type.",
+      "(for a property let at the first attempt enter ‘0’ )",
+      data,
+      "previously-offered",
+      "number"
+    ) }}
+
+    {{ mhclg.textbox(
+      "Property reference",
+      "",
+      data,
+      "property-ref"
+    ) }}
+
+    {{ mhclg.textbox(
+      "UPRN (Unique Property Reference Number)",
+      "",
+      data,
+      "uprn"
+    ) }}
   </div>
 
   <button class="govuk-button" data-module="govuk-button">

@@ -1,5 +1,4 @@
 {% import "./mhclg.html" as mhclg %}
-{% import "./form_titles.html" as titles %}
 {% extends "layout.html" %} {% block pageTitle %} Summary {% endblock %} 
 {% block header %} {{ govukHeader() }} {% endblock %} 
 {% block beforeContent %}
@@ -58,14 +57,21 @@
                 {{ question }}
               </dt>
               <dd class="govuk-summary-list__value">
+                {% set is_list = data[group] and "," in data[group] | string %}
                 {% if mhclg.data_lookups[group][data[group]] %}
                   {{ mhclg.data_lookups[group][data[group]] }}
-                {% else %}
-                  {{ data[group] }}
+                {% elseif is_list %}
+                  <ul>
+                  {% for item in data[group] %}
+                    <li>{{ mhclg.data_lookups[group][item] }}</li>
+                  {% endfor %}
+                  </ul>
+                {% elseif data[group] %}
+                    {{ data[group] }}
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="/sprint6/{{ step }}">
+                <a class="govuk-link" href="/sprint6/{{ step }}#{{ group }}">
                   Change<span class="govuk-visually-hidden"> name</span>
                 </a>
               </dd>
