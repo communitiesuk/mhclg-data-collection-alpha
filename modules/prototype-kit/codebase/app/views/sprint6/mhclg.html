@@ -68,6 +68,27 @@
             "allocations-cap": "Common Allocation Policy (CAP):",
             "referral-by": "Who referred the household for this letting?"
         }
+        },
+        "step7": {
+          "name": "Step 7",
+          "questions": {
+            "rental-period": "Over what period are rent and other charges due",
+            "basic-rent": "Basic rent (eligible for Housing Benefit or Universal Credit ) (for period shown in above)",
+            "service-charge": "Service charge (eligible for HB or UC)",
+            "personal-service-charge": "Personal service charge (not eligible for HB or UC e.g. heating, hot water excluding water rates)",
+            "support-charge": "Support charge (charges made to fund housing related support services included in the tenancy agreement)",
+            "outstanding-after-uc": "After housing benefit and/or housing element of UC payment is received, will there be an outstanding amount for basic rent (18ai) and/or benefit eligible charges (18aii)?",
+            "outstanding-amount": "Outstanding amount",
+            "void-date-day": "Void date day",
+            "void-date-month": "Void date month",
+            "void-date-year": "Void date year",
+            "repairs-completion-date-day": "Major repairs completion date day",
+            "repairs-completion-date-month": "Major repairs completion date month",
+            "repairs-completion-date-year": "Major repairs completion date year",
+            "previously-offered": "How many times has this property been previously offered for rent? From the end of the previous tenancy or the first let? For an Affordable Rent or Rent To Buy Letting, only include number of offers as that type.",
+            "property-ref": "Property reference",
+            "uprn": "UPRN (Unique Property Reference Number)"
+          }
       }
     }
 %}
@@ -386,7 +407,8 @@
     "health-service": "Health service",
     "voluntary-agency": "Voluntary agency",
     "other": "Other"
-  }
+  },
+  "outstanding-after-uc": yes_no_dk
 }
 %}
 
@@ -407,7 +429,7 @@
   <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ label }}</label>
   <div class="govuk-radios">
       {% for value, name in actual_answers %}
-    <div class="govuk-radios__item">
+    <div class="govuk-radios__item" id="{{ group }}">
       <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
         onchange="{{ changefn }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
       <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ value }}">
@@ -420,7 +442,7 @@
 
 {% macro checkboxes(label, hint, answers, data, group) %}
   {% set actual_answers = data_lookups[group] if data_lookups[group] else answers %}
-      <div class="govuk-form-group" id="{{ group }}-section">
+      <div class="govuk-form-group" id="{{ group }}">
         <label class="govuk-label govuk-label--s">{{ label }}</label>
         <div id="{{ group }}-hint" class="govuk-hint">{{ hint }}</div>
         <div class="govuk-checkboxes">
@@ -435,4 +457,28 @@
           {% endfor %}
         </div>
       </div>
+{% endmacro %}
+
+
+{% macro textbox(label, hint, data, group, type) %}
+  {% set fieldtype = type if type else "text" %}
+  <label class="govuk-label govuk-label--m" for="{{ group }}">
+    {{ label }}
+  </label>
+  <span class="govuk-caption-m">{{ hint }}</span>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+    <div class="govuk-input__wrapper">
+      <input
+        class="govuk-input"
+        id="{{ group }}"
+        name="{{ group }}"
+        type="{{ fieldtype }}"
+        min="1"
+        step="1"
+        value="{{ data[group] }}"
+      />
+      </div>
+    </div>
+  </div>
 {% endmacro %}

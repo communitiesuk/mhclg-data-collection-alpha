@@ -1,5 +1,4 @@
 {% import "./mhclg.html" as mhclg %}
-{% import "./form_titles.html" as titles %}
 {% extends "layout.html" %} {% block pageTitle %} Summary {% endblock %} 
 {% block header %} {{ govukHeader() }} {% endblock %} 
 {% block beforeContent %}
@@ -72,7 +71,7 @@
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="/sprint6/{{ step }}">
+                <a class="govuk-link" href="/sprint6/{{ step }}#{{ group }}">
                   Change<span class="govuk-visually-hidden"> name</span>
                 </a>
               </dd>
