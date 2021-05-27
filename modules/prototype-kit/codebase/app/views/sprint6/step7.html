@@ -48,101 +48,13 @@
     </fieldset>
   </div>
 
-  <div class="govuk-form-group">
-    <label class="govuk-label govuk-label--m" for="basic-rent">
-      Basic rent (eligible for Housing Benefit or Universal Credit ) (for period
-      shown in above)
-    </label>
-    <span class="govuk-caption-m">Round to nearest £</span>
+  {{ mhclg.currency_field("step7", data, "basic-rent")  }}
 
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-half">
-        <div class="govuk-input__wrapper">
-          <div class="govuk-input__prefix" aria-hidden="true">£</div>
-          <input
-            class="govuk-input"
-            id="basic-rent"
-            name="basic-rent"
-            type="number"
-            min="1"
-            step="any"
-            value="{{ data['basic-rent'] }}"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
+  {{ mhclg.currency_field("step7", data, "service-charge")  }}
 
-  <div class="govuk-form-group">
-    <label class="govuk-label govuk-label--m" for="service-charge">
-      Service charge (eligible for HB or UC)
-    </label>
-    <span class="govuk-caption-m">Round to nearest £</span>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-half">
-      <div class="govuk-input__wrapper">
-          <div class="govuk-input__prefix" aria-hidden="true">£</div>
-        <input
-          class="govuk-input"
-          id="service-charge"
-          name="service-charge"
-          type="number"
-          min="1"
-          step="any"
-          value="{{ data['service-charge'] }}"
-        />
-        </div>
-      </div>
-    </div>
-  </div>
+  {{ mhclg.currency_field("step7", data, "personal-service-charge")  }}
 
-  <div class="govuk-form-group">
-    <label class="govuk-label govuk-label--m" for="personal-service-charge">
-      Personal service charge (not eligible for HB or UC e.g. heating, hot water
-      excluding water rates)
-    </label>
-    <span class="govuk-caption-m">Round to nearest £</span>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-half">
-      <div class="govuk-input__wrapper">
-          <div class="govuk-input__prefix" aria-hidden="true">£</div>
-        <input
-          class="govuk-input"
-          id="personal-service-charge"
-          name="personal-service-charge"
-          type="number"
-          min="1"
-          step="any"
-          value="{{ data['personal-service-charge'] }}"
-        />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="govuk-form-group">
-    <label class="govuk-label govuk-label--m" for="support-charge">
-      Support charge (charges made to fund housing related support services
-      included in the tenancy agreement)
-    </label>
-    <span class="govuk-caption-m">Round to nearest £</span>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-half">
-      <div class="govuk-input__wrapper">
-          <div class="govuk-input__prefix" aria-hidden="true">£</div>
-        <input
-          class="govuk-input"
-          id="support-charge"
-          name="support-charge"
-          type="number"
-          min="1"
-          step="1"
-          value="{{ data['support-charge'] }}"
-        />
-        </div>
-      </div>
-    </div>
-  </div>
+  {{ mhclg.currency_field("step7", data, "support-charge")  }}
 
   <div class="govuk-form-group">
     <label class="govuk-label govuk-label--m" for="total-charge">
@@ -169,49 +81,26 @@
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
 
-      {{ mhclg.radio("After housing benefit and/or housing element of UC payment is received,
-        will there be an outstanding amount for basic rent (18ai) and/or benefit
-        eligible charges (18aii)?", mhclg.yes_no_dk, data, 'outstanding-after-uc', 'check()') }}
+    {{ mhclg.radio("step7", data, "outstanding-after-uc", 'check()') }}
 
-  <div class="govuk-form-group" id="outstanding-amount">
-    <div class="govuk-grid-row govuk-!-margin-bottom-6">
-      <div class="govuk-grid-column-one-half">
-        <label class="govuk-label govuk-label--m" for="outstanding-amount">
-          Outstanding amount
-        </label>
-        <input
-          class="govuk-input"
-          name="outstanding-amount"
-          type="text"
-          value="{{ data['outstanding-amount'] }}"
-        />
-      </div>
-    </div>
+  <div id="outstanding-amount-block">
+    {{ mhclg.textbox("step7", "", data, "outstanding-amount", "number") }}
   </div>
 
   {# rent after UC conditional render check and style#}
   <script>
-
-  function check() {
+    function check() {
       var val = document.getElementById("outstanding-after-uc-yes").checked;
       if (val) {
-        document.getElementById("outstanding-amount").style.display = "block";
-        document.getElementById("outstanding-amount").style.opacity = 1;
+        document.getElementById("outstanding-amount-block").style.display = "block";
+        document.getElementById("outstanding-amount-block").style.opacity = 1;
       } else {
-        document.getElementById("outstanding-amount").style.display = "none";
-        document.getElementById("outstanding-amount").style.opacity = 0;
+        document.getElementById("outstanding-amount-block").style.display = "none";
+        document.getElementById("outstanding-amount-block").style.opacity = 0;
       }
     }
     check();
   </script>
-
-  <style>
-    #outstanding-amount {
-      display: none;
-      opacity: 0;
-      transition: opacity 2s;
-    }
-  </style>
 
   {# Void date #}
 

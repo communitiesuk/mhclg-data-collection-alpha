@@ -39,21 +39,11 @@
 
   {# age input #}
   <div class="govuk-date-input__item">
-    <div class="govuk-form-group">
-      <h2 class="govuk-label-wrapper">
-        <label class="govuk-label govuk-label--m" for="tenancy-age">
-          Age
-        </label>
-      </h2>
-      <input class="govuk-input" name="tenancy-age" type="number" value="{{ data['tenancy-age'] }}"/>
-    </div>
+      {{ mhclg.textbox("step4", "", data, "tenant-age", "number") }}
   </div>
 
   {# gender input #}
-
-  <div class="govuk-date-input__item">
-    {{ mhclg.option("step4", data, 'tenant-gender') }}
-  </div>
+  {{ mhclg.option("step4", data, 'tenant-gender') }}
 
   {# economic status input #}
 
@@ -92,7 +82,9 @@
     </div>
   </fieldset>
 
-  <div class="govuk-date-input__item">
+  {{ mhclg.textbox("step4", "Maximum 7", data, "number-in-household", "number", "check()") }}
+
+  <!-- <div class="govuk-date-input__item">
     <div class="govuk-form-group">
       <h2 class="govuk-label-wrapper">
         <label class="govuk-label govuk-label--m" for="number-in-household">
@@ -104,7 +96,7 @@
         pattern="[0-7]*" inputmode="numeric" onkeyup="check()"
       />
     </div>
-  </div>
+  </div> -->
   </fieldset>
 
   {# Person 1 #}

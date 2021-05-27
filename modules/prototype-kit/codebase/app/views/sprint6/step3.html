@@ -28,77 +28,42 @@
 {% endblock %} {% block content %}
 <h1 class="govuk-heading-l">Tenancy details</h1>
 <form class="form" action="/sprint6/step4" method="POST">
-<fieldset
-  class="govuk-fieldset"
-  role="group"
-  aria-describedby="Tenancy Details"
->
-  {{ mhclg.radio("step3", data, 'starter-tenancy') }}
+  <fieldset class="govuk-fieldset" role="group" aria-describedby="Tenancy Details">
+    {{ mhclg.radio("step3", data, 'starter-tenancy') }}
 
-  {{ mhclg.option("step3", data, 'tenancy-type', "check()") }}
+    {{ mhclg.option("step3", data, 'tenancy-type', "check()") }}
 
-  <div class="govuk-grid-row" id="tenancy-type-other">
-    <div class="govuk-grid-column-one-half">
-      <div>
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--l" for="tenancy-type-other">
-            Please state tenancy type
-          </label>
-        </h2>
-        <input class="govuk-input" name="tenancy-type-other" type="text" value="{{ data['tenancy-type-other'] }}" />
-      </div>
+    <div id="tenancy-type-other-block">
+      {{ mhclg.textbox("step3", "", data, "tenancy-type-other") }}
     </div>
-  </div>
-  <h2 class="govuk-label-wrapper">
-        <label class="govuk-label govuk-label--l" for="tenancy-code">
-          Tenant code
-        </label>
-      </h2>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
-      <input class="govuk-input" name="tenancy-code" type="text" value="{{ data['tenancy-code'] }}"/>
-    </div>
-  </div>
 
-  <h2 class="govuk-label-wrapper govuk-!-margin-top-6">
-        <label class="govuk-label govuk-label--l" for="length-fixed-term">
-          If the main tenancy is a fixed term tenancy, please provide the length
-          of the fixed term (to the nearest year) excluding any
-          starter/introductory period
-        </label>
-      </h2>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
-      <input class="govuk-input" name="length-fixed-term" type="text" value="{{ data['length-fixed-term'] }}"/>
+    <div>
+      {{ mhclg.textbox("step3", "", data, "tenancy-code") }}
     </div>
-  </div>
 
-  <button class="govuk-button" data-module="govuk-button">
-    Continue
-    <svg
-      class="govuk-button__start-icon"
-      xmlns="http://www.w3.org/2000/svg"
-      width="17.5"
-      height="19"
-      viewBox="0 0 33 40"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-    </svg>
-  </button>
-</fieldset>
+    <div>
+      {{ mhclg.textbox("step3", "", data, "length-fixed-term") }}
+    </div>
+
+    <button class="govuk-button" data-module="govuk-button">
+      Continue
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
+        viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+      </svg>
+    </button>
+  </fieldset>
 </form>
 {# conditional render check and style#}
 <script>
   function check() {
     var val = document.getElementById("tenancy-type").value;
     if (val == "other") {
-      document.getElementById("tenancy-type-other").style.display = "block";
-      document.getElementById("tenancy-type-other").style.opacity = 1;
+      document.getElementById("tenancy-type-other-block").style.display = "block";
+      document.getElementById("tenancy-type-other-block").style.opacity = 1;
     } else {
-      document.getElementById("tenancy-type-other").style.display = "none";
-      document.getElementById("tenancy-type-other").style.opacity = 0;
+      document.getElementById("tenancy-type-other-block").style.display = "none";
+      document.getElementById("tenancy-type-other-block").style.opacity = 0;
     }
   }
   check();

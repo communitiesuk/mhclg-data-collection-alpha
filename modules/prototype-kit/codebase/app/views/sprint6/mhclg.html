@@ -30,11 +30,12 @@
         "step4": {
           "name": "Step 4",
           "questions": {
-            "tenancy-age": "Age",
+            "tenant-age": "Age",
             "tenant-gender": "Gender",
             "tenant-economic-status": "Tenant economic status",
             "ethnicity-options": "Ethnicity options",
-            "nationality-options": "Nationality options"
+            "nationality-options": "Nationality options",
+            "number-in-household": "How many other people in the household?"
           }
         },
         "step5": {
@@ -94,6 +95,7 @@
             "name": "Property details",
             "questions": {
                 "bedrooms": "Number of bedrooms (if shared accommodation, enter number of bedrooms occupied by this household; a bed-sit has 1 bedroom)",
+                "bedrooms-override": "",
                 "unit-type": "Type of unit",
                 "building-type": "Type of building",
                 "wheelchair-access": "Is property built or adapted to be wheelchair accessible?",
@@ -431,7 +433,10 @@
     "rent-to-buy": "A rent to buy basis",
     "unknown": "Don't know"
   },
-  "wheelchair-access": yes_no
+  "wheelchair-access": yes_no,
+  "bedrooms-override": {
+    "override": "Override"
+  }
 }
 %}
 
@@ -480,24 +485,42 @@
 {% endmacro %}
 
 
-{% macro textbox(step, hint, data, group, type) %}
+{% macro textbox(step, hint, data, group, type, onkeyup) %}
   {% set fieldtype = type if type else "text" %}
   <label class="govuk-label govuk-label--m" for="{{ group }}">
     {{ form_titles[step].questions[group] }}
   </label>
-  <span class="govuk-caption-m">{{ hint }}</span>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
-    <div class="govuk-input__wrapper">
-      <input
-        class="govuk-input"
-        id="{{ group }}"
-        name="{{ group }}"
-        type="{{ fieldtype }}"
-        min="1"
-        step="1"
-        value="{{ data[group] }}"
-      />
+    <span class="govuk-caption-m">{{ hint }}</span>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <div class="govuk-input__wrapper">
+          <input class="govuk-input" id="{{ group }}" name="{{ group }}" type="{{ fieldtype }}" min="1" step="1"
+            value="{{ data[group] }}" onkeyup="{{ onkeyup }}" />
+        </div>
+      </div>
+    </div>
+{% endmacro %}
+
+{% macro currency_field(step, data, group) %}
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--m" for="basic-rent">
+      {{ form_titles[step].questions[group] }}
+    </label>
+    <span class="govuk-caption-m">Round to nearest £</span>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <div class="govuk-input__wrapper">
+          <div class="govuk-input__prefix" aria-hidden="true">£</div>
+          <input
+            class="govuk-input"
+            id="{{ group }}"
+            name="{{ group }}"
+            type="number"
+            min="1"
+            step="any"
+            value="{{ data[group] }}"
+          />
+        </div>
       </div>
     </div>
   </div>
