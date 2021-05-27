@@ -66,20 +66,17 @@
 
   <div class="govuk-form-group">
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-quarter">
-        <label class="govuk-label govuk-label--1" for="postal-code-out">Postcode first part</label>
-        <input class="govuk-input" name="postal-code-out" type="text" value="{{ data['postal-code-out'] }}" />
+      <div class="govuk-grid-column-one-third">
+        {{ mhclg.textbox("step8", "", data, "postal-code-out") }}
       </div>
-      <div class="govuk-grid-column-one-quarter">
-        <label class="govuk-label govuk-label--1" for="postal-code-out">Postcode second part</label>
-        <input class="govuk-input" name="postal-code-in" type="text" value="{{ data['postal-code-in'] }}" />
+
+      <div class="govuk-grid-column-one-third">
+        {{ mhclg.textbox("step8", "", data, "postal-code-in") }}
       </div>
     </div>
-
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-quarter">
-        <label class="govuk-label govuk-label--1" for="ons-la-code">ONS LA Code</label>
-        <input class="govuk-input" name="ons-la-code" type="text" value="{{ data['ons-la-code'] }}" />
+      <div class="govuk-grid-column-one-half">
+        {{ mhclg.textbox("step8", "", data, "ons-la-code")}}
       </div>
   </div>
 
