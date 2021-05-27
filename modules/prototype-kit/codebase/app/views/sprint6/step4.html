@@ -37,95 +37,30 @@
   aria-describedby="Tenant age and gender"
 >
 
-  {# age input #}
-  <div class="govuk-date-input__item">
-      {{ mhclg.textbox("step4", "", data, "tenant-age", "number") }}
-  </div>
+  {{ mhclg.textbox("step4", "", data, "tenant-age", "number") }}
 
-  {# gender input #}
   {{ mhclg.option("step4", data, 'tenant-gender') }}
 
-  {# economic status input #}
+  {{ mhclg.option("step4", data, 'tenant-economic-status') }}
 
-  <fieldset
-    class="govuk-fieldset"
-    role="group"
-    aria-describedby="Tenant economic status"
-  >
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", data, 'tenant-economic-status') }}
-    </div>
-  </fieldset>
+  {{ mhclg.option("step4", data, 'ethnicity-options') }}
 
-
-  {# Ethnicity input #}
-
-  <fieldset
-    class="govuk-fieldset"
-    role="group"
-    aria-describedby="Ethnicity options"
-  >
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", data, 'ethnicity-options') }}
-    </div>
-  </fieldset>
-
-  {# Nationality input #}
-
-  <fieldset
-    class="govuk-fieldset"
-    role="group"
-    aria-describedby="Nationality options"
-  >
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", data, 'nationality-options') }}
-    </div>
-  </fieldset>
+  {{ mhclg.option("step4", data, 'nationality-options') }}
 
   {{ mhclg.textbox("step4", "Maximum 7", data, "number-in-household", "number", "check()") }}
 
-  <!-- <div class="govuk-date-input__item">
-    <div class="govuk-form-group">
-      <h2 class="govuk-label-wrapper">
-        <label class="govuk-label govuk-label--m" for="number-in-household">
-          How many other people in the household?
-        </label>
-      </h2>
-      <span class="govuk-caption-m">Maximum 7</span>
-      <input class="govuk-input" name="number-in-household" id="number-in-household" type="number" value="{{ data['number-in-household'] }}"
-        pattern="[0-7]*" inputmode="numeric" onkeyup="check()"
-      />
-    </div>
-  </div> -->
-  </fieldset>
+</fieldset>
 
   {% for i in [1,2,3,4,5,6,7] %}
   <div id="person-{{i}}">
     <hr class="govuk-!-margin-bottom-6" />
-    {# age input #}
-    {% set age_group = "tenant-age-person-"+ i %}
-    {{ mhclg.textbox("step4", "", data, age_group, "number" )}}
+    {{ mhclg.textbox("step4", "", data, "tenant-age-person-"+ i , "number" )}}
 
-    {# gender input #}
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", data, 'tenant-gender-person-'+i) }}
-    </div>
+    {{ mhclg.option("step4", data, 'tenant-gender-person-'+i) }}
 
-    {# economic status input #}
-    <fieldset
-      class="govuk-fieldset"
-      role="group"
-      aria-describedby="Tenant economic status"
-    >
-      <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", data, 'tenant-economic-status-person-'+i) }}
-      </div>
-    </fieldset>
+    {{ mhclg.option("step4", data, 'tenant-economic-status-person-'+i) }}
 
-    {# relationship input #}
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", data, 'tenant-relationship-person-'+i) }}
-    </div>
+    {{ mhclg.option("step4", data, 'tenant-relationship-person-'+i) }}
   </div>
   {% endfor %}
 
