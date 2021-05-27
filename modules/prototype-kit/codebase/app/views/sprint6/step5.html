@@ -43,7 +43,7 @@
     </fieldset>
   </div>
 
-  <div class="govuk-form-group" id="regular-service-group">
+  <div class="govuk-form-group" id="rs-group">
     <fieldset class="govuk-fieldset">
       {{ mhclg.radio("step5", data, 'regular-service') }}
     </fieldset>
@@ -54,18 +54,18 @@
     function checkRegular() {
       var val = document.getElementById("armed-forces-regular").checked;
       if (val) {
-        document.getElementById("regular-service-group").style.display = "block";
-        document.getElementById("regular-service-group").style.opacity = 1;
+        document.getElementById("rs-group").style.display = "block";
+        document.getElementById("rs-group").style.opacity = 1;
       } else {
-        document.getElementById("regular-service-group").style.display = "none";
-        document.getElementById("regular-service-group").style.opacity = 0;
+        document.getElementById("rs-group").style.display = "none";
+        document.getElementById("rs-group").style.opacity = 0;
       }
     }
     checkRegular();
   </script>
 
   <style>
-    #regular-service-group {
+    #rs-group {
       display: none;
       opacity: 0;
       transition: opacity 2s;
