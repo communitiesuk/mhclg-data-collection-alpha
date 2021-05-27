@@ -75,32 +75,8 @@ endblock %} {% block header %}
       </legend>
       {{ mhclg.radio("step2", data, 'provider') }}
       {{ mhclg.radio("step2", data, 'll-status', "check()") }}
-
-      <div id="rp-name">
-        <div class="govuk-grid-row govuk-!-margin-bottom-6">
-          <div class="govuk-grid-column-one-half">
-            <h1 class="govuk-label-wrapper">
-              <label class="govuk-label govuk-label--l" for="rp-name">
-                RP (HA/LA)Name
-              </label>
-            </h1>
-            <input class="govuk-input" name="rp-name" type="text" value="{{ data['rp-name'] }}" />
-          </div>
-        </div>
-
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-one-half">
-            <div id="core-code">
-              <h1 class="govuk-label-wrapper">
-                <label class="govuk-label govuk-label--l" for="core-code">
-                  CORE code
-                </label>
-              </h1>
-              <input class="govuk-input" name="core-code" type="text" value="{{ data['core-code'] }}" />
-            </div>
-          </div>
-        </div>
-      </div>
+      {{ mhclg.textbox("step2", "", data, "rp-name") }}
+      {{ mhclg.textbox("step2", "", data, "core-code") }}
     </fieldset>
 </div>
 
@@ -108,23 +84,19 @@ endblock %} {% block header %}
 <script>
   function check() {
     if (document.getElementById("ll-status-another").checked) {
-      document.getElementById("rp-name").style.display = "block";
-      document.getElementById("rp-name").style.opacity = 1;
+      document.getElementById("rp-name-group").style.display = "block";
+      document.getElementById("rp-name-group").style.opacity = 1;
+      document.getElementById("core-code-group").style.display = "block";
+      document.getElementById("core-code-group").style.opacity = 1;
     } else {
-      document.getElementById("rp-name").style.display = "none";
-      document.getElementById("rp-name").style.opacity = 0;
+      document.getElementById("rp-name-group").style.display = "none";
+      document.getElementById("rp-name-group").style.opacity = 0;
+      document.getElementById("core-code-group").style.display = "none";
+      document.getElementById("core-code-group").style.opacity = 0;
     }
   }
   check();
 </script>
-
-<style>
-  #rp-name {
-    display: none;
-    opacity: 0;
-    transition: opacity 2s;
-  }
-</style>
 
 <button class="govuk-button" data-module="govuk-button">
   Continue

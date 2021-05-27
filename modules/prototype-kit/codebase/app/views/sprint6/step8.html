@@ -42,13 +42,15 @@
 </div>
 {% endblock %} {% block content %}
 <h1 class="govuk-heading-l">Property details</h1>
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="repairs-completion-date-hint"
+  >
 <form class="form" action="/sprint6/summary" method="POST">
-  <div class="govuk-form-group">
-    <fieldset class="govuk-fieldset">
-      {{ mhclg.textbox("step8", "", data, "bedrooms", "numeric", "check()") }}
-      {{ mhclg.checkboxes("step8", "", data, "bedrooms-override") }}
-    </fieldset>
-  </div>
+  {{ mhclg.textbox("step8", "", data, "bedrooms", "numeric", "check()") }}
+
+  {{ mhclg.checkboxes("step8", "", data, "bedrooms-override") }}
 
   {{ mhclg.option("step8", data, 'unit-type') }}
 
@@ -67,16 +69,16 @@
   <div class="govuk-form-group">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
-        {{ mhclg.textbox("step8", "", data, "postal-code-out") }}
+        {{ mhclg.textbox("step8", "Postcode first part", data, "postal-code-out") }}
       </div>
 
       <div class="govuk-grid-column-one-third">
-        {{ mhclg.textbox("step8", "", data, "postal-code-in") }}
+        {{ mhclg.textbox("step8", "Postcode second part", data, "postal-code-in") }}
       </div>
     </div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
-        {{ mhclg.textbox("step8", "", data, "ons-la-code")}}
+        {{ mhclg.textbox("step8", "ONS LA Code", data, "ons-la-code")}}
       </div>
   </div>
 
@@ -98,6 +100,7 @@
 
   <input class="govuk-input" name="summary" type="text" value="true" hidden />
 
+  </fieldset>
   <button class="govuk-button" data-module="govuk-button">
     Continue
     <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"

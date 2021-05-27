@@ -84,7 +84,7 @@
     {{ mhclg.radio("step7", data, "outstanding-after-uc", 'check()') }}
 
   <div id="outstanding-amount-block">
-    {{ mhclg.textbox("step7", "", data, "outstanding-amount", "number") }}
+    {{ mhclg.currency_field("step7", data, "outstanding-amount") }}
   </div>
 
   {# rent after UC conditional render check and style#}
@@ -109,6 +109,7 @@
     role="group"
     aria-describedby="void-date-hint"
   >
+  <div class="govuk-form-group govuk-!-margin-bottom-4">
     <label class="govuk-label govuk-label--m">
       <h2 class="govuk-fieldset__heading">
         Void (or new build handover / renewal) date
@@ -174,6 +175,7 @@
         </div>
       </div>
     </div>
+    </div>
   </fieldset>
 
   <fieldset
@@ -181,6 +183,7 @@
     role="group"
     aria-describedby="repairs-completion-date-hint"
   >
+  <div class="govuk-form-group govuk-!-margin-bottom-4">
     <label class="govuk-label govuk-label--m">
       <h2 class="govuk-fieldset__heading">
         Major repairs completion date (if major repairs carried out during void period)
@@ -248,9 +251,10 @@
         </div>
       </div>
     </div>
+  </div>
   </fieldset>
 
-  <div class="govuk-form-group">
+  <div class="govuk-form-group govuk-!-margin-bottom-4">
     {{ mhclg.textbox( "step7", "(for a property let at the first attempt enter ‘0’ )", data, "previously-offered", "number") }}
 
     {{ mhclg.textbox( "step7", "", data, "property-ref") }}
