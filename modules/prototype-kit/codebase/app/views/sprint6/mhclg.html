@@ -35,7 +35,35 @@
             "tenant-economic-status": "Tenant economic status",
             "ethnicity-options": "Ethnicity options",
             "nationality-options": "Nationality options",
-            "number-in-household": "How many other people in the household?"
+            "number-in-household": "How many other people in the household?",
+            "tenant-age-person-1": "Person 1 age",
+            "tenant-gender-person-1": "Person 1 gender",
+            "tenant-economic-status-person-1": "Person 1 economic status",
+            "tenant-relationship-person-1": "Relationship to tenant",
+            "tenant-age-person-2": "Person 2 age",
+            "tenant-gender-person-2": "Person 2 gender",
+            "tenant-economic-status-person-2": "Person 2 economic status",
+            "tenant-relationship-person-2": "Relationship to tenant",
+            "tenant-age-person-3": "Person 3 age",
+            "tenant-gender-person-3": "Person 3 gender",
+            "tenant-economic-status-person-3": "Person 3 economic status",
+            "tenant-relationship-person-3": "Relationship to tenant",
+            "tenant-age-person-4": "Person 4 age",
+            "tenant-gender-person-4": "Person 4 gender",
+            "tenant-economic-status-person-4": "Person 4 economic status",
+            "tenant-relationship-person-4": "Relationship to tenant",
+            "tenant-age-person-5": "Person 5 age",
+            "tenant-gender-person-5": "Person 5 gender",
+            "tenant-economic-status-person-5": "Person 5 economic status",
+            "tenant-relationship-person-5": "Relationship to tenant",
+            "tenant-age-person-6": "Person 6 age",
+            "tenant-gender-person-6": "Person 6 gender",
+            "tenant-economic-status-person-6": "Person 6 economic status",
+            "tenant-relationship-person-6": "Relationship to tenant",
+            "tenant-age-person-7": "Person 7 age",
+            "tenant-gender-person-7": "Person 7 gender",
+            "tenant-economic-status-person-7": "Person 7 economic status",
+            "tenant-relationship-person-7": "Relationship to tenant"
           }
         },
         "step5": {
@@ -166,6 +194,15 @@
 %}
 
 {%
+  set relationship = {
+    "partner": "Partner",
+    "child": "Child",
+    "other": "Other",
+    "refused": "Refused"
+  }
+%}
+
+{%
   set data_lookups = {
    "completion-year": {
       "2021": "2020/2021",
@@ -206,13 +243,20 @@
     "tenant-gender-person-6": gender,
     "tenant-gender-person-7": gender,
     "tenant-economic-status": economic_status,
-    "tenant-economic-status-1": economic_status,
-    "tenant-economic-status-2": economic_status,
-    "tenant-economic-status-3": economic_status,
-    "tenant-economic-status-4": economic_status,
-    "tenant-economic-status-5": economic_status,
-    "tenant-economic-status-6": economic_status,
-    "tenant-economic-status-7": economic_status,
+    "tenant-economic-status-person-1": economic_status,
+    "tenant-economic-status-person-2": economic_status,
+    "tenant-economic-status-person-3": economic_status,
+    "tenant-economic-status-person-4": economic_status,
+    "tenant-economic-status-person-5": economic_status,
+    "tenant-economic-status-person-6": economic_status,
+    "tenant-economic-status-person-7": economic_status,
+    "tenant-relationship-person-1": relationship,
+    "tenant-relationship-person-2": relationship,
+    "tenant-relationship-person-3": relationship,
+    "tenant-relationship-person-4": relationship,
+    "tenant-relationship-person-5": relationship,
+    "tenant-relationship-person-6": relationship,
+    "tenant-relationship-person-7": relationship,
     "ethnicity-options": {
       "white-british": "White: British",
       "white-irish": "White: Irish",
@@ -490,6 +534,9 @@
 
 {% macro textbox(step, hint, data, group, type, onkeyup) %}
   {% set fieldtype = type if type else "text" %}
+    <!-- {{ step }} : {{ group }} -->
+    <!-- {{ form_titles[step] }} -->
+    <!-- {{ form_titles[step].questions[group] }} -->
   <label class="govuk-label govuk-label--m" for="{{ group }}">
     {{ form_titles[step].questions[group] }}
   </label>
