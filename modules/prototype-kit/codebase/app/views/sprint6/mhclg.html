@@ -89,32 +89,19 @@
             "property-ref": "Property reference",
             "uprn": "UPRN (Unique Property Reference Number)"
           }
-      }
+        },
+        "step8": {
+            "name": "Property details",
+            "questions": {
+                "bedrooms": "Number of bedrooms (if shared accommodation, enter number of bedrooms occupied by this household; a bed-sit has 1 bedroom)",
+                "unit-type": "Type of unit",
+                "building-type": "Type of building",
+                "wheelchair-access": "Is property built or adapted to be wheelchair accessible?",
+                "relet": "If this is a relet, was the property most recently let on..",
+                "reason-for-vacancy": "Reason for vacancy"
+            }
+        }
     }
-%}
-
-{%
-  set reason_for_vacancy = {
-      "arrears": "Relet - tenant evicted due to arrears",
-      "asb": "Relet - tenant evicted due to ASB or other reason",
-      "died": "Relet - tenant died (no succession) ",
-      "moved-to-social": "Relet - tenant moved to other social housing provider",
-      "abandoned": "Relet - tenant abandoned property",
-      "moved-to-private": "Relet - tenant moved to private sector or other accommodation",
-      "from-temoprary": "Relet - to tenant who occupied same property as temporary accommodation",
-      "internal-transfer": "Relet – internal transfer (excluding renewals of a fixed-term tenancy)",
-      "renewal": "Relet – renewal of fixed-term tenancy",
-      "first-let-new-build": "First let of newbuild property",
-      "first-let-conversion": "First let of conversion/rehabilitation/acquired property",
-      "first-let-leased": "First let of leased property"
-  }
-%}
-
-{%
-  set building_type = {
-    "purpose-built": "Purpose built",
-    "converted": "Converted from previous residential or non-residential property"
-  }
 %}
 
 {%
@@ -140,14 +127,6 @@
   }
 %}
 
-{%
-  set relet = {
-    "social-rent": "A social rent basis",
-    "affordable": "An affordable rent basis",
-    "rent-to-buy": "A rent to buy basis",
-    "unknown": "Don't know"
-  }
-%}
 
 {%
   set time_range = {
@@ -427,7 +406,32 @@
     "51-weekly": "Weekly for 51 weeks",
     "52-weekly": "Weekly for 52 weeks",
     "53-weekly": "Weekly for 53 weeks"
-  }
+  },
+  "building-type" : {
+    "purpose-built": "Purpose built",
+    "converted": "Converted from previous residential or non-residential property"
+  },
+  "reason-for-vacancy" : {
+      "arrears": "Relet - tenant evicted due to arrears",
+      "asb": "Relet - tenant evicted due to ASB or other reason",
+      "died": "Relet - tenant died (no succession) ",
+      "moved-to-social": "Relet - tenant moved to other social housing provider",
+      "abandoned": "Relet - tenant abandoned property",
+      "moved-to-private": "Relet - tenant moved to private sector or other accommodation",
+      "from-temoprary": "Relet - to tenant who occupied same property as temporary accommodation",
+      "internal-transfer": "Relet – internal transfer (excluding renewals of a fixed-term tenancy)",
+      "renewal": "Relet – renewal of fixed-term tenancy",
+      "first-let-new-build": "First let of newbuild property",
+      "first-let-conversion": "First let of conversion/rehabilitation/acquired property",
+      "first-let-leased": "First let of leased property"
+  },
+  "relet": {
+    "social-rent": "A social rent basis",
+    "affordable": "An affordable rent basis",
+    "rent-to-buy": "A rent to buy basis",
+    "unknown": "Don't know"
+  },
+  "wheelchair-access": yes_no
 }
 %}
 
