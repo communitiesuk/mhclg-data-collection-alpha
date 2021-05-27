@@ -45,26 +45,8 @@
 <form class="form" action="/sprint6/summary" method="POST">
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      <label class="govuk-label govuk-label--m" for="bedrooms">
-          Number of bedrooms (if shared accommodation, enter number of bedrooms occupied by this household; a bed-sit
-          has 1 bedroom)
-      </label>
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-half">
-          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="bedrooms" name="bedrooms"
-            type="number" pattern="[0-9]*" inputmode="numeric" value="{{ data['bedrooms'] }}" onkeyup="check()" />
-        </div>
-      </div>
-      <div class="govuk-checkboxes" id="bedrooms-override-section">
-        <div class="govuk-checkboxes__item">
-          <p></p>
-          <input class="govuk-checkboxes__input" id="bedrooms-override" name="bedrooms-override" type="checkbox"
-            {{ 'checked' if data['bedrooms-override'] and data['bedrooms-override']=='override' }} value="override">
-          <label class="govuk-label govuk-checkboxes__label" for="bedrooms-override">
-            Override
-          </label>
-        </div>
-      </div>
+      {{ mhclg.textbox("step8", "", data, "bedrooms", "numeric", "check()") }}
+      {{ mhclg.checkboxes("step8", "", data, "bedrooms-override") }}
     </fieldset>
   </div>
 
@@ -84,20 +66,17 @@
 
   <div class="govuk-form-group">
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-quarter">
-        <label class="govuk-label govuk-label--1" for="postal-code-out">Postcode first part</label>
-        <input class="govuk-input" name="postal-code-out" type="text" value="{{ data['postal-code-out'] }}" />
+      <div class="govuk-grid-column-one-third">
+        {{ mhclg.textbox("step8", "", data, "postal-code-out") }}
       </div>
-      <div class="govuk-grid-column-one-quarter">
-        <label class="govuk-label govuk-label--1" for="postal-code-out">Postcode second part</label>
-        <input class="govuk-input" name="postal-code-in" type="text" value="{{ data['postal-code-in'] }}" />
+
+      <div class="govuk-grid-column-one-third">
+        {{ mhclg.textbox("step8", "", data, "postal-code-in") }}
       </div>
     </div>
-
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-quarter">
-        <label class="govuk-label govuk-label--1" for="ons-la-code">ONS LA Code</label>
-        <input class="govuk-input" name="ons-la-code" type="text" value="{{ data['ons-la-code'] }}" />
+      <div class="govuk-grid-column-one-half">
+        {{ mhclg.textbox("step8", "", data, "ons-la-code")}}
       </div>
   </div>
 
@@ -106,12 +85,12 @@
       var val = document.getElementById("bedrooms").value;
       console.log("VAL: " + val + "; ON: " + (val > 7))
       if (val > 7) {
-        document.getElementById("bedrooms-override-section").style.display = "block";
-        document.getElementById("bedrooms-override-section").style.opacity = 1;
+        document.getElementById("bedrooms-override").style.display = "block";
+        document.getElementById("bedrooms-override").style.opacity = 1;
       } else {
-        document.getElementById("bedrooms-override-section").style.display = "none";
-        document.getElementById("bedrooms-override-section").style.opacity = 0;
-        document.getElementById("bedrooms-override").checked = false;
+        document.getElementById("bedrooms-override").style.display = "none";
+        document.getElementById("bedrooms-override").style.opacity = 0;
+        document.getElementById("bedrooms-override-override").checked = false;
       }
     }
     check();

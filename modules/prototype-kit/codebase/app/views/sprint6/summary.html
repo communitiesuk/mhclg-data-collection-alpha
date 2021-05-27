@@ -52,7 +52,7 @@
           <h2 class="govuk-heading-m">{{ step_info.name }}</h2>
           <dl class="govuk-summary-list govuk-!-margin-bottom-9">
           {% for group, question in step_info.questions %}
-            <div class="govuk-summary-list__row">
+            <div class="govuk-summary-list__row" id="{{ group }}">
               <dt class="govuk-summary-list__key">
                 {{ question }}
               </dt>
@@ -80,6 +80,17 @@
           </dl>
         {% endfor %}
 
+        <script>
+            function hide_tenants(){
+              for (var i={{ data['number-in-household'] }} + 1; i <= 7; i++){
+                document.getElementById("tenant-age-person-"+i).style.display = "none";
+                document.getElementById("tenant-gender-person-"+i).style.display = "none";
+                document.getElementById("tenant-economic-status-person-"+i).style.display = "none";
+                document.getElementById("tenant-relationship-person-"+i).style.display = "none";
+              }
+            }
+            hide_tenants();
+        </script>
         <h2 class="govuk-heading-m">Now send your application</h2>
 
         <p class="govuk-body">By submitting this notification you are confirming that, to the best of your knowledge,

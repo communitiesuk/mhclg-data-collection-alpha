@@ -1,5 +1,6 @@
-{% import "./mhclg.html" as mhclg %} {% extends "layout.html" %} {% block
-pageTitle %} Start page example {% endblock %} {% block header %}
+{% import "./mhclg.html" as mhclg %}
+{% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
+%} {% block header %}
 <!-- Blank header with no service name for the start page -->
 {{ govukHeader() }} {% endblock %} {% block beforeContent %}
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
@@ -23,122 +24,91 @@ pageTitle %} Start page example {% endblock %} {% block header %}
       <a class="govuk-breadcrumbs__link" href="/sprint6/step3">Step 3</a>
     </li>
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link">Step 4</a>
+      <a class="govuk-breadcrumbs__link" >Step 4</a>
     </li>
   </ol>
 </div>
 {% endblock %} {% block content %}
-<h1 class="govuk-heading-l">Household details</h1>
+<h1 class="govuk-heading-l">Tenant details</h1>
 <form class="form" action="/sprint6/step5" method="POST">
+<fieldset
+  class="govuk-fieldset"
+  role="group"
+  aria-describedby="Tenant age and gender"
+>
+
+  {# age input #}
+  <div class="govuk-date-input__item">
+      {{ mhclg.textbox("step4", "", data, "tenant-age", "number") }}
+  </div>
+
+  {# gender input #}
+  {{ mhclg.option("step4", data, 'tenant-gender') }}
+
+  {# economic status input #}
+
   <fieldset
     class="govuk-fieldset"
     role="group"
-    aria-describedby="Tenant age and gender"
+    aria-describedby="Tenant economic status"
   >
-    {# age input #}
     <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--m" for="tenancy-age">
-            Age
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-age"
-          type="number"
-          value="{{ data['tenancy-age'] }}"
-        />
-      </div>
-    </div>
-
-    {# gender input #}
-
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", data, 'tenant-gender') }}
-    </div>
-
-    {# economic status input #}
-
-    <fieldset
-      class="govuk-fieldset"
-      role="group"
-      aria-describedby="Tenant economic status"
-    >
-      <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", data, 'tenant-economic-status') }}
-      </div>
-    </fieldset>
-
-    {# Ethnicity input #}
-
-    <fieldset
-      class="govuk-fieldset"
-      role="group"
-      aria-describedby="Ethnicity options"
-    >
-      <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", data, 'ethnicity-options') }}
-      </div>
-    </fieldset>
-
-    {# Nationality input #}
-
-    <fieldset
-      class="govuk-fieldset"
-      role="group"
-      aria-describedby="Nationality options"
-    >
-      <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", data, 'nationality-options') }}
-      </div>
-    </fieldset>
-
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--m" for="number-in-household">
-            How many other people in the household?
-          </label>
-        </h2>
-        <span class="govuk-caption-m">Maximum 7</span>
-        <input
-          class="govuk-input"
-          name="number-in-household"
-          id="number-in-household"
-          type="number"
-          value="{{ data['number-in-household'] }}"
-          pattern="[0-7]*"
-          inputmode="numeric"
-          onkeyup="check()"
-        />
-      </div>
+      {{ mhclg.option("step4", data, 'tenant-economic-status') }}
     </div>
   </fieldset>
 
-  {# Person 1 #}
-  <div id="person-1">
+
+  {# Ethnicity input #}
+
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="Ethnicity options"
+  >
+    <div class="govuk-date-input__item">
+      {{ mhclg.option("step4", data, 'ethnicity-options') }}
+    </div>
+  </fieldset>
+
+  {# Nationality input #}
+
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="Nationality options"
+  >
+    <div class="govuk-date-input__item">
+      {{ mhclg.option("step4", data, 'nationality-options') }}
+    </div>
+  </fieldset>
+
+  {{ mhclg.textbox("step4", "Maximum 7", data, "number-in-household", "number", "check()") }}
+
+  <!-- <div class="govuk-date-input__item">
+    <div class="govuk-form-group">
+      <h2 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--m" for="number-in-household">
+          How many other people in the household?
+        </label>
+      </h2>
+      <span class="govuk-caption-m">Maximum 7</span>
+      <input class="govuk-input" name="number-in-household" id="number-in-household" type="number" value="{{ data['number-in-household'] }}"
+        pattern="[0-7]*" inputmode="numeric" onkeyup="check()"
+      />
+    </div>
+  </div> -->
+  </fieldset>
+
+  {% for i in [1,2,3,4,5,6,7] %}
+  <div id="person-{{i}}">
     <hr class="govuk-!-margin-bottom-6" />
     {# age input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--m" for="tenant-age-person-1">
-            Person 1 Age
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-age-person-1"
-          type="number"
-          value="{{ data['tenancy-age-person-1'] }}"
-        />
-      </div>
-    </div>
+    {% set age_group = "tenant-age-person-"+ i %}
+    {{ mhclg.textbox("step4", "", data, age_group, "number" )}}
 
     {# gender input #}
     <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", mhclg.gender, 'tenant-gender-person-1') }}
+      {{ mhclg.option("step4", data, 'tenant-gender-person-'+i) }}
     </div>
 
     {# economic status input #}
@@ -148,427 +118,60 @@ pageTitle %} Start page example {% endblock %} {% block header %}
       aria-describedby="Tenant economic status"
     >
       <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", mhclg.economic_status,
-        'tenant-economic-status-1') }}
+        {{ mhclg.option("step4", data, 'tenant-economic-status-person-'+i) }}
       </div>
     </fieldset>
 
     {# relationship input #}
     <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label
-            class="govuk-label govuk-label--m"
-            for="tenancy-relation-person-1"
-          >
-            Relationship to tenant
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-relation-person-1"
-          type="number"
-          value="{{ data['tenancy-relation-person-1'] }}"
-        />
-      </div>
+      {{ mhclg.option("step4", data, 'tenant-relationship-person-'+i) }}
     </div>
   </div>
-
-  {# Person 1 end #} {# Person 2 #}
-  <div id="person-2">
-    <hr class="govuk-!-margin-bottom-6" />
-    {# age input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--m" for="tenancy-age-person-2">
-            Person 2 Age
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-age-person-2"
-          type="number"
-          value="{{ data['tenancy-age-person-2'] }}"
-        />
-      </div>
-    </div>
-
-    {# gender input #}
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", mhclg.gender, 'tenant-gender-person-2') }}
-    </div>
-
-    {# economic status input #}
-    <fieldset
-      class="govuk-fieldset"
-      role="group"
-      aria-describedby="Tenant economic status"
-    >
-      <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", mhclg.economic_status,
-        'tenant-economic-status-2') }}
-      </div>
-    </fieldset>
-
-    {# relationship input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label
-            class="govuk-label govuk-label--m"
-            for="tenancy-relation-person-2"
-          >
-            Relationship to tenant
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-relation-person-2"
-          type="number"
-          value="{{ data['tenancy-relation-person-2'] }}"
-        />
-      </div>
-    </div>
-  </div>
-
-  {# Person 2 end #} {# Person 3 #}
-  <div id="person-3">
-    <hr class="govuk-!-margin-bottom-6" />
-    {# age input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--m" for="tenancy-age-person-3">
-            Person 3 Age
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-age-person-3"
-          type="number"
-          value="{{ data['tenancy-age-person-3'] }}"
-        />
-      </div>
-    </div>
-
-    {# gender input #}
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", mhclg.gender, 'tenant-gender-person-3') }}
-    </div>
-
-    {# economic status input #}
-    <fieldset
-      class="govuk-fieldset"
-      role="group"
-      aria-describedby="Tenant economic status"
-    >
-      <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", mhclg.economic_status,
-        'tenant-economic-status-3') }}
-      </div>
-    </fieldset>
-
-    {# relationship input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label
-            class="govuk-label govuk-label--m"
-            for="tenancy-relation-person-3"
-          >
-            Relationship to tenant
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-relation-person-3"
-          type="number"
-          value="{{ data['tenancy-relation-person-3'] }}"
-        />
-      </div>
-    </div>
-  </div>
-
-  {# Person 3 end #} {# Person 4 #}
-  <div id="person-4">
-    <hr class="govuk-!-margin-bottom-6" />
-    {# age input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--m" for="tenancy-age-person-4">
-            Person 4 Age
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-age-person-4"
-          type="number"
-          value="{{ data['tenancy-age-person-4'] }}"
-        />
-      </div>
-    </div>
-
-    {# gender input #}
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", mhclg.gender, 'tenant-gender-person-4') }}
-    </div>
-
-    {# economic status input #}
-    <fieldset
-      class="govuk-fieldset"
-      role="group"
-      aria-describedby="Tenant economic status"
-    >
-      <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", mhclg.economic_status,
-        'tenant-economic-status-4') }}
-      </div>
-    </fieldset>
-
-    {# relationship input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label
-            class="govuk-label govuk-label--m"
-            for="tenancy-relation-person-4"
-          >
-            Relationship to tenant
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-relation-person-4"
-          type="number"
-          value="{{ data['tenancy-relation-person-4'] }}"
-        />
-      </div>
-    </div>
-  </div>
-
-  {# Person 4 end #} {# Person 5 #}
-  <div id="person-5">
-    <hr class="govuk-!-margin-bottom-6" />
-    {# age input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--m" for="tenancy-age-person-5">
-            Person 5 Age
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-age-person-5"
-          type="number"
-          value="{{ data['tenancy-age-person-5'] }}"
-        />
-      </div>
-    </div>
-
-    {# gender input #}
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", mhclg.gender, 'tenant-gender-person-5') }}
-    </div>
-
-    {# economic status input #}
-    <fieldset
-      class="govuk-fieldset"
-      role="group"
-      aria-describedby="Tenant economic status"
-    >
-      <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", mhclg.economic_status,
-        'tenant-economic-status-5') }}
-      </div>
-    </fieldset>
-
-    {# relationship input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label
-            class="govuk-label govuk-label--m"
-            for="tenancy-relation-person-5"
-          >
-            Relationship to tenant
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-relation-person-5"
-          type="number"
-          value="{{ data['tenancy-relation-person-5'] }}"
-        />
-      </div>
-    </div>
-  </div>
-
-  {# Person 5 end #} {# Person 6 #}
-  <div id="person-6">
-    <hr class="govuk-!-margin-bottom-6" />
-    {# age input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--m" for="tenancy-age-person-6">
-            Person 6 Age
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-age-person-6"
-          type="number"
-          value="{{ data['tenancy-age-person-6'] }}"
-        />
-      </div>
-    </div>
-
-    {# gender input #}
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", mhclg.gender, 'tenant-gender-person-6') }}
-    </div>
-
-    {# economic status input #}
-    <fieldset
-      class="govuk-fieldset"
-      role="group"
-      aria-describedby="Tenant economic status"
-    >
-      <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", mhclg.economic_status,
-        'tenant-economic-status-6') }}
-      </div>
-    </fieldset>
-
-    {# relationship input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label
-            class="govuk-label govuk-label--m"
-            for="tenancy-relation-person-6"
-          >
-            Relationship to tenant
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-relation-person-6"
-          type="number"
-          value="{{ data['tenancy-relation-person-6'] }}"
-        />
-      </div>
-    </div>
-  </div>
-
-  {# Person 6 end #} {# Person 7 #}
-  <div id="person-7">
-    <hr class="govuk-!-margin-bottom-6" />
-    {# age input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--m" for="tenancy-age-person-7">
-            Person 7 Age
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-age-person-7"
-          type="number"
-          value="{{ data['tenancy-age-person-7'] }}"
-        />
-      </div>
-    </div>
-
-    {# gender input #}
-    <div class="govuk-date-input__item">
-      {{ mhclg.option("step4", mhclg.gender, 'tenant-gender-person-7') }}
-    </div>
-
-    {# economic status input #}
-    <fieldset
-      class="govuk-fieldset"
-      role="group"
-      aria-describedby="Tenant economic status"
-    >
-      <div class="govuk-date-input__item">
-        {{ mhclg.option("step4", mhclg.economic_status,
-        'tenant-economic-status-7') }}
-      </div>
-    </fieldset>
-
-    {# relationship input #}
-    <div class="govuk-date-input__item">
-      <div class="govuk-form-group">
-        <h2 class="govuk-label-wrapper">
-          <label
-            class="govuk-label govuk-label--m"
-            for="tenancy-relation-person-7"
-          >
-            Relationship to tenant
-          </label>
-        </h2>
-        <input
-          class="govuk-input"
-          name="tenancy-relation-person-7"
-          type="number"
-          value="{{ data['tenancy-relation-person-8'] }}"
-        />
-      </div>
-    </div>
-  </div>
-
-  {# Person 7 end #}
+  {% endfor %}
 
   <script>
     const reset = () => {
-      for (var i = 1; i <= 7; i++) {
+      for(var i = 1; i<=7; i++ ) {
         let test = `person-${i.toString()}`;
         document.getElementById(test).style.display = "none";
       }
-    };
+    }
 
     function check() {
       reset();
-      var val =
-        document.getElementById("number-in-household").value > 7
-          ? 7
-          : document.getElementById("number-in-household").value;
+      var val = document.getElementById("number-in-household").value > 7 ? 7 : document.getElementById("number-in-household").value;
 
       console.log(val);
-      for (var i = 1; i <= val; i++) {
+      for(var i = 1; i<=val; i++ ) {
         let test = `person-${i.toString()}`;
         document.getElementById(test).style.display = "block";
       }
     }
+    check()
   </script>
 
   <style>
-    #person-1 {
-      display: none;
-    }
-    #person-2 {
-      display: none;
-    }
-    #person-3 {
-      display: none;
-    }
-    #person-4 {
-      display: none;
-    }
-    #person-5 {
-      display: none;
-    }
-    #person-6 {
-      display: none;
-    }
-    #person-7 {
-      display: none;
-    }
+  #person-1 {
+    display: none;
+  }
+  #person-2{
+    display: none;
+  }
+  #person-3{
+    display: none;
+  }
+  #person-4{
+    display: none;
+  }
+  #person-5{
+    display: none;
+  }
+  #person-6{
+    display: none;
+  }
+  #person-7{
+    display: none;
+  }
   </style>
 
   <button class="govuk-button" data-module="govuk-button">

@@ -30,11 +30,40 @@
         "step4": {
           "name": "Household Details",
           "questions": {
-            "tenancy-age": "Age",
+            "tenant-age": "Age",
             "tenant-gender": "Gender",
             "tenant-economic-status": "Tenant economic status",
             "ethnicity-options": "Ethnicity options",
-            "nationality-options": "Nationality options"
+            "nationality-options": "Nationality options",
+            "number-in-household": "How many other people in the household?",
+            "tenant-age-person-1": "Person 1 age",
+            "tenant-gender-person-1": "Person 1 gender",
+            "tenant-economic-status-person-1": "Person 1 economic status",
+            "tenant-relationship-person-1": "Relationship to tenant",
+            "tenant-age-person-2": "Person 2 age",
+            "tenant-gender-person-2": "Person 2 gender",
+            "tenant-economic-status-person-2": "Person 2 economic status",
+            "tenant-relationship-person-2": "Relationship to tenant",
+            "tenant-age-person-3": "Person 3 age",
+            "tenant-gender-person-3": "Person 3 gender",
+            "tenant-economic-status-person-3": "Person 3 economic status",
+            "tenant-relationship-person-3": "Relationship to tenant",
+            "tenant-age-person-4": "Person 4 age",
+            "tenant-gender-person-4": "Person 4 gender",
+            "tenant-economic-status-person-4": "Person 4 economic status",
+            "tenant-relationship-person-4": "Relationship to tenant",
+            "tenant-age-person-5": "Person 5 age",
+            "tenant-gender-person-5": "Person 5 gender",
+            "tenant-economic-status-person-5": "Person 5 economic status",
+            "tenant-relationship-person-5": "Relationship to tenant",
+            "tenant-age-person-6": "Person 6 age",
+            "tenant-gender-person-6": "Person 6 gender",
+            "tenant-economic-status-person-6": "Person 6 economic status",
+            "tenant-relationship-person-6": "Relationship to tenant",
+            "tenant-age-person-7": "Person 7 age",
+            "tenant-gender-person-7": "Person 7 gender",
+            "tenant-economic-status-person-7": "Person 7 economic status",
+            "tenant-relationship-person-7": "Relationship to tenant"
           }
         },
         "step5": {
@@ -94,11 +123,15 @@
             "name": "Property details",
             "questions": {
                 "bedrooms": "Number of bedrooms (if shared accommodation, enter number of bedrooms occupied by this household; a bed-sit has 1 bedroom)",
+                "bedrooms-override": "",
                 "unit-type": "Type of unit",
                 "building-type": "Type of building",
                 "wheelchair-access": "Is property built or adapted to be wheelchair accessible?",
                 "relet": "If this is a relet, was the property most recently let on..",
-                "reason-for-vacancy": "Reason for vacancy"
+                "reason-for-vacancy": "Reason for vacancy",
+                "ons-la-code": "ONS LA Code",
+                "postal-code-out": "Postcode first part",
+                "postal-code-in": "Postcode second part"
             }
         }
     }
@@ -161,6 +194,15 @@
 %}
 
 {%
+  set relationship = {
+    "partner": "Partner",
+    "child": "Child",
+    "other": "Other",
+    "refused": "Refused"
+  }
+%}
+
+{%
   set data_lookups = {
    "completion-year": {
       "2021": "2020/2021",
@@ -201,13 +243,20 @@
     "tenant-gender-person-6": gender,
     "tenant-gender-person-7": gender,
     "tenant-economic-status": economic_status,
-    "tenant-economic-status-1": economic_status,
-    "tenant-economic-status-2": economic_status,
-    "tenant-economic-status-3": economic_status,
-    "tenant-economic-status-4": economic_status,
-    "tenant-economic-status-5": economic_status,
-    "tenant-economic-status-6": economic_status,
-    "tenant-economic-status-7": economic_status,
+    "tenant-economic-status-person-1": economic_status,
+    "tenant-economic-status-person-2": economic_status,
+    "tenant-economic-status-person-3": economic_status,
+    "tenant-economic-status-person-4": economic_status,
+    "tenant-economic-status-person-5": economic_status,
+    "tenant-economic-status-person-6": economic_status,
+    "tenant-economic-status-person-7": economic_status,
+    "tenant-relationship-person-1": relationship,
+    "tenant-relationship-person-2": relationship,
+    "tenant-relationship-person-3": relationship,
+    "tenant-relationship-person-4": relationship,
+    "tenant-relationship-person-5": relationship,
+    "tenant-relationship-person-6": relationship,
+    "tenant-relationship-person-7": relationship,
     "ethnicity-options": {
       "white-british": "White: British",
       "white-irish": "White: Irish",
@@ -431,33 +480,40 @@
     "rent-to-buy": "A rent to buy basis",
     "unknown": "Don't know"
   },
-  "wheelchair-access": yes_no
+  "wheelchair-access": yes_no,
+  "bedrooms-override": {
+    "override": "Override"
+  }
 }
 %}
 
 {% macro option(step, data, group, onchange) %}
-  <label class="govuk-label govuk-label--m" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
-  <div class="govuk-form-group">
-    <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="{{ onchange }}">
-      {% for value, name in data_lookups[group] %}
-      <option value="{{ value }}" {{ 'selected' if data[group] == value }}>{{ name }}</option>
-      {% endfor %}
-    </select>
+  <div class="govuk-form-group" id="{{ group }}-group">
+    <label class="govuk-label govuk-label--m" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
+    <div class="govuk-form-group">
+      <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="{{ onchange }}">
+        {% for value, name in data_lookups[group] %}
+        <option value="{{ value }}" {{ 'selected' if data[group] == value }}>{{ name }}</option>
+        {% endfor %}
+      </select>
+    </div>
   </div>
 {% endmacro %}
 
 {% macro radio(step, data, group, changefn, subdued) %}
-  <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
-  <div class="govuk-radios govuk-!-margin-bottom-4">
-      {% for value, name in data_lookups[group]  %}
-    <div class="govuk-radios__item" id="{{ group }}">
-      <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
-        onchange="{{ changefn }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
-      <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ value }}">
-        {{ name }}
-      </label>
+  <div class="govuk-form-group" id="{{ group }}-group">
+    <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
+    <div class="govuk-radios govuk-!-margin-bottom-4">
+        {% for value, name in data_lookups[group]  %}
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
+          onchange="{{ changefn }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
+        <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ value }}">
+          {{ name }}
+        </label>
+      </div>
+        {% endfor %}
     </div>
-      {% endfor %}
   </div>
 {% endmacro %}
 
@@ -480,24 +536,44 @@
 {% endmacro %}
 
 
-{% macro textbox(step, hint, data, group, type) %}
+{% macro textbox(step, hint, data, group, type, onkeyup) %}
   {% set fieldtype = type if type else "text" %}
-  <label class="govuk-label govuk-label--m" for="{{ group }}">
-    {{ form_titles[step].questions[group] }}
-  </label>
-  <span class="govuk-caption-m">{{ hint }}</span>
+  <div class="govuk-form-group" id="{{ group }}-group">
+    <label class="govuk-label govuk-label--m" for="{{ group }}">
+      {{ form_titles[step].questions[group] }}
+    </label>
+    <span class="govuk-caption-m">{{ hint }}</span>
   <div class="govuk-grid-row govuk-!-margin-bottom-4">
-    <div class="govuk-grid-column-one-half">
-    <div class="govuk-input__wrapper">
-      <input
-        class="govuk-input"
-        id="{{ group }}"
-        name="{{ group }}"
-        type="{{ fieldtype }}"
-        min="1"
-        step="1"
-        value="{{ data[group] }}"
-      />
+      <div class="govuk-grid-column-one-half">
+        <div class="govuk-input__wrapper">
+          <input class="govuk-input" id="{{ group }}" name="{{ group }}" type="{{ fieldtype }}" min="1" step="1"
+            value="{{ data[group] }}" onkeyup="{{ onkeyup }}" />
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro currency_field(step, data, group) %}
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--m" for="{{ group }}">
+      {{ form_titles[step].questions[group] }}
+    </label>
+    <span class="govuk-caption-m">Round to nearest £</span>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <div class="govuk-input__wrapper">
+          <div class="govuk-input__prefix" aria-hidden="true">£</div>
+          <input
+            class="govuk-input"
+            id="{{ group }}"
+            name="{{ group }}"
+            type="number"
+            min="1"
+            step="any"
+            value="{{ data[group] }}"
+          />
+        </div>
       </div>
     </div>
   </div>

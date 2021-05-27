@@ -101,11 +101,7 @@
   </div>
 
   <div class="govuk-form-group">
-    <label class="govuk-label govuk-label--m" for="income">
-        Tenant’s or tenant and partner’s net income (after tax deductions) For those receiving Universal Credit, please enter net income from employment, pensions and Universal Credit. Please exclude child benefit, housing element of universal credit and council tax support. For those not receiving Universal Credit, please enter net income from employment, pensions and other benefits. Please exclude housing benefit, child benefit and council tax support.
-      </label>
-    <span class="govuk-caption-m">Round to nearest £</span>
-    <input class="govuk-input" id="income" name="income" type="text" min="1" step="any">
+    {{ mhclg.currency_field("step5", data, "income", "number") }}
   </div>
 
   <div class="govuk-form-group">
