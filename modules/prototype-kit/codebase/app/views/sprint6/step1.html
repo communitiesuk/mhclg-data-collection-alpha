@@ -6,19 +6,8 @@ endblock %} {% block header %}
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-<div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="index">Home</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link">Step 1</a>
-    </li>
-  </ol>
-</div>
+{{ mhclg.breadcrumbs([1]) }}
+
 {% endblock %} {% block content %}
 <h1 class="govuk-heading-l">Form Selection</h1>
 <div class="govuk-form-group">
