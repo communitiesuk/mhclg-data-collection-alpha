@@ -9,7 +9,7 @@
             }
         },
         "step2": {
-            "name": "Tenancy Details",
+            "name": "Provider Details",
             "questions": {
                 "provider": "Type of provider",
                 "ll-status": "Status",
@@ -18,7 +18,7 @@
             }
         },
         "step3": {
-            "name": "Household Details",
+            "name": "Tenancy Details",
             "questions": {
                 "starter-tenancy": "Is this a starter/introductory tenancy?",
                 "tenancy-type": "Type of main tenancy (after any starter/introductory period)",
@@ -28,7 +28,7 @@
             }
         },
         "step4": {
-          "name": "Step 4",
+          "name": "Household Details",
           "questions": {
             "tenancy-age": "Age",
             "tenant-gender": "Gender",
@@ -38,7 +38,7 @@
           }
         },
         "step5": {
-          "name": "Step 5",
+          "name": "Household Details cont.",
           "questions": {
             "armed-forces": "Has anyone in the household ever served in the UK Armed Forces as a regular or a reserve? (Excluding National Service)",
             "injury-illness": "Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?",
@@ -55,7 +55,7 @@
           }
         },
         "step6": {
-          "name": "Step 6",
+          "name": "Local Authority Details",
           "questions": {
             "time-in-la": "For how long has the household continuously lived in the local authority area where the new letting is located?",
             "time-waiting": "For how long was the household on the local authority waiting list where the new letting is located?",
@@ -70,7 +70,7 @@
           }
         },
         "step7": {
-          "name": "Step 7",
+          "name": "Rent and other charges",
           "questions": {
             "rental-period": "Over what period are rent and other charges due",
             "basic-rent": "Basic rent (eligible for Housing Benefit or Universal Credit ) (for period shown in above)",
@@ -448,7 +448,7 @@
 
 {% macro radio(step, data, group, changefn, subdued) %}
   <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
-  <div class="govuk-radios">
+  <div class="govuk-radios govuk-!-margin-bottom-4">
       {% for value, name in data_lookups[group]  %}
     <div class="govuk-radios__item" id="{{ group }}">
       <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
@@ -462,7 +462,7 @@
 {% endmacro %}
 
 {% macro checkboxes(step, hint, data, group) %}
-      <div class="govuk-form-group" id="{{ group }}">
+      <div class="govuk-form-group govuk-!-margin-bottom-4" id="{{ group }}">
         <label class="govuk-label govuk-label--s">{{ form_titles[step].questions[group] }}</label>
         <div id="{{ group }}-hint" class="govuk-hint">{{ hint }}</div>
         <div class="govuk-checkboxes">
@@ -486,7 +486,7 @@
     {{ form_titles[step].questions[group] }}
   </label>
   <span class="govuk-caption-m">{{ hint }}</span>
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row govuk-!-margin-bottom-4">
     <div class="govuk-grid-column-one-half">
     <div class="govuk-input__wrapper">
       <input
