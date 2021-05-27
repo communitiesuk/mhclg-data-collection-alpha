@@ -488,28 +488,32 @@
 %}
 
 {% macro option(step, data, group, onchange) %}
-  <label class="govuk-label govuk-label--m" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
-  <div class="govuk-form-group">
-    <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="{{ onchange }}">
-      {% for value, name in data_lookups[group] %}
-      <option value="{{ value }}" {{ 'selected' if data[group] == value }}>{{ name }}</option>
-      {% endfor %}
-    </select>
+  <div class="govuk-form-group" id="{{ group }}-group">
+    <label class="govuk-label govuk-label--m" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
+    <div class="govuk-form-group">
+      <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="{{ onchange }}">
+        {% for value, name in data_lookups[group] %}
+        <option value="{{ value }}" {{ 'selected' if data[group] == value }}>{{ name }}</option>
+        {% endfor %}
+      </select>
+    </div>
   </div>
 {% endmacro %}
 
 {% macro radio(step, data, group, changefn, subdued) %}
-  <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
-  <div class="govuk-radios">
-      {% for value, name in data_lookups[group]  %}
-    <div class="govuk-radios__item" id="{{ group }}">
-      <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
-        onchange="{{ changefn }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
-      <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ value }}">
-        {{ name }}
-      </label>
+  <div class="govuk-form-group" id="{{ group }}-group">
+    <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
+    <div class="govuk-radios">
+        {% for value, name in data_lookups[group]  %}
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
+          onchange="{{ changefn }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
+        <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ value }}">
+          {{ name }}
+        </label>
+      </div>
+        {% endfor %}
     </div>
-      {% endfor %}
   </div>
 {% endmacro %}
 
@@ -534,12 +538,10 @@
 
 {% macro textbox(step, hint, data, group, type, onkeyup) %}
   {% set fieldtype = type if type else "text" %}
-    <!-- {{ step }} : {{ group }} -->
-    <!-- {{ form_titles[step] }} -->
-    <!-- {{ form_titles[step].questions[group] }} -->
-  <label class="govuk-label govuk-label--m" for="{{ group }}">
-    {{ form_titles[step].questions[group] }}
-  </label>
+  <div class="govuk-form-group" id="{{ group }}-group">
+    <label class="govuk-label govuk-label--m" for="{{ group }}">
+      {{ form_titles[step].questions[group] }}
+    </label>
     <span class="govuk-caption-m">{{ hint }}</span>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
@@ -549,6 +551,7 @@
         </div>
       </div>
     </div>
+  </div>
 {% endmacro %}
 
 {% macro currency_field(step, data, group) %}
