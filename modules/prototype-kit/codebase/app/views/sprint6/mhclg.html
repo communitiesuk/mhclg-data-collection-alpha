@@ -506,7 +506,7 @@
 
 {% macro currency_field(step, data, group) %}
   <div class="govuk-form-group">
-    <label class="govuk-label govuk-label--m" for="basic-rent">
+    <label class="govuk-label govuk-label--m" for="{{ group }}">
       {{ form_titles[step].questions[group] }}
     </label>
     <span class="govuk-caption-m">Round to nearest £</span>

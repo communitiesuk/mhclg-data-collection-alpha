@@ -25,7 +25,8 @@
     </li>
   </ol>
 </div>
-{% endblock %} {% block content %}
+{% endblock %} 
+{% block content %}
 <h1 class="govuk-heading-l">Tenancy details</h1>
 <form class="form" action="/sprint6/step4" method="POST">
   <fieldset class="govuk-fieldset" role="group" aria-describedby="Tenancy Details">
@@ -42,7 +43,7 @@
     </div>
 
     <div>
-      {{ mhclg.textbox("step3", "", data, "length-fixed-term") }}
+      {{ mhclg.textbox("step3", "", data, "length-fixed-term", "number") }}
     </div>
 
     <button class="govuk-button" data-module="govuk-button">
