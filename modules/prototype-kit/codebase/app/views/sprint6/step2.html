@@ -6,16 +6,15 @@ endblock %} {% block header %}
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-{{ mhclg.breadcrumbs([1,2]) }}
-{#mhclg.breadcrumbs2("step2", data)#}
+{{ mhclg.breadcrumbs(2, data) }}
 
 {% endblock %} {% block content %}
-<h1 class="govuk-heading-l">Provider Details</h1>
+{{ mhclg.page_title(2)}}
 <div class="govuk-form-group">
   {# Tenancy start date input #}
 
   <form class="form" action="/sprint6/step3" method="POST">
-  {{ mhclg.record_step("step2", data)}}
+    {{ mhclg.record_step(2, data) }}
     <fieldset class="govuk-fieldset" role="group" aria-describedby="tenancy-hint">
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
         <h2 class="govuk-fieldset__heading">Tenancy start date</h2>

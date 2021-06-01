@@ -6,11 +6,12 @@
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-{{ mhclg.breadcrumbs([1,2,3,4,5,6]) }}
+{{ mhclg.breadcrumbs(6, data) }}
 
 {% endblock %} {% block content %}
-<h1 class="govuk-heading-l">Local Authority Details</h1>
+{{ mhclg.page_title(6) }}
 <form class="form" action="/sprint6/step7" method="POST">
+  {{ mhclg.record_step(6, data)}}
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
       {{ mhclg.option("step6", data, 'time-in-la') }}

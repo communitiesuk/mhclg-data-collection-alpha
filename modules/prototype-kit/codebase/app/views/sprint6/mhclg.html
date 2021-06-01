@@ -517,7 +517,7 @@
 {% endmacro %}
 
 {% macro radio(step, data, group, changefn, subdued) %}
-  <div class="govuk-form-group" id="{{ group }}-group">
+  <div class="govuk-form-group" id="{{ group }}">
     <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
     <div class="govuk-radios">
         {% for value, name in data_lookups[group]  %}
@@ -605,7 +605,8 @@
   </button>
 {% endmacro %}
 
-{% macro breadcrumbs(steps) %}
+{% macro breadcrumbs(this_step, data) %}
+{% set furthest = data['furthest_step'] | int + 1 if data['furthest_step'] else 0 %}
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
@@ -614,59 +615,29 @@
     <li class="govuk-breadcrumbs__list-item">
       <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
     </li>
-  {% set last_item = steps | last %}
-    {% for step in steps %}
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link"
-      {% if step != last_item %}
-       href="/sprint6/step{{ step }}"
-       {% endif %}
-       >{{ form_titles["step"+step].name }}</a>
-    </li>
-    {% endfor %}
-  </ol>
-</div>
-{% endmacro %}
-
-{% macro breadcrumbs2(this_step, data) %}
-<!-- This: {{ this_step }} -->
-<!-- Steps: {{ data['steps'] }} -->
-<div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="index">Home</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
-    </li>
-    {% if data['steps'] %}
-    <!-- In If : {{ data['steps'] }} -->
-      {% for step in data['steps'] %}
+      {% for step in [1,2,3,4,5,6,7,8,9] %}
+      {% if step <= furthest %}
       <li class="govuk-breadcrumbs__list-item">
         <a class="govuk-breadcrumbs__link"
-        {% if step != this_step %}
-        href="/sprint6/{{ step }}"
+        {% if this_step != step %}
+          href="/sprint6/step{{ step }}"
         {% endif %}
-        >{{ form_titles[step].name }}</a>
+        >
+          {{ form_titles["step"+step].name }}
+        </a>
       </li>
+      {% endif %}
       {% endfor %}
-      {% endif %}
-      {% if not data['steps'] or this_step not in data['steps'] %}
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link">{{ form_titles[this_step].name }}</a>
-      </li>
-      {% endif %}
   </ol>
 </div>
 {% endmacro %}
 
 {% macro record_step(this_step, data) %}
-<!-- This: {{ this_step }} -->
-<!-- Steps: {{ data['steps'] }} -->
-  {% for step in data['steps'] %}
-    <input type="hidden" name="steps[]" value="{{ step }}"
-  {% endfor %}
-  {% if not data['steps'] or this_step not in data['steps'] %}
-    <input type="hidden" name="steps[]" value="{{ this_step }}"
-  {% endif %}
+  {% set furthest = data['furthest_step'] | int if data['furthest_step'] else 0 %}
+  <input type="hidden" name="furthest_step" value="{{ this_step if this_step > furthest else furthest}}" />
+{% endmacro %}
+
+
+{% macro page_title(step) %}
+<h1 class="govuk-heading-l">{{ form_titles["step"+step].name }}</h1>
 {% endmacro %}

@@ -6,19 +6,17 @@
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-{{ mhclg.breadcrumbs([1,2,3,4]) }}
-{#mhclg.breadcrumbs2("step4", data)#}
+{{ mhclg.breadcrumbs(4, data) }}
 
 {% endblock %} {% block content %}
-<h1 class="govuk-heading-l">Tenant details</h1>
+{{ mhclg.page_title(4)}}
 <form class="form" action="/sprint6/step5" method="POST">
-  {{ mhclg.record_step("step4", data)}}
+  {{ mhclg.record_step(4, data)}}
 <fieldset
   class="govuk-fieldset"
   role="group"
   aria-describedby="Tenant age and gender"
 >
-
   {{ mhclg.textbox("step4", "", data, "tenant-age", "number") }}
 
   {{ mhclg.option("step4", data, 'tenant-gender') }}
