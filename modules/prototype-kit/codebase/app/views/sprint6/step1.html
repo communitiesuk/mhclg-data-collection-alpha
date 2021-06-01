@@ -7,12 +7,13 @@ endblock %} {% block header %}
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
 {{ mhclg.breadcrumbs([1]) }}
+{# mhclg.breadcrumbs2("step1", data) #}
 
 {% endblock %} {% block content %}
 <h1 class="govuk-heading-l">Form Selection</h1>
 <div class="govuk-form-group">
-  {# Tenency start date input #}
-<form class="form" action= "{{ '/sprint6/summary' if data['summary'] else '/sprint6/step2' }}" method="POST">
+<form class="form" action= "/sprint6/step2" method="POST">
+  {{ mhclg.record_step("step1", data)}}
   <fieldset
     class="govuk-fieldset"
     role="group"

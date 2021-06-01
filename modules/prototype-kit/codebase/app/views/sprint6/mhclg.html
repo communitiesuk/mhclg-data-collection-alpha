@@ -614,3 +614,46 @@
   </ol>
 </div>
 {% endmacro %}
+
+{% macro breadcrumbs2(this_step, data) %}
+<!-- This: {{ this_step }} -->
+<!-- Steps: {{ data['steps'] }} -->
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="index">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
+    </li>
+    {% if data['steps'] %}
+    <!-- In If : {{ data['steps'] }} -->
+      {% for step in data['steps'] %}
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link"
+        {% if step != this_step %}
+        href="/sprint6/{{ step }}"
+        {% endif %}
+        >{{ form_titles[step].name }}</a>
+      </li>
+      {% endfor %}
+      {% endif %}
+      {% if not data['steps'] or this_step not in data['steps'] %}
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link">{{ form_titles[this_step].name }}</a>
+      </li>
+      {% endif %}
+  </ol>
+</div>
+{% endmacro %}
+
+{% macro record_step(this_step, data) %}
+<!-- This: {{ this_step }} -->
+<!-- Steps: {{ data['steps'] }} -->
+  {% for step in data['steps'] %}
+    <input type="hidden" name="steps[]" value="{{ step }}"
+  {% endfor %}
+  {% if not data['steps'] or this_step not in data['steps'] %}
+    <input type="hidden" name="steps[]" value="{{ this_step }}"
+  {% endif %}
+{% endmacro %}
