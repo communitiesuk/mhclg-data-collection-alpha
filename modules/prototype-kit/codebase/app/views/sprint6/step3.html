@@ -7,11 +7,13 @@
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
 {{ mhclg.breadcrumbs([1,2,3]) }}
+{#mhclg.breadcrumbs2("step3", data)#}
 
 {% endblock %} 
 {% block content %}
 <h1 class="govuk-heading-l">Tenancy details</h1>
 <form class="form" action="/sprint6/step4" method="POST">
+  {{ mhclg.record_step("step3", data)}}
   <fieldset class="govuk-fieldset" role="group" aria-describedby="Tenancy Details">
     {{ mhclg.radio("step3", data, 'starter-tenancy') }}
 
