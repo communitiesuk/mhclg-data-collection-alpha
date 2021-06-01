@@ -120,6 +120,29 @@
     {{ mhclg.option("step5", data, 'previous-situation') }}
   </div>
 
+  <div class="govuk-form-group">
+    {{ mhclg.radio("step5", data, 'health-conditions-bool', 'checkHealthConditions()') }}
+  </div>
+
+  <div class="govuk-form-group" id="health-conditions">
+    <fieldset class="govuk-fieldset" aria-describedby="health-conditions">
+      {{ mhclg.checkboxes('step5', 'Select all that apply.', data, 'health-conditions') }}
+    </fieldset>
+  </div>
+
+  <script>
+    function checkHealthConditions() {
+      if (document.getElementById("health-conditions-bool-yes").checked) {
+        document.getElementById("health-conditions").style.display = "block";
+        document.getElementById("health-conditions").style.opacity = 1;
+      } else {
+        document.getElementById("health-conditions").style.display = "none";
+        document.getElementById("health-conditions").style.opacity = 0;
+      }
+    }
+    checkHealthConditions();
+  </script>
+
   {{ mhclg.submit() }}
 
 </form>
