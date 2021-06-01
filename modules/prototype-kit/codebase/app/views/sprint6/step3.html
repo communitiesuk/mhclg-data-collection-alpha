@@ -6,25 +6,8 @@
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-<div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="index">Home</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step1">Step 1</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step2">Step 2</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link">Step 3</a>
-    </li>
-  </ol>
-</div>
+{{ mhclg.breadcrumbs([1,2,3]) }}
+
 {% endblock %} 
 {% block content %}
 <h1 class="govuk-heading-l">Tenancy details</h1>
@@ -46,13 +29,8 @@
       {{ mhclg.textbox("step3", "", data, "length-fixed-term", "number") }}
     </div>
 
-    <button class="govuk-button" data-module="govuk-button">
-      Continue
-      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
-        viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-      </svg>
-    </button>
+  {{ mhclg.submit() }}
+
   </fieldset>
 </form>
 {# conditional render check and style#}

@@ -6,37 +6,8 @@
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-<div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="index">Home</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step1">Step 1</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step2">Step 2</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step3">Step 3</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step4">Step 4</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step5">Step 5</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step6">Step 6</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link">Step 7</a>
-    </li>
-  </ol>
-</div>
+{{ mhclg.breadcrumbs([1,2,3,4,5,6,7]) }}
+
 {% endblock %} {% block content %}
 <h1 class="govuk-heading-l">Rental details and charges</h1>
 <form class="form" action="/sprint6/step8" method="POST">
@@ -262,20 +233,8 @@
     {{ mhclg.textbox( "step7", "", data, "uprn") }}
   </div>
 
-  <button class="govuk-button" data-module="govuk-button">
-    Continue
-    <svg
-      class="govuk-button__start-icon"
-      xmlns="http://www.w3.org/2000/svg"
-      width="17.5"
-      height="19"
-      viewBox="0 0 33 40"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-    </svg>
-  </button>
+  {{ mhclg.submit() }}
+
 </form>
 
 {% endblock %}

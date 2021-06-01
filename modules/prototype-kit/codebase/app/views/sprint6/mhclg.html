@@ -115,7 +115,7 @@
             "repairs-completion-date-day": "Major repairs completion date day",
             "repairs-completion-date-month": "Major repairs completion date month",
             "repairs-completion-date-year": "Major repairs completion date year",
-            "previously-offered": "How many times has this property been previously offered for rent? From the end of the previous tenancy or the first let? For an Affordable Rent or Rent To Buy Letting, only include number of offers as that type.",
+            "previously-offered": "How many times has this property been offered for rent since its last letting?",
             "property-ref": "Property reference",
             "uprn": "UPRN (Unique Property Reference Number)"
           }
@@ -130,10 +130,12 @@
                 "wheelchair-access": "Is property built or adapted to be wheelchair accessible?",
                 "relet": "If this is a relet, was the property most recently let on..",
                 "reason-for-vacancy": "Reason for vacancy",
-                "ons-la-code": "",
-                "postal-code-out": "",
-                "postal-code-in": ""
+                "ons-la-code": "ONS LA Code",
+                "postal-code": "Property postal code"
             }
+        },
+        "step9": {
+          "name": "Summary"
         }
     }
 %}
@@ -578,4 +580,37 @@
       </div>
     </div>
   </div>
+{% endmacro %}
+
+{% macro submit() %}
+  <button class="govuk-button" data-module="govuk-button">
+    Continue
+    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
+      viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+    </svg>
+  </button>
+{% endmacro %}
+
+{% macro breadcrumbs(steps) %}
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="index">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
+    </li>
+  {% set last_item = steps | last %}
+    {% for step in steps %}
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link"
+      {% if step != last_item %}
+       href="/sprint6/step{{ step }}"
+       {% endif %}
+       >{{ form_titles["step"+step].name }}</a>
+    </li>
+    {% endfor %}
+  </ol>
+</div>
 {% endmacro %}

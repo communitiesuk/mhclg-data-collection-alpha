@@ -14,30 +14,7 @@
     <li class="govuk-breadcrumbs__list-item">
       <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
     </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step1">Step 1</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step2">Step 2</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step3">Step 3</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step4">Step 4</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step5">Step 5</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step6">Step 6</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6/step7">Step 7</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link">Step 8</a>
-    </li>
+    {{ mhclg.breadcrumbs([1,2,3,4,5,6,7,8]) }}
   </ol>
 </div>
 {% endblock %} {% block content %}
@@ -48,7 +25,7 @@
     aria-describedby="repairs-completion-date-hint"
   >
 <form class="form" action="/sprint6/summary" method="POST">
-  {{ mhclg.textbox("step8", "", data, "bedrooms", "numeric", "check()") }}
+  {{ mhclg.textbox("step8", "Maximum 7", data, "bedrooms", "numeric", "check()") }}
 
   {{ mhclg.checkboxes("step8", "", data, "bedrooms-override") }}
 
@@ -62,30 +39,13 @@
 
   {{ mhclg.option("step8", data, 'reason-for-vacancy') }}
 
-  <label class="govuk-label govuk-label--m" for="unit-type">
-    Location of property
-  </label>
+  {{ mhclg.textbox("step8", "", data, "postal-code") }}
 
-  <div class="govuk-form-group">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third">
-        {{ mhclg.textbox("step8", "Postcode first part", data, "postal-code-out") }}
-      </div>
-
-      <div class="govuk-grid-column-one-third">
-        {{ mhclg.textbox("step8", "Postcode second part", data, "postal-code-in") }}
-      </div>
-    </div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-half">
-        {{ mhclg.textbox("step8", "ONS LA Code", data, "ons-la-code")}}
-      </div>
-  </div>
+  {{ mhclg.textbox("step8", "", data, "ons-la-code")}}
 
   <script>
     function check() {
       var val = document.getElementById("bedrooms").value;
-      console.log("VAL: " + val + "; ON: " + (val > 7))
       if (val > 7) {
         document.getElementById("bedrooms-override").style.display = "block";
         document.getElementById("bedrooms-override").style.opacity = 1;
@@ -101,13 +61,8 @@
   <input class="govuk-input" name="summary" type="text" value="true" hidden />
 
   </fieldset>
-  <button class="govuk-button" data-module="govuk-button">
-    Continue
-    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
-      viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-    </svg>
-  </button>
+
+  {{ mhclg.submit() }}
 </form>
 
 {% endblock %}

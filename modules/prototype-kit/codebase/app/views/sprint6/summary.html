@@ -5,40 +5,7 @@
 <div class="govuk-width-container">
   <a href="#" class="govuk-back-link">Back</a>
 
-  <div class="govuk-breadcrumbs">
-    <ol class="govuk-breadcrumbs__list">
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="index">Home</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step1">Step 1</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step2">Step 2</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step3">Step 3</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step4">Step 4</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step5">Step 5</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step6">Step 6</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step7">Step 7</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/sprint6/step8">Step 8</a>
-      </li>
-    </ol>
-  </div>
+{{ mhclg.breadcrumbs([1,2,3,4,5,6,7,8,9]) }}
 
 {% endblock %} {% block content %}
   <main class="govuk-main-wrapper " id="main-content" role="main">
@@ -49,6 +16,8 @@
 
         {# Step One Answers #}
         {% for step, step_info in mhclg.form_titles %}
+          {# Horrible hack #}
+          {% if step_info.name != "Summary" %}
           <h2 class="govuk-heading-m">{{ step_info.name }}</h2>
           <dl class="govuk-summary-list govuk-!-margin-bottom-9">
           {% for group, question in step_info.questions %}
@@ -78,8 +47,10 @@
             </div>
           {% endfor %}
           </dl>
+          {% endif %}
         {% endfor %}
 
+        {# Horrible hack 2 #}
         <script>
             function hide_tenants(){
               for (var i={{ data['number-in-household'] }} + 1; i <= 7; i++){
