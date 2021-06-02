@@ -6,14 +6,13 @@ endblock %} {% block header %}
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-{{ mhclg.breadcrumbs([1]) }}
-{# mhclg.breadcrumbs2("step1", data) #}
+{{ mhclg.breadcrumbs(1, data) }}
 
 {% endblock %} {% block content %}
-<h1 class="govuk-heading-l">Form Selection</h1>
+{{ mhclg.page_title(1)}}
 <div class="govuk-form-group">
 <form class="form" action= "/sprint6/step2" method="POST">
-  {{ mhclg.record_step("step1", data)}}
+  {{ mhclg.record_step(1, data)}}
   <fieldset
     class="govuk-fieldset"
     role="group"

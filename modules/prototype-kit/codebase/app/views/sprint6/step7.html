@@ -6,12 +6,12 @@
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-{{ mhclg.breadcrumbs([1,2,3,4,5,6,7]) }}
+{{ mhclg.breadcrumbs(7, data) }}
 
 {% endblock %} {% block content %}
-<h1 class="govuk-heading-l">Rental details and charges</h1>
+{{ mhclg.page_title(7) }}
 <form class="form" action="/sprint6/step8" method="POST">
-  {# Rental details input #}
+  {{ mhclg.record_step(7, data) }}
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">

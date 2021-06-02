@@ -6,13 +6,13 @@
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-{{ mhclg.breadcrumbs([1,2,3,4,5]) }}
+{{ mhclg.breadcrumbs(5, data) }}
 
 {% endblock %} {% block content %}
-<h1 class="govuk-heading-l">Household Details cont.</h1>
+{{ mhclg.page_title(5) }}
 <form class="form" action="/sprint6/step6" method="POST">
 
-  {# armed forces input #}
+  {{ mhclg.record_step(5, data)}}
 
   {{ mhclg.radio("step5", data, 'armed-forces', 'checkRegular()') }}
 
@@ -23,11 +23,11 @@
     function checkRegular() {
       var val = document.getElementById("armed-forces-regular").checked;
       if (val) {
-        document.getElementById("regular-service-group").style.display = "block";
-        document.getElementById("regular-service-group").style.opacity = 1;
+        document.getElementById("regular-service").style.display = "block";
+        document.getElementById("regular-service").style.opacity = 1;
       } else {
-        document.getElementById("regular-service-group").style.display = "none";
-        document.getElementById("regular-service-group").style.opacity = 0;
+        document.getElementById("regular-service").style.display = "none";
+        document.getElementById("regular-service").style.opacity = 0;
       }
     }
     checkRegular();

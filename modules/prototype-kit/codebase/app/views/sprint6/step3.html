@@ -6,33 +6,25 @@
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
 
-{{ mhclg.breadcrumbs([1,2,3]) }}
-{#mhclg.breadcrumbs2("step3", data)#}
+{{ mhclg.breadcrumbs(3, data) }}
 
 {% endblock %} 
 {% block content %}
-<h1 class="govuk-heading-l">Tenancy details</h1>
+{{ mhclg.page_title(3)}}
 <form class="form" action="/sprint6/step4" method="POST">
-  {{ mhclg.record_step("step3", data)}}
+  {{ mhclg.record_step(3, data)}}
   <fieldset class="govuk-fieldset" role="group" aria-describedby="Tenancy Details">
     {{ mhclg.radio("step3", data, 'starter-tenancy') }}
 
     {{ mhclg.option("step3", data, 'tenancy-type', "check()") }}
 
-    <div id="tenancy-type-other-block">
-      {{ mhclg.textbox("step3", "", data, "tenancy-type-other") }}
-    </div>
+    {{ mhclg.textbox("step3", "", data, "tenancy-type-other") }}
 
-    <div>
-      {{ mhclg.textbox("step3", "", data, "tenancy-code") }}
-    </div>
+    {{ mhclg.textbox("step3", "", data, "tenancy-code") }}
 
-    <div>
-      {{ mhclg.textbox("step3", "", data, "length-fixed-term", "number") }}
-    </div>
+    {{ mhclg.textbox("step3", "", data, "length-fixed-term", "number") }}
 
-  {{ mhclg.submit() }}
-
+    {{ mhclg.submit() }}
   </fieldset>
 </form>
 {# conditional render check and style#}
@@ -40,11 +32,11 @@
   function check() {
     var val = document.getElementById("tenancy-type").value;
     if (val == "other") {
-      document.getElementById("tenancy-type-other-block").style.display = "block";
-      document.getElementById("tenancy-type-other-block").style.opacity = 1;
+      document.getElementById("tenancy-type-other-group").style.display = "block";
+      document.getElementById("tenancy-type-other-group").style.opacity = 1;
     } else {
-      document.getElementById("tenancy-type-other-block").style.display = "none";
-      document.getElementById("tenancy-type-other-block").style.opacity = 0;
+      document.getElementById("tenancy-type-other-group").style.display = "none";
+      document.getElementById("tenancy-type-other-group").style.opacity = 0;
     }
   }
   check();

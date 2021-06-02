@@ -5,9 +5,10 @@
 <div class="govuk-width-container">
   <a href="#" class="govuk-back-link">Back</a>
 
-{{ mhclg.breadcrumbs([1,2,3,4,5,6,7,8,9]) }}
+{{ mhclg.breadcrumbs(9, data) }}
 
 {% endblock %} {% block content %}
+  {{ mhclg.record_step(9, data)}}
   <main class="govuk-main-wrapper " id="main-content" role="main">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds-from-desktop">
