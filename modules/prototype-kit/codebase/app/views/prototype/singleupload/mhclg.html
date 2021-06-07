@@ -606,7 +606,8 @@
 {% endmacro %}
 
 {% macro breadcrumbs(this_step, data) %}
-{% set furthest = data['furthest_step'] | int + 1 if data['furthest_step'] else 0 %}
+{% set furthest = data['furthest_step'] | int + 1 if data['furthest_step'] else 1 %}
+
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
