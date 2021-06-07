@@ -1,0 +1,57 @@
+{% import "./mhclg.html" as mhclg %}
+{% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
+%} {% block header %}
+<!-- Blank header with no service name for the start page -->
+{{ govukHeader() }} {% endblock %} {% block beforeContent %}
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
+
+{{ mhclg.breadcrumbs(6, data) }}
+
+{% endblock %} {% block content %}
+{{ mhclg.page_title(6) }}
+<form class="form" action="/prototype/singleupload/step7" method="POST">
+  {{ mhclg.record_step(6, data)}}
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      {{ mhclg.option("step6", data, 'time-in-la') }}
+
+      {{ mhclg.option("step6", data, 'time-waiting') }}
+
+      {{ mhclg.radio("step6", data, 'prior-status') }}
+
+      {{ mhclg.radio("step6", data, 'reasonable-preference', 'check()') }}
+
+      {{ mhclg.checkboxes("step6", "Select all that apply.", data, 'reasonable-preference-reasons') }}
+
+      <label class="govuk-label govuk-label--m" for="unit-type">
+        Was the letting made under any of the following allocations systems? Select Yes or No for each allocation
+        system.
+      </label>
+      {{ mhclg.radio("step6", data, 'allocations-cbl', "", true) }}
+      {{ mhclg.radio("step6", data, 'allocations-chr', "", true) }}
+      {{ mhclg.radio("step6", data, 'allocations-cap', "", true) }}
+
+      {{ mhclg.option("step6", data, 'referral-by') }}
+    </fieldset>
+  </div>
+
+  <script>
+    function check() {
+      var val = document.getElementById("reasonable-preference-yes").checked;
+      if (val) {
+        document.getElementById("reasonable-preference-reasons").style.display = "block";
+        document.getElementById("reasonable-preference-reasons").style.opacity = 1;
+      } else {
+        document.getElementById("reasonable-preference-reasons").style.display = "none";
+        document.getElementById("reasonable-preference-reasons").style.opacity = 0;
+      }
+    }
+    check();
+  </script>
+
+  {{ mhclg.submit() }}
+
+</form>
+
+{% endblock %}

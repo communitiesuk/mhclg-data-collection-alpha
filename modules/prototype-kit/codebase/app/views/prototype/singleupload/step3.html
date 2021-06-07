@@ -1,0 +1,53 @@
+{% import "./mhclg.html" as mhclg %}
+{% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
+%} {% block header %}
+<!-- Blank header with no service name for the start page -->
+{{ govukHeader() }} {% endblock %} {% block beforeContent %}
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
+
+{{ mhclg.breadcrumbs(3, data) }}
+
+{% endblock %} 
+{% block content %}
+{{ mhclg.page_title(3)}}
+<form class="form" action="/prototype/singleupload/step4" method="POST">
+  {{ mhclg.record_step(3, data)}}
+  <fieldset class="govuk-fieldset" role="group" aria-describedby="Tenancy Details">
+    {{ mhclg.radio("step3", data, 'starter-tenancy') }}
+
+    {{ mhclg.option("step3", data, 'tenancy-type', "check()") }}
+
+    {{ mhclg.textbox("step3", "", data, "tenancy-type-other") }}
+
+    {{ mhclg.textbox("step3", "", data, "tenancy-code") }}
+
+    {{ mhclg.textbox("step3", "", data, "length-fixed-term", "number") }}
+
+    {{ mhclg.submit() }}
+  </fieldset>
+</form>
+{# conditional render check and style#}
+<script>
+  function check() {
+    var val = document.getElementById("tenancy-type").value;
+    if (val == "other") {
+      document.getElementById("tenancy-type-other-group").style.display = "block";
+      document.getElementById("tenancy-type-other-group").style.opacity = 1;
+    } else {
+      document.getElementById("tenancy-type-other-group").style.display = "none";
+      document.getElementById("tenancy-type-other-group").style.opacity = 0;
+    }
+  }
+  check();
+</script>
+
+<style>
+  #rp-name {
+    display: none;
+    opacity: 0;
+    transition: opacity 2s;
+  }
+</style>
+
+{% endblock %}

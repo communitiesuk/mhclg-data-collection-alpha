@@ -1,0 +1,30 @@
+{% import "./mhclg.html" as mhclg %}
+{% extends "layout.html" %} {% block pageTitle %} Log Creation | Step 1 {%
+endblock %} {% block header %}
+<!-- Blank header with no service name for the start page -->
+{{ govukHeader() }} {% endblock %} {% block beforeContent %}
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
+
+{{ mhclg.breadcrumbs(1, data) }}
+
+{% endblock %} {% block content %}
+{{ mhclg.page_title(1)}}
+<div class="govuk-form-group">
+<form class="form" action= "/prototype/singleupload/step2" method="POST">
+  {{ mhclg.record_step(1, data)}}
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="passport-issued-hint"
+  >
+    {{ mhclg.option("step1", data, 'completion-year') }}
+    {{ mhclg.option("step1", data, 'form-name') }}
+    {{ mhclg.radio("step1", data, 'gdpr') }}
+  </fieldset>
+</div>
+
+{{ mhclg.submit() }}
+
+</form>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% import "./mhclg.html" as mhclg %}
+{% extends "layout.html" %} {% block pageTitle %} Log Creation | Step 1 {%
+endblock %} {% block header %}
+<!-- Blank header with no service name for the start page -->
+{{ govukHeader() }} {% endblock %} {% block beforeContent %}
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
+
+{{ mhclg.breadcrumbs(2, data) }}
+
+{% endblock %} {% block content %}
+{{ mhclg.page_title(2)}}
+<div class="govuk-form-group">
+  {# Tenancy start date input #}
+
+  <form class="form" action="/prototype/singleupload/step3" method="POST">
+    {{ mhclg.record_step(2, data) }}
+    <fieldset class="govuk-fieldset" role="group" aria-describedby="tenancy-hint">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h2 class="govuk-fieldset__heading">Tenancy start date</h2>
+      </legend>
+      <div id="tenancy-hint" class="govuk-hint">
+        For example, 01 01 2021
+      </div>
+      <div class="govuk-date-input" id="tenancy">
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="tenancy-day">
+              Day
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-day" name="tenancy-day"
+              type="number" pattern="[0-9]*" inputmode="numeric" value="{{ data['tenancy-day'] }}" />
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="tenancy-month">
+              Month
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-month"
+              name="tenancy-month" type="number" pattern="[0-9]*" inputmode="numeric"
+              value="{{ data['tenancy-month'] }}" />
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="tenancy-year">
+              Year
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="tenancy-year"
+              name="tenancy-year" type="number" pattern="[0-9]*" inputmode="numeric"
+              value="{{ data['tenancy-year'] }}" />
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    {# Provider and landlord #}
+    <fieldset class="govuk-fieldset govuk-!-margin-top-6" role="group" aria-describedby="tenancy-hint">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h2 class="govuk-fieldset__heading">Provider</h2>
+      </legend>
+      {{ mhclg.radio("step2", data, 'provider') }}
+      {{ mhclg.radio("step2", data, 'll-status', "check()") }}
+      {{ mhclg.textbox("step2", "", data, "rp-name") }}
+      {{ mhclg.textbox("step2", "", data, "core-code") }}
+    </fieldset>
+</div>
+
+{# conditional render check and style#}
+<script>
+  function check() {
+    if (document.getElementById("ll-status-another").checked) {
+      document.getElementById("rp-name-group").style.display = "block";
+      document.getElementById("rp-name-group").style.opacity = 1;
+      document.getElementById("core-code-group").style.display = "block";
+      document.getElementById("core-code-group").style.opacity = 1;
+    } else {
+      document.getElementById("rp-name-group").style.display = "none";
+      document.getElementById("rp-name-group").style.opacity = 0;
+      document.getElementById("core-code-group").style.display = "none";
+      document.getElementById("core-code-group").style.opacity = 0;
+    }
+  }
+  check();
+</script>
+
+{{ mhclg.submit() }}
+
+</form>
+{% endblock %}

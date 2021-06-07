@@ -1,0 +1,87 @@
+{% import "./mhclg.html" as mhclg %}
+{% extends "layout.html" %} {% block pageTitle %} Summary {% endblock %} 
+{% block header %} {{ govukHeader() }} {% endblock %} 
+{% block beforeContent %}
+<div class="govuk-width-container">
+  <a href="#" class="govuk-back-link">Back</a>
+
+{{ mhclg.breadcrumbs(9, data) }}
+
+{% endblock %} {% block content %}
+  {{ mhclg.record_step(9, data)}}
+  <main class="govuk-main-wrapper " id="main-content" role="main">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds-from-desktop">
+
+        <h1 class="govuk-heading-l">Check your answers before submitting your log</h1>
+
+        {# Step One Answers #}
+        {% for step, step_info in mhclg.form_titles %}
+          {# Horrible hack #}
+          {% if step_info.name != "Summary" %}
+          <h2 class="govuk-heading-m">{{ step_info.name }}</h2>
+          <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          {% for group, question in step_info.questions %}
+            <div class="govuk-summary-list__row" id="{{ group }}">
+              <dt class="govuk-summary-list__key">
+                {{ question }}
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% set is_list = data[group] and "," in data[group] | string %}
+                {% if mhclg.data_lookups[group][data[group]] %}
+                  {{ mhclg.data_lookups[group][data[group]] }}
+                {% elseif is_list %}
+                  <ul>
+                  {% for item in data[group] %}
+                    <li>{{ mhclg.data_lookups[group][item] }}</li>
+                  {% endfor %}
+                  </ul>
+                {% elseif data[group] %}
+                    {{ data[group] }}
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/prototype/singleupload/{{ step }}#{{ group }}">
+                  Change<span class="govuk-visually-hidden"> name</span>
+                </a>
+              </dd>
+            </div>
+          {% endfor %}
+          </dl>
+          {% endif %}
+        {% endfor %}
+
+        {# Horrible hack 2 #}
+        <script>
+            function hide_tenants(){
+              for (var i={{ data['number-in-household'] }} + 1; i <= 7; i++){
+                document.getElementById("tenant-age-person-"+i).style.display = "none";
+                document.getElementById("tenant-gender-person-"+i).style.display = "none";
+                document.getElementById("tenant-economic-status-person-"+i).style.display = "none";
+                document.getElementById("tenant-relationship-person-"+i).style.display = "none";
+              }
+            }
+            hide_tenants();
+        </script>
+        <h2 class="govuk-heading-m">Now send your application</h2>
+
+        <p class="govuk-body">By submitting this notification you are confirming that, to the best of your knowledge,
+          the details you are providing are correct.</p>
+
+        <form action="/prototype/singleupload/confirmation" method="post" novalidate>
+
+          <input type="hidden" name="answers-checked" value="true">
+
+          <button class="govuk-button" data-module="govuk-button">
+            Accept and send
+          </button>
+
+        </form>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+
+{% endblock %}

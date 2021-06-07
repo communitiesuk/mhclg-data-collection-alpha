@@ -1,0 +1,96 @@
+{% import "./mhclg.html" as mhclg %}
+{% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
+%} {% block header %}
+<!-- Blank header with no service name for the start page -->
+{{ govukHeader() }} {% endblock %} {% block beforeContent %}
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
+
+{{ mhclg.breadcrumbs(4, data) }}
+
+{% endblock %} {% block content %}
+{{ mhclg.page_title(4)}}
+<form class="form" action="/prototype/singleupload/step5" method="POST">
+  {{ mhclg.record_step(4, data)}}
+<fieldset
+  class="govuk-fieldset"
+  role="group"
+  aria-describedby="Tenant age and gender"
+>
+  {{ mhclg.textbox("step4", "", data, "tenant-age", "number") }}
+
+  {{ mhclg.option("step4", data, 'tenant-gender') }}
+
+  {{ mhclg.option("step4", data, 'tenant-economic-status') }}
+
+  {{ mhclg.option("step4", data, 'ethnicity-options') }}
+
+  {{ mhclg.option("step4", data, 'nationality-options') }}
+
+  {{ mhclg.textbox("step4", "Maximum 7", data, "number-in-household", "number", "check()") }}
+
+</fieldset>
+
+  {% for i in [1,2,3,4,5,6,7] %}
+  <div id="person-{{i}}">
+    <hr class="govuk-!-margin-bottom-6" />
+    {{ mhclg.textbox("step4", "", data, "tenant-age-person-"+ i , "number" )}}
+
+    {{ mhclg.option("step4", data, 'tenant-gender-person-'+i) }}
+
+    {{ mhclg.option("step4", data, 'tenant-economic-status-person-'+i) }}
+
+    {{ mhclg.option("step4", data, 'tenant-relationship-person-'+i) }}
+  </div>
+  {% endfor %}
+
+  <script>
+    const reset = () => {
+      for(var i = 1; i<=7; i++ ) {
+        let test = `person-${i.toString()}`;
+        document.getElementById(test).style.display = "none";
+      }
+    }
+
+    function check() {
+      reset();
+      var val = document.getElementById("number-in-household").value > 7 ? 7 : document.getElementById("number-in-household").value;
+
+      console.log(val);
+      for(var i = 1; i<=val; i++ ) {
+        let test = `person-${i.toString()}`;
+        document.getElementById(test).style.display = "block";
+      }
+    }
+    check()
+  </script>
+
+  <style>
+  #person-1 {
+    display: none;
+  }
+  #person-2{
+    display: none;
+  }
+  #person-3{
+    display: none;
+  }
+  #person-4{
+    display: none;
+  }
+  #person-5{
+    display: none;
+  }
+  #person-6{
+    display: none;
+  }
+  #person-7{
+    display: none;
+  }
+  </style>
+
+{{ mhclg.submit() }}
+
+</form>
+
+{% endblock %}

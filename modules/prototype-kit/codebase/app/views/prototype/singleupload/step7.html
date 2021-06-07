@@ -1,0 +1,240 @@
+{% import "./mhclg.html" as mhclg %}
+{% extends "layout.html" %} {% block pageTitle %} Start page example {% endblock
+%} {% block header %}
+<!-- Blank header with no service name for the start page -->
+{{ govukHeader() }} {% endblock %} {% block beforeContent %}
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/customParseFormat.js"></script>
+
+{{ mhclg.breadcrumbs(7, data) }}
+
+{% endblock %} {% block content %}
+{{ mhclg.page_title(7) }}
+<form class="form" action="/prototype/singleupload/step8" method="POST">
+  {{ mhclg.record_step(7, data) }}
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+    {{ mhclg.option("step7", data, 'rental-period') }}
+    </fieldset>
+  </div>
+
+  {{ mhclg.currency_field("step7", data, "basic-rent")  }}
+
+  {{ mhclg.currency_field("step7", data, "service-charge")  }}
+
+  {{ mhclg.currency_field("step7", data, "personal-service-charge")  }}
+
+  {{ mhclg.currency_field("step7", data, "support-charge")  }}
+
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--m" for="total-charge">
+      TOTAL CHARGE
+    </label>
+    <span class="govuk-caption-m" id="total-charge">£ 0</span>
+  </div>
+
+  <script>
+    document.body.addEventListener("change", function (e) {
+      let target = e.target;
+      document.getElementById("total-charge").innerHTML = `£ ${
+        Number(document.getElementById("basic-rent").value) +
+        Number(document.getElementById("service-charge").value) +
+        Number(document.getElementById("personal-service-charge").value) +
+        Number(document.getElementById("support-charge").value)
+      }`;
+    });
+  </script>
+
+  <hr class="govuk-!-margin-bottom-6" />
+
+  {# rent after UC #}
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+
+    {{ mhclg.radio("step7", data, "outstanding-after-uc", 'check()') }}
+
+  <div id="outstanding-amount-block">
+    {{ mhclg.currency_field("step7", data, "outstanding-amount") }}
+  </div>
+
+  {# rent after UC conditional render check and style#}
+  <script>
+    function check() {
+      var val = document.getElementById("outstanding-after-uc-yes").checked;
+      if (val) {
+        document.getElementById("outstanding-amount-block").style.display = "block";
+        document.getElementById("outstanding-amount-block").style.opacity = 1;
+      } else {
+        document.getElementById("outstanding-amount-block").style.display = "none";
+        document.getElementById("outstanding-amount-block").style.opacity = 0;
+      }
+    }
+    check();
+  </script>
+
+  {# Void date #}
+
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="void-date-hint"
+  >
+  <div class="govuk-form-group govuk-!-margin-bottom-4">
+    <label class="govuk-label govuk-label--m">
+      <h2 class="govuk-fieldset__heading">
+        Void (or new build handover / renewal) date
+      </h2>
+    </label>
+    <div id="void-date-hint" class="govuk-hint">For example, 01 01 2021</div>
+    <div class="govuk-date-input" id="void-date">
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="void-date-day"
+          >
+            Day
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-2"
+            id="void-date-day"
+            name="void-date-day"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['void-date-day'] }}"
+          />
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="void-date-month"
+          >
+            Month
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-2"
+            id="void-date-month"
+            name="void-date-month"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['void-date-month'] }}"
+          />
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="void-date-year"
+          >
+            Year
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-4"
+            id="void-date-year"
+            name="void-date-year"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['void-date-year'] }}"
+          />
+        </div>
+      </div>
+    </div>
+    </div>
+  </fieldset>
+
+  <fieldset
+    class="govuk-fieldset"
+    role="group"
+    aria-describedby="repairs-completion-date-hint"
+  >
+  <div class="govuk-form-group govuk-!-margin-bottom-4">
+    <label class="govuk-label govuk-label--m">
+      <h2 class="govuk-fieldset__heading">
+        Major repairs completion date (if major repairs carried out during void period)
+      </h2>
+    </label>
+    <div id="repairs-completion-date-hint" class="govuk-hint">
+      For example, 01 01 2021
+    </div>
+    <div class="govuk-date-input" id="repairs-completion-date">
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="repairs-completion-date-day"
+          >
+            Day
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-2"
+            id="repairs-completion-date-day"
+            name="repairs-completion-date-day"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['repairs-completion-date-day'] }}"
+          />
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="repairs-completion-date-month"
+          >
+            Month
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-2"
+            id="repairs-completion-date-month"
+            name="repairs-completion-date-month"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['repairs-completion-date-month'] }}"
+          />
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="repairs-completion-date-year"
+          >
+            Year
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-4"
+            id="repairs-completion-date-year"
+            name="repairs-completion-date-year"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            value="{{ data['repairs-completion-date-year'] }}"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  </fieldset>
+
+  <div class="govuk-form-group govuk-!-margin-bottom-4">
+    {{ mhclg.textbox( "step7", "(for a property let at the first attempt enter ‘0’ )", data, "previously-offered", "number") }}
+
+    {{ mhclg.textbox( "step7", "", data, "property-ref") }}
+
+    {{ mhclg.textbox( "step7", "", data, "uprn") }}
+  </div>
+
+  {{ mhclg.submit() }}
+
+</form>
+
+{% endblock %}

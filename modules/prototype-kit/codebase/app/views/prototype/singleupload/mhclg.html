@@ -1,0 +1,643 @@
+{%
+    set form_titles = {
+        "step1": {
+            "name": "Form Selection",
+            "questions": {
+                "completion-year": "Which year is this log for?",
+                "form-name": "Which form are you completing?",
+                "gdpr": "GDPR"
+            }
+        },
+        "step2": {
+            "name": "Provider Details",
+            "questions": {
+                "provider": "Type of provider",
+                "ll-status": "Status",
+                "rp-name": "RP (HA/LA)Name",
+                "core-code": "CORE code"
+            }
+        },
+        "step3": {
+            "name": "Tenancy Details",
+            "questions": {
+                "starter-tenancy": "Is this a starter/introductory tenancy?",
+                "tenancy-type": "Type of main tenancy (after any starter/introductory period)",
+                "tenancy-type-other": "Please state tenancy type",
+                "tenancy-code": "Tenant code",
+                "length-fixed-term": "If the main tenancy is a fixed term tenancy, please provide the length of the fixed term (to the nearest year) excluding any starter/introductory period"
+            }
+        },
+        "step4": {
+          "name": "Household Details",
+          "questions": {
+            "tenant-age": "Age",
+            "tenant-gender": "Gender",
+            "tenant-economic-status": "Tenant economic status",
+            "ethnicity-options": "Ethnicity options",
+            "nationality-options": "Nationality options",
+            "number-in-household": "How many other people in the household?",
+            "tenant-age-person-1": "Person 1 age",
+            "tenant-gender-person-1": "Person 1 gender",
+            "tenant-economic-status-person-1": "Person 1 economic status",
+            "tenant-relationship-person-1": "Relationship to tenant",
+            "tenant-age-person-2": "Person 2 age",
+            "tenant-gender-person-2": "Person 2 gender",
+            "tenant-economic-status-person-2": "Person 2 economic status",
+            "tenant-relationship-person-2": "Relationship to tenant",
+            "tenant-age-person-3": "Person 3 age",
+            "tenant-gender-person-3": "Person 3 gender",
+            "tenant-economic-status-person-3": "Person 3 economic status",
+            "tenant-relationship-person-3": "Relationship to tenant",
+            "tenant-age-person-4": "Person 4 age",
+            "tenant-gender-person-4": "Person 4 gender",
+            "tenant-economic-status-person-4": "Person 4 economic status",
+            "tenant-relationship-person-4": "Relationship to tenant",
+            "tenant-age-person-5": "Person 5 age",
+            "tenant-gender-person-5": "Person 5 gender",
+            "tenant-economic-status-person-5": "Person 5 economic status",
+            "tenant-relationship-person-5": "Relationship to tenant",
+            "tenant-age-person-6": "Person 6 age",
+            "tenant-gender-person-6": "Person 6 gender",
+            "tenant-economic-status-person-6": "Person 6 economic status",
+            "tenant-relationship-person-6": "Relationship to tenant",
+            "tenant-age-person-7": "Person 7 age",
+            "tenant-gender-person-7": "Person 7 gender",
+            "tenant-economic-status-person-7": "Person 7 economic status",
+            "tenant-relationship-person-7": "Relationship to tenant"
+          }
+        },
+        "step5": {
+          "name": "Household Details cont.",
+          "questions": {
+            "armed-forces": "Has anyone in the household ever served in the UK Armed Forces as a regular or a reserve? (Excluding National Service)",
+            "regular-service": "If they've ever served as a regular, when did they leave?",
+            "injury-illness": "Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?",
+            "pregnancy": "Does the household contain a pregnant person?",
+            "benefits": "Is the tenant in receipt of or likely to be in receipt of the following",
+            "benefit-proportion": "How much of your income comes from Universal Credit , state pensions or benefits? (excluding child & housing benefit, Universal Credit  housing element, council tax support or tax credits)",
+            "income": "Tenant’s or tenant and partner’s net income (after tax deductions) For those receiving Universal Credit, please enter net income from employment, pensions and Universal Credit. Please exclude child benefit, housing element of universal credit and council tax support. For those not receiving Universal Credit, please enter net income from employment, pensions and other benefits. Please exclude housing benefit, child benefit and council tax support.",
+            "regularity": "Is the income...?",
+            "reason-for-leaving-previous": "In the tenant’s view what was the main reason the household left their last settled home?",
+            "other-reason-for-leaving-previous": "please state the reason for leaving last settled home",
+            "subsidy-cap": "Was the reason for leaving a direct result of the removal of the spare room subsidy or benefit cap introduced from 2013? (this is most likely to apply if options 1, 29, 30, 33, 34 or 37 were selected for Q09a)",
+            "disability": "Does anyone in the household require: (Please tick those that apply)",
+            "health-conditions-bool": "Does anyone in the household have any physical or mental health conditions or illness lasting or expected to last for 12 months or more?",
+            "health-conditions": "Please select all health conditions that apply",
+            "previous-situation": "The housing situation for this household immediately before this letting"
+          }
+        },
+        "step6": {
+          "name": "Local Authority Details",
+          "questions": {
+            "time-in-la": "For how long has the household continuously lived in the local authority area where the new letting is located?",
+            "time-waiting": "For how long was the household on the local authority waiting list where the new letting is located?",
+            "prior-status": "What was this household's situation before this letting?",
+            "reasonable-preference": "Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?",
+            "reasonable-preference-reasons": "Which of the following reasons for Reasonable Preference apply?",
+            "unit-type": " Was the letting made under any of the following allocations systems? Select Yes or No for each allocation system.",
+            "allocations-cbl": "Choice-based lettings (CBL):",
+            "allocations-chr": "Common housing register (CHR):",
+            "allocations-cap": "Common Allocation Policy (CAP):",
+            "referral-by": "Who referred the household for this letting?"
+          }
+        },
+        "step7": {
+          "name": "Rent and other charges",
+          "questions": {
+            "rental-period": "Over what period are rent and other charges due",
+            "basic-rent": "Basic rent (eligible for Housing Benefit or Universal Credit ) (for period shown in above)",
+            "service-charge": "Service charge (eligible for HB or UC)",
+            "personal-service-charge": "Personal service charge (not eligible for HB or UC e.g. heating, hot water excluding water rates)",
+            "support-charge": "Support charge (charges made to fund housing related support services included in the tenancy agreement)",
+            "outstanding-after-uc": "After housing benefit and/or housing element of UC payment is received, will there be an outstanding amount for basic rent (18ai) and/or benefit eligible charges (18aii)?",
+            "outstanding-amount": "Outstanding amount",
+            "void-date-day": "Void date day",
+            "void-date-month": "Void date month",
+            "void-date-year": "Void date year",
+            "repairs-completion-date-day": "Major repairs completion date day",
+            "repairs-completion-date-month": "Major repairs completion date month",
+            "repairs-completion-date-year": "Major repairs completion date year",
+            "previously-offered": "How many times has this property been offered for rent since its last letting?",
+            "property-ref": "Property reference",
+            "uprn": "UPRN (Unique Property Reference Number)"
+          }
+        },
+        "step8": {
+            "name": "Property details",
+            "questions": {
+                "bedrooms": "Number of bedrooms (if shared accommodation, enter number of bedrooms occupied by this household; a bed-sit has 1 bedroom)",
+                "bedrooms-override": "",
+                "unit-type": "Type of unit",
+                "building-type": "Type of building",
+                "wheelchair-access": "Is property built or adapted to be wheelchair accessible?",
+                "relet": "If this is a relet, was the property most recently let on..",
+                "reason-for-vacancy": "Reason for vacancy",
+                "ons-la-code": "ONS LA Code",
+                "postal-code": "Property postal code"
+            }
+        },
+        "step9": {
+          "name": "Summary"
+        }
+    }
+%}
+
+{%
+  set yes_no = {
+    "yes": "Yes",
+    "no": "No"
+  }
+%}
+
+{%
+  set yes_no_dk = {
+    "yes": "Yes",
+    "no": "No",
+    "dont-know": "Don't know"
+  }
+%}
+
+{%
+  set yes_no_ref = {
+    "yes": "Yes",
+    "no": "No",
+    "refused": "Refused"
+  }
+%}
+
+
+{%
+  set time_range = {
+          "0": "Just moved to Local Authority area",
+          "<1": "Less than 1 year",
+          "<2": "1 year but under 2 years",
+          "<3": "2 years but under 3 years",
+          "<4": "3 years but under 4 years",
+          "<5": "4 years but under 5 years",
+          ">5": "5 years or more",
+          "unknown": "Don't Know"
+  }
+%}
+
+{%
+  set gender = {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other",
+      "refused": "Refused"
+  }
+%}
+
+{%
+  set economic_status = {
+      "part-time": "Part-time (Less than 30 hrs)",
+      "full-time": "Full-time (30 hrs or more) - Not seeking work or Government training/New deal",
+      "student": "Full-time student Jobseeker Child under 16 Retired",
+      "unable-to-work": "Unable to work/long term sick or disability",
+      "other": "Other adult"
+    }
+%}
+
+{%
+  set relationship = {
+    "partner": "Partner",
+    "child": "Child",
+    "other": "Other",
+    "refused": "Refused"
+  }
+%}
+
+{%
+  set data_lookups = {
+   "completion-year": {
+      "2021": "2020/2021",
+      "2022": "2021/2022"
+    },
+    "form-name": {
+        "social-general": "Social Rent General Needs",
+        "social-supported": "Social Rent Supported Housing",
+        "affordable-general": "Affordable Rent General Needs",
+        "affordable-supported": "Affordable Rent Supported Housing",
+        "rtb-general": "Rent To Buy General Needs",
+        "rtb-supported": "Rent To Buy Supported Housing",
+        "sales-log": "Sales Log"
+    },
+    "gdpr": yes_no,
+    "provider": {
+      "private-registered": "Private Registered Provider",
+      "local-authority": "Local Authority"
+    },
+    "ll-status": {
+      "this": "This Landlord",
+      "another": "Another RP (HA/LA)"
+    },
+    "tenancy-type": {
+      "secure-including-flexible": "Secure including flexible",
+      "assured": "Assured",
+      "assured-shorthold": "Assured shorthold",
+      "license-agreement": "License agreement",
+      "other": "Other"
+    },
+    "starter-tenancy": yes_no,
+    "tenant-gender": gender,
+    "tenant-gender-person-1": gender,
+    "tenant-gender-person-2": gender,
+    "tenant-gender-person-3": gender,
+    "tenant-gender-person-4": gender,
+    "tenant-gender-person-5": gender,
+    "tenant-gender-person-6": gender,
+    "tenant-gender-person-7": gender,
+    "tenant-economic-status": economic_status,
+    "tenant-economic-status-person-1": economic_status,
+    "tenant-economic-status-person-2": economic_status,
+    "tenant-economic-status-person-3": economic_status,
+    "tenant-economic-status-person-4": economic_status,
+    "tenant-economic-status-person-5": economic_status,
+    "tenant-economic-status-person-6": economic_status,
+    "tenant-economic-status-person-7": economic_status,
+    "tenant-relationship-person-1": relationship,
+    "tenant-relationship-person-2": relationship,
+    "tenant-relationship-person-3": relationship,
+    "tenant-relationship-person-4": relationship,
+    "tenant-relationship-person-5": relationship,
+    "tenant-relationship-person-6": relationship,
+    "tenant-relationship-person-7": relationship,
+    "ethnicity-options": {
+      "white-british": "White: British",
+      "white-irish": "White: Irish",
+      "white-gypsy-irish-traveller": "White: Gypsy/Irish Traveller",
+      "white-other": "White: Other",
+      "mixed-white-and-black-caribbean": "Mixed: White and Black Caribbean",
+      "mixed-other": "Mixed: Other",
+      "mixed-white-and-asian": "Mixed: White and Asian",
+      "asian-or-asian-british-indian": "Asian or Asian British: Indian",
+      "asian-or-asian-british-pakistani": "Asian or Asian British: Pakistani",
+      "asian-or-asian-british-bangladeshi": "Asian or Asian British: Bangladeshi",
+      "asian-or-asian-british-chinese": "Asian or Asian British: Chinese",
+      "asian-or-asian-british-other": "Asian or Asian British: Other",
+      "black-caribbean": "Black: Caribbean",
+      "black-african": "Black: African",
+      "black-other": "Black: Other",
+      "other-arab": "Other: Arab"
+    },
+    "nationality-options": {
+      "resident-uk-national": "UK national resident in UK",
+      "returning-uk-national": "UK national returning from residence overseas",
+      "czech-republic": "Czech Republic",
+      "estonia": "Estonia",
+      "hungary": "Hungary",
+      "lithuania": "Lithuania",
+      "poland": "Poland",
+      "slovakia": "Slovakia",
+      "slovenia": "Slovenia",
+      "bulgaria": "Bulgaria",
+      "romania": "Romania",
+      "croatia": "Croatia",
+      "ireland": "Ireland",
+      "other-eu": "Other EU Economic Area EEA Country",
+      "other": "Any other country"
+    },
+    "armed-forces": {
+      "regular": "Yes - Regular",
+      "reserve": "Yes - Reserve",
+      "no": "No",
+      "refused": "Refused"
+    },
+    "injury-illness": yes_no_ref,
+    "pregnancy": yes_no_ref,
+    "benefits": {
+      "hb-no-uc": "Housing Benefit (If not in receipt of universal credit)",
+      "no-hb-or-uc": "Not in receipt of either UC or HB",
+      "unknown": "Don't know",
+      "no-hb-uc-with-housing": "UC - With housing element (and not in receipt of housing benefit)",
+      "uc-no-hb-without-housing": "UC - Without housing element (not in receipt of HB and tenants not eligible for housing support e.g residential care home)",
+      "uc-hb-without-housing": "UC - Without housing element (and in receipt of HB)"
+    },
+    "benefit-proportion": {
+      "all": "All",
+      "some": "Some",
+      "none": "None",
+      "unknown": "Don't know"
+    },
+    "regularity": {
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "annual": "Annual"
+    },
+    "subsidy-cap": {
+      "spare-bedroom": "Yes: Removal or spare bedroom subsidy",
+      "benefit-cap": "Yes: Benefit cap",
+      "both": "Yes: both",
+      "no": "No",
+      "unknown": "Don't know"
+    },
+    "disability": {
+      "full-wheelchair": "Fully wheelchair accessible housing",
+      "essential-wheelchair": "Wheelchair access to essential rooms",
+      "level-access": "Level access housing",
+      "other-disability": "Other disability requirements.",
+      "no-disability": "No disability requirements",
+      "unknown": "Don’t know"
+    },
+    "previous-situation": {
+      "owner-occupied-private": "Owner occupation (private)",
+      "owner-occupied-low-cost": "Owner occupation (low cost home ownership)",
+      "private-sector": "Private sector tenancy",
+      "tied-housing": "Tied housing or rented with job",
+      "supported-housing": "Supported housing",
+      "sheltered": "Sheltered accommodation",
+      "residential-care-home": "Residential care home",
+      "living-with-family": "Living with friends or family",
+      "refuge": "Refuge",
+      "hospital": "Hospital",
+      "prison": "Prison / Approved Probation Hostel",
+      "direct-access-hostel": "Direct access hostel",
+      "bed-and-breakfast": "Bed and Breakfast",
+      "caravan": "Mobile home / caravan",
+      "any-other-temporary": "Any other temporary accommodation",
+      "asylum-support": "Home Office Asylum Support",
+      "children-home / foster care": "Children's home / foster care",
+      "rough-sleeping": "Rough sleeping",
+      "fixed-term-la": "Fixed term Local Authority General Needs tenancy",
+      "lifetime-la": "Lifetime Local Authority General Needs tenancy",
+      "fixed-term-prp": "Fixed term PRP General Needs tenancy",
+      "lifetime-prp": "Lifetime PRP General Needs tenancy",
+      "other": "Other"
+  },
+  "health-conditions-bool": yes_no_ref,
+  "health-conditions": {
+    "vision": "Vision (e.g. blindness or partial sight)",
+    "hearing":	"Hearing (e.g. deatness or partial hearing)	Mobility (e.g. walking short distances or climbing stairs)",
+    "dexterity":	"Dexterity (e.g. lifting and carrying objects, using a keyboard)",
+    "learning":	"Learning or understanding or concentrating	Memory",
+    "mental":	"Mental health",
+    "stamina":	"Stamina or breathing or fatigue",
+    "social":	"Socially or behaviourally (e.g. associated with autism spectral disorder (ASD) which includes Aspergers', or attention deficit hyperactivity disorder (ADHD))",
+    "other":	"Other"
+  },
+  "unit-type": {
+      "flat": "Flat / maisonette",
+      "bedsit": "Bed-sit",
+      "house": "House",
+      "bungalow": "Bungalow",
+      "maisonette": "Shared flat / maisonette",
+      "shared-house": "Shared house",
+      "shared-bungalow": "Shared bungalow",
+      "other": "Other"
+  },
+  "time-in-la": time_range,
+  "time-waiting": time_range,
+  "regular-service": {
+    "<=5": "Up to and including 5 years ago",
+    ">5": "More than 5 years ago",
+    "still-serving": "Are still serving",
+    "refused": "Refused"
+  },
+  "reason-for-leaving-previous": {
+      "decanted": "Permanently decanted from another property owned by this landlord",
+      "refugee": "Left home country as refugee",
+      "prison-discharge": "Discharged from prison or from long stay hospital or other institution",
+      "loss-of-tied": "Loss of tied accommodation",
+      "domestic-abuse": "Domestic abuse",
+      "relationship-breakdown": "(Non-violent) relationship breakdown with partner",
+      "family-asked-to-leave": "Asked to leave by family or friends",
+      "racial-harassment": "Racial harassment",
+      "neighbours": "Other problems with neighbours",
+      "overcrowding": "Property unsuitable because of overcrowding",
+      "end-of-assured-shorthold": "End of assured shorthold tenancy – no fault",
+      "end-of-assured-shorthold-tenant-fault": "End of assured shorthold tenancy- tenant’s fault",
+      "end-of-fixed-term": "End of fixed term tenancy – no fault",
+      "end-of-fixed-term-tenant-fault": "End of fixed term tenancy – tenant’s fault",
+      "repossession": "Repossession",
+      "under-occupation-offered-incentive": "Under occupation - offered incentive to downsize",
+      "under-occupation-no-incentive": "Under occupation - no incentive",
+      "ill-health": "Property unsuitable because of ill health / disability",
+      "poor-condition": "Property unsuitable because of poor condition",
+      "could-not-afford-fees": "Couldn’t afford fees attached to renewing the tenancy",
+      "could-not-afford-rent": "Couldn’t afford the increase in rent",
+      "could-not-afford–welfare-reforms": "Couldn’t afford rent or mortgage – welfare reforms",
+      "could-not-afford–employment": "Couldn’t afford rent or mortgage – employment",
+      "could-not-afford–other": "Couldn’t afford rent or mortgage – other",
+      "move-nearer-to-family": "To move nearer to family / friends / school",
+      "move-nearer-to-work": "To move nearer to work",
+      "move-to-accommodation-with-support": "To move to accommodation with support",
+      "move-to-independent-accommodation": "To move to independent accommodation",
+      "hate-crime": "Hate crime",
+      "other": "Other",
+      "unknown": "Don’t know"
+  },
+  "reasonable-preference": yes_no_dk,
+  "reasonable-preference-reasons": {
+    'homeless': 'Homeless or about to lose their home (within 56 days)',
+    'insanitary': 'Living in insanitary or overcrowded or unsatisfactory housing',
+    'medical': 'A need to move on medical and welfare grounds (including a reasonable-preference-reasons)',
+    'hardship': 'A need to move to avoid hardship to themselves or others',
+    'unknown': "Don't know"
+  },
+  "prior-status": {
+    "not-homeless": "Not homeless",
+    "threatened-homeless": "Assessed as threatened with homelessness within 56 days by a LA and owed prevention duty",
+    "homeless-owed-relief-duty": "Assessed as homeless by a LA and owed a relief duty",
+    "unintentionally-homeless": "Assessed as unintentionally homeless and having priority need by a LA and owed a homeless main duty",
+    "other-homeless": "Other homelessness i.e. not found statutorily homeless by a housing authority but considered to be homeless by the letting landlord"
+  },
+  "allocations-cbl":  yes_no,
+  "allocations-chr":  yes_no,
+  "allocations-cap":  yes_no,
+  "referral-by": {
+    "internal-transfer": "Internal transfer",
+    "applied-direct": "Tenant applied direct (no referral or nomination)",
+    "la-nominated": "PRP lettings only - nominated by a local housing authority",
+    "housing-mobility": "Relocated through recognised national/regional or sub-regional housing mobility scheme",
+    "social-landlord": "Other social landlord",
+    "social-services": "Social services",
+    "police-etc": "Police/probation/prison",
+    "youth-offending-team": "Youth offending team",
+    "mental-health-team": "Community mental health team",
+    "health-service": "Health service",
+    "voluntary-agency": "Voluntary agency",
+    "other": "Other"
+  },
+  "outstanding-after-uc": yes_no_dk,
+  "rental-period": {
+    "fortnight": "Fortnightly",
+    "four-weekly": "Four-weekly",
+    "monthly": "Calendar monthly",
+    "46-weekly": "Weekly for 46 weeks",
+    "47-weekly": "Weekly for 47 weeks",
+    "48-weekly": "Weekly for 48 weeks",
+    "49-weekly": "Weekly for 49 weeks",
+    "50-weekly": "Weekly for 50 weeks",
+    "51-weekly": "Weekly for 51 weeks",
+    "52-weekly": "Weekly for 52 weeks",
+    "53-weekly": "Weekly for 53 weeks"
+  },
+  "building-type" : {
+    "purpose-built": "Purpose built",
+    "converted": "Converted from previous residential or non-residential property"
+  },
+  "reason-for-vacancy" : {
+      "arrears": "Relet - tenant evicted due to arrears",
+      "asb": "Relet - tenant evicted due to ASB or other reason",
+      "died": "Relet - tenant died (no succession) ",
+      "moved-to-social": "Relet - tenant moved to other social housing provider",
+      "abandoned": "Relet - tenant abandoned property",
+      "moved-to-private": "Relet - tenant moved to private sector or other accommodation",
+      "from-temoprary": "Relet - to tenant who occupied same property as temporary accommodation",
+      "internal-transfer": "Relet – internal transfer (excluding renewals of a fixed-term tenancy)",
+      "renewal": "Relet – renewal of fixed-term tenancy",
+      "first-let-new-build": "First let of newbuild property",
+      "first-let-conversion": "First let of conversion/rehabilitation/acquired property",
+      "first-let-leased": "First let of leased property"
+  },
+  "relet": {
+    "social-rent": "A social rent basis",
+    "affordable": "An affordable rent basis",
+    "rent-to-buy": "A rent to buy basis",
+    "unknown": "Don't know"
+  },
+  "wheelchair-access": yes_no,
+  "bedrooms-override": {
+    "override": "Override"
+  }
+}
+%}
+
+{% macro option(step, data, group, onchange) %}
+  <div class="govuk-form-group" id="{{ group }}-group">
+    <label class="govuk-label govuk-label--m" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
+    <div class="govuk-form-group">
+      <select class="govuk-select" id="{{ group }}" name="{{ group }}" onchange="{{ onchange }}">
+        {% for value, name in data_lookups[group] %}
+        <option value="{{ value }}" {{ 'selected' if data[group] == value }}>{{ name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro radio(step, data, group, changefn, subdued) %}
+  <div class="govuk-form-group" id="{{ group }}">
+    <label class="govuk-label {{ '' if subdued == true else 'govuk-label--m' }}" for="{{ group }}">{{ form_titles[step].questions[group] }}</label>
+    <div class="govuk-radios">
+        {% for value, name in data_lookups[group]  %}
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="{{ group }}-{{ value }}" name="{{ group }}" type="radio"
+          onchange="{{ changefn }}" value="{{ value }}" {{ 'checked' if data[group] == value }} />
+        <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ value }}">
+          {{ name }}
+        </label>
+      </div>
+        {% endfor %}
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro checkboxes(step, hint, data, group) %}
+      <div class="govuk-form-group" id="{{ group }}">
+        <label class="govuk-label govuk-label--s">{{ form_titles[step].questions[group] }}</label>
+        <div id="{{ group }}-hint" class="govuk-hint">{{ hint }}</div>
+        <div class="govuk-checkboxes">
+          {% for value, name in data_lookups[group] %}
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="{{ group }}-{{ value }}"
+              name="{{ group }}" type="checkbox"
+              {{ 'checked' if data[group] and value in data[group] else '' }}
+              value="{{ value }}">
+            <label class="govuk-label govuk-checkboxes__label" for="{{ group }}-{{ value }}">{{ name }}</label>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+{% endmacro %}
+
+
+{% macro textbox(step, hint, data, group, type, onkeyup) %}
+  {% set fieldtype = type if type else "text" %}
+  <div class="govuk-form-group" id="{{ group }}-group">
+    <label class="govuk-label govuk-label--m" for="{{ group }}">
+      {{ form_titles[step].questions[group] }}
+    </label>
+    <span class="govuk-caption-m">{{ hint }}</span>
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <div class="govuk-input__wrapper">
+          <input class="govuk-input" id="{{ group }}" name="{{ group }}" type="{{ fieldtype }}" min="1" step="1"
+            value="{{ data[group] }}" onkeyup="{{ onkeyup }}" />
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro currency_field(step, data, group) %}
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--m" for="{{ group }}">
+      {{ form_titles[step].questions[group] }}
+    </label>
+    <span class="govuk-caption-m">Round to nearest £</span>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <div class="govuk-input__wrapper">
+          <div class="govuk-input__prefix" aria-hidden="true">£</div>
+          <input
+            class="govuk-input"
+            id="{{ group }}"
+            name="{{ group }}"
+            type="number"
+            min="1"
+            step="any"
+            value="{{ data[group] }}"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro submit() %}
+  <button class="govuk-button" data-module="govuk-button">
+    Continue
+    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
+      viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+    </svg>
+  </button>
+{% endmacro %}
+
+{% macro breadcrumbs(this_step, data) %}
+{% set furthest = data['furthest_step'] | int + 1 if data['furthest_step'] else 0 %}
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/prototype">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/prototype/singleupload">Single upload</a>
+    </li>
+      {% for step in [1,2,3,4,5,6,7,8,9] %}
+      {% if step <= furthest %}
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link"
+        {% if this_step != step %}
+          href="/prototype/singleupload/step{{ step }}"
+        {% endif %}
+        >
+          {{ form_titles["step"+step].name }}
+        </a>
+      </li>
+      {% endif %}
+      {% endfor %}
+  </ol>
+</div>
+{% endmacro %}
+
+{% macro record_step(this_step, data) %}
+  {% set furthest = data['furthest_step'] | int if data['furthest_step'] else 0 %}
+  <input type="hidden" name="furthest_step" value="{{ this_step if this_step > furthest else furthest}}" />
+{% endmacro %}
+
+
+{% macro page_title(step) %}
+<h1 class="govuk-heading-l">{{ form_titles["step"+step].name }}</h1>
+{% endmacro %}
