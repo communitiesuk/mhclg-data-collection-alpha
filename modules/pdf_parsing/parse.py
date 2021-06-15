@@ -27,9 +27,7 @@ with open(sys.argv[1], "rb") as fh:
             print("%s: %s" % (field["/T"], field["/V"]))
 
     except:
-        pass
-
-    #  print("No Form")
-    #  raw_data = {k: v for k, v in pdf.resolvedObjects.items()}
-    #  for k,v in flatten(raw_data).items():
-        #  print("%s: %s" % (k, v))
+        print("No Form")
+        raw_data = {k: v for k, v in pdf.resolvedObjects.items()}
+        for k,v in flatten(raw_data).items():
+            print("%s: %s" % (k, v))
