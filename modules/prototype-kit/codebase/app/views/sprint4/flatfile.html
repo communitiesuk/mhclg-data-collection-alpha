@@ -9,7 +9,7 @@ block beforeContent %} {% endblock %} {% block content %}
 <script src="/public/javascripts/time_in_tenancy_validations.js"></script>
 <script>
   const importer = new FlatfileImporter(
-    "b673cbe9-dda6-4045-a536-3ecff934d443",
+    "48516a22-60d0-4074-b1ec-f8b85ee44931",
     {
       type: "Import type",
       fields: [
@@ -139,7 +139,7 @@ block beforeContent %} {% endblock %} {% block content %}
 
   importer.registerRecordHook((record, index, mode) => {
     let out = {};
-    
+
     out = {...out, ...checkGender(record)};
     out = {...out, ...mapPostcodes(record)};
     out = {...out, ...mapHomelessness(record)};
