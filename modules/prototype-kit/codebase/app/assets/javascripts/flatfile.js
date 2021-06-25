@@ -39,11 +39,11 @@ const allFields = [
 ]
 
 const importer = new FlatfileImporter(
-  "b673cbe9-dda6-4045-a536-3ecff934d443",
+  "48516a22-60d0-4074-b1ec-f8b85ee44931",
   {
     type: "Import type",
     fields: allFields,
-    managed: false,
+    managed: true,
     theme: {
       buttons: {
         primary: { backgroundColor: "#00703C", border: "#00703C" }
