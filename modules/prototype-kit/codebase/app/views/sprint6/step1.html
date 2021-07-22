@@ -11,7 +11,7 @@ endblock %} {% block header %}
 {% endblock %} {% block content %}
 {{ mhclg.page_title(1)}}
 <div class="govuk-form-group">
-<form class="form" action= "/sprint6/step2" method="POST">
+<form class="form" action= "/sprint6/step2" method="POST" novalidate data-validate='my-form-validation'>
   {{ mhclg.record_step(1, data)}}
   <fieldset
     class="govuk-fieldset"
@@ -23,6 +23,17 @@ endblock %} {% block header %}
     {{ mhclg.radio("step1", data, 'gdpr') }}
   </fieldset>
 </div>
+
+<script type="application/json" id="my-form-validation">
+  {
+    "gdpr": {
+      "presence": {
+        "value": true,
+        "message": "^You must confirm GDPR requirements have been met"
+      }
+    }
+  }
+</script>
 
 {{ mhclg.submit() }}
 

@@ -1,5 +1,11 @@
 {%
     set form_titles = {
+        "step0": {
+            "name": "Organisation",
+            "questions": {
+                "organisation": "Type of organisation who owns the property"
+            }
+        },
         "step1": {
             "name": "Form Selection",
             "questions": {
@@ -12,7 +18,7 @@
             "name": "Provider Details",
             "questions": {
                 "provider": "Type of provider",
-                "ll-status": "Status",
+                "status": "Status",
                 "rp-name": "RP (HA/LA)Name",
                 "core-code": "CORE code"
             }
@@ -209,6 +215,11 @@
 
 {%
   set data_lookups = {
+   "organisation": {
+     "housing_assocation": "Housing Association",
+     "local_authority": "Local Authority",
+     "private_landlord": "Private Landlord"
+   },
    "completion-year": {
       "2021": "2020/2021",
       "2022": "2021/2022"
@@ -227,7 +238,7 @@
       "private-registered": "Private Registered Provider",
       "local-authority": "Local Authority"
     },
-    "ll-status": {
+    "status": {
       "this": "This Landlord",
       "another": "Another RP (HA/LA)"
     },
@@ -610,17 +621,18 @@
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="index">Home</a>
+      <a class="govuk-breadcrumbs__link" href="/">Home</a>
     </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/sprint6">Sprint 6</a>
-    </li>
-      {% for step in [1,2,3,4,5,6,7,8,9] %}
+      {% for step in [0,1,2,3,4,5,6,7,8,9] %}
       {% if step <= furthest %}
       <li class="govuk-breadcrumbs__list-item">
         <a class="govuk-breadcrumbs__link"
         {% if this_step != step %}
-          href="/sprint6/step{{ step }}"
+          {% if step != 0 %}
+            href="/sprint6/step{{ step }}"
+          {% else %}
+            href="/sprint6/index"
+          {% endif %}
         {% endif %}
         >
           {{ form_titles["step"+step].name }}

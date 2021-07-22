@@ -13,47 +13,25 @@ endblock %} {% block header %}
 <div class="govuk-form-group">
   {# Tenancy start date input #}
 
-  <form class="form" action="/sprint6/step3" method="POST">
+  <form class="form" action="/sprint6/step3" method="POST" novalidate data-validate='my-form-validation'>
     {{ mhclg.record_step(2, data) }}
-    <fieldset class="govuk-fieldset" role="group" aria-describedby="tenancy-hint">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h2 class="govuk-fieldset__heading">Tenancy start date</h2>
-      </legend>
-      <div id="tenancy-hint" class="govuk-hint">
-        For example, 01 01 2021
-      </div>
-      <div class="govuk-date-input" id="tenancy">
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-date-input__label" for="tenancy-day">
-              Day
-            </label>
-            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-day" name="tenancy-day"
-              type="number" pattern="[0-9]*" inputmode="numeric" value="{{ data['tenancy-day'] }}" />
-          </div>
-        </div>
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-date-input__label" for="tenancy-month">
-              Month
-            </label>
-            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-month"
-              name="tenancy-month" type="number" pattern="[0-9]*" inputmode="numeric"
-              value="{{ data['tenancy-month'] }}" />
-          </div>
-        </div>
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-date-input__label" for="tenancy-year">
-              Year
-            </label>
-            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="tenancy-year"
-              name="tenancy-year" type="number" pattern="[0-9]*" inputmode="numeric"
-              value="{{ data['tenancy-year'] }}" />
-          </div>
-        </div>
-      </div>
-    </fieldset>
+
+    {% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+
+       {{ govukDateInput({
+         id: "tenancy-start",
+         namePrefix: "tenancy-start",
+         fieldset: {
+           legend: {
+             text: "Tenancy Start Date",
+             isPageHeading: true,
+             classes: "govuk-fieldset__legend--xl"
+           }
+         },
+         hint: {
+           text: "For example, 01 01 2021"
+         }
+       }) }}
 
     {# Provider and landlord #}
     <fieldset class="govuk-fieldset govuk-!-margin-top-6" role="group" aria-describedby="tenancy-hint">
@@ -61,7 +39,7 @@ endblock %} {% block header %}
         <h2 class="govuk-fieldset__heading">Provider</h2>
       </legend>
       {{ mhclg.radio("step2", data, 'provider') }}
-      {{ mhclg.radio("step2", data, 'll-status', "check()") }}
+      {{ mhclg.radio("step2", data, 'status', "check()") }}
       {{ mhclg.textbox("step2", "", data, "rp-name") }}
       {{ mhclg.textbox("step2", "", data, "core-code") }}
     </fieldset>
@@ -70,7 +48,7 @@ endblock %} {% block header %}
 {# conditional render check and style#}
 <script>
   function check() {
-    if (document.getElementById("ll-status-another").checked) {
+    if (document.getElementById("status-another").checked) {
       document.getElementById("rp-name-group").style.display = "block";
       document.getElementById("rp-name-group").style.opacity = 1;
       document.getElementById("core-code-group").style.display = "block";
@@ -83,6 +61,23 @@ endblock %} {% block header %}
     }
   }
   check();
+</script>
+
+<script type="application/json" id="my-form-validation">
+  {
+  	"tenancy-start-day": {
+  		"date": {
+  			"namePrefix": "tenancy-start",
+  			"message": "^Tenancy start should be a valid date"
+  		}
+  	},
+    "provider": {
+      "presence": true
+    },
+    "status": {
+      "presence": true
+    }
+  }
 </script>
 
 {{ mhclg.submit() }}
