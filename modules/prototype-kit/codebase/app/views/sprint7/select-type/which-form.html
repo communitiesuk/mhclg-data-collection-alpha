@@ -1,0 +1,90 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="" method="POST" novalidate="" data-validate="my-form-validation">
+
+
+
+
+<div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+            Which form are you completing
+            </h1>
+          </legend>
+
+            <div class="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-housing_assocation" type="radio"  name="next-page" value="GDPR" data-value="Social Rent General Needs">
+                <label class="govuk-label govuk-radios__label" for="organisation-housing_assocation">
+                  Social Rent General Needs
+                </label>
+              </div>
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-local_authority" type="radio"   name="next-page" value="GDPR" data-value="Social Rent Supporting Housing">
+                <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
+                  Social Rent Supporting Housing
+                </label>
+              </div>
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-local_authority" type="radio"   name="next-page" value="GDPR" data-value="Affordable Rent General Needs">
+                <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
+                  Affordable Rent General Needs
+                </label>
+              </div>
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-local_authority" type="radio"   name="next-page" value="GDPR" data-value="Affordable Rent Supporting Housing">
+                <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
+                  Affordable Rent Supporting Housing
+                </label>
+              </div>
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-local_authority" type="radio"   name="next-page" value="GDPR" data-value="Rent To Buy General Needs">
+                <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
+                  Rent To Buy General Needs
+                </label>
+              </div>
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-local_authority" type="radio"   name="next-page" value="GDPR" data-value="Rent To Buy Supported Housing">
+                <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
+                  Rent To Buy Supported Housing
+                </label>
+              </div>
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-local_authority" type="radio"   name="next-page" value="GDPR" data-value="Sales Log">
+                <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
+                  Sales Log
+                </label>
+              </div>
+
+            </div>
+</div>
+
+
+
+           <input type="hidden" name="which-form">
+           <input class="govuk-button" type="submit" value="Save and continue"  />
+
+      </fieldset>
+    </form>
+   </div>
+  </div>
+
+{% endblock %}

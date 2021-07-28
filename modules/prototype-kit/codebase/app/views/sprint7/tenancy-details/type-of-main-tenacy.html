@@ -1,0 +1,74 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="" method="POST" novalidate="" data-validate="my-form-validation">
+
+
+
+
+<div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+        Type of main tenancy (after any starter/introductory period)
+            </h1>
+          </legend>
+
+            <div class="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-housing_assocation" type="radio"  name="next-page" value="tenant-code" data-value="Secure including flexible">
+                <label class="govuk-label govuk-radios__label" for="organisation-housing_assocation">
+              Secure including flexible
+                </label>
+              </div>
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-local_authority" type="radio"   name="next-page" value="tenant-code" data-value="Assured">
+                <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
+              Assured
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-local_authority" type="radio"   name="next-page" value="tenant-code" data-value="    Assured shorthold">
+                <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
+              Assured shorthold
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-local_authority" type="radio"   name="next-page" value="tenant-code" data-value="    License agreement">
+                <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
+              License agreement
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="organisation-local_authority" type="radio"   name="next-page" value="other-type" data-value="Other">
+                <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
+            Other
+                </label>
+              </div>
+
+
+            </div>
+</div>
+
+
+
+           <input type="hidden" name="type-of-main-tenacy">
+           <input class="govuk-button" type="submit" value="Save and continue"  />
+
+      </fieldset>
+    </form>
+   </div>
+  </div>
+
+{% endblock %}

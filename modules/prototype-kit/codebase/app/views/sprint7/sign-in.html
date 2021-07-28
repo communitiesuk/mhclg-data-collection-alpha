@@ -1,0 +1,32 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container ">
+
+  <div class="govuk-grid-row">
+
+
+<div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">Sign in
+</h1>
+      <form class="form" action="/url/of/next/page" method="post">
+<div class="govuk-form-group">
+  <label class="govuk-label" for="email">
+    Email address
+  </label>
+  <div id="email-hint" class="govuk-hint">
+    We’ll send a security code to the email your organisation registered with this service.
+  </div>
+  <input class="govuk-input" id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint" autocomplete="email">
+</div>
+        <a class="govuk-button" href="enter-code" data-module="govuk-button">Continue</a>
+      </form>
+    </div>
+</div>
+</div>
+{% endblock %}

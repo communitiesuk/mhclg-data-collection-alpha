@@ -1,0 +1,31 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container ">
+  <a class="govuk-back-link" href="/url/of/previous/page">Back</a>
+        <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">Check your email</h1>
+      <form class="form" action="/url/of/next/page" method="post">
+<div class="govuk-form-group">
+  <label class="govuk-label" for="email">
+Email code  </label>
+  <div id="email-hint" class="govuk-hint">
+This will be the email address you use for your organisation.  </div>
+  <input class="govuk-input" id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint" autocomplete="email">
+</div>
+        <a class="govuk-button" href="home-page" data-module="govuk-button">Continue</a>
+          <p><a href="#" class="govuk-link">Not received an email?</a></p>
+      </form>
+    </div>
+  </div>
+        </main>
+      </div>
+
+{% endblock %}

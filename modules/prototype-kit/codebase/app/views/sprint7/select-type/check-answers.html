@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">Check your answers</h1>
+
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <h2 class="govuk-heading-m"> Select form type</h2>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+        Which year is this log for?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["which-year"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="feedstock-supply">
+              Change<span class="govuk-visually-hidden"> feedstock supply</span>
+            </a>
+          </dd>
+        </div>
+
+
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Which form are you completing
+
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["which-form"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="feedstock-supply">
+              Change<span class="govuk-visually-hidden"> feedstock supply</span>
+            </a>
+          </dd>
+        </div>
+
+
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+          GDPR
+
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["GDPR"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="feedstock-supply">
+              Change<span class="govuk-visually-hidden"> feedstock supply</span>
+            </a>
+          </dd>
+        </div>
+
+
+      </dl>
+
+
+
+
+    <form action="../tasklist" method="post" novalidate>
+
+      <input type="hidden" name="select-completed" value="true">
+
+
+      <button class="govuk-button" data-module="govuk-button">
+        Save and continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

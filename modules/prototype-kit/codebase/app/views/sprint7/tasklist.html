@@ -1,0 +1,170 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-width-container ">
+      <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+Case #342351      </h1>
+    <h2 class="govuk-heading-s govuk-!-margin-bottom-2">Application incomplete</h2>
+    <p class="govuk-body govuk-!-margin-bottom-7">You have completed 2 of 7 sections.</p>
+    <ol class="app-task-list">
+      <li>
+        <h2 class="app-task-list__section">
+          <span class="app-task-list__section-number">1. </span> Prepare case
+        </h2>
+        <ul class="app-task-list__items">
+          <li class="app-task-list__item"">
+
+
+                              {% if  data['org-completed'] == 'true' %}
+                                <a class="task-name" href="organisation-type/check-answers" aria-describedby="read-declaration-completed">
+                              Organisation type
+                                </a>
+                                  <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                              {% elif  data['org-inprogress'] == 'true' %}
+                              <a class="task-name" href="organisation-type/check-answers" aria-describedby="read-declaration-completed">
+                              Organisation type
+                              </a>
+                              <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                              {% else %}
+                              <a class="task-name" href="organisation-type/org-type" aria-describedby="read-declaration-completed">
+                              Organisation type
+                              </a>
+                                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                              {% endif %}
+            </li>
+
+            <li class="app-task-list__item"">
+
+
+                                {% if  data['select-completed'] == 'true' %}
+                                  <a class="task-name" href="select-type/check-answers" aria-describedby="read-declaration-completed">
+                                Select form type
+                                  </a>
+                                    <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                                {% elif  data['select-inprogress'] == 'true' %}
+                                <a class="task-name" href="select-type/check-answers" aria-describedby="read-declaration-completed">
+                              Select form type
+                                </a>
+                                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                                {% else %}
+                                <a class="task-name" href="select-type/which-year" aria-describedby="read-declaration-completed">
+                            Select form type
+                                </a>
+                                  <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                                {% endif %}
+              </li>
+
+              <li class="app-task-list__item"">
+
+
+                                  {% if  data['provider-completed'] == 'true' %}
+                                    <a class="task-name" href="provider-details/check-answers" aria-describedby="read-declaration-completed">
+                                Provider details
+                                    </a>
+                                      <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                                  {% elif  data['provider-inprogress'] == 'true' %}
+                                  <a class="task-name" href="provider-details/check-answers" aria-describedby="read-declaration-completed">
+                              Provider details
+                                  </a>
+                                  <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                                  {% else %}
+                                  <a class="task-name" href="provider-details/tenancy-start-date" aria-describedby="read-declaration-completed">
+                              Provider details
+                                  </a>
+                                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                                  {% endif %}
+                </li>
+
+                <li class="app-task-list__item"">
+
+
+                                    {% if  data['tenancy-completed'] == 'true' %}
+                                      <a class="task-name" href="tenancy-details/check-answers" aria-describedby="read-declaration-completed">
+                                Tenancy details
+                                      </a>
+                                        <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                                    {% elif  data['tenancy-inprogress'] == 'true' %}
+                                    <a class="task-name" href="tenancy-details/check-answers" aria-describedby="read-declaration-completed">
+                            Tenancy details
+                                    </a>
+                                    <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                                    {% else %}
+                                    <a class="task-name" href="tenancy-details/start-tenancy" aria-describedby="read-declaration-completed">
+                          Tenancy details
+                                    </a>
+                                      <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                                    {% endif %}
+                  </li>
+
+
+                  <li class="app-task-list__item"">
+
+
+                                      {% if  data['household-completed'] == 'true' %}
+                                        <a class="task-name" href="household-details/check-answers" aria-describedby="read-declaration-completed">
+                                  Household details
+                                        </a>
+                                          <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                                      {% elif  data['household-inprogress'] == 'true' %}
+                                      <a class="task-name" href="household-details/check-answers" aria-describedby="read-declaration-completed">
+                            Household details
+                                      </a>
+                                      <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                                      {% else %}
+                                      <a class="task-name" href="household-details/gender" aria-describedby="read-declaration-completed">
+                              Household details
+                                      </a>
+                                        <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                                      {% endif %}
+                    </li>
+
+
+
+
+
+
+
+
+
+<li class="app-task-list__item">
+            <span class="app-task-list__task-name">
+              <a href="#" aria-describedby="list-convictions-status">Local authority details</a>
+            </span>
+            <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="list-convictions-status">Not started</strong>
+          </li>
+ <li class="app-task-list__item">
+            <span class="app-task-list__task-name">
+              <a href="#" aria-describedby="list-convictions-status">Rent and other charges</a>
+            </span>
+            <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="list-convictions-status">Not started</strong>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h2 class="app-task-list__section">
+          <span class="app-task-list__section-number">2. </span> Submit case
+        </h2>
+        <ul class="app-task-list__items">
+          <li class="app-task-list__item">
+            <span class="app-task-list__task-name">
+Check answers and submit              </span>
+            <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="submit-pay-status">Cannot start yet</strong>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+</div>
+      </main>
+    </div>
+
+{% endblock %}
