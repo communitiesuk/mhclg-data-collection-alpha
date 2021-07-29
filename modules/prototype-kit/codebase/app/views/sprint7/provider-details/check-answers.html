@@ -4,8 +4,6 @@
 Check your answers
 {% endblock %}
 
-
-
 {% block content %}
 
 <div class="govuk-grid-row">
@@ -13,17 +11,16 @@ Check your answers
 
     <h1 class="govuk-heading-l">Check your answers</h1>
 
-
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <h2 class="govuk-heading-m"> Provider details</h2>
 
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-          When is the tenancy start date?
+            When is the tenancy start date?
           </dt>
           <dd class="govuk-summary-list__value">
-          {{ data["tenancy-day"]}}   {{ data["tenancy-month"]}}  {{ data["tenancy-year"]}}
+            {{ data["tenancy-day"]}} {{ data["tenancy-month"]}} {{ data["tenancy-year"]}}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="tenancy-start-date">
@@ -31,8 +28,6 @@ Check your answers
             </a>
           </dd>
         </div>
-
-
       </dl>
 
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -50,16 +45,12 @@ Check your answers
             </a>
           </dd>
         </div>
-
-
       </dl>
 
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Status of the provider
-
-
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["status-provider"] }}
@@ -70,23 +61,14 @@ Check your answers
             </a>
           </dd>
         </div>
-
-
       </dl>
 
-
-
-
-    <form action="../tasklist" method="post" novalidate>
-
-      <input type="hidden" name="provider-completed" value="true">
-
-
-      <button class="govuk-button" data-module="govuk-button">
-        Save and continue
-      </button>
-
-    </form>
+      <form action="../tasklist" method="post" novalidate>
+        <input type="hidden" name="provider-completed" value="true">
+        <button class="govuk-button" data-module="govuk-button">
+          Save and continue
+        </button>
+      </form>
 
   </div>
 </div>

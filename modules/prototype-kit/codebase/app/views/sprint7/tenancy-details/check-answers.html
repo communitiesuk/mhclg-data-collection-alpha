@@ -4,15 +4,12 @@
 Check your answers
 {% endblock %}
 
-
-
 {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
 
     <h1 class="govuk-heading-l">Check your answers</h1>
-
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <h2 class="govuk-heading-m"> Tenancy details</h2>
@@ -23,7 +20,7 @@ Check your answers
             Is this a starter or introductory tenancy?
           </dt>
           <dd class="govuk-summary-list__value">
-          {{ data["tenancy-starter"]}}
+            {{ data["tenancy-starter"]}}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="tenancy-starter">
@@ -31,15 +28,12 @@ Check your answers
             </a>
           </dd>
         </div>
-
-
       </dl>
 
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-          Type of main tenancy (after any starter/introductory period)
-
+            Type of main tenancy (after any starter/introductory period)
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["type-of-main-tenancy"] }}
@@ -50,8 +44,6 @@ Check your answers
             </a>
           </dd>
         </div>
-
-
       </dl>
 
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -68,14 +60,12 @@ Check your answers
             </a>
           </dd>
         </div>
-
-
       </dl>
 
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-          If the main tenancy is a fixed term tenancy, please provide the length of the fixed term (to the nearest year) excluding any starter/introductory period
+            If the main tenancy is a fixed term tenancy, please provide the length of the fixed term (to the nearest year) excluding any starter/introductory period
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["fixed-term"] }}
@@ -86,23 +76,14 @@ Check your answers
             </a>
           </dd>
         </div>
-
-
       </dl>
 
-
-
-
-    <form action="../tasklist" method="post" novalidate>
-
-      <input type="hidden" name="tenancy-completed" value="true">
-
-
-      <button class="govuk-button" data-module="govuk-button">
-        Save and continue
-      </button>
-
-    </form>
+      <form action="../tasklist" method="post" novalidate>
+        <input type="hidden" name="tenancy-completed" value="true">
+        <button class="govuk-button" data-module="govuk-button">
+          Save and continue
+        </button>
+      </form>
 
   </div>
 </div>
