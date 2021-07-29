@@ -9,11 +9,9 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
-
+    <form class="form" action="economic-status" method="POST" novalidate="" data-validate="my-form-validation">
 
       <h1 class="govuk-heading-xl">About the tenant</h1>
-
 
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
@@ -24,25 +22,25 @@ GOV.UK Prototype Kit
           </legend>
           <div class="govuk-radios govuk-radios--small">
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="month">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Male">
               <label class="govuk-label govuk-radios__label" for="gender">
                 Male
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="year">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Female">
               <label class="govuk-label govuk-radios__label" for="gender">
                 Female
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="year">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Other">
               <label class="govuk-label govuk-radios__label" for="gender">
                 Other
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="year">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Prefer not to say">
               <label class="govuk-label govuk-radios__label" for="gender">
                 Prefer not to say
               </label>
@@ -51,62 +49,11 @@ GOV.UK Prototype Kit
 
         </fieldset>
       </div>
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-            <h1 class="govuk-fieldset__heading">
-              Work
-            </h1>
-          </legend>
-          <div class="govuk-radios govuk-radios--small">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="month">
-              <label class="govuk-label govuk-radios__label" for="economic-status">
-                Part-time (Less than 30 hours) 
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-statuse" type="radio" value="year">
-              <label class="govuk-label govuk-radios__label" for="economic-status">
-                Full-time (30 hours or more)
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="year">
-              <label class="govuk-label govuk-radios__label" for="economic-status">
-                Not seeking work, in government training or New Deal                  
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="year">
-              <label class="govuk-label govuk-radios__label" for="economic-status">
-                Full-time student, jobseeker, child under 16 or retired                 
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="year">
-              <label class="govuk-label govuk-radios__label" for="economic-status">
-                Unable to work, on long term sick or has a disability                
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="year">
-              <label class="govuk-label govuk-radios__label" for="economic-status">
-                Other              
-              </label>
-            </div>
-          </div>
-
-        </fieldset>
-      </div>
-
 
       <input type="hidden" name="type-of-main-tenacy">
       <input class="govuk-button" type="submit" value="Save and continue" />
 
       </fieldset>
-
-
 
     </form>
   </div>

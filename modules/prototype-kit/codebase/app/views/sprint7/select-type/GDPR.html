@@ -13,35 +13,32 @@ GOV.UK Prototype Kit
 
       <div class="govuk-form-group">
 
-        <fieldset class="govuk-fieldset">
+        <fieldset class="govuk-fieldset" aria-describedby="gdpr-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              GDPR?!
+              GDPR
             </h1>
           </legend>
-
-          <div class="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="organisation-housing_assocation" type="radio" name="next-page" value="check-answers" data-value="Yes">
-              <label class="govuk-label govuk-radios__label" for="organisation-housing_assocation">
-                Yes
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="organisation-local_authority" type="radio" name="next-page" value="check-answers" data-value="No">
-              <label class="govuk-label govuk-radios__label" for="organisation-local_authority">
-                No
-              </label>
-            </div>
-
+          <div id="gdpr-hint" class="govuk-hint">
+            Has the tenant consented to the processing of their data in accordance with GDPR?
           </div>
-      </div>
 
-      <input type="hidden" name="GDPR">
-      <input class="govuk-button" type="submit" value="Save and continue" />
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="gdpr" name="gdpr" type="checkbox" value="Confirmed">
+              <label class="govuk-label govuk-checkboxes__label" for="gdpr">
 
-      </fieldset>
+              </label>
+            </div>
+          </div>
+
+          <br />
+          <br />
+
+          <input type="hidden" name="GDPR">
+          <input class="govuk-button" type="submit" value="Save and continue" />
+
+        </fieldset>
     </form>
   </div>
 </div>

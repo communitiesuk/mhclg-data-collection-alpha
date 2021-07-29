@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <h1 class="govuk-heading-xl">About the tenant</h1>
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            <h1 class="govuk-fieldset__heading">
+              Work
+            </h1>
+          </legend>
+          <div class="govuk-radios govuk-radios--small">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Part-time (Less than 30 hours)">
+              <label class="govuk-label govuk-radios__label" for="economic-status">
+                Part-time (Less than 30 hours) 
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="economic-status" name="economic-statuse" type="radio" value="Full-time (30 hours or more)">
+              <label class="govuk-label govuk-radios__label" for="economic-status">
+                Full-time (30 hours or more)
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Not seeking work, in government training or New Deal">
+              <label class="govuk-label govuk-radios__label" for="economic-status">
+                Not seeking work, in government training or New Deal                  
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Full-time student, jobseeker, child under 16 or retired">
+              <label class="govuk-label govuk-radios__label" for="economic-status">
+                Full-time student, jobseeker, child under 16 or retired                 
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Unable to work, on long term sick or has a disability">
+              <label class="govuk-label govuk-radios__label" for="economic-status">
+                Unable to work, on long term sick or has a disability                
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Other">
+              <label class="govuk-label govuk-radios__label" for="economic-status">
+                Other              
+              </label>
+            </div>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="type-of-main-tenacy">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}
