@@ -6,13 +6,9 @@ GOV.UK Prototype Kit
 
 {% block content %}
 
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <form class="form" action="type-of-provider" method="POST" novalidate="" data-validate="my-form-validation">
-
-
-
 
       <div class="govuk-form-group">
 
@@ -23,36 +19,35 @@ GOV.UK Prototype Kit
             </h1>
           </legend>
 
-          <div id="passport-issued-hint" class="govuk-hint">
+          <div id="tenancy-start-hint" class="govuk-hint">
             For example, 27 3 2007
           </div>
-          <div class="govuk-date-input" id="passport-issued">
+          <div class="govuk-date-input" id="tenancy-start">
             <div class="govuk-date-input__item">
               <div class="govuk-form-group">
-                <label class="govuk-label govuk-date-input__label" for="passport-issued-day">
+                <label class="govuk-label govuk-date-input__label" for="tenancy-start-day">
                   Day
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-day" name="tenancy-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-start-day" name="tenancy-start-day" type="text" pattern="[0-9]*" inputmode="numeric">
               </div>
             </div>
             <div class="govuk-date-input__item">
               <div class="govuk-form-group">
-                <label class="govuk-label govuk-date-input__label" for="passport-issued-month">
+                <label class="govuk-label govuk-date-input__label" for="tenancy-start-month">
                   Month
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-month" name="tenancy-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-start-month" name="tenancy-start-month" type="text" pattern="[0-9]*" inputmode="numeric">
               </div>
             </div>
             <div class="govuk-date-input__item">
               <div class="govuk-form-group">
-                <label class="govuk-label govuk-date-input__label" for="passport-issued-year">
+                <label class="govuk-label govuk-date-input__label" for="tenancy-start-year">
                   Year
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="passport-issued-year" name="tenancy-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="tenancy-start-year" name="tenancy-start-year" type="text" pattern="[0-9]*" inputmode="numeric">
               </div>
             </div>
           </div>
-
       </div>
 
       <input type="hidden" name="provider-inprogress" value="true">
