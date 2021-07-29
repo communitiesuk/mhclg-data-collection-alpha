@@ -20,25 +20,31 @@ GOV.UK Prototype Kit
             </h1>
           </legend>
           <div id="gdpr-hint" class="govuk-hint">
-            Pleaase confirm that the tenant gave their consent to the processing of their data in accordance with GDPR
+            Has the tenant/buyer that this letting/sale relates to been shown the privacy note set out by MHCLG?
           </div>
 
-          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="gdpr" name="gdpr" type="checkbox" value="Confirmed">
-              <label class="govuk-label govuk-checkboxes__label" for="gdpr">
-
+          <div class="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="gdpr" type="radio" name="gdpr" value="Yes" data-value="Yes">
+              <label class="govuk-label govuk-radios__label" for="gdpr">
+                Yes
               </label>
             </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="gdpr" type="radio" name="gdpr" value="No" data-value="No">
+              <label class="govuk-label govuk-radios__label" for="gdpr-2">
+                No
+              </label>
+            </div>
+
           </div>
+      </div>
 
-          <br />
-          <br />
+      <input type="hidden" name="GDPR">
+      <input class="govuk-button" type="submit" value="Save and continue" />
 
-          <input type="hidden" name="GDPR">
-          <input class="govuk-button" type="submit" value="Save and continue" />
-
-        </fieldset>
+      </fieldset>
     </form>
   </div>
 </div>
