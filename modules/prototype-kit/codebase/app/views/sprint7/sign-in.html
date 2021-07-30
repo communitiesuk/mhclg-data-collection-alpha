@@ -9,7 +9,6 @@ GOV.UK Prototype Kit
 
   <div class="govuk-grid-row">
 
-
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">Sign in
       </h1>
@@ -29,4 +28,14 @@ GOV.UK Prototype Kit
     </div>
   </div>
 </div>
+
+<script>
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const timeout = urlParams.get('timeout')
+  if(timeout){
+    alert('Your session has been timed out. Please sign in again')
+  }
+</script>
+
 {% endblock %}
