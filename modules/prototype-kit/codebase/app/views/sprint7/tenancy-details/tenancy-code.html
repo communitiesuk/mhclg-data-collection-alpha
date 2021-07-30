@@ -35,11 +35,13 @@ GOV.UK Prototype Kit
           </div>
       </div>
 
-      <input type="hidden" name="tenancy-code">
-      <input type="hidden" name="tenancy-inprogress" value="true">
-      <input class="govuk-button" type="submit" value="Save and continue" />
-      &nbsp;&nbsp;
-      <a class="govuk-button govuk-button--secondary" href="../sign-in?timeout=true" data-module="govuk-button">Save as draft</a>
+      <div class="govuk-button-group">
+        <input type="hidden" name="tenancy-code">
+        <input type="hidden" name="tenancy-inprogress" value="true">
+        <input class="govuk-button" type="submit" value="Save and continue" />
+
+        <a class="govuk-button govuk-button--secondary" href="../sign-in?timeout=true" data-module="govuk-button">Save as draft</a>
+      </div>
 
       </fieldset>
     </form>
