@@ -49,5 +49,11 @@ module.exports = function (env) {
   /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
+
+  filters.trim_end = function(str, char) {
+    const re = new RegExp(`${char}$`)
+    return str.replace(/,$/, '')
+  }
+
   return filters
 }

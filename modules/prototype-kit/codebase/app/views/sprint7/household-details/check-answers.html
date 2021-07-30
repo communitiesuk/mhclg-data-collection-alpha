@@ -20,7 +20,10 @@ Check your answers
             What is the tenant code?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["tenant-code"]}}
+            <!-- {% set value = data["tenant-code"] | join(",") %}
+            {{ value | trim_end(',') }} -->
+
+            {{ data["tenant-code"][0] }}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="tenant-code">
@@ -36,7 +39,7 @@ Check your answers
             Tenant's Age
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["tenant-age"] }}
+            {{ data["tenant-age"][0] }}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="tenant-age">
@@ -71,7 +74,7 @@ Check your answers
             {{ data["economic-status"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="gender">
+            <a class="govuk-link" href="economic-status">
               Change<span class="govuk-visually-hidden">Economic Status</span>
             </a>
           </dd>

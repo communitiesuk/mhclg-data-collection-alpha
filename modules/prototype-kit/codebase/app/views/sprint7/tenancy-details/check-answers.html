@@ -52,7 +52,7 @@ Check your answers
             What is the tenancy code?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["tenancy-code"] }}
+            {{ data["tenancy-code"][0] }}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="tenancy-code">
@@ -68,7 +68,7 @@ Check your answers
             If the main tenancy is a fixed term tenancy, please provide the length of the fixed term (to the nearest year) excluding any starter/introductory period
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["fixed-term"] }}
+            {{ data["fixed-term"][0] }}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="fixed-term">
