@@ -1,0 +1,294 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">Check your answers</h1>
+
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <h2 class="govuk-heading-m">Organisation details</h2>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Type of organisation who owns the property
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["org-type"][0] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="organisation-type/org-type">
+              Change<span class="govuk-visually-hidden">org-type</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <h2 class="govuk-heading-m"> Select form type</h2>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Which year is this log for?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["which-year"][0] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="select-type/which-year">
+              Change<span class="govuk-visually-hidden">which-year</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Which form are you completing
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["which-form"][0] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="select-type/which-form">
+              Change<span class="govuk-visually-hidden">which-form</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            GDPR
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["gdpr"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="select-type/GDPR">
+              Change<span class="govuk-visually-hidden">GDPR</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <h2 class="govuk-heading-m"> Provider details</h2>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            When is the tenancy start date?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["tenancy-start-day"]}} {{ data["tenancy-start-month"]}} {{ data["tenancy-start-year"]}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="provider-details/tenancy-start-date">
+              Change<span class="govuk-visually-hidden">Tenancy Start Date</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Type of provider
+
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["type-of-provider"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="provider-details/type-of-provider">
+              Change<span class="govuk-visually-hidden">type-of-provider</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Status of the provider
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["status-of-provider"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="provider-details/status-of-provider">
+              Change<span class="govuk-visually-hidden">status-of-provider</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <h2 class="govuk-heading-m"> Tenancy details</h2>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Is this a starter or introductory tenancy?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data["starter-tenancy"]}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="tenancy-details/start-tenancy">
+                Change<span class="govuk-visually-hidden">start-tenancy</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Type of main tenancy (after any starter/introductory period)
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data["tenancy-type"] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="tenancy-details/type-of-main-tenancy">
+                Change<span class="govuk-visually-hidden">type-of-main-tenancy</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              What is the tenancy code?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data["tenancy-code"][0] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="tenancy-details/tenancy-code">
+                Change<span class="govuk-visually-hidden">tenancy-code</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              If the main tenancy is a fixed term tenancy, please provide the length of the fixed term (to the nearest year) excluding any starter/introductory period
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data["fixed-term"][0] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="tenancy-details/fixed-term">
+                Change<span class="govuk-visually-hidden">fixed-term</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <h2 class="govuk-heading-m">Household details</h2>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              What is the tenant code?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <!-- {% set value = data["tenant-code"] | join(",") %}
+              {{ value | trim_end(',') }} -->
+
+              {{ data["tenant-code"][0] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="household-details/tenant-code">
+                Change<span class="govuk-visually-hidden">Tenant Code</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Tenant's Age
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data["tenant-age"][0] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="household-details/tenant-age">
+                Change<span class="govuk-visually-hidden">Tenant Age</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Tenant's Gender
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data["gender"] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="household-details/gender">
+                Change<span class="govuk-visually-hidden">Tenant Gender</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Work
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data["economic-status"] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="household-details/economic-status">
+                Change<span class="govuk-visually-hidden">Economic Status</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </dl>
+
+      <div class="govuk-button-group">
+        <form action="confirmation" method="post" novalidate>
+          <input type="hidden" name="review-completed" value="true">
+          <a class="govuk-button govuk-button govuk-button--secondary" data-module="govuk-button" href="tasklist">
+            Back
+          </a>
+          <button class="govuk-button" data-module="govuk-button">
+            Submit
+          </button>
+        </form>
+      </div>
+
+  </div>
+</div>
+
+{% endblock %}

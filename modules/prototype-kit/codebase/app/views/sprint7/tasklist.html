@@ -134,7 +134,7 @@ GOV.UK Prototype Kit
 
 
 
-              <li class="app-task-list__item">
+              <!-- <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
                   <a href="#" aria-describedby="list-convictions-status">Local authority details</a>
                 </span>
@@ -145,7 +145,7 @@ GOV.UK Prototype Kit
                   <a href="#" aria-describedby="list-convictions-status">Rent and other charges</a>
                 </span>
                 <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="list-convictions-status">Not started</strong>
-              </li>
+              </li> -->
             </ul>
           </li>
           <li>
@@ -156,7 +156,11 @@ GOV.UK Prototype Kit
               <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
                   Check answers and submit </span>
-                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="submit-pay-status">Cannot start yet</strong>
+                {% if (data['org-completed'] == 'true') and (data['select-completed'] == 'true') and (data['provider-completed'] == 'true') and (data['tenancy-completed'] == 'true') and (data['household-completed'] == 'true') %}
+                  <a href="check-and-submit" class="govuk-button app-task-list__tag" data-module="govuk-button">Start</a>
+                {% else %}
+                  <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="submit-pay-status">Cannot start yet</strong>
+                {% endif %}
               </li>
             </ul>
           </li>
