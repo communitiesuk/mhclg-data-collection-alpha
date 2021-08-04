@@ -83,6 +83,60 @@ Check your answers
     </dl>
     </dl>
 
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Ethnicity
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["ethnicity"][0] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="ethnicity">
+            Change<span class="govuk-visually-hidden">Ethnicity</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    </dl>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Nationality
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["nationality"][0] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="nationality">
+            Change<span class="govuk-visually-hidden">Nationality</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    </dl>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Number of Other Household Members
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["number-of-other-members"][0] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="other-household-members">
+            Change<span class="govuk-visually-hidden">Other Household Members</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    </dl>
+    </dl>
+
     <form action="../tasklist" method="post" novalidate>
       <input type="hidden" name="household-completed" value="true">
       <button class="govuk-button" data-module="govuk-button">
