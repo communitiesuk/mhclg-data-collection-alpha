@@ -330,6 +330,24 @@ Check your answers
     </dl>
     </dl>
 
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Armed Forces
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["armed-forces"][0] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="household-details/armed-forces">
+            Change<span class="govuk-visually-hidden">Armed Forces</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    </dl>
+    </dl>
+
     <div class="govuk-button-group">
       <form action="confirmation" method="post" novalidate>
         <input type="hidden" name="review-completed" value="true">

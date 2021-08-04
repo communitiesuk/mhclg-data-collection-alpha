@@ -31,7 +31,7 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+    <form class="form" action="armed-forces" method="POST" novalidate="" data-validate="my-form-validation">
 
       <div class="govuk-form-group">
 
@@ -82,19 +82,23 @@ GOV.UK Prototype Kit
             items: [
               {
                 value: "Male",
-                text: "Male"
+                text: "Male",
+                checked: checked("person-" + i + "-gender", "Male")
               },
               {
                 value: "Female",
-                text: "Female"
+                text: "Female",
+                checked: checked("person-" + i + "-gender", "Female")
               },
               {
                 value: "Other",
-                text: "Other"
+                text: "Other",
+                checked: checked("person-" + i + "-gender", "Other")
               },
               {
                 value: "Prefer not to say",
-                text: "Prefer not to say"
+                text: "Prefer not to say",
+                checked: checked("person-" + i + "-gender", "Prefer not to say")
               }
             ]
           }) }}
@@ -111,19 +115,23 @@ GOV.UK Prototype Kit
             items: [
               {
                 value: "Partner",
-                text: "Partner"
+                text: "Partner",
+                checked: checked("person-" + i + "-relationship-to-main", "Partner")
               },
               {
                 value: "Child",
-                text: "Child"
+                text: "Child",
+                checked: checked("person-" + i + "-relationship-to-main", "Child")
               },
               {
                 value: "Other",
-                text: "Other"
+                text: "Other",
+                checked: checked("person-" + i + "-relationship-to-main", "Other")
               },
               {
                 value: "Refused",
-                text: "Refused"
+                text: "Refused",
+                checked: checked("person-" + i + "-relationship-to-main", "Refused")
               }
             ]
           }) }}
@@ -140,27 +148,33 @@ GOV.UK Prototype Kit
             items: [
               {
                 value: "Part-time (Less than 30 hours)",
-                text: "Part-time (Less than 30 hours)"
+                text: "Part-time (Less than 30 hours)",
+                checked: checked("person-" + i + "-economic-status", "Part-time (Less than 30 hours)")
               },
               {
                 value: "Full-time (30 hours or more)",
-                text: "Full-time (30 hours or more)"
+                text: "Full-time (30 hours or more)",
+                checked: checked("person-" + i + "-economic-status", "Full-time (30 hours or more)")
               },
               {
                 value: "Not seeking work, in government training or New Deal",
-                text: "Not seeking work, in government training or New Deal"
+                text: "Not seeking work, in government training or New Deal",
+                checked: checked("person-" + i + "-economic-status", "Not seeking work, in government training or New Deal")
               },
               {
                 value: "Full-time student, jobseeker, child under 16 or retired",
-                text: "Full-time student, jobseeker, child under 16 or retired"
+                text: "Full-time student, jobseeker, child under 16 or retired",
+                checked: checked("person-" + i + "-economic-status", "Full-time student, jobseeker, child under 16 or retired")
               },
               {
                 value: "Unable to work, on long term sick or has a disability",
-                text: "Unable to work, on long term sick or has a disability"
+                text: "Unable to work, on long term sick or has a disability",
+                checked: checked("person-" + i + "-economic-status", "Unable to work, on long term sick or has a disability")
               },
               {
                 value: "Other",
-                text: "Other"
+                text: "Other",
+                checked: checked("person-" + i + "-economic-status", "Other")
               }
             ]
           }) }}
@@ -206,7 +220,6 @@ GOV.UK Prototype Kit
   const reset_fields = () => {
     for(var i = 1; i<=7; i++ ) {
       let div = "person-".concat(i.toString());
-      console.log(div)
       document.getElementById(div).style.display = "none";
     }
   }
@@ -215,7 +228,6 @@ GOV.UK Prototype Kit
     reset_fields();
     var val = document.getElementById("number-of-other-members").value > 7 ? 7 : document.getElementById("number-of-other-members").value;
 
-    console.log(val)
     for(var i = 1; i<=val; i++ ) {
       let div = "person-".concat(i.toString());
       document.getElementById(div).style.display = "block";
