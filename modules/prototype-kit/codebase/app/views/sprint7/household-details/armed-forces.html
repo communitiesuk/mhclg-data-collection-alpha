@@ -51,6 +51,9 @@ GOV.UK Prototype Kit
           <div id="armed-forces">
 
             {% macro radio(data, group, items, changefn) %}
+              <label class="govuk-label--s" for="group">
+                Member of the armed forces?
+              </label>
               <div class="govuk-form-group" id="{{ group }}">
                 <div class="govuk-radios">
                   {% for i in range(0, items['items'].length) %}
@@ -91,7 +94,7 @@ GOV.UK Prototype Kit
                 }
               ]
               }, "displayArmed()") }}
-
+              <br />
 
               <div id="armed-forces-tenure-div">
                 {{ govukRadios({
@@ -100,8 +103,7 @@ GOV.UK Prototype Kit
                 fieldset: {
                   legend: {
                     text: "When did they leave the Armed Forces?",
-                    isPageHeading: true,
-                    classes: "govuk-fieldset__legend--l"
+                    classes: "govuk-label--s"
                   }
                 },
                 items: [
@@ -128,6 +130,38 @@ GOV.UK Prototype Kit
                 ]
               }) }}
             </div>
+            <br />
+            <br />
+
+            <div id="armed-forces-injured-div">
+              {{ govukRadios({
+              idPrefix: "armed-forces-injured",
+              name: "armed-forces-injured",
+              fieldset: {
+                legend: {
+                  text: "Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?",
+                  classes: "govuk-label--s"
+                }
+              },
+              items: [
+                {
+                  value: "Yes",
+                  text: "Yes",
+                  checked: checked("armed-forces-injured", "Yes")
+                },
+                {
+                  value: "No",
+                  text: "No",
+                  checked: checked("armed-forces-injured", "No")
+                },
+                {
+                  value: "Refused",
+                  text: "Refused",
+                  checked: checked("armed-forces-injured", "Refused")
+                }
+              ]
+            }) }}
+          </div>
 
           </div>
       </div>
@@ -138,6 +172,9 @@ GOV.UK Prototype Kit
 
       <style>
       #armed-forces-tenure-div {
+        display: none;
+      }
+      #armed-forces-injured-div {
         display: none;
       }
       </style>
@@ -154,8 +191,10 @@ GOV.UK Prototype Kit
     const spouse = document.getElementById("armed-forces-2").checked
     if(regular || reserve || spouse){
       document.getElementById("armed-forces-tenure-div").style.display = "block";
+      document.getElementById("armed-forces-injured-div").style.display = "block";
     } else {
       document.getElementById("armed-forces-tenure-div").style.display = "none";
+      document.getElementById("armed-forces-injured-div").style.display = "none";
     }
   }
   // So that this runs if you've already answered and hit the back button
