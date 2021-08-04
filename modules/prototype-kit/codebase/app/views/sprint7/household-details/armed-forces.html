@@ -185,7 +185,7 @@ GOV.UK Prototype Kit
 </div>
 
 <script>
-  function displayArmed() {
+  function displayArmed(data) {
     const regular = document.getElementById("armed-forces-0").checked
     const reserve = document.getElementById("armed-forces-1").checked
     const spouse = document.getElementById("armed-forces-2").checked
@@ -194,7 +194,15 @@ GOV.UK Prototype Kit
       document.getElementById("armed-forces-injured-div").style.display = "block";
     } else {
       document.getElementById("armed-forces-tenure-div").style.display = "none";
+      document.getElementById("armed-forces-tenure").checked = false;
+      document.getElementById("armed-forces-tenure-2").checked = false;
+      document.getElementById("armed-forces-tenure-3").checked = false;
+      document.getElementById("armed-forces-tenure-4").checked = false;
+
       document.getElementById("armed-forces-injured-div").style.display = "none";
+      document.getElementById("armed-forces-injured").checked = false;
+      document.getElementById("armed-forces-injured-2").checked = false;
+      document.getElementById("armed-forces-injured-3").checked = false;
     }
   }
   // So that this runs if you've already answered and hit the back button
