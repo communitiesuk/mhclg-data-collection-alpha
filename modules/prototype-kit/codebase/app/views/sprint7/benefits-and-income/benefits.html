@@ -6,43 +6,12 @@ GOV.UK Prototype Kit
 
 {% block content %}
 
-<div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="tenant-code">Tenant Code</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="tenant-age">Age</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="gender">Gender</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="economic-status">Work</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="ethnicity">Ethnicity</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="nationality">Nationality</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="other-household-members">Other Household Members</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="other-household-members">Armed Forces</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="other-household-members">Pregnancy</a>
-    </li>
-  </ol>
-</div>
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+    <form class="form" action="benefit-proportion" method="POST" novalidate="" data-validate="my-form-validation">
 
       <h1 class="govuk-heading-xl">Universal Credit & Housing Benefit</h1>
+
 
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
@@ -62,15 +31,12 @@ GOV.UK Prototype Kit
               <option value="UC - without housing element (and in receipt of HB)">UC - without housing element (and in receipt of HB)</option>
             </select>
           </div>
-
         </fieldset>
       </div>
 
       <input type="hidden" name="benefits">
-      <input type="hidden" name="household-inprogress" value="true">
+      <input type="hidden" name="benefits-and-income-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
-
-      </fieldset>
 
     </form>
   </div>

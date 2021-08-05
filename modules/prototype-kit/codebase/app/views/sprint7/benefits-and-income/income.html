@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="benefits">Universal Credit & Housing Benefit</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="benefit-proportion">Benefits as a proportion of income</a>
+    </li>
+  </ol>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <h1 class="govuk-heading-xl">Benefits & Income</h1>
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Tenant’s or tenant and partner’s net income (after tax deductions) For those receiving Universal Credit, please enter net income from employment, pensions and Universal Credit. Please exclude child benefit, housing element of universal
+              credit and council tax support. For those not receiving Universal Credit, please enter net income from employment, pensions and other benefits. Please exclude housing benefit, child benefit and council tax support.
+            </h1>
+          </legend>
+          <div id="income-hint" class="govuk-hint">
+            Rounded to nearest £
+          </div>
+
+          <div class="govuk-form-group">
+            <input class="govuk-input govuk-input--width-20" id="income" name="income" type="number" value={{ data['income'] }}>
+          </div>
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="benefits">
+      <input type="hidden" name="benefits-and-income-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}
