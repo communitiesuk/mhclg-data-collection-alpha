@@ -379,7 +379,7 @@ Check your answers
             {{ data["benefit"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="benefits">
+            <a class="govuk-link" href="benefits-and-income/benefits">
               Change<span class="govuk-visually-hidden">Benefits</span>
             </a>
           </dd>
@@ -395,7 +395,7 @@ Check your answers
             {{ data["benefit-proportion"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="benefit-proportion">
+            <a class="govuk-link" href="benefits-and-income/benefit-proportion">
               Change<span class="govuk-visually-hidden">Benefit Proportion</span>
             </a>
           </dd>
@@ -411,12 +411,28 @@ Check your answers
             {{ data["income"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="income">
+            <a class="govuk-link" href="benefits-and-income/income">
               Change<span class="govuk-visually-hidden">Income</span>
             </a>
           </dd>
         </div>
       </dl>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Income Frequency
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["income-frequency"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="benefits-and-income/income">
+            Change<span class="govuk-visually-hidden">Income Frequency</span>
+          </a>
+        </dd>
+      </div>
     </dl>
 
 

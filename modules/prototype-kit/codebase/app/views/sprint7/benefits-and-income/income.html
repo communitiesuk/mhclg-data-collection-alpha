@@ -12,7 +12,7 @@ GOV.UK Prototype Kit
       <a class="govuk-breadcrumbs__link" href="benefits">Universal Credit & Housing Benefit</a>
     </li>
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="benefit-proportion">Benefits as a proportion of income</a>
+      <a class="govuk-breadcrumbs__link" href="income-frequency">Benefits as a proportion of income</a>
     </li>
   </ol>
 </div>
@@ -37,6 +37,37 @@ GOV.UK Prototype Kit
 
           <div class="govuk-form-group">
             <input class="govuk-input govuk-input--width-20" id="income" name="income" type="number" value={{ data['income'] }}>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            <h1 class="govuk-fieldset__heading">
+              Is the income...?
+            </h1>
+          </legend>
+
+          <div class="govuk-radios govuk-radios--small">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="income-frequency" name="income-frequency" type="radio" value="Weekly" {{ 'checked' if data['income-frequency'] == "Weekly" }}>
+              <label class="govuk-label govuk-radios__label" for="income-frequency">
+                Weekly
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="income-frequency" name="income-frequency" type="radio" value="Monthly" {{ 'checked' if data['income-frequency'] == "Monthly" }}>
+              <label class="govuk-label govuk-radios__label" for="income-frequency-2">
+                Monthly
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="income-frequency" name="income-frequency" type="radio" value="Annual" {{ 'checked' if data['income-frequency'] == "Annual" }}>
+              <label class="govuk-label govuk-radios__label" for="income-frequency-3">
+                Annual
+              </label>
+            </div>
           </div>
         </fieldset>
       </div>
