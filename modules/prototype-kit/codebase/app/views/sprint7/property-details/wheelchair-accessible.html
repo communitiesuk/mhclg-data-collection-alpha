@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="number-of-bedrooms">Number of bedrooms</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="type-of-unit">Type of unit</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="type-of-building">Type of building</a>
+    </li>
+  </ol>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="relet" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <h1 class="govuk-heading-xl">Property Details</h1>
+
+      {{ govukRadios({
+      idPrefix: "wheelchair-accesible",
+      name: "wheelchair-accesible",
+      fieldset: {
+        legend: {
+          text: "Is property built or adapted to wheelchair user standards?",
+          classes: "govuk-label--m"
+        }
+      },
+      items: [
+        {
+          value: "Yes",
+          text: "Yes",
+          checked: checked("wheelchair-accesible", "Yes")
+        },
+        {
+          value: "No",
+          text: "No",
+          checked: checked("wheelchair-accesible", "No")
+        }
+      ]
+    }) }}
+
+      <input type="hidden" name="is-wheelchair-accessible">
+      <input type="hidden" name="property-details-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

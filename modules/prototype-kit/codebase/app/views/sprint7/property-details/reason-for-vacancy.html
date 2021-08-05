@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="number-of-bedrooms">Number of bedrooms</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="type-of-unit">Type of unit</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="type-of-building">Type of building</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="wheelchair-accessible">Wheelchair accessible</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="relet">Most recent let basis</a>
+    </li>
+  </ol>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="property-location" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <h1 class="govuk-heading-xl">Property Details</h1>
+
+      {{ govukSelect({
+      idPrefix: "reason-for-vacancy",
+      name: "reason-for-vacancy",
+      fieldset: {
+        legend: {
+          text: "Reason for vacancy",
+          classes: "govuk-label--s"
+        }
+      },
+      items: [
+        {
+          value: "First let of newbuild property",
+          text: "First let of newbuild property",
+          checked: checked("reason-for-vacancy", "First let of newbuild property")
+        },
+        {
+          value: "First let of conversion/rehabilitation/acquired property",
+          text: "First let of conversion/rehabilitation/acquired property",
+          checked: checked("reason-for-vacancy", "First let of conversion/rehabilitation/acquired property")
+        },
+        {
+          value: "First let of leased property",
+          text: "First let of leased property",
+          checked: checked("reason-for-vacancy", "First let of leased property")
+        },
+        {
+          value: "Relet - tenant evicted due to arrears",
+          text: "Relet - tenant evicted due to arrears",
+          checked: checked("reason-for-vacancy", "Relet - tenant evicted due to arrears")
+        },
+        {
+          value: "Relet - tenant evicted due to ASB or other reason",
+          text: "Relet - tenant evicted due to ASB or other reason",
+          checked: checked("reason-for-vacancy", "Relet - tenant evicted due to ASB or other reason")
+        },
+        {
+          value: "Relet - tenant died (no succession)",
+          text: "Relet - tenant died (no succession)",
+          checked: checked("reason-for-vacancy", "Relet - tenant died (no succession)")
+        },
+        {
+          value: "Relet - tenant moved to other social housing provider",
+          text: "Relet - tenant moved to other social housing provider",
+          checked: checked("reason-for-vacancy", "Relet - tenant moved to other social housing provider")
+        },
+        {
+          value: "Relet - tenant abandoned property",
+          text: "Relet - tenant abandoned property",
+          checked: checked("reason-for-vacancy", "Relet - tenant abandoned property")
+        },
+        {
+          value: "Relet - tenant moved to private sector or other accommodation",
+          text: "Relet - tenant moved to private sector or other accommodation",
+          checked: checked("reason-for-vacancy", "Relet - tenant moved to private sector or other accommodation")
+        },
+        {
+          value: "Relet - to tenant who occupied same property as temporary accommodation",
+          text: "Relet - to tenant who occupied same property as temporary accommodation",
+          checked: checked("reason-for-vacancy", "Relet - to tenant who occupied same property as temporary accommodation")
+        },
+        {
+          value: "Relet – internal transfer (excluding renewals of a fixed-term tenancy)",
+          text: "Relet – internal transfer (excluding renewals of a fixed-term tenancy)",
+          checked: checked("reason-for-vacancy", "Relet – internal transfer (excluding renewals of a fixed-term tenancy)")
+        },
+        {
+          value: "Relet – renewal of fixed-term tenancy",
+          text: "Relet – renewal of fixed-term tenancy",
+          checked: checked("reason-for-vacancy", "Relet – renewal of fixed-term tenancy")
+        },
+        {
+          value: "Relet – tenant moved to care home",
+          text: "Relet – tenant moved to care home",
+          checked: checked("reason-for-vacancy", "Relet – tenant moved to care home")
+        },
+        {
+          value: "Relet – tenant involved in a succession downsize<",
+          text: "Relet – tenant involved in a succession downsize<",
+          checked: checked("reason-for-vacancy", "Relet – tenant involved in a succession downsize<")
+        }
+      ]
+    }) }}
+
+      <input type="hidden" name="reason-for-vacancy-page">
+      <input type="hidden" name="property-details-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}
