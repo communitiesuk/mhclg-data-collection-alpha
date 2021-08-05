@@ -210,7 +210,7 @@ Check your answers
           Disability Requirements
         </dt>
         <dd class="govuk-summary-list__value">
-          {% set value = data["disabilities"] | join(", ") %}
+          {% set value = data["disabilities"] |d([]) | join(", ") %}
             {{ value | trim_end(", ") }}
         </dd>
         <dd class="govuk-summary-list__actions">
@@ -228,6 +228,23 @@ Check your answers
         </dt>
         <dd class="govuk-summary-list__value">
           {{ data["long-term-conditions"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="disabilities">
+            Change<span class="govuk-visually-hidden">disabilities</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Conditions or illnesses
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% set value = data["conditions"] |d([]) | join(", ") %}
+            {{ value | trim_end(", ") }}
         </dd>
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link" href="disabilities">
