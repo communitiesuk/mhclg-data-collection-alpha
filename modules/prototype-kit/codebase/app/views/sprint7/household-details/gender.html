@@ -32,25 +32,25 @@ GOV.UK Prototype Kit
           </legend>
           <div class="govuk-radios govuk-radios--small">
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Male">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Male" {{ 'checked' if data['gender'][0] == "Male" }}>
               <label class="govuk-label govuk-radios__label" for="gender">
                 Male
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Female">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Female" {{ 'checked' if data['gender'][0] == "Female" }}>
               <label class="govuk-label govuk-radios__label" for="gender-2">
                 Female
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Other">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Other" {{ 'checked' if data['gender'][0] == "Other" }}>
               <label class="govuk-label govuk-radios__label" for="gender-3">
                 Other
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Prefer not to say">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Prefer not to say" {{ 'checked' if data['gender'][0] == "Prefer not to say" }}>
               <label class="govuk-label govuk-radios__label" for="gender-4">
                 Prefer not to say
               </label>
