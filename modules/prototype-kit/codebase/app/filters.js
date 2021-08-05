@@ -52,7 +52,7 @@ module.exports = function (env) {
 
   filters.trim_end = function(str, char) {
     const re = new RegExp(`${char}$`)
-    return str.replace(/,$/, '')
+    return str.replace(re, '')
   }
 
   return filters

@@ -40,7 +40,7 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+    <form class="form" action="disabilities" method="POST" novalidate="" data-validate="my-form-validation">
 
       <div class="govuk-form-group">
 
@@ -125,31 +125,31 @@ GOV.UK Prototype Kit
           </legend>
           <div class="govuk-radios govuk-radios--small">
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes: Removal of the spare room subsidy" {{ 'checked' if data['reason-removal'][0] == "Yes: Removal of the spare room subsidy" }}>
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes: Removal of the spare room subsidy" {{ 'checked' if data['reason-removal'] == "Yes: Removal of the spare room subsidy" }}>
               <label class="govuk-label govuk-radios__label" for="reason-removal">
                 Yes: Removal of the spare room subsidy
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes: Benefit cap" {{ 'checked' if data['reason-removal'][0] == "Yes: Benefit cap" }}>
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes: Benefit cap" {{ 'checked' if data['reason-removal'] == "Yes: Benefit cap" }}>
               <label class="govuk-label govuk-radios__label" for="reason-removal-2">
                 Yes: Benefit cap
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes: Both" {{ 'checked' if data['reason-removal'][0] == "Yes: Both" }}>
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes: Both" {{ 'checked' if data['reason-removal'] == "Yes: Both" }}>
               <label class="govuk-label govuk-radios__label" for="reason-removal-3">
                 Yes: Both
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="No" {{ 'checked' if data['reason-removal'][0] == "No" }}>
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="No" {{ 'checked' if data['reason-removal'] == "No" }}>
               <label class="govuk-label govuk-radios__label" for="reason-removal-4">
                 No
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Don't Know" {{ 'checked' if data['reason-removal'][0] == "Don't Know" }}>
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Don't Know" {{ 'checked' if data['reason-removal'] == "Don't Know" }}>
               <label class="govuk-label govuk-radios__label" for="reason-removal-4">
                 Don't Know
               </label>
