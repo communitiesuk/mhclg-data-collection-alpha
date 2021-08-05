@@ -147,8 +147,24 @@ GOV.UK Prototype Kit
                 {% endif %}
               </li>
 
-
-
+              <li class="app-task-list__item"">
+              {% if  data['rent-and-other-charges-completed'] == 'true' %}
+              <a class=" task-name" href="rent-and-other-charges/check-answers" aria-describedby="read-declaration-completed">
+                Rent & Other Charges
+                </a>
+                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                {% elif  data['rent-and-other-charges-inprogress'] == 'true' %}
+                <a class="task-name" href="rent-and-other-charges/check-answers" aria-describedby="read-declaration-completed">
+                  Rent & Other Charges
+                </a>
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                {% else %}
+                <a class="task-name" href="rent-and-other-charges/rent" aria-describedby="read-declaration-completed">
+                  Rent & Other Charges
+                </a>
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                {% endif %}
+              </li>
 
 
 
@@ -178,9 +194,9 @@ GOV.UK Prototype Kit
                 <span class="app-task-list__task-name">
                   Check answers and submit </span>
                 {% if (data['org-completed'] == 'true') and (data['select-completed'] == 'true') and (data['provider-completed'] == 'true') and (data['tenancy-completed'] == 'true') and (data['household-completed'] == 'true') %}
-                  <a href="check-and-submit" class="govuk-button app-task-list__tag" data-module="govuk-button">Start</a>
+                <a href="check-and-submit" class="govuk-button app-task-list__tag" data-module="govuk-button">Start</a>
                 {% else %}
-                  <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="submit-pay-status">Cannot start yet</strong>
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="submit-pay-status">Cannot start yet</strong>
                 {% endif %}
               </li>
             </ul>

@@ -1,0 +1,184 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <h1 class="govuk-heading-xl">Rent</h1>
+
+
+      {{ govukRadios({
+      idPrefix: "rent-period",
+      name: "rent-period",
+      fieldset: {
+        legend: {
+          text: "Over what period are rent and other charges due",
+          classes: "govuk-label--s"
+        }
+      },
+      items: [
+        {
+          value: "Weekly for 52 weeks",
+          text: "Weekly for 52 weeks",
+          checked: checked("rent-period", "Weekly for 52 weeks")
+        },
+        {
+          value: "Fortnightly",
+          text: "Fortnightly",
+          checked: checked("rent-period", "Fortnightly")
+        },
+        {
+          value: "Four-weekly",
+          text: "Four-weekly",
+          checked: checked("rent-period", "Four-weekly")
+        },
+        {
+          value: "Calendar Monthly",
+          text: "Calendar Monthly",
+          checked: checked("rent-period", "Calendar Monthly")
+        },
+        {
+          value: "Weekly for 50 weeks",
+          text: "Weekly for 50 weeks",
+          checked: checked("rent-period", "Weekly for 50 weeks")
+        },
+        {
+          value: "Weekly for 49 weeks",
+          text: "Weekly for 49 weeks",
+          checked: checked("rent-period", "Weekly for 49 weeks")
+        },
+        {
+          value: "Weekly for 48 weeks",
+          text: "Weekly for 48 weeks",
+          checked: checked("rent-period", "Weekly for 48 weeks")
+        },
+        {
+          value: "Weekly for 47 weeks",
+          text: "Weekly for 47 weeks",
+          checked: checked("rent-period", "Weekly for 47 weeks")
+        },
+        {
+          value: "Weekly for 46 weeks",
+          text: "Weekly for 46 weeks",
+          checked: checked("rent-period", "Weekly for 46 weeks")
+        },
+        {
+          value: "Weekly for 53 weeks",
+          text: "Weekly for 53 weeks",
+          checked: checked("rent-period", "Weekly for 53 weeks")
+        }
+      ]
+    }) }}
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-label--s">
+            Basic rent (eligible for HB or UC)
+          </h1>
+        </legend>
+        <div id="income-hint" class="govuk-hint">
+          For the period chosen above
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="rent" name="rent" type="number" onchange="calcTotal()" value={{ data['rent'] }}>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-label--s">
+            Service charge (eligible for HB or UC)
+          </h1>
+        </legend>
+        <div id="income-hint" class="govuk-hint">
+          For the period chosen above
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="service-charge" name="service-charge" type="number" onchange="calcTotal()" value={{ data['service-charge'] }}>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-label--s">
+            Personal service charge (not eligible for HB or UC e.g. heating, hot water excluding water rates)
+          </h1>
+        </legend>
+        <div id="income-hint" class="govuk-hint">
+          For the period chosen above
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="personal-service-charge" name="personal-service-charge" type="number" onchange="calcTotal()" value={{ data['personal-service-charge'] }}>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-label--s">
+            Support charge (charges made to fund housing related support services included in the tenancy agreement)
+          </h1>
+        </legend>
+        <div id="income-hint" class="govuk-hint">
+          For the period chosen above
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="support-charge" name="support-charge" type="number" onchange="calcTotal()" value={{ data['support-charge'] }}>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-label--s">
+              Total Charge (Basic Rent + Service Charge + Personal Service Charge + Support Charge)
+          </h1>
+        </legend>
+        <div id="income-hint" class="govuk-hint">
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="total-charge" name="total-charge" type="number" value={{ data['rent'] + data['service-charge'] + data['personal-service-charge'] + data['support-charge'] }} readonly>
+        </div>
+      </fieldset>
+    </div>
+
+      <input type="hidden" name="rent">
+      <input type="hidden" name="rent-and-other-charges-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+<script>
+  function calcTotal() {
+    const rent = Number(document.getElementById("rent").value);
+    const serviceCharge = Number(document.getElementById("service-charge").value);
+    const personalServiceCharge = Number(document.getElementById("personal-service-charge").value);
+    const supportCharge = Number(document.getElementById("support-charge").value);
+    const total = rent + serviceCharge + personalServiceCharge + supportCharge
+    const totalField = document.getElementById("total-charge")
+    console.log(total)
+    totalField.value = total
+  }
+</script>
+
+{% endblock %}
