@@ -51,7 +51,7 @@ GOV.UK Prototype Kit
           <div id="armed-forces">
 
             {% macro radio(data, group, items, changefn) %}
-              <label class="govuk-label--s" for="group">
+              <label class="govuk-fieldset__legend govuk-label--s" for="group">
                 Member of the armed forces?
               </label>
               <div class="govuk-form-group" id="{{ group }}">
@@ -166,7 +166,7 @@ GOV.UK Prototype Kit
           </div>
       </div>
 
-      <input type="hidden" name="armed-forces">
+      <input type="hidden" name="armed-forces-page">
       <input type="hidden" name="household-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 
