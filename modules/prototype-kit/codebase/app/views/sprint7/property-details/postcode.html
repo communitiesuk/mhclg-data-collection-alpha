@@ -52,7 +52,8 @@ GOV.UK Prototype Kit
           </div>
 
           <div class="govuk-form-group">
-            <input class="govuk-input govuk-input--width-20" id="postcode" name="postcode" type="text" value={{ data["postcode"] }}>
+            {% set value = data["postcode"] %}
+            <input class="govuk-input govuk-input--width-20" id="postcode" name="postcode" type="text" value={{ value | trim_end(",") }}>
           </div>
         </fieldset>
       </div>

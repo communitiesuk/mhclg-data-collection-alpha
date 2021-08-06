@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="tenant-code">Tenant Code</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="tenant-age">Age</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="reason-removal">reason-removal</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="economic-status">Work</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="ethnicity">Ethnicity</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="nationality">Nationality</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="other-household-members">Other Household Members</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="armed-forces">Armed Forces</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="pregnancy">Pregnancy</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="reason-for-leaving">Reason for leaving past settled accomodation</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="disabilities">Disability requirements</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="previous-housing-situation">Previous housing situation</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="previous-la">Previous LA</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="previous-postcode">Previous postcode</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="time-lived-in-la">Time lived continuously in LA</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="time-on-waiting-list">Time on waiting list</a>
+    </li>
+  </ol>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <h1 class="govuk-heading-xl">Household Details</h1>
+
+      {% set options = [
+        "Not homeless","Assessed as homeless (or threatened with homelessness within 56 days) by a local authority and owed a homelessness duty",
+        "Other homelessness i.e. not found statutorily homeless by a housing authority but considered to be homeless by the letting"
+        ] %}
+
+      {% set optionsItems = [] %}
+
+      {% for option in options %}
+        {% set optionsItems = (optionsItems.push({value: option, text: option, checked: checked("homeless", option)}), optionsItems) %}
+      {% endfor %}
+
+      <legend class="govuk-fieldset__legend--l">
+        <h1 class="govuk-label--m">
+          Immediately prior to this letting, was this household …?
+        </h1>
+      </legend>
+
+      {{ govukSelect({
+      idPrefix: "homeless",
+      name: "homeless",
+      items: optionsItems
+    }) }}
+
+      <input type="hidden" name="homeless-page">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

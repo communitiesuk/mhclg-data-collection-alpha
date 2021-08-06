@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="tenant-code">Tenant Code</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="tenant-age">Age</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="reason-removal">reason-removal</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="economic-status">Work</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="ethnicity">Ethnicity</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="nationality">Nationality</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="other-household-members">Other Household Members</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="armed-forces">Armed Forces</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="pregnancy">Pregnancy</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="reason-for-leaving">Reason for leaving past settled accomodation</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="disabilities">Disability requirements</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="previous-housing-situation">Previous housing situation</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="previous-la">Previous LA</a>
+    </li>
+  </ol>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="time-lived-in-la" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <h1 class="govuk-heading-xl">Household Details</h1>
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="previous-postcode-hint">
+          <legend class="govuk-fieldset__legend--l">
+            <h1 class="govuk-label--m">
+              If the household has moved from settled accommodation (Immediately prior to being re-housed), enter the full postcode for the previous accommodation
+            </h1>
+          </legend>
+          <div id="previous-postcode-hint" class="govuk-hint">
+          </div>
+
+          <div class="govuk-form-group">
+            {% set value = data["previous-postcode"] %}
+            <input class="govuk-input govuk-input--width-20" id="previous-postcode" name="previous-postcode" type="text" value={{ value | trim_end(",") }}>
+          </div>
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="previous-postcode-page">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}
