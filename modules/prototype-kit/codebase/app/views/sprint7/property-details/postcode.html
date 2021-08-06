@@ -52,8 +52,9 @@ GOV.UK Prototype Kit
           </div>
 
           <div class="govuk-form-group">
-            {% set value = data["postcode"] if data["postcode"] else "" %}
-            <input class="govuk-input govuk-input--width-20" id="postcode" name="postcode" type="text" value={{ value | trim_end(",") }}>
+            {% set value = (data["postcode"] if data["postcode"] else "") | trim_end(",") %}
+            {{ value }}
+            <input class="govuk-input govuk-input--width-20" id="postcode" name="postcode" type="text" value="{{ value | escape }}">
           </div>
         </fieldset>
       </div>
