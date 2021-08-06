@@ -24,15 +24,13 @@ GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
     <form class="form" action="wheelchair-accessible" method="POST" novalidate="" data-validate="my-form-validation">
 
-      <h1 class="govuk-heading-xl">Property Details</h1>
-
       {{ govukRadios({
       idPrefix: "type-of-building",
       name: "type-of-building",
       fieldset: {
         legend: {
           text: "Type of building",
-          classes: "govuk-label--m"
+          classes: "govuk-label--l"
         }
       },
       items: [

@@ -33,17 +33,19 @@ GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
     <form class="form" action="property-location" method="POST" novalidate="" data-validate="my-form-validation">
 
-      <h1 class="govuk-heading-xl">Property Details</h1>
+      <fieldset class="govuk-fieldset" aria-describedby="reason-for-vacancy-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Reason for vacancy
+          </h1>
+        </legend>
+        <div id="reason-for-vacancy-hint" class="govuk-hint">
+
+        </div>
 
       {{ govukSelect({
       idPrefix: "reason-for-vacancy",
       name: "reason-for-vacancy",
-      fieldset: {
-        legend: {
-          text: "Reason for vacancy",
-          classes: "govuk-label--s"
-        }
-      },
       items: [
         {
           value: "First let of newbuild property",

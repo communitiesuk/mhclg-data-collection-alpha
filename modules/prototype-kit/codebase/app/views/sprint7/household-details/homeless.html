@@ -63,8 +63,6 @@ GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
     <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
 
-      <h1 class="govuk-heading-xl">Household Details</h1>
-
       {% set options = [
         "Not homeless","Assessed as homeless (or threatened with homelessness within 56 days) by a local authority and owed a homelessness duty",
         "Other homelessness i.e. not found statutorily homeless by a housing authority but considered to be homeless by the letting"
@@ -77,7 +75,7 @@ GOV.UK Prototype Kit
       {% endfor %}
 
       <legend class="govuk-fieldset__legend--l">
-        <h1 class="govuk-label--m">
+        <h1 class="govuk-fieldset__heading">
           Immediately prior to this letting, was this household …?
         </h1>
       </legend>

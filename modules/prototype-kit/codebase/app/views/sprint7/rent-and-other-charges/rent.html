@@ -10,16 +10,13 @@ GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
     <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
 
-      <h1 class="govuk-heading-xl">Rent</h1>
-
-
       {{ govukRadios({
       idPrefix: "rent-period",
       name: "rent-period",
       fieldset: {
         legend: {
           text: "Over what period are rent and other charges due",
-          classes: "govuk-label--s"
+          classes: "govuk-label--l"
         }
       },
       items: [
@@ -79,7 +76,7 @@ GOV.UK Prototype Kit
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="income-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <h1 class="govuk-label--s">
+          <h1 class="govuk-fieldset__heading">
             Basic rent (eligible for HB or UC)
           </h1>
         </legend>
@@ -96,7 +93,7 @@ GOV.UK Prototype Kit
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="income-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <h1 class="govuk-label--s">
+          <h1 class="govuk-fieldset__heading">
             Service charge (eligible for HB or UC)
           </h1>
         </legend>
@@ -113,7 +110,7 @@ GOV.UK Prototype Kit
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="income-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <h1 class="govuk-label--s">
+          <h1 class="govuk-fieldset__heading">
             Personal service charge (not eligible for HB or UC e.g. heating, hot water excluding water rates)
           </h1>
         </legend>
@@ -130,7 +127,7 @@ GOV.UK Prototype Kit
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="income-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <h1 class="govuk-label--s">
+          <h1 class="govuk-fieldset__heading">
             Support charge (charges made to fund housing related support services included in the tenancy agreement)
           </h1>
         </legend>
@@ -147,7 +144,7 @@ GOV.UK Prototype Kit
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="income-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <h1 class="govuk-label--s">
+          <h1 class="govuk-fieldset__heading">
               Total Charge (Basic Rent + Service Charge + Personal Service Charge + Support Charge)
           </h1>
         </legend>
@@ -161,9 +158,11 @@ GOV.UK Prototype Kit
     </div>
 
     {% macro radio(data, group, items, changefn) %}
-      <label class="govuk-label--s govuk-fieldset__legend" for="group">
-        After housing benefit and/or housing element of UC payment is received, will there be an outstanding amount for basic rent and/or benefit eligible charges?
-      </label>
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+            After housing benefit and/or housing element of UC payment is received, will there be an outstanding amount for basic rent and/or benefit eligible charges?
+        </h1>
+      </legend>
       <div class="govuk-form-group" id="{{ group }}">
         <div class="govuk-radios">
           {% for i in range(0, items['items'].length) %}
@@ -197,7 +196,7 @@ GOV.UK Prototype Kit
 
     <div id="outstanding-amount-div" class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="outstanding-amount-hint">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 class="govuk-fieldset__heading">
             What do you expect the amount to be?
           </h1>

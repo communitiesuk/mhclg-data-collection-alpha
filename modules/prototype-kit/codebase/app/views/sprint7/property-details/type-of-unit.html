@@ -21,15 +21,13 @@ GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
     <form class="form" action="type-of-building" method="POST" novalidate="" data-validate="my-form-validation">
 
-      <h1 class="govuk-heading-xl">Property Details</h1>
-
       {{ govukRadios({
       idPrefix: "type-of-unit",
       name: "type-of-unit",
       fieldset: {
         legend: {
           text: "Type of unit",
-          classes: "govuk-label--m"
+          classes: "govuk-label--l"
         }
       },
       items: [

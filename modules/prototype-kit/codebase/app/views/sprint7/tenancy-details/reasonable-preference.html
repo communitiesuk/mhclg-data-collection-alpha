@@ -29,17 +29,14 @@ GOV.UK Prototype Kit
 
       <div class="govuk-form-group">
 
-        <fieldset class="govuk-fieldset">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h1 class="govuk-fieldset__heading">
-              Tenancy Details
-            </h1>
-          </legend>
-
           {% macro radio(data, group, items, changefn) %}
-            <label class="govuk-label--m" for="group">
-              Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?
-            </label>
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?
+              </h1>
+            </legend>
+
             <div class="govuk-form-group" id="{{ group }}">
               <div class="govuk-radios">
                 {% for i in range(0, items['items'].length) %}
@@ -54,6 +51,7 @@ GOV.UK Prototype Kit
                   {% endfor %}
               </div>
             </div>
+            </<fieldset>
           {% endmacro %}
 
           {{ radio(data, "reasonable-preference", {
@@ -74,7 +72,7 @@ GOV.UK Prototype Kit
 
       <div id="reasonable-preference-reason-div" class="govuk-form-group">
         <fieldset class="govuk-fieldset" aria-describedby="reasonable-preference-reason-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
                Which of the following reasons for Reasonable Preference apply?
             </h1>

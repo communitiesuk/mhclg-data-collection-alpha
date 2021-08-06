@@ -51,9 +51,6 @@ GOV.UK Prototype Kit
           <div id="armed-forces">
 
             {% macro radio(data, group, items, changefn) %}
-              <label class="govuk-fieldset__legend govuk-label--s" for="group">
-                Member of the armed forces?
-              </label>
               <div class="govuk-form-group" id="{{ group }}">
                 <div class="govuk-radios">
                   {% for i in range(0, items['items'].length) %}
@@ -103,7 +100,7 @@ GOV.UK Prototype Kit
                 fieldset: {
                   legend: {
                     text: "When did they leave the Armed Forces?",
-                    classes: "govuk-label--s"
+                    classes: "govuk-label--l"
                   }
                 },
                 items: [
@@ -140,7 +137,7 @@ GOV.UK Prototype Kit
               fieldset: {
                 legend: {
                   text: "Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?",
-                  classes: "govuk-label--s"
+                  classes: "govuk-label--l"
                 }
               },
               items: [

@@ -27,15 +27,13 @@ GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
     <form class="form" action="relet" method="POST" novalidate="" data-validate="my-form-validation">
 
-      <h1 class="govuk-heading-xl">Property Details</h1>
-
       {{ govukRadios({
       idPrefix: "wheelchair-accesible",
       name: "wheelchair-accesible",
       fieldset: {
         legend: {
           text: "Is property built or adapted to wheelchair user standards?",
-          classes: "govuk-label--m"
+          classes: "govuk-label--l"
         }
       },
       items: [

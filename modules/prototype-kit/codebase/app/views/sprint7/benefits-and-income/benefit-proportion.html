@@ -18,16 +18,18 @@ GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
     <form class="form" action="income" method="POST" novalidate="" data-validate="my-form-validation">
 
-      <h1 class="govuk-heading-xl">Benefits as a proportion of income</h1>
-
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
 
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              How much of your income comes from UC, state pensions or benefits (excluding child & housing benefit, UC housing element, council tax support or tax credits)?
+              How much of your income comes from UC, state pensions or benefits?
             </h1>
           </legend>
+
+          <div id="benefit-proportion--hint" class="govuk-hint">
+            Exclude child & housing benefit, UC housing element, council tax support or tax credits
+          </div>
 
           <div class="govuk-radios govuk-radios--small">
             <div class="govuk-radios__item">
