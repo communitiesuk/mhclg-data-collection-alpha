@@ -210,7 +210,7 @@ Check your answers
             Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["reasonable-preference"][0] }}
+            {{ data["reasonable-preference"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="tenancy-details/reasonable-preference">
@@ -219,6 +219,26 @@ Check your answers
           </dd>
         </div>
       </dl>
+
+      {% if  data['reasonable-preference-reason'] %}
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Reason for reasonable preference
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% set value = data["reasonable-preference-reason"] |d([]) | join(", ") %}
+              {{ value | trim_end(", ") }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="tenancy-details/reasonable-preference">
+              Change<span class="govuk-visually-hidden">reason for reasonable preference</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+      {% endif %}
+
     </dl>
     </dl>
 
@@ -344,7 +364,7 @@ Check your answers
             Armed Forces
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["armed-forces"][0] }}
+            {{ data["armed-forces"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="household-details/armed-forces">

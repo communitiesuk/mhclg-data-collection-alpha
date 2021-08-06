@@ -60,7 +60,7 @@ GOV.UK Prototype Kit
                   {% set item = items['items'][i] %}
                   <div class="govuk-radios__item">
                     <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
-                      onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group][0] == item['value'] }} />
+                      onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
                     <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
                       {{ item['text'] }}
                     </label>
