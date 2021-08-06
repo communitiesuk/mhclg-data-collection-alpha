@@ -160,6 +160,64 @@ GOV.UK Prototype Kit
       </fieldset>
     </div>
 
+    {% macro radio(data, group, items, changefn) %}
+      <label class="govuk-label--s govuk-fieldset__legend" for="group">
+        After housing benefit and/or housing element of UC payment is received, will there be an outstanding amount for basic rent and/or benefit eligible charges?
+      </label>
+      <div class="govuk-form-group" id="{{ group }}">
+        <div class="govuk-radios">
+          {% for i in range(0, items['items'].length) %}
+          {% set item = items['items'][i] %}
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
+              onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
+            <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
+              {{ item['text'] }}
+            </label>
+          </div>
+            {% endfor %}
+        </div>
+      </div>
+    {% endmacro %}
+
+    {{ radio(data, "outstanding", {
+      items: [
+      {
+        value: "Yes",
+        text: "Yes",
+        checked: checked("outstanding", "Yes")
+      },
+      {
+        value: "No",
+        text: "No",
+        checked: checked("outstanding", "No")
+      }
+      ]
+      }, "displayConditional()") }}
+
+    <div id="outstanding-amount-div" class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="outstanding-amount-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          <h1 class="govuk-fieldset__heading">
+            What do you expect the amount to be?
+          </h1>
+        </legend>
+        <div id="outstanding-amount-hint" class="govuk-hint">
+          For the period chosen above
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="outstanding-amount" name="outstanding-amount" type="number" value={{ data['outstanding-amount'] }}>
+        </div>
+      </fieldset>
+    </div>
+
+    <style>
+    #outstanding-amount-div {
+      display: none;
+    }
+    </style>
+
       <input type="hidden" name="rent">
       <input type="hidden" name="rent-and-other-charges-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
@@ -179,6 +237,23 @@ GOV.UK Prototype Kit
     console.log(total)
     totalField.value = total
   }
+
+  function displayConditional() {
+    const outstanding = document.getElementById("outstanding-0").checked
+    if(outstanding){
+      document.getElementById("outstanding-amount-div").style.display = "block";
+    } else {
+      document.getElementById("outstanding-amount-div").style.display = "none";
+      document.getElementById("outstanding-amount").checked = false;
+      document.getElementById("outstanding-amount-2").checked = false;
+      document.getElementById("outstanding-amount-3").checked = false;
+      document.getElementById("outstanding-amount-4").checked = false;
+      document.getElementById("outstanding-amount-5").checked = false;
+      document.getElementById("outstanding-amount-6").checked = false;
+    }
+  }
+  // So that this runs if you've already answered and hit the back button
+  displayConditional()
 </script>
 
 {% endblock %}
