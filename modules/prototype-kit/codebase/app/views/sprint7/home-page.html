@@ -5,6 +5,59 @@ GOV.UK Prototype Kit
 {% endblock %}
 
 {% block content %}
+
+{% set numberOfCompletedSections = 0 %}
+{% if data['org-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['select-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['provider-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['tenancy-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['household-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['benefits-and-income--completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['rent-and-other-charges-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['property-details-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+
+{% set numberOfInProgressSections = 0 %}
+{% if data['org-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['select-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['provider-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['tenancy-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['household-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['benefits-and-income--inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['rent-and-other-charges-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['property-details-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-quarter">
     <ul class="govuk-list">
@@ -17,6 +70,7 @@ GOV.UK Prototype Kit
     <div class="govuk-form-group">
       <input class="govuk-input" id="event-name" name="event-name" placeholder="Search for logs" type="text">
     </div>
+    {% if ((numberOfCompletedSections > 0) and (numberOfCompletedSections < 8)) or ((numberOfInProgressSections > 0) and (numberOfCompletedSections < 8)) %}
     <table class="govuk-table">
       <caption class="govuk-table__caption govuk-table__caption--m">Submissions in progress</caption>
       <thead class="govuk-table__head">
@@ -28,32 +82,16 @@ GOV.UK Prototype Kit
       </thead>
       <tbody class="govuk-table__body">
         <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header">#742151
+          <th scope="row" class="govuk-table__header">#342351
           </th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">3 of 7 sections
-          </td>
-          <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">View</a>
-          </td>
-        </tr>
-        <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header">#322151
-          </th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">2 of 7 sections
-          </td>
-          <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">View</a>
-          </td>
-        </tr>
-        <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header">#532251
-          </th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">4 of 7 sections
+          <td class="govuk-table__cell govuk-table__cell--numeric">{{ numberOfCompletedSections }} of 8 sections
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">View</a>
           </td>
         </tr>
       </tbody>
     </table>
-    <p><a href="#" class="govuk-link">View all 39 logs</a></p>
+    {% endif %}
     <br>
     <table class="govuk-table">
       <caption class="govuk-table__caption govuk-table__caption--m">Submitted</caption>

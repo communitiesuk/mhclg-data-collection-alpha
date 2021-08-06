@@ -6,6 +6,32 @@ GOV.UK Prototype Kit
 
 {% block content %}
 
+{% set numberOfCompletedSections = 0 %}
+{% if data['org-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['select-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['provider-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['tenancy-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['household-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['benefits-and-income--completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['rent-and-other-charges-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['property-details-completed'] == 'true' %}
+  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+
 <div class="govuk-width-container ">
   <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
     <div class="govuk-grid-row">
@@ -13,7 +39,7 @@ GOV.UK Prototype Kit
         <h1 class="govuk-heading-xl">
           Case #342351 </h1>
         <h2 class="govuk-heading-s govuk-!-margin-bottom-2">Submission in progress</h2>
-        <p class="govuk-body govuk-!-margin-bottom-7">You've completed 2 of 7 sections.</p>
+        <p class="govuk-body govuk-!-margin-bottom-7">You've completed {{ numberOfCompletedSections }} of 8 sections.</p>
         <ol class="app-task-list">
           <li>
             <h2 class="app-task-list__section">
