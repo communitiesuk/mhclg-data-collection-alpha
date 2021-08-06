@@ -32,32 +32,44 @@ GOV.UK Prototype Kit
     <li class="govuk-breadcrumbs__list-item">
       <a class="govuk-breadcrumbs__link" href="reason-for-vacancy">Property Location</a>
     </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="postcode">Postcode</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="void-date">Void date</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="repair-date">Repair date</a>
+    </li>
   </ol>
 </div>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="void-date" method="POST" novalidate="" data-validate="my-form-validation">
+    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
 
       <h1 class="govuk-heading-xl">Property Details</h1>
 
       <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="postcode-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h1 class="govuk-label--m">
-              Postcode
-            </h1>
-          </legend>
-          <div id="postcode-hint" class="govuk-hint">
-          </div>
 
-          <div class="govuk-form-group">
-            <input class="govuk-input govuk-input--width-20" id="postcode" name="postcode" type="text" value={{ data["postcode"] }}>
-          </div>
-        </fieldset>
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h1 class="govuk-fieldset__heading">
+            How many times has this unit been previously offered since becoming available for relet since the last tenancy ended or as a first let? For an Affordable Rent or Intermediate Rent Letting, only include number of offers as that type.
+          </h1>
+        </legend>
+
+      <div id="previously-offered-hint" class="govuk-hint">
+        for a property let at the first attempt enter ‘0’
       </div>
 
-      <input type="hidden" name="postcode-page">
+      <div class="govuk-form-group">
+        <input class="govuk-input govuk-input--width-20" id="previously-offered" name="previously-offered" type="text" value={{ data["previously-offered"] }}>
+      </div>
+
+  </div>
+
+      <input type="hidden" name="previously-offered-page">
       <input type="hidden" name="property-details-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 

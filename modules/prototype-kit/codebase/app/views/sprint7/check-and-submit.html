@@ -879,6 +879,54 @@ Check your answers
           </dd>
         </div>
       </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             Void date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["void-date-day"] }} {{ data["void-date-month"] }} {{ data["void-date-year"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/void-date">
+              Change<span class="govuk-visually-hidden">void-date</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             Repair date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["repair-date-day"] }} {{ data["repair-date-month"] }} {{ data["repair-date-year"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/repair-date">
+              Change<span class="govuk-visually-hidden">repair-date</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             How many times has this unit been previously offered since becoming available for relet since the last tenancy ended or as a first let?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["previously-offered"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/previously-offered">
+              Change<span class="govuk-visually-hidden">previously-offered</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
     </dl>
     </dl>
 
