@@ -58,6 +58,8 @@ GOV.UK Prototype Kit
   {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
 {% endif %}
 
+{% set postcodeValue = (data["postcode"] if data["postcode"] else "") | trim_end(",") %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-quarter">
     <ul class="govuk-list">
@@ -76,6 +78,7 @@ GOV.UK Prototype Kit
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header">Log</th>
+          <th scope="col" class="govuk-table__header">Postcode</th>
           <th scope="col" class="govuk-table__header govuk-table__header--numeric">Completed sections</th>
           <th scope="col" class="govuk-table__header govuk-table__header--numeric"></th>
         </tr>
@@ -84,6 +87,8 @@ GOV.UK Prototype Kit
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">#342351
           </th>
+          <td class="govuk-table__cell govuk-table__cell">{{ postcodeValue }}
+          </td>
           <td class="govuk-table__cell govuk-table__cell--numeric">{{ numberOfCompletedSections + 1 }} of 8 sections
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">View</a>
@@ -98,6 +103,7 @@ GOV.UK Prototype Kit
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header">Log</th>
+          <th scope="col" class="govuk-table__header">Postcode</th>
           <th scope="col" class="govuk-table__header govuk-table__header--numeric">Date</th>
           <th scope="col" class="govuk-table__header govuk-table__header--numeric"></th>
         </tr>
@@ -106,6 +112,8 @@ GOV.UK Prototype Kit
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">#922151
           </th>
+          <td class="govuk-table__cell govuk-table__cell">SE4 4RY
+          </td>
           <td class="govuk-table__cell govuk-table__cell--numeric">29 7 2021
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">Edit</a>
@@ -114,6 +122,8 @@ GOV.UK Prototype Kit
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">#182151
           </th>
+          <td class="govuk-table__cell govuk-table__cell">NW4 6RR
+          </td>
           <td class="govuk-table__cell govuk-table__cell--numeric">27 7 2021
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">Edit</a>
@@ -122,6 +132,8 @@ GOV.UK Prototype Kit
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">#872251
           </th>
+          <td class="govuk-table__cell govuk-table__cell">NW4 3RR
+          </td>
           <td class="govuk-table__cell govuk-table__cell--numeric">26 7 2021
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">Edit</a>
