@@ -203,6 +203,23 @@ Check your answers
           </dd>
         </div>
       </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["reasonable-preference"][0] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="tenancy-details/reasonable-preference">
+              Change<span class="govuk-visually-hidden">reasonable-preference</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </dl>
     </dl>
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -425,7 +442,7 @@ Check your answers
           </dt>
           <dd class="govuk-summary-list__value">
             {% set value = data["conditions"] | d([]) | join(", ") %}
-              {{ value | trim_end(", ") }}
+            {{ value | trim_end(", ") }}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="household-details/disabilities">
@@ -491,21 +508,21 @@ Check your answers
         </div>
       </dl>
 
-    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Income Frequency
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{ data["income-frequency"] }}
-        </dd>
-        <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="benefits-and-income/income">
-            Change<span class="govuk-visually-hidden">Income Frequency</span>
-          </a>
-        </dd>
-      </div>
-    </dl>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Income Frequency
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["income-frequency"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="benefits-and-income/income">
+              Change<span class="govuk-visually-hidden">Income Frequency</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
     </dl>
     </dl>
 
@@ -608,143 +625,143 @@ Check your answers
           </dd>
         </div>
       </dl>
-      </dl>
-      </dl>
+    </dl>
+    </dl>
 
 
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <h2 class="govuk-heading-m">Property Details</h2>
 
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-        <h2 class="govuk-heading-m">Property Details</h2>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Number of bedrooms
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["bedrooms"][0] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/number-of-bedrooms">
+              Change<span class="govuk-visually-hidden">Bedrooms</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
 
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Number of bedrooms
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data["bedrooms"][0] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="property-details/number-of-bedrooms">
-                Change<span class="govuk-visually-hidden">Bedrooms</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Type of Unit
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["type-of-unit"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/type-of-unit">
+              Change<span class="govuk-visually-hidden">Type of unit</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
 
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Type of Unit
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data["type-of-unit"] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="property-details/type-of-unit">
-                Change<span class="govuk-visually-hidden">Type of unit</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Type of Building
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["type-of-building"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/type-of-building">
+              Change<span class="govuk-visually-hidden">Type of building</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
 
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Type of Building
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data["type-of-building"] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="property-details/type-of-building">
-                Change<span class="govuk-visually-hidden">Type of building</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Is property built or adapted to wheelchair user standards?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["wheelchair-accesible"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/wheelchair-accesible">
+              Change<span class="govuk-visually-hidden">Wheelchair accesible</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
 
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-               Is property built or adapted to wheelchair user standards?
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data["wheelchair-accesible"] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="property-details/wheelchair-accesible">
-                Change<span class="govuk-visually-hidden">Wheelchair accesible</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Most recent let basis
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["relet"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/relet">
+              Change<span class="govuk-visually-hidden">relet</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
 
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-               Most recent let basis
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data["relet"] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="property-details/relet">
-                Change<span class="govuk-visually-hidden">relet</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Reason for vacancy
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["reason-for-vacancy"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/reason-for-vacancy">
+              Change<span class="govuk-visually-hidden">reason for vacancy</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
 
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-               Reason for vacancy
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data["reason-for-vacancy"] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="property-details/reason-for-vacancy">
-                Change<span class="govuk-visually-hidden">reason for vacancy</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Property Location
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["property-location"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/property-location">
+              Change<span class="govuk-visually-hidden">property-location</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
 
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-               Property Location
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data["property-location"] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="property-details/property-location">
-                Change<span class="govuk-visually-hidden">property-location</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
-
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-               Postcode
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{ data["postcode"] }}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="property-details/postcode">
-                Change<span class="govuk-visually-hidden">postcode</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
-        </dl>
-        </dl>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Postcode
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["postcode"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/postcode">
+              Change<span class="govuk-visually-hidden">postcode</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </dl>
+    </dl>
 
 
 
