@@ -739,10 +739,26 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
+            Property reference
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["property-reference"][0] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-details/property-reference">
+              Change<span class="govuk-visually-hidden">property reference</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
             Number of bedrooms
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["bedrooms"][0] }}
+            {{ data["bedrooms"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="property-details/number-of-bedrooms">
