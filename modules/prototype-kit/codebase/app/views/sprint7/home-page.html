@@ -7,9 +7,6 @@ GOV.UK Prototype Kit
 {% block content %}
 
 {% set numberOfCompletedSections = 0 %}
-{% if data['org-completed'] == 'true' %}
-  {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
 {% if data['select-completed'] == 'true' %}
   {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
 {% endif %}
@@ -33,9 +30,6 @@ GOV.UK Prototype Kit
 {% endif %}
 
 {% set numberOfInProgressSections = 0 %}
-{% if data['org-inprogress'] == 'true' %}
-  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
-{% endif %}
 {% if data['select-inprogress'] == 'true' %}
   {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
 {% endif %}
@@ -72,7 +66,7 @@ GOV.UK Prototype Kit
     <div class="govuk-form-group">
       <input class="govuk-input" id="event-name" name="event-name" placeholder="Search for logs" type="text">
     </div>
-    {% if ((numberOfCompletedSections > 0) and (numberOfCompletedSections < 8)) or ((numberOfInProgressSections > 0) and (numberOfCompletedSections < 8)) %}
+    {% if ((numberOfCompletedSections > 0) and (numberOfCompletedSections < 7)) or ((numberOfInProgressSections > 0) and (numberOfCompletedSections < 7)) %}
     <table class="govuk-table">
       <caption class="govuk-table__caption govuk-table__caption--m">Submissions in progress</caption>
       <thead class="govuk-table__head">
@@ -89,7 +83,7 @@ GOV.UK Prototype Kit
           </th>
           <td class="govuk-table__cell govuk-table__cell">{{ postcodeValue }}
           </td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">{{ numberOfCompletedSections }} of 8 sections
+          <td class="govuk-table__cell govuk-table__cell--numeric">{{ numberOfCompletedSections }} of 7 sections
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">View</a>
           </td>
