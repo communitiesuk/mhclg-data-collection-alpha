@@ -12,7 +12,39 @@ Check your answers
     <h1 class="govuk-heading-l">Check your answers</h1>
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-      <h2 class="govuk-heading-m">Household details</h2>
+      <h2 class="govuk-heading-m">Local Authority</h2>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            How long has the household continuously lived in the local authority area where the new letting is located?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["time-lived-in-la"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint8/local-authority/time-lived-in-la">
+              Change<span class="govuk-visually-hidden">time-lived-in-la</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            How long has the household been in the local authority waiting list where the new letting is located?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["time-on-waiting-list"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint8/local-authority/time-on-waiting-list">
+              Change<span class="govuk-visually-hidden">time-on-waiting-list</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
 
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
@@ -50,14 +82,49 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            How long has the household continuously lived in the local authority area where the new letting is located?
+            Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["time-lived-in-la"] }}
+            {{ data["reasonable-preference"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint8/local-authority/time-lived-in-la">
-              Change<span class="govuk-visually-hidden">time-lived-in-la</span>
+            <a class="govuk-link" href="/sprint8/local-authority/reasonable-preference">
+              Change<span class="govuk-visually-hidden">reasonable-preference</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      {% if  data['reasonable-preference-reason'] %}
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Reason for reasonable preference
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% set value = data["reasonable-preference-reason"] |d([]) | join(", ") %}
+            {{ value | trim_end(", ") }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint8/local-authority/reasonable-preference">
+              Change<span class="govuk-visually-hidden">reason for reasonable preference</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+      {% endif %}
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Choice-based letting?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["choice-based"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint8/local-authority/allocation-type">
+              Change<span class="govuk-visually-hidden">allocation type</span>
             </a>
           </dd>
         </div>
@@ -66,14 +133,30 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            How long has the household been in the local authority waiting list where the new letting is located?
+            Common housing register letting?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["time-on-waiting-list"] }}
+            {{ data["common-housing-register"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint8/local-authority/time-on-waiting-list">
-              Change<span class="govuk-visually-hidden">time-on-waiting-list</span>
+            <a class="govuk-link" href="/sprint8/local-authority/allocation-type">
+              Change<span class="govuk-visually-hidden">allocation type</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Common allocation policy letting?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["common-allocation-policy"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint8/local-authority/allocation-type">
+              Change<span class="govuk-visually-hidden">allocation type</span>
             </a>
           </dd>
         </div>

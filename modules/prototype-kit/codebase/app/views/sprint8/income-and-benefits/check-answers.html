@@ -17,38 +17,6 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Universal Credit & Housing Benefit
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data["benefit"] }}
-          </dd>
-          <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint8/income-and-benefits/benefits">
-              Change<span class="govuk-visually-hidden">Benefits</span>
-            </a>
-          </dd>
-        </div>
-      </dl>
-
-      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Benefits as a proportion of income
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data["benefit-proportion"] }}
-          </dd>
-          <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint8/income-and-benefits/benefit-proportion">
-              Change<span class="govuk-visually-hidden">Benefit Proportion</span>
-            </a>
-          </dd>
-        </div>
-      </dl>
-
-      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
             Income
           </dt>
           <dd class="govuk-summary-list__value">
@@ -77,6 +45,39 @@ Check your answers
           </dd>
         </div>
       </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Benefits as a proportion of income
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["benefit-proportion"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint8/income-and-benefits/benefit-proportion">
+              Change<span class="govuk-visually-hidden">Benefit Proportion</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Universal Credit & Housing Benefit
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["benefit"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint8/income-and-benefits/benefits">
+              Change<span class="govuk-visually-hidden">Benefits</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </dl>
 
 
     <form action="../tasklist" method="post" novalidate>
