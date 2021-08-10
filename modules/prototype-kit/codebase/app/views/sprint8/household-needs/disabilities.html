@@ -40,83 +40,8 @@ GOV.UK Prototype Kit
         </fieldset>
       </div>
 
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="conditions-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h1 class="govuk-fieldset__heading">
-              Do any of these conditions or illnesses affect anyone in the household in any of the following areas?
-            </h1>
-          </legend>
-          <div id="conditions-hint" class="govuk-hint">
-            Select all that apply.
-          </div>
-          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="conditions" name="conditions" type="checkbox" value="Vision (e.g. blindness or partial sight)" {{ 'checked' if data['conditions'][0] == "Vision (e.g. blindness or partial sight)" }}>
-              <label class="govuk-label govuk-checkboxes__label" for="conditions">
-                Vision (e.g. blindness or partial sight)
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="conditions-2" name="conditions" type="checkbox" value="Hearing (e.g. deafness or partial hearing)" {{ 'checked' if data['conditions'][0] == "Hearing (e.g. deafness or partial hearing)" }}>
-              <label class="govuk-label govuk-checkboxes__label" for="conditions-2">
-                Hearing (e.g. deafness or partial hearing)
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="conditions-3" name="conditions" type="checkbox" value="Mobility (e.g. walking short distances or climbing stairs)" {{ 'checked' if data['conditions'][0] == "Mobility (e.g. walking short distances or climbing stairs)" }}>
-              <label class="govuk-label govuk-checkboxes__label" for="conditions-3">
-                 Mobility (e.g. walking short distances or climbing stairs)
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="conditions-4" name="conditions" type="checkbox" value="Dexterity (e.g. lifting and carrying objects, using a keyboard)" {{ 'checked' if data['conditions'][0] == "Dexterity (e.g. lifting and carrying objects, using a keyboard)" }}>
-              <label class="govuk-label govuk-checkboxes__label" for="conditions-4">
-                 Dexterity (e.g. lifting and carrying objects, using a keyboard)
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="conditions-5" name="conditions" type="checkbox" value="Learning or understanding or concentrating" {{ 'checked' if data['conditions'][0] == "Learning or understanding or concentrating" }}>
-              <label class="govuk-label govuk-checkboxes__label" for="conditions-5">
-                 Learning or understanding or concentrating
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="conditions-6" name="conditions" type="checkbox" value="Memory" {{ 'checked' if data['conditions'][0] == "Memory" }}>
-              <label class="govuk-label govuk-checkboxes__label" for="conditions-6">
-                 Memory
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="conditions-7" name="conditions" type="checkbox" value="Mental health" {{ 'checked' if data['conditions'][0] == "Mental health" }}>
-              <label class="govuk-label govuk-checkboxes__label" for="conditions-7">
-                 Mental health
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="conditions-8" name="conditions" type="checkbox" value="Stamina or breathing or fatigue" {{ 'checked' if data['conditions'][0] == "Stamina or breathing or fatigue" }}>
-              <label class="govuk-label govuk-checkboxes__label" for="conditions-8">
-                 Stamina or breathing or fatigue
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="conditions-9" name="conditions" type="checkbox" value="Socially or behaviourally (e.g. associated with autism spectral disorder (ASD) which includes Aspergers’, or attention deficit hyperactivity disorder (ADHD)) " {{ 'checked' if data['conditions'][0] == "Socially or behaviourally (e.g. associated with autism spectral disorder (ASD) which includes Aspergers’, or attention deficit hyperactivity disorder (ADHD)) " }}>
-              <label class="govuk-label govuk-checkboxes__label" for="conditions-9">
-                 Socially or behaviourally (e.g. associated with autism spectral disorder (ASD) which includes Aspergers’, or attention deficit hyperactivity disorder (ADHD))
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="conditions-10" name="conditions" type="checkbox" value="Other" {{ 'checked' if data['conditions'][0] == "Other" }}>
-              <label class="govuk-label govuk-checkboxes__label" for="conditions-10">
-                 Other
-              </label>
-            </div>
-          </div>
-        </fieldset>
-      </div>
-
       <input type="hidden" name="disabilities-page">
-      <input type="hidden" name="household-inprogress" value="true">
+      <input type="hidden" name="household-needs-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 
       </fieldset>

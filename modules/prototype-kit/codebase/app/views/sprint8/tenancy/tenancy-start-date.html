@@ -28,7 +28,7 @@ GOV.UK Prototype Kit
                 <label class="govuk-label govuk-date-input__label" for="tenancy-start-day">
                   Day
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-start-day" name="tenancy-start-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-start-day" name="tenancy-start-day" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data['tenancy-start-day'] }} >
               </div>
             </div>
             <div class="govuk-date-input__item">
@@ -36,7 +36,7 @@ GOV.UK Prototype Kit
                 <label class="govuk-label govuk-date-input__label" for="tenancy-start-month">
                   Month
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-start-month" name="tenancy-start-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-start-month" name="tenancy-start-month" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data['tenancy-start-month'] }}>
               </div>
             </div>
             <div class="govuk-date-input__item">
@@ -44,13 +44,13 @@ GOV.UK Prototype Kit
                 <label class="govuk-label govuk-date-input__label" for="tenancy-start-year">
                   Year
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="tenancy-start-year" name="tenancy-start-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="tenancy-start-year" name="tenancy-start-year" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data['tenancy-start-year'] }}>
               </div>
             </div>
           </div>
       </div>
 
-      <input type="hidden" name="provider-inprogress" value="true">
+      <input type="hidden" name="tenancy-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 
       </fieldset>

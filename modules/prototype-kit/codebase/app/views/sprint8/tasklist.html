@@ -7,19 +7,19 @@ GOV.UK Prototype Kit
 {% block content %}
 
 {% set numberOfCompletedSections = 0 %}
-{% if data['select-completed'] == 'true' %}
+{% if data['household-completed'] == 'true' %}
 {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
 {% endif %}
-{% if data['provider-completed'] == 'true' %}
+{% if data['household-situation-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['household-needs-completed'] == 'true' %}
 {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
 {% endif %}
 {% if data['tenancy-completed'] == 'true' %}
 {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
 {% endif %}
-{% if data['household-completed'] == 'true' %}
-{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
-{% if data['benefits-and-income--completed'] == 'true' %}
+{% if data['property-completed'] == 'true' %}
 {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
 {% endif %}
 {% if data['rent-and-other-charges-completed'] == 'true' %}
@@ -36,7 +36,7 @@ GOV.UK Prototype Kit
         <h1 class="govuk-heading-xl">
           Case #342351 </h1>
         <h2 class="govuk-heading-s govuk-!-margin-bottom-2">Submission in progress</h2>
-        <p class="govuk-body govuk-!-margin-bottom-7">You've completed {{ numberOfCompletedSections }} of 7 sections.</p>
+        <p class="govuk-body govuk-!-margin-bottom-7">You've completed {{ numberOfCompletedSections }} of 9 sections.</p>
 
 
         <ol class="app-task-list">
@@ -65,12 +65,12 @@ GOV.UK Prototype Kit
               </li>
 
               <li class="app-task-list__item"">
-              {% if  data['provider-completed'] == 'true' %}
+              {% if  data['household-situation-completed'] == 'true' %}
                 <a class=" task-name" href="household-situation/check-answers" aria-describedby="read-declaration-completed">
                 Household situation
                 </a>
                 <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-                {% elif  data['provider-inprogress'] == 'true' %}
+                {% elif  data['household-situation-inprogress'] == 'true' %}
                 <a class="task-name" href="household-situation/check-answers" aria-describedby="read-declaration-completed">
                   Household situation
                 </a>
@@ -84,12 +84,12 @@ GOV.UK Prototype Kit
               </li>
 
               <li class="app-task-list__item"">
-              {% if  data['tenancy-completed'] == 'true' %}
+              {% if  data['household-needs-completed'] == 'true' %}
                 <a class=" task-name" href="household-needs/check-answers" aria-describedby="read-declaration-completed">
                 Household needs
                 </a>
                 <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-                {% elif  data['tenancy-inprogress'] == 'true' %}
+                {% elif  data['household-needs-inprogress'] == 'true' %}
                 <a class="task-name" href="household-needs/check-answers" aria-describedby="read-declaration-completed">
                   Household needs
                 </a>
@@ -105,34 +105,35 @@ GOV.UK Prototype Kit
 
           <li>
             <h2 class="app-task-list__section">
-              <span class="app-task-list__section-number">2. </span> Property & Tenancy Information
+              <span class="app-task-list__section-number">2. </span>Tenancy & Property Information
             </h2>
             <ul class="app-task-list__items">
               <li class="app-task-list__item"">
             {% if  data['tenancy-completed'] == 'true' %}
-              <a class=" task-name" href="tenancy-details/check-answers" aria-describedby="read-declaration-completed">
+              <a class=" task-name" href="tenancy/check-answers" aria-describedby="read-declaration-completed">
                 Tenancy information
                 </a>
                 <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
                 {% elif  data['tenancy-inprogress'] == 'true' %}
-                <a class="task-name" href="tenancy-details/check-answers" aria-describedby="read-declaration-completed">
+                <a class="task-name" href="tenancy/check-answers" aria-describedby="read-declaration-completed">
                   Tenancy information
                 </a>
                 <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
                 {% else %}
-                <a class="task-name" href="tenancy-details/tenancy-start-date" aria-describedby="read-declaration-completed">
+                <a class="task-name" href="tenancy/tenancy-code" aria-describedby="read-declaration-completed">
                   Tenancy information
                 </a>
                 <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
                 {% endif %}
               </li>
+
               <li class="app-task-list__item"">
-            {% if  data['tenancy-completed'] == 'true' %}
+            {% if  data['property-completed'] == 'true' %}
               <a class=" task-name" href="property/check-answers" aria-describedby="read-declaration-completed">
                 Property information
                 </a>
                 <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-                {% elif  data['tenancy-inprogress'] == 'true' %}
+                {% elif  data['property-inprogress'] == 'true' %}
                 <a class="task-name" href="property/check-answers" aria-describedby="read-declaration-completed">
                   Property information
                 </a>
@@ -189,7 +190,7 @@ GOV.UK Prototype Kit
           </ul>
 
           <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">4. </span> Application / referral
+            <span class="app-task-list__section-number">4. </span> Application / Referral
           </h2>
           <ul class="app-task-list__items">
             </li>
