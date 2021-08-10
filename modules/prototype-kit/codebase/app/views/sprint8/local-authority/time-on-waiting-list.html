@@ -8,7 +8,7 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="homeless" method="POST" novalidate="" data-validate="my-form-validation">
+    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
 
       {% set options = [
         "Just moved to Local Authority area","Less than 1 year","1 year but under 2 years", "2 years but under 3 years","3 years but under 4 years",
@@ -34,7 +34,7 @@ GOV.UK Prototype Kit
     }) }}
 
       <input type="hidden" name="time-on-waiting-list-page">
-      <input type="hidden" name="household-inprogress" value="true">
+      <input type="hidden" name="local-authority-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 
       </fieldset>
