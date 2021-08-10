@@ -22,10 +22,10 @@ GOV.UK Prototype Kit
 {% if data['property-completed'] == 'true' %}
 {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
 {% endif %}
-{% if data['rent-and-other-charges-completed'] == 'true' %}
+{% if data['income-and-benefits-completed'] == 'true' %}
 {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
 {% endif %}
-{% if data['property-details-completed'] == 'true' %}
+{% if data['rent-completed'] == 'true' %}
 {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
 {% endif %}
 
@@ -152,12 +152,12 @@ GOV.UK Prototype Kit
             </h2>
             <ul class="app-task-list__items">
               <li class="app-task-list__item"">
-            {% if  data['tenancy-completed'] == 'true' %}
+            {% if  data['income-and-benefits-completed'] == 'true' %}
               <a class=" task-name" href="income-and-benefits/check-answers" aria-describedby="read-declaration-completed">
                 Income & benefits
                 </a>
                 <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-                {% elif  data['tenancy-inprogress'] == 'true' %}
+                {% elif  data['income-and-benefits-inprogress'] == 'true' %}
                 <a class="task-name" href="income-and-benefits/check-answers" aria-describedby="read-declaration-completed">
                   Income & benefits
                 </a>
@@ -170,12 +170,12 @@ GOV.UK Prototype Kit
                 {% endif %}
               </li>
 
-              {% if  data['tenancy-completed'] == 'true' %}
+              {% if  data['rent-completed'] == 'true' %}
               <a class=" task-name" href="rent/check-answers" aria-describedby="read-declaration-completed">
                 Rent
               </a>
               <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-              {% elif  data['tenancy-inprogress'] == 'true' %}
+              {% elif  data['rent-inprogress'] == 'true' %}
               <a class="task-name" href="rent/check-answers" aria-describedby="read-declaration-completed">
                 Rent
               </a>
