@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="homeless" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {% set situations = [
+        "Owner occupation (private)","Owner occupation (low cost home ownership)","Private sector tenancy","Tied housing or rented with job","Supported housing","Sheltered accomodation","Residential care home","Living with friends or family","Refuge","Hospital","Prison / Approved Probation Hostel","Direct access hostel","Bed &amp; Breakfast","Mobile home / caravan","Any other temporary accommodation","Home Office Asylum Support","Children’s home / foster care","Rough sleeping","Other","Fixed term Local Authority General Needs tenancy","Lifetime Local Authority General Needs tenancy","Fixed term PRP General Needs tenancy","Lifetime PRP General Needs tenancy"
+        ] %}
+
+      {% set previousHousingSituationItems = [] %}
+
+      {% for situation in situations %}
+        {% set previousHousingSituationItems = (previousHousingSituationItems.push({value: situation, text: situation, checked: checked("previous-housing-situation", situation)}), previousHousingSituationItems) %}
+      {% endfor %}
+
+      <legend class="govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          The housing situation for this household immediately before this letting
+        </h1>
+      </legend>
+
+      {{ govukSelect({
+      idPrefix: "previous-housing-situation",
+      name: "previous-housing-situation",
+      items: previousHousingSituationItems
+    }) }}
+
+
+      <input type="hidden" name="previous-housing-situation-page">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

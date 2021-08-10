@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="reason-for-leaving" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {% set options = [
+        "Not homeless","Assessed as homeless (or threatened with homelessness within 56 days) by a local authority and owed a homelessness duty",
+        "Other homelessness i.e. not found statutorily homeless by a housing authority but considered to be homeless by the letting"
+        ] %}
+
+      {% set optionsItems = [] %}
+
+      {% for option in options %}
+        {% set optionsItems = (optionsItems.push({value: option, text: option, checked: checked("homeless", option)}), optionsItems) %}
+      {% endfor %}
+
+      <legend class="govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Immediately prior to this letting, was this household …?
+        </h1>
+      </legend>
+
+      {{ govukSelect({
+      idPrefix: "homeless",
+      name: "homeless",
+      items: optionsItems
+    }) }}
+
+      <input type="hidden" name="homeless-page">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="void-date" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="bedrooms-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Number of bedrooms
+            </h1>
+          </legend>
+          <div id="bedrooms-hint" class="govuk-hint">
+            if shared accommodation, enter number of bedrooms occupied by this household; a bed-sit has 1 bedroom
+          </div>
+
+          <div class="govuk-form-group">
+            <input class="govuk-input govuk-input--width-20" id="bedrooms" name="bedrooms" type="number" value={{ data['bedrooms'] }}>
+          </div>
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="bedrooms-page">
+      <input type="hidden" name="property-details-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

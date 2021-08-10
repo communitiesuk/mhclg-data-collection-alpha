@@ -1,0 +1,216 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset" aria-describedby="number-of-other-members-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              How many other members of the household are there?
+            </h1>
+          </legend>
+
+          <div id="number-of-other-members-hint" class="govuk-hint">
+            Maximum 7
+          </div>
+
+          <div class="govuk-form-group">
+            <input class="govuk-input govuk-input--width-20" id="number-of-other-members" name="number-of-other-members" type="text" onkeyup=check()>
+          </div>
+      </div>
+
+      {% for i in [1,2,3,4,5,6,7] %}
+      <div id="person-{{i}}">
+        <hr class="govuk-!-margin-bottom-6" />
+
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            {{ "Person " + i }}
+          </h1>
+        </legend>
+
+        {{ govukRadios({
+          idPrefix: "person-" + i + "-relationship-to-main",
+          name: "person-" + i + "-relationship-to-main",
+          fieldset: {
+            legend: {
+              text: "Relationship to main tenant?",
+              classes: "govuk-label--s"
+            }
+          },
+          items: [
+            {
+              value: "Partner",
+              text: "Partner",
+              checked: checked("person-" + i + "-relationship-to-main", "Partner")
+            },
+            {
+              value: "Child",
+              text: "Child",
+              checked: checked("person-" + i + "-relationship-to-main", "Child")
+            },
+            {
+              value: "Other",
+              text: "Other",
+              checked: checked("person-" + i + "-relationship-to-main", "Other")
+            },
+            {
+              value: "Refused",
+              text: "Refused",
+              checked: checked("person-" + i + "-relationship-to-main", "Refused")
+            }
+          ]
+        }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Age?",
+              classes: "govuk-label--s"
+            },
+            id: "person-" + i + "-age",
+            name: "person-" + i + "-age"
+          }) }}
+
+          {{ govukRadios({
+            idPrefix: "person-" + i + "-gender",
+            name: "person-" + i + "-gender",
+            fieldset: {
+              legend: {
+                text: "Gender?",
+                classes: "govuk-label--s"
+              }
+            },
+            items: [
+              {
+                value: "Male",
+                text: "Male",
+                checked: checked("person-" + i + "-gender", "Male")
+              },
+              {
+                value: "Female",
+                text: "Female",
+                checked: checked("person-" + i + "-gender", "Female")
+              },
+              {
+                value: "Other",
+                text: "Other",
+                checked: checked("person-" + i + "-gender", "Other")
+              },
+              {
+                value: "Prefer not to say",
+                text: "Prefer not to say",
+                checked: checked("person-" + i + "-gender", "Prefer not to say")
+              }
+            ]
+          }) }}
+
+          {{ govukRadios({
+            idPrefix: "person-" + i + "-economic-status",
+            name: "person-" + i + "-economic-status",
+            fieldset: {
+              legend: {
+                text: "Work",
+                classes: "govuk-label--s"
+              }
+            },
+            items: [
+              {
+                value: "Part-time (Less than 30 hours)",
+                text: "Part-time (Less than 30 hours)",
+                checked: checked("person-" + i + "-economic-status", "Part-time (Less than 30 hours)")
+              },
+              {
+                value: "Full-time (30 hours or more)",
+                text: "Full-time (30 hours or more)",
+                checked: checked("person-" + i + "-economic-status", "Full-time (30 hours or more)")
+              },
+              {
+                value: "Not seeking work, in government training or New Deal",
+                text: "Not seeking work, in government training or New Deal",
+                checked: checked("person-" + i + "-economic-status", "Not seeking work, in government training or New Deal")
+              },
+              {
+                value: "Full-time student, jobseeker, child under 16 or retired",
+                text: "Full-time student, jobseeker, child under 16 or retired",
+                checked: checked("person-" + i + "-economic-status", "Full-time student, jobseeker, child under 16 or retired")
+              },
+              {
+                value: "Unable to work, on long term sick or has a disability",
+                text: "Unable to work, on long term sick or has a disability",
+                checked: checked("person-" + i + "-economic-status", "Unable to work, on long term sick or has a disability")
+              },
+              {
+                value: "Other",
+                text: "Other",
+                checked: checked("person-" + i + "-economic-status", "Other")
+              }
+            ]
+          }) }}
+
+      </div>
+      {% endfor %}
+
+
+      <input type="hidden" name="other-members">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      <style>
+      #person-1 {
+        display: none;
+      }
+      #person-2{
+        display: none;
+      }
+      #person-3{
+        display: none;
+      }
+      #person-4{
+        display: none;
+      }
+      #person-5{
+        display: none;
+      }
+      #person-6{
+        display: none;
+      }
+      #person-7{
+        display: none;
+      }
+      </style>
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<script>
+  const reset_fields = () => {
+    for(var i = 1; i<=7; i++ ) {
+      let div = "person-".concat(i.toString());
+      document.getElementById(div).style.display = "none";
+    }
+  }
+
+  function check() {
+    reset_fields();
+    var val = document.getElementById("number-of-other-members").value > 7 ? 7 : document.getElementById("number-of-other-members").value;
+
+    for(var i = 1; i<=val; i++ ) {
+      let div = "person-".concat(i.toString());
+      document.getElementById(div).style.display = "block";
+    }
+  }
+  check()
+</script>
+
+{% endblock %}

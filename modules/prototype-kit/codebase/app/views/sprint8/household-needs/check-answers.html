@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">Check your answers</h1>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <h2 class="govuk-heading-m">Household needs</h2>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Armed Forces
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["armed-forces"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint8/household-needs/armed-forces">
+            Change<span class="govuk-visually-hidden">Armed Forces</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Physical or Mental Health Conditions lasting more than 12 months
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["long-term-conditions"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint8/household-needs/disabilities">
+            Change<span class="govuk-visually-hidden">disabilities</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Pregnancy
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["pregnancy"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint8/household-needs/pregnancy">
+            Change<span class="govuk-visually-hidden">Pregnancy</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Disability Requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% set value = data["disabilities"] |d([]) | join(", ") %}
+            {{ value | trim_end(", ") }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint8/household-needs/disabilities">
+            Change<span class="govuk-visually-hidden">disabilities</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Conditions or illnesses
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% set value = data["conditions"] |d([]) | join(", ") %}
+            {{ value | trim_end(", ") }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint8/household-needs/disabilities">
+            Change<span class="govuk-visually-hidden">disabilities</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    </dl>
+
+    <form action="../tasklist" method="post" novalidate>
+      <input type="hidden" name="household-completed" value="true">
+      <button class="govuk-button" data-module="govuk-button">
+        Save and continue
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="number-of-bedrooms" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {{ govukRadios({
+      idPrefix: "type-of-building",
+      name: "type-of-building",
+      fieldset: {
+        legend: {
+          text: "Type of building",
+          classes: "govuk-label--l"
+        }
+      },
+      items: [
+        {
+          value: "Purpose built",
+          text: "Purpose built",
+          checked: checked("type-of-building", "Purpose built")
+        },
+        {
+          value: "Converted from previous residential or non-residential property",
+          text: "Converted from previous residential or non-residential property",
+          checked: checked("type-of-building", "Converted from previous residential or non-residential property")
+        }
+      ]
+    }) }}
+
+      <input type="hidden" name="building-type">
+      <input type="hidden" name="property-details-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

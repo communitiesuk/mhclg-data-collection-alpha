@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="economic-status" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Nationality
+            </h1>
+          </legend>
+          <div id="nationality-hint" class="govuk-hint">
+
+          </div>
+
+          <div class="govuk-form-group">
+            <select class="govuk-select" id="nationality" name="nationality">
+              <option value="UK national resident in UK" selected>UK national resident in UK</option>
+              <option value="UK national returning from residence overseas">UK national returning from residence overseas</option>
+              <option value="Czech Republic">Czech Republic</option>
+              <option value="Estonia">Estonia</option>
+              <option value="Hungary">Hungary</option>
+              <option value="Latvia">Latvia</option>
+              <option value="Lithuania">Lithuania</option>
+              <option value="Poland">Poland</option>
+              <option value="Slovakia">Slovakia</option>
+              <option value="Slovenia">Slovenia</option>
+              <option value="Bulgaria">Bulgaria</option>
+              <option value="Romania">Romania</option>
+              <option value="Croatia">Croatia</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Other EU Economic Area (EEA) country">Other EU Economic Area (EEA country)</option>
+              <option value="Any other country">Any other country</option>
+              <option value="Refused">Refused</option>
+            </select>
+          </div>
+      </div>
+
+      <input type="hidden" name="nationality">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
