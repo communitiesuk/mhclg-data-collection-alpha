@@ -31,6 +31,9 @@ GOV.UK Prototype Kit
 {% if data['local-authority-completed'] == 'true' %}
 {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
 {% endif %}
+{% if data['submitted-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
 
 <div class="govuk-width-container ">
   <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
@@ -151,7 +154,7 @@ GOV.UK Prototype Kit
             </ul>
 
             <h2 class="app-task-list__section">
-              <span class="app-task-list__section-number">3. </span> Rents & Charges
+              <span class="app-task-list__section-number">3. </span> Income & Charges
             </h2>
             <ul class="app-task-list__items">
               <li class="app-task-list__item"">
@@ -173,6 +176,7 @@ GOV.UK Prototype Kit
                 {% endif %}
               </li>
 
+              <li class="app-task-list__item"">
               {% if  data['rent-completed'] == 'true' %}
               <a class=" task-name" href="rent/check-answers" aria-describedby="read-declaration-completed">
                 Rent
@@ -196,7 +200,7 @@ GOV.UK Prototype Kit
             <span class="app-task-list__section-number">4. </span> Application / Referral
           </h2>
           <ul class="app-task-list__items">
-            </li>
+            <li class="app-task-list__item"">
             {% if  data['local-authority-completed'] == 'true' %}
             <a class=" task-name" href="local-authority/check-answers" aria-describedby="read-declaration-completed">
               Local authority
@@ -222,8 +226,7 @@ GOV.UK Prototype Kit
           </h2>
           <ul class="app-task-list__items">
             <li class="app-task-list__item">
-              <span class="app-task-list__task-name">
-                Check answers and submit </span>
+              <span class="app-task-list__task-name"> </span>
               {% if (data['household-completed'] == 'true') and
                     (data['household-situation-completed'] == 'true') and
                     (data['household-needs-completed'] == 'true') and
@@ -232,7 +235,12 @@ GOV.UK Prototype Kit
                     (data['income-and-benefits-completed'] == 'true') and
                     (data['rent-completed'] == 'true') and
                     (data['local-authority-completed'] == 'true') %}
-              <a href="check-and-submit" class="govuk-button app-task-list__tag" data-module="govuk-button">Start</a>
+                    <form action="confirmation" method="post" novalidate>
+                      <input type="hidden" name="submitted-completed" value="true">
+                      <button class="govuk-button govuk-button app-task-list__tag" data-module="govuk-button">
+                        Submit
+                      </button>
+                    </form>
               {% else %}
               <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="submit-pay-status">Cannot start yet</strong>
               {% endif %}
