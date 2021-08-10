@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="which-form" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Which year is this form for?
+            </h1>
+          </legend>
+
+          <div class="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="which-year" type="radio" name="which-year" value="April 2020 to March 2021" data-value="2020 to 2021">
+              <label class="govuk-label govuk-radios__label" for="which-year">
+                April 2020 to March 2021
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="which-year" type="radio" name="which-year" value="April 2021 to March 2022" data-value="2021 to 2022">
+              <label class="govuk-label govuk-radios__label" for="which-year-2">
+                April 2021 to March 2022
+              </label>
+            </div>
+
+          </div>
+      </div>
+
+      <input type="hidden" name="which-year">
+      <input type="hidden" name="org-inprogress" data-value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,260 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {{ govukRadios({
+      idPrefix: "rent-period",
+      name: "rent-period",
+      fieldset: {
+        legend: {
+          text: "Over what period are rent and other charges due",
+          classes: "govuk-label--l"
+        }
+      },
+      items: [
+        {
+          value: "Weekly for 52 weeks",
+          text: "Weekly for 52 weeks",
+          checked: checked("rent-period", "Weekly for 52 weeks")
+        },
+        {
+          value: "Fortnightly",
+          text: "Fortnightly",
+          checked: checked("rent-period", "Fortnightly")
+        },
+        {
+          value: "Four-weekly",
+          text: "Four-weekly",
+          checked: checked("rent-period", "Four-weekly")
+        },
+        {
+          value: "Calendar Monthly",
+          text: "Calendar Monthly",
+          checked: checked("rent-period", "Calendar Monthly")
+        },
+        {
+          value: "Weekly for 50 weeks",
+          text: "Weekly for 50 weeks",
+          checked: checked("rent-period", "Weekly for 50 weeks")
+        },
+        {
+          value: "Weekly for 49 weeks",
+          text: "Weekly for 49 weeks",
+          checked: checked("rent-period", "Weekly for 49 weeks")
+        },
+        {
+          value: "Weekly for 48 weeks",
+          text: "Weekly for 48 weeks",
+          checked: checked("rent-period", "Weekly for 48 weeks")
+        },
+        {
+          value: "Weekly for 47 weeks",
+          text: "Weekly for 47 weeks",
+          checked: checked("rent-period", "Weekly for 47 weeks")
+        },
+        {
+          value: "Weekly for 46 weeks",
+          text: "Weekly for 46 weeks",
+          checked: checked("rent-period", "Weekly for 46 weeks")
+        },
+        {
+          value: "Weekly for 53 weeks",
+          text: "Weekly for 53 weeks",
+          checked: checked("rent-period", "Weekly for 53 weeks")
+        }
+      ]
+    }) }}
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Basic rent (eligible for HB or UC)
+          </h1>
+        </legend>
+        <div id="income-hint" class="govuk-hint">
+          For the period chosen above
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="rent" name="rent" type="number" onchange="calcTotal()" value={{ data['rent'] }}>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Service charge (eligible for HB or UC)
+          </h1>
+        </legend>
+        <div id="income-hint" class="govuk-hint">
+          For the period chosen above
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="service-charge" name="service-charge" type="number" onchange="calcTotal()" value={{ data['service-charge'] }}>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Personal service charge (not eligible for HB or UC e.g. heating, hot water excluding water rates)
+          </h1>
+        </legend>
+        <div id="income-hint" class="govuk-hint">
+          For the period chosen above
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="personal-service-charge" name="personal-service-charge" type="number" onchange="calcTotal()" value={{ data['personal-service-charge'] }}>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Support charge (charges made to fund housing related support services included in the tenancy agreement)
+          </h1>
+        </legend>
+        <div id="income-hint" class="govuk-hint">
+          For the period chosen above
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="support-charge" name="support-charge" type="number" onchange="calcTotal()" value={{ data['support-charge'] }}>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+              Total Charge (Basic Rent + Service Charge + Personal Service Charge + Support Charge)
+          </h1>
+        </legend>
+        <div id="income-hint" class="govuk-hint">
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="total-charge" name="total-charge" type="number" value={{ data['rent'] + data['service-charge'] + data['personal-service-charge'] + data['support-charge'] }} readonly>
+        </div>
+      </fieldset>
+    </div>
+
+    {% macro radio(data, group, items, changefn) %}
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+            After housing benefit and/or housing element of UC payment is received, will there be an outstanding amount for basic rent and/or benefit eligible charges?
+        </h1>
+      </legend>
+      <div class="govuk-form-group" id="{{ group }}">
+        <div class="govuk-radios">
+          {% for i in range(0, items['items'].length) %}
+          {% set item = items['items'][i] %}
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
+              onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
+            <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
+              {{ item['text'] }}
+            </label>
+          </div>
+            {% endfor %}
+        </div>
+      </div>
+    {% endmacro %}
+
+    {{ radio(data, "outstanding", {
+      items: [
+      {
+        value: "Yes",
+        text: "Yes",
+        checked: checked("outstanding", "Yes")
+      },
+      {
+        value: "No",
+        text: "No",
+        checked: checked("outstanding", "No")
+      }
+      ]
+      }, "displayConditional()") }}
+
+    <div id="outstanding-amount-div" class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="outstanding-amount-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            What do you expect the amount to be?
+          </h1>
+        </legend>
+        <div id="outstanding-amount-hint" class="govuk-hint">
+          For the period chosen above.<br/>
+          <br/>
+          ONLY ANSWER IF THE TENANT IS IN OR DUE TO BE IN RECEIPT OF HOUSING BENEFIT AND/OR HOUSING ELEMENT OF UC FOR THIS LETTING. IF THE HOUSING BENEFIT AND/OR HOUSING ELEMENT AMOUNT IS UNKNOWN PLEASE ESTIMATE DIFFERENCE.
+        </div>
+
+        <div class="govuk-form-group">
+          <input class="govuk-input govuk-input--width-20" id="outstanding-amount" name="outstanding-amount" type="number" value={{ data['outstanding-amount'] }}>
+        </div>
+      </fieldset>
+    </div>
+
+    <style>
+    #outstanding-amount-div {
+      display: none;
+    }
+    </style>
+
+      <input type="hidden" name="rent">
+      <input type="hidden" name="rent-and-other-charges-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+<script>
+  function calcTotal() {
+    const rent = Number(document.getElementById("rent").value);
+    const serviceCharge = Number(document.getElementById("service-charge").value);
+    const personalServiceCharge = Number(document.getElementById("personal-service-charge").value);
+    const supportCharge = Number(document.getElementById("support-charge").value);
+    const total = rent + serviceCharge + personalServiceCharge + supportCharge
+    const totalField = document.getElementById("total-charge")
+    console.log(total)
+    totalField.value = total
+  }
+
+  function displayConditional() {
+    const outstanding = document.getElementById("outstanding-0").checked
+    if(outstanding){
+      document.getElementById("outstanding-amount-div").style.display = "block";
+    } else {
+      document.getElementById("outstanding-amount-div").style.display = "none";
+      document.getElementById("outstanding-amount").checked = false;
+      document.getElementById("outstanding-amount-2").checked = false;
+      document.getElementById("outstanding-amount-3").checked = false;
+      document.getElementById("outstanding-amount-4").checked = false;
+      document.getElementById("outstanding-amount-5").checked = false;
+      document.getElementById("outstanding-amount-6").checked = false;
+    }
+  }
+  // So that this runs if you've already answered and hit the back button
+  displayConditional()
+</script>
+
+{% endblock %}

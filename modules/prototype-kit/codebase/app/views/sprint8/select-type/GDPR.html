@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset" aria-describedby="gdpr-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              GDPR
+            </h1>
+          </legend>
+          <div id="gdpr-hint" class="govuk-hint">
+            Has the tenant/buyer that this letting/sale relates to been shown the privacy note set out by MHCLG?
+          </div>
+
+          <div class="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="gdpr" type="radio" name="gdpr" value="Yes" data-value="Yes">
+              <label class="govuk-label govuk-radios__label" for="gdpr">
+                Yes
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="gdpr" type="radio" name="gdpr" value="No" data-value="No">
+              <label class="govuk-label govuk-radios__label" for="gdpr-2">
+                No
+              </label>
+            </div>
+
+          </div>
+      </div>
+
+      <input type="hidden" name="GDPR">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

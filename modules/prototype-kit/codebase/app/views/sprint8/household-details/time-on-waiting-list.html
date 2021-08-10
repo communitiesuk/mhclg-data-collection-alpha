@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="homeless" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {% set options = [
+        "Just moved to Local Authority area","Less than 1 year","1 year but under 2 years", "2 years but under 3 years","3 years but under 4 years",
+        "4 years but under 5 years","5 years or more", "Don't know"
+        ] %}
+
+      {% set optionsItems = [] %}
+
+      {% for option in options %}
+        {% set optionsItems = (optionsItems.push({value: option, text: option, checked: checked("time-on-waiting-list", option)}), optionsItems) %}
+      {% endfor %}
+
+      <legend class="govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          How long has the household been in the local authority waiting list where the new letting is located?
+        </h1>
+      </legend>
+
+      {{ govukSelect({
+      idPrefix: "time-on-waiting-list",
+      name: "time-on-waiting-list",
+      items: optionsItems
+    }) }}
+
+      <input type="hidden" name="time-on-waiting-list-page">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

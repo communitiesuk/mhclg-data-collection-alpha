@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="previously-offered" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Major repairs completion date (if major repairs carried out during void period)
+          </h1>
+        </legend>
+
+      <div id="repair-date-hint" class="govuk-hint">
+        For example, 27 3 2007
+      </div>
+      <div class="govuk-date-input" id="repair-date">
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="repair-date-day">
+              Day
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="repair-date-day" name="repair-date-day" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data["repair-date-day"] }}>
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="repair-date-month">
+              Month
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="repair-date-month" name="repair-date-month" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data["repair-date-month"] }}>
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="repair-date-year">
+              Year
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="repair-date-year" name="repair-date-year" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data["repair-date-year"] }}>
+          </div>
+        </div>
+      </div>
+  </div>
+
+      <input type="hidden" name="repair-date-page">
+      <input type="hidden" name="property-details-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

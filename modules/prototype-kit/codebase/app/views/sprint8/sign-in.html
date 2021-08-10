@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container ">
+
+  <div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">Sign in
+      </h1>
+      <form class="form" action="/url/of/next/page" method="post">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="email">
+            Email address
+          </label>
+          <input class="govuk-input" id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint" autocomplete="email">
+          <label class="govuk-label" for="password">
+            Password
+          </label>
+          <input class="govuk-input" id="password" name="password" type="password" spellcheck="false">
+        </div>
+        <a class="govuk-button" href="home-page" data-module="govuk-button">Continue</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const timeout = urlParams.get('timeout')
+  if(timeout){
+    alert('Your session has been timed out. Please sign in again')
+  }
+</script>
+
+{% endblock %}

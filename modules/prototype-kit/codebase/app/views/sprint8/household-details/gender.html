@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="economic-status" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Gender
+            </h1>
+          </legend>
+          <div class="govuk-radios govuk-radios--small">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Male" {{ 'checked' if data['gender'] == "Male" }}>
+              <label class="govuk-label govuk-radios__label" for="gender">
+                Male
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Female" {{ 'checked' if data['gender'] == "Female" }}>
+              <label class="govuk-label govuk-radios__label" for="gender-2">
+                Female
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Other" {{ 'checked' if data['gender'] == "Other" }}>
+              <label class="govuk-label govuk-radios__label" for="gender-3">
+                Other
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Prefer not to say" {{ 'checked' if data['gender'] == "Prefer not to say" }}>
+              <label class="govuk-label govuk-radios__label" for="gender-4">
+                Prefer not to say
+              </label>
+            </div>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="type-of-main-tenacy">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

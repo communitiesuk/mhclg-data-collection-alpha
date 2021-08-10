@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="reason-for-leaving" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Does the household contain a pregnant person?
+            </h1>
+          </legend>
+          <div class="govuk-radios govuk-radios--small">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pregnancy" name="pregnancy" type="radio" value="Yes" {{ 'checked' if data['pregnancy'] == "Yes" }}>
+              <label class="govuk-label govuk-radios__label" for="pregnancy">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pregnancy" name="pregnancy" type="radio" value="No" {{ 'checked' if data['pregnancy'] == "No" }}>
+              <label class="govuk-label govuk-radios__label" for="pregnancy-2">
+                No
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pregnancy" name="pregnancy" type="radio" value="Refused" {{ 'checked' if data['pregnancy'] == "Refused" }}>
+              <label class="govuk-label govuk-radios__label" for="pregnancy-3">
+                Refused
+              </label>
+            </div>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="pregnancy-page">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

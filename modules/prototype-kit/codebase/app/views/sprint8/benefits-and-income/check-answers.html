@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">Check your answers</h1>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <h2 class="govuk-heading-m">Benefits & Income</h2>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Universal Credit & Housing Benefit
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["benefit"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="benefits">
+              Change<span class="govuk-visually-hidden">Benefits</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Benefits as a proportion of income
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["benefit-proportion"][0] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="benefit-proportion">
+              Change<span class="govuk-visually-hidden">Benefit Proportion</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Income
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["income"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="income">
+              Change<span class="govuk-visually-hidden">Income</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Income Frequency
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["income-frequency"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="income">
+              Change<span class="govuk-visually-hidden">Income Frequency</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+
+    <form action="../tasklist" method="post" novalidate>
+      <input type="hidden" name="benefits-and-income-completed" value="true">
+      <button class="govuk-button" data-module="govuk-button">
+        Save and continue
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

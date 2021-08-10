@@ -1,0 +1,220 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">Check your answers</h1>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <h2 class="govuk-heading-m">Property Details</h2>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Property reference
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["property-reference"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-reference">
+              Change<span class="govuk-visually-hidden">property reference</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Number of bedrooms
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["bedrooms"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="number-of-bedrooms">
+              Change<span class="govuk-visually-hidden">Bedrooms</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Type of Unit
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["type-of-unit"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="type-of-unit">
+              Change<span class="govuk-visually-hidden">Type of unit</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Type of Building
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["type-of-building"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="type-of-building">
+              Change<span class="govuk-visually-hidden">Type of building</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             Is property built or adapted to wheelchair user standards?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["wheelchair-accesible"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="wheelchair-accesible">
+              Change<span class="govuk-visually-hidden">Wheelchair accesible</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             Most recent let basis
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["relet"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="relet">
+              Change<span class="govuk-visually-hidden">relet</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             Reason for vacancy
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["reason-for-vacancy"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="reason-for-vacancy">
+              Change<span class="govuk-visually-hidden">reason for vacancy</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             Property Location
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["property-location"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="property-location">
+              Change<span class="govuk-visually-hidden">property-location</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      {% set value = data["postcode"] if data["postcode"] else "" %}
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             Postcode
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ value | trim_end(",") }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="postcode">
+              Change<span class="govuk-visually-hidden">postcode</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             Void date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["void-date-day"] }} {{ data["void-date-month"] }} {{ data["void-date-year"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="void-date">
+              Change<span class="govuk-visually-hidden">void-date</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             Repair date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["repair-date-day"] }} {{ data["repair-date-month"] }} {{ data["repair-date-year"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="repair-date">
+              Change<span class="govuk-visually-hidden">repair-date</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+             How many times has this unit been previously offered since becoming available for relet since the last tenancy ended or as a first let?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["previously-offered"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="previously-offered">
+              Change<span class="govuk-visually-hidden">previously-offered</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+    <form action="../tasklist" method="post" novalidate>
+      <input type="hidden" name="property-details-completed" value="true">
+      <button class="govuk-button" data-module="govuk-button">
+        Save and continue
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

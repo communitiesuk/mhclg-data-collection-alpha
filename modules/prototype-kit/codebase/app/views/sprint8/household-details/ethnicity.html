@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="nationality" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset" aria-describedby="ethnicity-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Ethnicity
+            </h1>
+          </legend>
+          <div id="ethnicity-hint" class="govuk-hint">
+
+          </div>
+
+          <div class="govuk-form-group">
+            <select class="govuk-select" id="ethnicity" name="ethnicity">
+              <option value="White: British" selected>White: English/Scottish/Welsh/Northern Irish/British</option>
+              <option value="White: Irish">White: Irish</option>
+              <option value="White: Gypsy/Irish Traveller">White: Gypsy/Irish Traveller</option>
+              <option value="White: Other">White: Other</option>
+              <option value="Mixed: White & Black Caribbean">Mixed: White & Black Caribbean</option>
+              <option value="Mixed: White & Black African">Mixed: White & Black African</option>
+              <option value="Mixed: White & Asian">Mixed: White & Asian</option>
+              <option value="Mixed: Other">Mixed: Other</option>
+              <option value="Asian or Asian British: Indian">Asian or Asian British: Indian</option>
+              <option value="Asian or Asian British: Pakistani">Asian or Asian British: Pakistani</option>
+              <option value="Asian or Asian British: Bangladeshi">Asian or Asian British: Bangladeshi</option>
+              <option value="Asian or Asian British: Chinese">Asian or Asian British: Chinese</option>
+              <option value="Asian or Asian British: Other">Asian or Asian British: Other</option>
+              <option value="Black: Caribbean">Black: Caribbean</option>
+              <option value="Black: African">Black: African</option>
+              <option value="Black: Other">Black: Other</option>
+              <option value="Other Ethnic Group: Arab">Other Ethnic Group: Arab</option>
+              <option value="Other Ethnic Group: Other">Other Ethnic Group: Other</option>
+              <option value="Refused">Refused</option>
+            </select>
+          </div>
+      </div>
+
+      <input type="hidden" name="ethnicity">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="repair-date" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Void (or new build handover / renewal) date
+          </h1>
+        </legend>
+
+      <div id="void-date-hint" class="govuk-hint">
+        For example, 27 3 2007
+      </div>
+      <div class="govuk-date-input" id="void-date">
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="void-date-day">
+              Day
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="void-date-day" name="void-date-day" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data["void-date-day"] }}>
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="void-date-month">
+              Month
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="void-date-month" name="void-date-month" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data["void-date-month"] }}>
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="void-date-year">
+              Year
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="void-date-year" name="void-date-year" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data["void-date-year"] }}>
+          </div>
+        </div>
+      </div>
+  </div>
+
+      <input type="hidden" name="void-date-page">
+      <input type="hidden" name="property-details-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}
