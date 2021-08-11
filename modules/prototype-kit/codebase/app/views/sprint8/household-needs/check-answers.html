@@ -30,6 +30,42 @@ Check your answers
       </div>
     </dl>
 
+    {% if  data['armed-forces-tenure'] %}
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          When did they leave the Armed Forces?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['armed-forces-tenure'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint8/household-needs/armed-forces">
+            Change<span class="govuk-visually-hidden">armed forces</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    {% endif %}
+
+    {% if  data['armed-forces-injured'] %}
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['armed-forces-injured'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint8/household-needs/armed-forces">
+            Change<span class="govuk-visually-hidden">armed forces</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    {% endif %}
+
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
