@@ -20,11 +20,11 @@ GOV.UK Prototype Kit
           </legend>
 
           <div class="govuk-form-group">
-            <input class="govuk-input govuk-input--width-20" id="tenant-code" name="tenant-code" data-value="tenant-code" type="text" value={{ data['tenant-code'][0] }} >
+            <input class="govuk-input govuk-input--width-20" id="tenant-code" name="tenant-code" data-value="tenant-code" type="text" value={{ data['tenant-code'] }} >
           </div>
       </div>
 
-      <input type="hidden" name="tenant-code">
+      <input type="hidden" name="tenant-code-page" value="true">
       <input type="hidden" name="household-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 
