@@ -8,7 +8,7 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="gender" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="gender" method="POST" novalidate="" data-validate="my-form-validation">
 
       <div class="govuk-form-group">
 
@@ -20,11 +20,11 @@ GOV.UK Prototype Kit
           </legend>
 
           <div class="govuk-form-group">
-            <input class="govuk-input govuk-input--width-20" id="tenant-age" name="tenant-age" type="text" value={{ data['tenant-age'][0] }} >
+            <input class="govuk-input govuk-input--width-20" id="tenant-age" name="tenant-age" type="text" value={{ data['tenant-age'] }} >
           </div>
       </div>
 
-      <input type="hidden" name="tenant-age">
+      <input type="hidden" name="tenant-age-page" value="true">
       <input type="hidden" name="household-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 

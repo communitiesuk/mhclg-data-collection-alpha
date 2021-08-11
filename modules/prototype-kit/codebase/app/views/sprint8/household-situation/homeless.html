@@ -8,7 +8,7 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="reason-for-leaving" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="reason-for-leaving" method="POST" novalidate="" data-validate="my-form-validation">
 
       {% set options = [
         "Not homeless","Assessed as homeless (or threatened with homelessness within 56 days) by a local authority and owed a homelessness duty",
@@ -33,7 +33,7 @@ GOV.UK Prototype Kit
       items: optionsItems
     }) }}
 
-      <input type="hidden" name="homeless-page">
+      <input type="hidden" name="homeless-page" value="true">
       <input type="hidden" name="household-situation-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 

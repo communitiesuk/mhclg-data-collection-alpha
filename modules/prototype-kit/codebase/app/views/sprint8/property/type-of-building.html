@@ -8,7 +8,7 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="number-of-bedrooms" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="number-of-bedrooms" method="POST" novalidate="" data-validate="my-form-validation">
 
       {{ govukRadios({
       idPrefix: "type-of-building",
@@ -33,7 +33,7 @@ GOV.UK Prototype Kit
       ]
     }) }}
 
-      <input type="hidden" name="building-type">
+      <input type="hidden" name="type-of-building" value="true">
       <input type="hidden" name="property-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 

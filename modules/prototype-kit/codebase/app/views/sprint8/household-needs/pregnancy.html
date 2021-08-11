@@ -8,7 +8,7 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="requirements" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="requirements" method="POST" novalidate="" data-validate="my-form-validation">
 
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
@@ -41,7 +41,7 @@ GOV.UK Prototype Kit
         </fieldset>
       </div>
 
-      <input type="hidden" name="pregnancy-page">
+      <input type="hidden" name="pregnancy-page" value="true">
       <input type="hidden" name="household-needs-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 

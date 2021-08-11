@@ -8,7 +8,7 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
 
       <div class="govuk-form-group">
 
@@ -91,7 +91,7 @@ GOV.UK Prototype Kit
       </div>
       </fieldset>
 
-      <input type="hidden" name="reasonable">
+      <input type="hidden" name="allocation-type-page" value="true">
       <input type="hidden" name="tenancy-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 

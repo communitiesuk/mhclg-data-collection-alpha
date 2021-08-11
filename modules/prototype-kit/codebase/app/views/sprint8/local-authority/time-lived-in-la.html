@@ -8,7 +8,7 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="time-on-waiting-list" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="time-on-waiting-list" method="POST" novalidate="" data-validate="my-form-validation">
 
       {% set options = [
         "Just moved to Local Authority area","Less than 1 year","1 year but under 2 years", "2 years but under 3 years","3 years but under 4 years",
@@ -33,7 +33,7 @@ GOV.UK Prototype Kit
       items: optionsItems
     }) }}
 
-      <input type="hidden" name="time-lived-in-la-page">
+      <input type="hidden" name="time-lived-in-la-page" value="true">
       <input type="hidden" name="local-authority-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 

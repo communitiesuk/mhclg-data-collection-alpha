@@ -8,7 +8,7 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="postcode" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="postcode" method="POST" novalidate="" data-validate="my-form-validation">
 
       <fieldset class="govuk-fieldset" aria-describedby="property-location-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -36,7 +36,7 @@ GOV.UK Prototype Kit
       items: locationItems
     }) }}
 
-      <input type="hidden" name="property-location-page">
+      <input type="hidden" name="property-location-page" value="true">
       <input type="hidden" name="property-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
 
