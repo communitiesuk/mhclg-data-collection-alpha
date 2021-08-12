@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Submit data on social housing sales and lettings
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-width-container ">
+  <div class="govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="https://www.gov.uk">Home</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="#">Section</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link">Subsection</a>
+      </li>
+    </ol>
+  </div>
+  <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Submit data on social housing sales and lettings</h1>
+        <p>Use this service to:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>create sales and lettings logs for your organisation</li>
+          <li>save and return to complete or edit your logs</li>
+          <li>search for your logs in progress and any you've previously submitted</li>
+        </ul>
+        <p>We’ll send you a confirmation email for each log you submit.</p>
+        {{ govukButton({
+          text: "Start now",
+          href: "sign-in",
+          isStartButton: true
+        }) }}
+        <h2 class="govuk-heading-m">Before you start</h2>
+        <p>Your organisation must <a href="#">create an account</a> so you can sign and use the service.</p>
+        <p>This service is only for social housing in England.</p>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <aside class="app-related-items" role="complementary">
+          <h2 class="govuk-heading-m" id="subsection-title">
+            Subsection
+          </h2>
+          <nav role="navigation" aria-labelledby="subsection-title">
+            <ul class="govuk-list govuk-!-font-size-16">
+              <li>
+                <a href="#">
+                  Related link
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Related link
+                </a>
+              </li>
+              <li>
+                <a href="#" class="govuk-!-font-weight-bold">
+                  More <span class="govuk-visually-hidden">in Subsection</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </aside>
+      </div>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

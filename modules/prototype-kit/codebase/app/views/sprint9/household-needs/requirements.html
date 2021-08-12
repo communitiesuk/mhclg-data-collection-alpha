@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="conditions" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="disabilities-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Does anyone in the household require
+            </h1>
+          </legend>
+          <div id="disabilities-hint" class="govuk-hint">
+            Select all that apply.
+          </div>
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="disabilities" name="disabilities" type="checkbox" value="Fully wheelchair accessible housing" {{ 'checked' if data['disabilities'][0] == "Fully wheelchair accessible housing" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="disabilities">
+                Fully wheelchair accessible housing
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="disabilities-2" name="disabilities" type="checkbox" value="Wheelchair access to essential rooms" {{ 'checked' if data['disabilities'][0] == "Wheelchair access to essential rooms" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="disabilities-2">
+                Wheelchair access to essential rooms
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="disabilities-3" name="disabilities" type="checkbox" value="Level access housing" {{ 'checked' if data['disabilities'][0] == "Level access housing" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="disabilities-3">
+                 Level access housing
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="disabilities-4" name="disabilities" type="checkbox" value="Other disability requirements" {{ 'checked' if data['disabilities'][0] == "Other disability requirements" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="disabilities-4">
+                 Other disability requirements
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="disabilities-5" name="disabilities" type="checkbox" value="No disability requirements" {{ 'checked' if data['disabilities'][0] == "No disability requirements" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="disabilities-5">
+                 No disability requirements
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="disabilities-6" name="disabilities" type="checkbox" value="Don’t know" {{ 'checked' if data['disabilities'][0] == "Don't know" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="disabilities-6">
+                 Don’t know
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="requirements-page" value="true">
+      <input type="hidden" name="household-needs-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

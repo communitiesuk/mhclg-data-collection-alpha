@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="pregnancy" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Does anyone in the household have any physical or mental health conditions or illness lasting or expected to last for 12 months or more?
+            </h1>
+          </legend>
+          <div class="govuk-radios govuk-radios--small">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="long-term-conditions" name="long-term-conditions" type="radio" value="Yes" {{ 'checked' if data['long-term-conditions'] == "Yes" }}>
+              <label class="govuk-label govuk-radios__label" for="long-term-conditions">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="long-term-conditions" name="long-term-conditions" type="radio" value="No" {{ 'checked' if data['long-term-conditions'] == "No" }}>
+              <label class="govuk-label govuk-radios__label" for="long-term-conditions-2">
+                No
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="long-term-conditions" name="long-term-conditions" type="radio" value="Don't know" {{ 'checked' if data['long-term-conditions'] == "Don't know" }}>
+              <label class="govuk-label govuk-radios__label" for="long-term-conditions-3">
+                Don't know
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="disabilities-page" value="true">
+      <input type="hidden" name="household-needs-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

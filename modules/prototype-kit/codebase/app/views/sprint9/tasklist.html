@@ -1,0 +1,320 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+{% set numberOfCompletedSections = 0 %}
+{% if data['household-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['household-situation-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['household-needs-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['tenancy-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['property-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['income-and-benefits-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['rent-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['local-authority-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['submitted-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+
+<div class="govuk-width-container ">
+  <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
+          Case #342351 </h1>
+        <h2 class="govuk-heading-s govuk-!-margin-bottom-2">Submission in progress</h2>
+        <p class="govuk-body govuk-!-margin-bottom-7">You've completed {{ numberOfCompletedSections }} of 9 sections.</p>
+
+
+        <ol class="app-task-list">
+          <li>
+            <h2 class="app-task-list__section">
+              <span class="app-task-list__section-number">1. </span> About the household
+            </h2>
+            <ul class="app-task-list__items">
+              <li class="app-task-list__item"">
+                {% if  data['household-completed'] == 'true' %}
+                <a class=" task-name" href="household/check-answers" aria-describedby="read-declaration-completed">
+                Household characteristics
+                </a>
+                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                {% elif  data['household-inprogress'] == 'true' %}
+                  {% set pages = ['tenant-code', 'tenant-age', 'gender', 'ethnicity', 'nationality', 'economic-status', 'other-household-members'] %}
+                  {% set notCompletedPages = [] %}
+                    {% for page in pages %}
+                      {% if not data[page + '-page'] %}
+                        {% set notCompletedPages = (notCompletedPages.push(page), notCompletedPages) %}
+                      {% endif %}
+                    {% endfor %}
+                    {% set nextPage = notCompletedPages[0] if notCompletedPages else 'check-answers' %}
+                    <a class="task-name" href={{ "household/" + nextPage }} aria-describedby="read-declaration-completed">
+                  Household characteristics
+                </a>
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                {% else %}
+                <a class="task-name" href="household/tenant-code" aria-describedby="read-declaration-completed">
+                  Household characteristics
+                </a>
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                {% endif %}
+              </li>
+
+              <li class="app-task-list__item"">
+              {% if  data['household-situation-completed'] == 'true' %}
+                <a class=" task-name" href="household-situation/check-answers" aria-describedby="read-declaration-completed">
+                Household situation
+                </a>
+                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                {% elif  data['household-situation-inprogress'] == 'true' %}
+                  {% set pages = ['previous-housing-situation', 'homeless', 'reason-for-leaving'] %}
+                  {% set notCompletedPages = [] %}
+                    {% for page in pages %}
+                      {% if not data[page + '-page'] %}
+                        {% set notCompletedPages = (notCompletedPages.push(page), notCompletedPages) %}
+                      {% endif %}
+                    {% endfor %}
+                    {% set nextPage = notCompletedPages[0] if notCompletedPages else 'check-answers' %}
+                    <a class="task-name" href={{ "household-situation/" + nextPage }} aria-describedby="read-declaration-completed">
+                  Household situation
+                </a>
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                {% else %}
+                <a class="task-name" href="household-situation/previous-housing-situation" aria-describedby="read-declaration-completed">
+                  Household situation
+                </a>
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                {% endif %}
+              </li>
+
+              <li class="app-task-list__item"">
+              {% if  data['household-needs-completed'] == 'true' %}
+                <a class=" task-name" href="household-needs/check-answers" aria-describedby="read-declaration-completed">
+                Household needs
+                </a>
+                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                {% elif  data['household-needs-inprogress'] == 'true' %}
+                  {% set pages = ['armed-forces', 'disabilities', 'pregnancy', 'requirements', 'conditions'] %}
+                  {% set notCompletedPages = [] %}
+                    {% for page in pages %}
+                      {% if not data[page + '-page'] %}
+                        {% set notCompletedPages = (notCompletedPages.push(page), notCompletedPages) %}
+                      {% endif %}
+                    {% endfor %}
+                    {% set nextPage = notCompletedPages[0] if notCompletedPages else 'check-answers' %}
+                    <a class="task-name" href={{ "household-needs/" + nextPage }} aria-describedby="read-declaration-completed">
+                  Household needs
+                </a>
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                {% else %}
+                <a class="task-name" href="household-needs/armed-forces" aria-describedby="read-declaration-completed">
+                  Household needs
+                </a>
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                {% endif %}
+              </li>
+            </ul>
+
+          <li>
+            <h2 class="app-task-list__section">
+              <span class="app-task-list__section-number">2. </span>Tenancy & Property Information
+            </h2>
+            <ul class="app-task-list__items">
+              <li class="app-task-list__item"">
+            {% if  data['tenancy-completed'] == 'true' %}
+              <a class=" task-name" href="tenancy/check-answers" aria-describedby="read-declaration-completed">
+                Tenancy information
+                </a>
+                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                {% elif  data['tenancy-inprogress'] == 'true' %}
+                  {% set pages = ['tenancy-code', 'tenancy-start-date', 'starter-tenancy', 'fixed-term', 'type-of-main-tenancy', 'letting-type', 'landlord'] %}
+                  {% set notCompletedPages = [] %}
+                    {% for page in pages %}
+                      {% if not data[page + '-page'] %}
+                        {% set notCompletedPages = (notCompletedPages.push(page), notCompletedPages) %}
+                      {% endif %}
+                    {% endfor %}
+                    {% set nextPage = notCompletedPages[0] if notCompletedPages else 'check-answers' %}
+                    <a class="task-name" href={{ "tenancy/" + nextPage }} aria-describedby="read-declaration-completed">
+                  Tenancy information
+                </a>
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                {% else %}
+                <a class="task-name" href="tenancy/tenancy-code" aria-describedby="read-declaration-completed">
+                  Tenancy information
+                </a>
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                {% endif %}
+              </li>
+
+              <li class="app-task-list__item"">
+            {% if  data['property-completed'] == 'true' %}
+              <a class=" task-name" href="property/check-answers" aria-describedby="read-declaration-completed">
+                Property information
+                </a>
+                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                {% elif  data['property-inprogress'] == 'true' %}
+                  {% set pages = ['property-location', 'postcode', 'relet', 'reason-for-vacancy', 'property-reference', 'type-of-unit', 'type-of-building', 'number-of-bedrooms', 'void-date', 'repair-date', 'previously-offered', 'wheelchair-accessible'] %}
+                  {% set notCompletedPages = [] %}
+                    {% for page in pages %}
+                      {% if not data[page + '-page'] %}
+                        {% set notCompletedPages = (notCompletedPages.push(page), notCompletedPages) %}
+                      {% endif %}
+                    {% endfor %}
+                    {% set nextPage = notCompletedPages[0] if notCompletedPages else 'check-answers' %}
+                    <a class="task-name" href={{ "property/" + nextPage }} aria-describedby="read-declaration-completed">
+                  Property information
+                </a>
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                {% else %}
+                <a class="task-name" href="property/property-location" aria-describedby="read-declaration-completed">
+                  Property information
+                </a>
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                {% endif %}
+              </li>
+            </ul>
+
+            <h2 class="app-task-list__section">
+              <span class="app-task-list__section-number">3. </span> Rent & Charges
+            </h2>
+            <ul class="app-task-list__items">
+              <li class="app-task-list__item"">
+            {% if  data['income-and-benefits-completed'] == 'true' %}
+              <a class=" task-name" href="income-and-benefits/check-answers" aria-describedby="read-declaration-completed">
+                Income & benefits
+                </a>
+                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+                {% elif  data['income-and-benefits-inprogress'] == 'true' %}
+                  {% set pages = ['income', 'benefit-proportion', 'benefits'] %}
+                  {% set notCompletedPages = [] %}
+                    {% for page in pages %}
+                      {% if not data[page + '-page'] %}
+                        {% set notCompletedPages = (notCompletedPages.push(page), notCompletedPages) %}
+                      {% endif %}
+                    {% endfor %}
+                    {% set nextPage = notCompletedPages[0] if notCompletedPages else 'check-answers' %}
+                    <a class="task-name" href={{ "income-and-benefits/" + nextPage }} aria-describedby="read-declaration-completed">
+                  Income & benefits
+                </a>
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+                {% else %}
+                <a class="task-name" href="income-and-benefits/income" aria-describedby="read-declaration-completed">
+                  Income & benefits
+                </a>
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+                {% endif %}
+              </li>
+
+              <li class="app-task-list__item"">
+              {% if  data['rent-completed'] == 'true' %}
+              <a class=" task-name" href="rent/check-answers" aria-describedby="read-declaration-completed">
+                Rent
+              </a>
+              <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+              {% elif  data['rent-inprogress'] == 'true' %}
+                {% set pages = ['rent'] %}
+                {% set notCompletedPages = [] %}
+                  {% for page in pages %}
+                    {% if not data[page + '-page'] %}
+                      {% set notCompletedPages = (notCompletedPages.push(page), notCompletedPages) %}
+                    {% endif %}
+                  {% endfor %}
+                  {% set nextPage = notCompletedPages[0] if notCompletedPages else 'check-answers' %}
+                  <a class="task-name" href={{ "rent/" + nextPage }} aria-describedby="read-declaration-completed">
+                Rent
+              </a>
+              <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+              {% else %}
+              <a class="task-name" href="rent/rent" aria-describedby="read-declaration-completed">
+                Rent
+              </a>
+              <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+              {% endif %}
+          </li>
+          </ul>
+
+          <h2 class="app-task-list__section">
+            <span class="app-task-list__section-number">4. </span> Local authority
+          </h2>
+          <ul class="app-task-list__items">
+            <li class="app-task-list__item"">
+            {% if  data['local-authority-completed'] == 'true' %}
+            <a class=" task-name" href="local-authority/check-answers" aria-describedby="read-declaration-completed">
+              Local authority
+            </a>
+            <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+            {% elif  data['local-authority-inprogress'] == 'true' %}
+              {% set pages = ['time-lived-in-la', 'time-on-waiting-list', 'previous-la', 'previous-postcode', 'reasonable-preference', 'allocation-type'] %}
+              {% set notCompletedPages = [] %}
+                {% for page in pages %}
+                  {% if not data[page + '-page'] %}
+                    {% set notCompletedPages = (notCompletedPages.push(page), notCompletedPages) %}
+                  {% endif %}
+                {% endfor %}
+                {% set nextPage = notCompletedPages[0] if notCompletedPages else 'check-answers' %}
+                <a class="task-name" href={{ "local-authority/" + nextPage }} aria-describedby="read-declaration-completed">
+              Local authority
+            </a>
+            <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+            {% else %}
+            <a class="task-name" href="local-authority/time-lived-in-la" aria-describedby="read-declaration-completed">
+              Local authority
+            </a>
+            <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+            {% endif %}
+            </li>
+          </ul>
+
+
+          <h2 class="app-task-list__section">
+            <span class="app-task-list__section-number">5. </span> Submit log
+          </h2>
+          <ul class="app-task-list__items">
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">Submit log</span>
+              {% if (data['household-completed'] == 'true') and
+                    (data['household-situation-completed'] == 'true') and
+                    (data['household-needs-completed'] == 'true') and
+                    (data['tenancy-completed'] == 'true') and
+                    (data['property-completed'] == 'true') and
+                    (data['income-and-benefits-completed'] == 'true') and
+                    (data['rent-completed'] == 'true') and
+                    (data['local-authority-completed'] == 'true') %}
+                    <form action="confirmation" method="post" novalidate>
+                      <input type="hidden" name="submitted-completed" value="true">
+                      <button class="govuk-button govuk-button app-task-list__tag" data-module="govuk-button">
+                        Submit
+                      </button>
+                    </form>
+              {% else %}
+              <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="submit-pay-status">Cannot start yet</strong>
+              {% endif %}
+            </li>
+          </ul>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

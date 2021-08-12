@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="allocation-type" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+          {% macro radio(data, group, items, changefn) %}
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?
+              </h1>
+            </legend>
+
+            <div class="govuk-form-group" id="{{ group }}">
+              <div class="govuk-radios">
+                {% for i in range(0, items['items'].length) %}
+                {% set item = items['items'][i] %}
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
+                    onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
+                  <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
+                    {{ item['text'] }}
+                  </label>
+                </div>
+                  {% endfor %}
+              </div>
+            </div>
+            </<fieldset>
+          {% endmacro %}
+
+          {{ radio(data, "reasonable-preference", {
+            items: [
+            {
+              value: "Yes",
+              text: "Yes",
+              checked: checked("reasonable-preference", "Yes")
+            },
+            {
+              value: "No",
+              text: "No",
+              checked: checked("reasonable-preference", "No")
+            }
+            ]
+            }, "displayConditional()") }}
+      </div>
+
+      <div id="reasonable-preference-reason-div" class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="reasonable-preference-reason-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+               Which of the following reasons for Reasonable Preference apply?
+            </h1>
+          </legend>
+          <div id="reasonable-preference-reason-hint" class="govuk-hint">
+            Select all that apply.
+          </div>
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="reasonable-preference-reason" name="reasonable-preference-reason" type="checkbox" value="Homeless or about to lose their home (within 56 days)" {{ 'checked' if data['reasonable-preference-reason'][0] == "Homeless or about to lose their home (within 56 days)" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reason">
+                Homeless or about to lose their home (within 56 days)
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="reasonable-preference-reason-2" name="reasonable-preference-reason" type="checkbox" value="Living in insanitary or overcrowded or unsatisfactory housing" {{ 'checked' if data['reasonable-preference-reason'][0] == "Living in insanitary or overcrowded or unsatisfactory housing" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reason-2">
+                Living in insanitary or overcrowded or unsatisfactory housing
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="reasonable-preference-reason-3" name="reasonable-preference-reason" type="checkbox" value="A need to move on medical and welfare grounds (including a disability)" {{ 'checked' if data['reasonable-preference-reason'][0] == "A need to move on medical and welfare grounds (including a disability)" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reason-3">
+                 A need to move on medical and welfare grounds (including a disability)
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="reasonable-preference-reason-4" name="reasonable-preference-reason" type="checkbox" value="A need to move to avoid hardship to themselves or others" {{ 'checked' if data['reasonable-preference-reason'][0] == "A need to move to avoid hardship to themselves or others" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reason-4">
+                 A need to move to avoid hardship to themselves or others
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="reasonable-preference-reason-6" name="reasonable-preference-reason" type="checkbox" value="Don’t know" {{ 'checked' if data['reasonable-preference-reason'][0] == "Don't know" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reason-6">
+                 Don’t know
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <style>
+      #reasonable-preference-reason-div {
+        display: none;
+      }
+      </style>
+
+      <input type="hidden" name="reasonable-preference-page" value="true">
+      <input type="hidden" name="tenancy-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<script>
+  function displayConditional() {
+    const reasonablePreferenceGiven = document.getElementById("reasonable-preference-0").checked
+    if(reasonablePreferenceGiven){
+      document.getElementById("reasonable-preference-reason-div").style.display = "block";
+    } else {
+      document.getElementById("reasonable-preference-reason-div").style.display = "none";
+      document.getElementById("reasonable-preference-reason").checked = false;
+      document.getElementById("reasonable-preference-reason-2").checked = false;
+      document.getElementById("reasonable-preference-reason-3").checked = false;
+      document.getElementById("reasonable-preference-reason-4").checked = false;
+      document.getElementById("reasonable-preference-reason-5").checked = false;
+      document.getElementById("reasonable-preference-reason-6").checked = false;
+    }
+  }
+  // So that this runs if you've already answered and hit the back button
+  displayConditional()
+</script>
+
+{% endblock %}

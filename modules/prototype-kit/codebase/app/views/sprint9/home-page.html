@@ -1,0 +1,170 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+{% set numberOfCompletedSections = 0 %}
+{% if data['household-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['household-situation-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['household-needs-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['tenancy-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['property-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['income-and-benefits-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['rent-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['local-authority-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+{% if data['submitted-completed'] == 'true' %}
+{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+{% endif %}
+
+{% set numberOfInProgressSections = 0 %}
+{% if data['household-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['household-situation-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['household-needs-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['tenancy-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['property-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['income-and-benefits-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['rent-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+{% if data['local-authority-inprogress'] == 'true' %}
+  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+{% endif %}
+
+{% set postcodeValue = (data["postcode"] if data["postcode"] else "") | trim_end(",") %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    <ul class="govuk-list">
+      <li>
+        <a class="govuk-button" href="tasklist" data-module="govuk-button">New Log</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-grid-column-three-quarters">
+    <div class="govuk-form-group">
+      <input class="govuk-input" id="event-name" name="event-name" placeholder="Search for logs" type="text">
+    </div>
+    {% if ((numberOfCompletedSections > 0) and (numberOfCompletedSections < 9)) or ((numberOfInProgressSections > 0) and (numberOfCompletedSections < 9)) %}
+    <table class="govuk-table">
+      <caption class="govuk-table__caption govuk-table__caption--m">Submissions in progress</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Log</th>
+          <th scope="col" class="govuk-table__header">Postcode</th>
+          <th scope="col" class="govuk-table__header govuk-table__header--numeric">Completed sections</th>
+          <th scope="col" class="govuk-table__header govuk-table__header--numeric"></th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">#342351
+          </th>
+          <td class="govuk-table__cell govuk-table__cell">{{ postcodeValue }}
+          </td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">{{ numberOfCompletedSections }} of 9 sections
+          </td>
+          <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">View</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    {% endif %}
+    <br>
+    <table class="govuk-table">
+      <caption class="govuk-table__caption govuk-table__caption--m">Submitted</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Log</th>
+          <th scope="col" class="govuk-table__header">Postcode</th>
+          <th scope="col" class="govuk-table__header govuk-table__header--numeric">Date Completed</th>
+          <th scope="col" class="govuk-table__header govuk-table__header--numeric"></th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% if (numberOfCompletedSections == 9) %}
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">#342351
+          </th>
+          <td class="govuk-table__cell govuk-table__cell">{{ postcodeValue }}
+          </td>
+          <td id="completed-date" class="govuk-table__cell govuk-table__cell--numeric">29 7 2021
+          </td>
+          <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">Edit</a>
+          </td>
+        </tr>
+        {% endif %}
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">#922151
+          </th>
+          <td class="govuk-table__cell govuk-table__cell">SE4 4RY
+          </td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">29 7 2021
+          </td>
+          <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">Edit</a>
+          </td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">#182151
+          </th>
+          <td class="govuk-table__cell govuk-table__cell">NW4 6RR
+          </td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">27 7 2021
+          </td>
+          <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">Edit</a>
+          </td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">#872251
+          </th>
+          <td class="govuk-table__cell govuk-table__cell">NW4 3RR
+          </td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">26 7 2021
+          </td>
+          <td class="govuk-table__cell govuk-table__cell--numeric"><a href="tasklist">Edit</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p><a href="#" class="govuk-link">View all 3032 logs</a></p>
+  </div>
+</div>
+
+<script>
+    el = document.getElementById("completed-date")
+    today = new Date();
+    dateString = today.toLocaleDateString('en-gb', {day: 'numeric', month: 'numeric', year: 'numeric'}).replace(/\/0+/g, ' ').replace(/\/+/g, ' ');
+    el.textContent = dateString
+</script>
+
+{% endblock %}

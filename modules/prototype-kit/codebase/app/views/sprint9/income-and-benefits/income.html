@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="benefit-proportion" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="income-hint">
+            <h1 class="govuk-fieldset__legend--l">
+              Tenant’s or tenant and partner’s net income (after tax deductions)
+            </h1>
+          <div id="income-hint" class="govuk-hint">
+            For those receiving Universal Credit, please enter net income from employment, pensions and Universal Credit. <br /> <br />
+            Please exclude child benefit, housing element of universal credit and council tax support.<br /> <br />
+            For those not receiving Universal Credit, please enter net income from employment, pensions and other benefits.<br /> <br />
+            Please exclude housing benefit, child benefit and council tax support.<br /> <br />
+            Rounded to nearest £
+          </div>
+
+          <div class="govuk-form-group">
+            <input class="govuk-input govuk-input--width-20" id="income" name="income" type="number" value={{ data['income'] }}>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Is the income...?
+            </h1>
+          </legend>
+
+          <div class="govuk-radios govuk-radios--small">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="income-frequency" name="income-frequency" type="radio" value="Weekly" {{ 'checked' if data['income-frequency'] == "Weekly" }}>
+              <label class="govuk-label govuk-radios__label" for="income-frequency">
+                Weekly
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="income-frequency" name="income-frequency" type="radio" value="Monthly" {{ 'checked' if data['income-frequency'] == "Monthly" }}>
+              <label class="govuk-label govuk-radios__label" for="income-frequency-2">
+                Monthly
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="income-frequency" name="income-frequency" type="radio" value="Annual" {{ 'checked' if data['income-frequency'] == "Annual" }}>
+              <label class="govuk-label govuk-radios__label" for="income-frequency-3">
+                Annual
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="income-page" value="true">
+      <input type="hidden" name="income-and-benefits-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

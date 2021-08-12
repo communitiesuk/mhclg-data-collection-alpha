@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+
+          <div id="choice-based-group" class="govuk-form-group">
+            {{ govukRadios({
+                idPrefix: "choice-based",
+                name: "choice-based",
+                fieldset: {
+                  legend: {
+                    text: "Was the letting made under choice-based lettings (CBL)?",
+                    classes: "govuk-label--l"
+                  }
+                },
+                items: [
+                  {
+                    value: "Yes",
+                    text: "Yes",
+                    checked: checked("choice-based", "Yes")
+                  },
+                  {
+                    value: "No",
+                    text: "No",
+                    checked: checked("choice-based", "No")
+                  }
+                ]
+              }) }}
+          </div>
+
+          <div id="common-housing-group" class="govuk-form-group">
+            {{ govukRadios({
+              idPrefix: "common-housing-register",
+              name: "common-housing-register",
+              fieldset: {
+                legend: {
+                  text: "Was the letting made under common housing register (CHR)?",
+                  classes: "govuk-label--l"
+                }
+              },
+              items: [
+                {
+                  value: "Yes",
+                  text: "Yes",
+                  checked: checked("common-housing-register", "Yes")
+                },
+                {
+                  value: "No",
+                  text: "No",
+                  checked: checked("common-housing-register", "No")
+                }
+              ]
+            }) }}
+          </div>
+
+          <div id="common-allocation-group" class="govuk-form-group">
+            {{ govukRadios({
+              idPrefix: "common-allocation-policy",
+              name: "common-allocation-policy",
+              fieldset: {
+                legend: {
+                  text: "Was the letting made under common allocation policy (CAP)?",
+                  classes: "govuk-label--l"
+                }
+              },
+              items: [
+                {
+                  value: "Yes",
+                  text: "Yes",
+                  checked: checked("common-allocation-policy", "Yes")
+                },
+                {
+                  value: "No",
+                  text: "No",
+                  checked: checked("common-allocation-policy", "No")
+                }
+              ]
+            }) }}
+          </div>
+      </div>
+      </fieldset>
+
+      <input type="hidden" name="allocation-type-page" value="true">
+      <input type="hidden" name="tenancy-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}

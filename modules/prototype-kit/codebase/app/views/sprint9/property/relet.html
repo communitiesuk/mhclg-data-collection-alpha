@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="reason-for-vacancy" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {{ govukRadios({
+      idPrefix: "relet",
+      name: "relet",
+      fieldset: {
+        legend: {
+          text: "If this is a relet, was the property most recently let on",
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [
+        {
+          value: "A social rent basis",
+          text: "A social rent basis",
+          checked: checked("relet", "A social rent basis")
+        },
+        {
+          value: "An affordable rent basis",
+          text: "An affordable rent basis",
+          checked: checked("relet", "An affordable rent basis")
+        },
+        {
+          value: "An intermediate rent basis",
+          text: "An intermediate rent basis",
+          checked: checked("relet", "An intermediate rent basis")
+        },
+        {
+          value: "Don't know",
+          text: "Don't know",
+          checked: checked("relet", "Don't know")
+        }
+      ]
+    }) }}
+
+      <input type="hidden" name="relet-page" value="true">
+      <input type="hidden" name="property-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}
