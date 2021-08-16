@@ -1,0 +1,4 @@
+pandas
+pyyaml
+ua-parser
+user-agents
