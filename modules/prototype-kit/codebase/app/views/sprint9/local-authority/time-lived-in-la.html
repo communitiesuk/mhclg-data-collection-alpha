@@ -27,9 +27,10 @@ GOV.UK Prototype Kit
         </h1>
       </legend>
 
-      {{ govukSelect({
+      {{ govukRadios({
       idPrefix: "time-lived-in-la",
       name: "time-lived-in-la",
+      classes: "govuk-radios--small",
       items: optionsItems
     }) }}
 

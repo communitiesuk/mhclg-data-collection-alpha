@@ -18,16 +18,25 @@ GOV.UK Prototype Kit
             </h1>
           </legend>
 
-          <div class="govuk-form-group">
-            <select class="govuk-select" id="benefit" name="benefit">
-              <option value="Housing Benefit" selected>Housing Benefit (if not in receipt of Universal Credit)</option>
-              <option value="Not in receipt of either UC or HB">Not in receipt of either UC or HB</option>
-              <option value="Don't Know">Don't Know</option>
-              <option value="UC - with housing element">UC - with housing element (and not in receipt of Housing Benefit)</option>
-              <option value="UC - without housing element (and not in receipt of HB)">UC - without housing element (not in receipt of HB and tenants not eligible for housing support e.g. residential care home)</option>
-              <option value="UC - without housing element (and in receipt of HB)">UC - without housing element (and in receipt of HB)</option>
-            </select>
-          </div>
+          {% set options = [
+            "Housing Benefit (if not in receipt of Universal Credit)", "Not in receipt of either UC or HB", "Don't Know",
+            "UC - with housing element (and not in receipt of Housing Benefit)",
+            "UC - without housing element (not in receipt of HB and tenants not eligible for housing support e.g. residential care home)",
+            "UC - without housing element (and in receipt of HB)"
+            ] %}
+
+          {% set optionItems = [] %}
+
+          {% for option in options %}
+            {% set optionItems = (optionItems.push({value: option, text: option, checked: checked("benefit", option)}), optionItems) %}
+          {% endfor %}
+
+          {{ govukRadios({
+          idPrefix: "benefit",
+          name: "benefit",
+          classes: "govuk-radios--small",
+          items: optionItems
+        }) }}
         </fieldset>
       </div>
 

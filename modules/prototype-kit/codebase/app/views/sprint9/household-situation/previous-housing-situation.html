@@ -26,9 +26,10 @@ GOV.UK Prototype Kit
         </h1>
       </legend>
 
-      {{ govukSelect({
+      {{ govukRadios({
       idPrefix: "previous-housing-situation",
       name: "previous-housing-situation",
+      classes: "govuk-radios--small",
       items: previousHousingSituationItems
     }) }}
 

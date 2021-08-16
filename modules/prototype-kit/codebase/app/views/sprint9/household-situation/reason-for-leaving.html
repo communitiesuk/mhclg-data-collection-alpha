@@ -22,43 +22,34 @@ GOV.UK Prototype Kit
 
           </div>
 
-          <div class="govuk-form-group">
-            <select class="govuk-select" id="reason-for-leaving" name="reason-for-leaving" onchange="displayConditional()">
-              <option value="Permanently decanted from another property owned by this landlord" selected>Permanently decanted from another property owned by this landlord</option>
-              <option value="Left home country as a refugee">Left home country as a refugee</option>
-              <option value="Loss of tied accommodation">Loss of tied accommodation</option>
-              <option value="Domestic abuse">Domestic abuse</option>
-              <option value="(Non violent) relationship breakdown with partner">(Non violent) relationship breakdown with partner</option>
-              <option value="Asked to leave by family or friends">Asked to leave by family or friends</option>
-              <option value="Racial harassment">Racial harassment</option>
-              <option value="Other problems with neighbours">Other problems with neighbours</option>
-              <option value="Property unsuitable because of overcrowding">Property unsuitable because of overcrowding</option>
-              <option value="End of assured shorthold tenancy - no fault">End of assured shorthold tenancy - no fault</option>
-              <option value="End of assured shorthold tenancy - tenant's fault">End of assured shorthold tenancy - tenant's fault</option>
-              <option value="End of fixed term tenancy - no fault">End of fixed term tenancy - no fault</option>
-              <option value="End of fixed term tenancy - tenant's fault">End of fixed term tenancy - tenant's fault</option>
-              <option value="Repossession">Repossession</option>
-              <option value="Under occupation - offered incentive to downsize">Under occupation - offered incentive to downsize</option>
-              <option value="Under occupation - no incentive">Under occupation - no incentive</option>
-              <option value="Property unsuitable because of ill health / disability">Property unsuitable because of ill health / disability</option>
-              <option value="Property unsuitable because of poor condition">Property unsuitable because of poor condition</option>
-              <option value="Couldn't afford fees attached to renewing the tenancy">Couldn't afford fees attached to renewing the tenancy</option>
-              <option value="Couldn't afford increase in rent">Couldn't afford increase in rent</option>
-              <option value="Couldn't afford rent or mortgage - welfare reforms">Couldn't afford rent or mortgage - welfare reforms</option>
-              <option value="Couldn't afford rent or mortgage - employment">Couldn't afford rent or mortgage - employment</option>
-              <option value="Couldn't afford rent or mortgage - other">Couldn't afford rent or mortgage - other</option>
-              <option value="To move nearer to family / friends / school">To move nearer to family / friends / school</option>
-              <option value="To move nearer to work">To move nearer to work</option>
-              <option value="To move to accomodation with support">To move to accomodation with support</option>
-              <option value="To move to independent accomodation">To move to independent accomodation</option>
-              <option value="Hate crime">Hate crime</option>
-              <option value="Death of household member in last settled accomodation">Death of household member in last settled accomodation</option>
-              <option value="Discharged from prison">Discharged from prison</option>
-              <option value="Discharged from long stay hospital or similar institution">Discharged from long stay hospital or similar institution</option>
-              <option value="Other">Other</option>
-              <option value="Don't know">Don't know</option>
-            </select>
-          </div>
+          {% set options = [
+            "Permanently decanted from another property owned by this landlord","Left home country as a refugee",
+            "Loss of tied accommodation","Domestic abuse","(Non violent) relationship breakdown with partner",
+            "Asked to leave by family or friends","Racial harassment","Other problems with neighbours",
+            "Property unsuitable because of overcrowding","End of assured shorthold tenancy - no fault",
+            "End of assured shorthold tenancy - tenant's fault","End of fixed term tenancy - no fault",
+            "End of fixed term tenancy - tenant's fault","Repossession","Under occupation - offered incentive to downsize",
+            "Under occupation - no incentive","Property unsuitable because of ill health / disability",
+            "Property unsuitable because of poor condition","Couldn't afford fees attached to renewing the tenancy",
+            "Couldn't afford increase in rent","Couldn't afford rent or mortgage - welfare reforms",
+            "Couldn't afford rent or mortgage - employment","Couldn't afford rent or mortgage - other",
+            "To move nearer to family / friends / school","To move nearer to work","To move to accomodation with support",
+            "To move to independent accomodation","Hate crime","Death of household member in last settled accomodation",
+            "Discharged from prison","Discharged from long stay hospital or similar institution","Other","Don't know"
+          ] %}
+
+          {% set optionsItems = [] %}
+
+          {% for option in options %}
+            {% set optionsItems = (optionsItems.push({value: option, text: option, checked: checked("reason-for-leaving", option)}), optionsItems) %}
+          {% endfor %}
+
+          {{ govukRadios({
+          idPrefix: "reason-for-leaving",
+          name: "reason-for-leaving",
+          classes: "govuk-radios--small",
+          items: optionsItems
+        }) }}
       </div>
 
       <div id="other-reason-for-leaving-group" class="govuk-form-group">

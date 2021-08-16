@@ -30,9 +30,10 @@ GOV.UK Prototype Kit
         {% set locationItems = (locationItems.push({value: location, text: location, checked: checked("property-location", location)}), locationItems) %}
       {% endfor %}
 
-      {{ govukSelect({
+      {{ govukRadios({
       idPrefix: "property-location",
       name: "property-location",
+      classes: "govuk-radios--small",
       items: locationItems
     }) }}
 

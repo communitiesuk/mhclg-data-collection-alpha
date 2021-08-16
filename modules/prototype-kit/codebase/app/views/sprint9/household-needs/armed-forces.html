@@ -26,7 +26,7 @@ GOV.UK Prototype Kit
 
             {% macro radio(data, group, items, changefn) %}
               <div class="govuk-form-group" id="{{ group }}">
-                <div class="govuk-radios">
+                <div class="govuk-radios--small">
                   {% for i in range(0, items['items'].length) %}
                   {% set item = items['items'][i] %}
                   <div class="govuk-radios__item">
@@ -71,6 +71,7 @@ GOV.UK Prototype Kit
                 {{ govukRadios({
                 idPrefix: "armed-forces-tenure",
                 name: "armed-forces-tenure",
+                classes: "govuk-radios",
                 fieldset: {
                   legend: {
                     text: "When did they leave the Armed Forces?",

@@ -22,26 +22,96 @@ GOV.UK Prototype Kit
 
           </div>
 
-          <div class="govuk-form-group">
-            <select class="govuk-select" id="nationality" name="nationality">
-              <option value="UK national resident in UK" selected>UK national resident in UK</option>
-              <option value="UK national returning from residence overseas">UK national returning from residence overseas</option>
-              <option value="Czech Republic">Czech Republic</option>
-              <option value="Estonia">Estonia</option>
-              <option value="Hungary">Hungary</option>
-              <option value="Latvia">Latvia</option>
-              <option value="Lithuania">Lithuania</option>
-              <option value="Poland">Poland</option>
-              <option value="Slovakia">Slovakia</option>
-              <option value="Slovenia">Slovenia</option>
-              <option value="Bulgaria">Bulgaria</option>
-              <option value="Romania">Romania</option>
-              <option value="Croatia">Croatia</option>
-              <option value="Ireland">Ireland</option>
-              <option value="Other EU Economic Area (EEA) country">Other EU Economic Area (EEA country)</option>
-              <option value="Any other country">Any other country</option>
-              <option value="Refused">Refused</option>
-            </select>
+          <div id="nationality-div">
+            {% macro radio(data, group, items, changefn) %}
+              <div class="govuk-form-group" id="{{ group }}">
+                <div class="govuk-radios--small">
+                  {% for i in range(0, items['items'].length) %}
+                  {% set item = items['items'][i] %}
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
+                      onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
+                    <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
+                      {{ item['text'] }}
+                    </label>
+                  </div>
+                    {% endfor %}
+                </div>
+              </div>
+            {% endmacro %}
+
+            {{ radio(data, "nationality", {
+              items: [
+                {
+                  value: "UK national resident in UK",
+                  text: "UK national resident in UK"
+                },
+                {
+                  value: "A current or former reserve in the UK Armed Forces (exc. National Service)",
+                  text: "A current or former reserve in the UK Armed Forces (exc. National Service)"
+                },
+                {
+                  value: "UK national returning from residence overseas",
+                  text: "UK national returning from residence overseas"
+                },
+                {
+                  value: "Czech Republic",
+                  text: "Czech Republic"
+                },
+                {
+                  value: "Estonia",
+                  text: "Estonia"
+                },
+                {
+                  value: "Hungary",
+                  text: "Hungary"
+                },
+                {
+                  value: "Latvia",
+                  text: "Latvia"
+                },
+                {
+                  value: "Lithuania",
+                  text: "Lithuania"
+                },
+                {
+                  value: "Poland",
+                  text: "Poland"
+                },
+                {
+                  value: "Slovakia",
+                  text: "Slovakia"
+                },
+                {
+                  value: "Bulgaria",
+                  text: "Bulgaria"
+                },
+                {
+                  value: "Romania",
+                  text: "Romania"
+                },
+                {
+                  value: "Croatia",
+                  text: "Croatia"
+                },
+                {
+                  value: "Ireland",
+                  text: "Ireland"
+                },
+                {
+                  value: "Other EU Economic Area (EEA country)",
+                  text: "Other EU Economic Area (EEA country)"
+                },
+                {
+                  value: "Any other country",
+                  text: "Any other country"
+                },
+                {
+                  value: "Refused",
+                  text: "Refused"
+                }
+              ]
+              }) }}
           </div>
       </div>
 

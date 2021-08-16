@@ -30,9 +30,10 @@ GOV.UK Prototype Kit
         Including temporary accomodation
       </div>
 
-      {{ govukSelect({
+      {{ govukRadios({
       idPrefix: "previous-la",
       name: "previous-la",
+      classes: "govuk-radios--small",
       items: locationItems
     }) }}
 

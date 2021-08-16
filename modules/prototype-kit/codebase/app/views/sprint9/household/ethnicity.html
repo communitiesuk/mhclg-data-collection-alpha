@@ -22,28 +22,104 @@ GOV.UK Prototype Kit
 
           </div>
 
-          <div class="govuk-form-group">
-            <select class="govuk-select" id="ethnicity" name="ethnicity">
-              <option value="White: British" selected>White: English/Scottish/Welsh/Northern Irish/British</option>
-              <option value="White: Irish">White: Irish</option>
-              <option value="White: Gypsy/Irish Traveller">White: Gypsy/Irish Traveller</option>
-              <option value="White: Other">White: Other</option>
-              <option value="Mixed: White & Black Caribbean">Mixed: White & Black Caribbean</option>
-              <option value="Mixed: White & Black African">Mixed: White & Black African</option>
-              <option value="Mixed: White & Asian">Mixed: White & Asian</option>
-              <option value="Mixed: Other">Mixed: Other</option>
-              <option value="Asian or Asian British: Indian">Asian or Asian British: Indian</option>
-              <option value="Asian or Asian British: Pakistani">Asian or Asian British: Pakistani</option>
-              <option value="Asian or Asian British: Bangladeshi">Asian or Asian British: Bangladeshi</option>
-              <option value="Asian or Asian British: Chinese">Asian or Asian British: Chinese</option>
-              <option value="Asian or Asian British: Other">Asian or Asian British: Other</option>
-              <option value="Black: Caribbean">Black: Caribbean</option>
-              <option value="Black: African">Black: African</option>
-              <option value="Black: Other">Black: Other</option>
-              <option value="Other Ethnic Group: Arab">Other Ethnic Group: Arab</option>
-              <option value="Other Ethnic Group: Other">Other Ethnic Group: Other</option>
-              <option value="Refused">Refused</option>
-            </select>
+          <div id="ethnicity-div">
+            {% macro radio(data, group, items, changefn) %}
+              <div class="govuk-form-group" id="{{ group }}">
+                <div class="govuk-radios--small">
+                  {% for i in range(0, items['items'].length) %}
+                  {% set item = items['items'][i] %}
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
+                      onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
+                    <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
+                      {{ item['text'] }}
+                    </label>
+                  </div>
+                    {% endfor %}
+                </div>
+              </div>
+            {% endmacro %}
+
+            {{ radio(data, "ethnicity", {
+              items: [
+                {
+                  value: "White: English/Scottish/Welsh/Northern Irish/British",
+                  text: "White: English/Scottish/Welsh/Northern Irish/British"
+                },
+                {
+                  value: "White: Irish",
+                  text: "White: Irish"
+                },
+                {
+                  value: "White: Gypsy/Irish Traveller",
+                  text: "White: Gypsy/Irish Traveller"
+                },
+                {
+                  value: "White: Other",
+                  text: "White: Other"
+                },
+                {
+                  value: "Mixed: White & Black Caribbean",
+                  text: "Mixed: White & Black Caribbean"
+                },
+                {
+                  value: "Mixed: White & Black African",
+                  text: "Mixed: White & Black African"
+                },
+                {
+                  value: "Mixed: White & Asian",
+                  text: "Mixed: White & Asian"
+                },
+                {
+                  value: "Mixed: Other",
+                  text: "Mixed: Other"
+                },
+                {
+                  value: "Asian or Asian British: Indian",
+                  text: "Asian or Asian British: Indian"
+                },
+                {
+                  value: "Asian or Asian British: Pakistani",
+                  text: "Asian or Asian British: Pakistani"
+                },
+                {
+                  value: "Asian or Asian British: Bangladeshi",
+                  text: "Asian or Asian British: Bangladeshi"
+                },
+                {
+                  value: "Asian or Asian British: Chinese",
+                  text: "Asian or Asian British: Chinese"
+                },
+                {
+                  value: "Asian or Asian British: Other",
+                  text: "Asian or Asian British: Other"
+                },
+                {
+                  value: "Black: Caribbean",
+                  text: "Black: Caribbean"
+                },
+                {
+                  value: "Black: African",
+                  text: "Black: African"
+                },
+                {
+                  value: "Black: Other",
+                  text: "Black: Other"
+                },
+                {
+                  value: "Other Ethnic Group: Arab",
+                  text: "Other Ethnic Group: Arab"
+                },
+                {
+                  value: "Other Ethnic Group: Other",
+                  text: "Other Ethnic Group: Other"
+                },
+                {
+                  value: "Refused",
+                  text: "Refused"
+                }
+              ]
+              }) }}
           </div>
       </div>
 

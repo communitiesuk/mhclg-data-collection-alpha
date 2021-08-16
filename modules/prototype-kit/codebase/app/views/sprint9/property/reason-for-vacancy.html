@@ -20,9 +20,10 @@ GOV.UK Prototype Kit
 
         </div>
 
-      {{ govukSelect({
+      {{ govukRadios({
       idPrefix: "reason-for-vacancy",
       name: "reason-for-vacancy",
+      classes: "govuk-radios--small",
       items: [
         {
           value: "First let of newbuild property",
