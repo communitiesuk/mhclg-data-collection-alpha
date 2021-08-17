@@ -4,10 +4,12 @@
 GOV.UK Prototype Kit
 {% endblock %}
 
-{% block content %}
+{% block beforeContent %}
+  <a href="../tasklist" class="govuk-back-link">Back</a>
+  <a href="../sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
 
-<a href="../tasklist" class="govuk-back-link">Back</a>
-<a href="sign-in" class="govuk-link--right ">Sign out</a>
+{% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">

@@ -17,4 +17,6 @@ $govuk-assets-path: '/govuk/assets/';
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 .govuk-link--right {
   float: right;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

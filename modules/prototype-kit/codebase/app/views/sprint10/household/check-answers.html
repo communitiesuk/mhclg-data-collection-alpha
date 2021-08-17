@@ -4,7 +4,14 @@
 Check your answers
 {% endblock %}
 
+{% block beforeContent %}
+  <a href="other-household-members" class="govuk-back-link">Back</a>
+  <a href="../sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
 {% block content %}
+
+{% set previous = "other-household-members" %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">

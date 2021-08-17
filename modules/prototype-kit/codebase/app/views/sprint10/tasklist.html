@@ -6,6 +6,11 @@ CORE tasklist
 
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
+{% block beforeContent %}
+  <a href="home-page" class="govuk-back-link">Back to your CORE logs</a>
+  <a href="../sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
 {% block content %}
 
 {% set numberOfCompletedSections = 0 %}
@@ -33,10 +38,6 @@ CORE tasklist
 {% else %}
   {% set nextIncompleteSectionStatus = 'incomplete' %}
 {% endif %}
-
-<a href="home-page" class="govuk-back-link">Back to your CORE logs</a>
-<a href="sign-in" class="govuk-link--right ">Sign out</a>
-
 
 <div class="govuk-width-container ">
   <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
