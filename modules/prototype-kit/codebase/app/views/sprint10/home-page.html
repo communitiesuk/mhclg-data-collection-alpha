@@ -7,59 +7,23 @@ GOV.UK Prototype Kit
 {% block content %}
 
 {% set numberOfCompletedSections = 0 %}
-{% if data['household-completed'] == 'true' %}
-{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
-{% if data['household-situation-completed'] == 'true' %}
-{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
-{% if data['household-needs-completed'] == 'true' %}
-{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
-{% if data['tenancy-completed'] == 'true' %}
-{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
-{% if data['property-completed'] == 'true' %}
-{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
-{% if data['income-and-benefits-completed'] == 'true' %}
-{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
-{% if data['rent-completed'] == 'true' %}
-{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
-{% if data['local-authority-completed'] == 'true' %}
-{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
-{% if data['submitted-completed'] == 'true' %}
-{% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
-{% endif %}
-
 {% set numberOfInProgressSections = 0 %}
-{% if data['household-inprogress'] == 'true' %}
-  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
-{% endif %}
-{% if data['household-situation-inprogress'] == 'true' %}
-  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
-{% endif %}
-{% if data['household-needs-inprogress'] == 'true' %}
-  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
-{% endif %}
-{% if data['tenancy-inprogress'] == 'true' %}
-  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
-{% endif %}
-{% if data['property-inprogress'] == 'true' %}
-  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
-{% endif %}
-{% if data['income-and-benefits-inprogress'] == 'true' %}
-  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
-{% endif %}
-{% if data['rent-inprogress'] == 'true' %}
-  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
-{% endif %}
-{% if data['local-authority-inprogress'] == 'true' %}
-  {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
-{% endif %}
+
+{% set sections = [
+  'household', 'household-situation', 'household-needs', 'tenancy', 'property', 'income-and-benefits', 'rent', 'local-authority', 'submitted'
+  ]
+%}
+
+{% for section in sections %}
+  {% set completedKey = section + '-completed' %}
+  {% if data[ completedKey ] == 'true' %}
+    {% set numberOfCompletedSections = numberOfCompletedSections + 1 %}
+  {% endif %}
+  {% set inProgressKey = section + '-inprogress' %}
+  {% if data[ inProgressKey ] == 'true' %}
+    {% set numberOfInProgressSections = numberOfInProgressSections + 1 %}
+  {% endif %}
+{% endfor %}
 
 {% set postcodeValue = (data["postcode"] if data["postcode"] else "") | trim_end(",") %}
 {% set numberOfCompletedLogs = '3,872' %}
