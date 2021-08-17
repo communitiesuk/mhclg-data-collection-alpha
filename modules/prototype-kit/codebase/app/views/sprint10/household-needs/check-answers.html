@@ -29,7 +29,7 @@ Check your answers
         </dd>
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link" href="/sprint10/household-needs/armed-forces?check=true">
-            Change<span class="govuk-visually-hidden">Armed Forces</span>
+            {{ "Change" if data["armed-forces"] else "Answer"}}<span class="govuk-visually-hidden">Armed Forces</span>
           </a>
         </dd>
       </div>
@@ -46,7 +46,7 @@ Check your answers
         </dd>
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link" href="/sprint10/household-needs/armed-forces?check=true">
-            Change<span class="govuk-visually-hidden">armed forces</span>
+            {{ "Change" if data["armed-forces-tenure"] else "Answer"}}<span class="govuk-visually-hidden">armed forces</span>
           </a>
         </dd>
       </div>
@@ -64,7 +64,7 @@ Check your answers
         </dd>
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link" href="/sprint10/household-needs/armed-forces?check=true">
-            Change<span class="govuk-visually-hidden">armed forces</span>
+            {{ "Change" if data["armed-forces-injured"] else "Answer"}}<span class="govuk-visually-hidden">armed forces</span>
           </a>
         </dd>
       </div>
@@ -81,7 +81,7 @@ Check your answers
         </dd>
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link" href="/sprint10/household-needs/disabilities?check=true">
-            Change<span class="govuk-visually-hidden">disabilities</span>
+            {{ "Change" if data["long-term-conditions"] else "Answer"}}<span class="govuk-visually-hidden">disabilities</span>
           </a>
         </dd>
       </div>
@@ -97,7 +97,7 @@ Check your answers
         </dd>
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link" href="/sprint10/household-needs/pregnancy?check=true">
-            Change<span class="govuk-visually-hidden">Pregnancy</span>
+            {{ "Change" if data["pregnancy"] else "Answer"}}<span class="govuk-visually-hidden">Pregnancy</span>
           </a>
         </dd>
       </div>
@@ -114,7 +114,7 @@ Check your answers
         </dd>
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link" href="/sprint10/household-needs/disabilities?check=true">
-            Change<span class="govuk-visually-hidden">disabilities</span>
+            {{ "Change" if data["disabilities"] else "Answer"}}<span class="govuk-visually-hidden">disabilities</span>
           </a>
         </dd>
       </div>
@@ -131,7 +131,7 @@ Check your answers
         </dd>
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link" href="/sprint10/household-needs/disabilities?check=true">
-            Change<span class="govuk-visually-hidden">disabilities</span>
+            {{ "Change" if data["conditions"] else "Answer"}}<span class="govuk-visually-hidden">disabilities</span>
           </a>
         </dd>
       </div>

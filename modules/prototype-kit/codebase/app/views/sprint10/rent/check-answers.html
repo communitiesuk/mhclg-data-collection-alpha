@@ -29,7 +29,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/rent/rent?check=true">
-              Change<span class="govuk-visually-hidden">Rent</span>
+              {{ "Change" if data["rent-period"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
             </a>
           </dd>
         </div>
@@ -45,7 +45,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/rent/rent?check=true">
-              Change<span class="govuk-visually-hidden">Rent</span>
+              {{ "Change" if data["rent"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
             </a>
           </dd>
         </div>
@@ -61,7 +61,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/rent/rent?check=true">
-              Change<span class="govuk-visually-hidden">Rent</span>
+              {{ "Change" if data["service-charge"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
             </a>
           </dd>
         </div>
@@ -77,7 +77,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/rent/rent?check=true">
-              Change<span class="govuk-visually-hidden">Rent</span>
+              {{ "Change" if data["personal-service-charge"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
             </a>
           </dd>
         </div>
@@ -93,7 +93,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/rent/rent?check=true">
-              Change<span class="govuk-visually-hidden">Rent</span>
+              {{ "Change" if data["support-charge"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
             </a>
           </dd>
         </div>
@@ -109,7 +109,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/rent/rent?check=true">
-              Change<span class="govuk-visually-hidden">Rent</span>
+              {{ "Change" if data["total-charge"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
             </a>
           </dd>
         </div>
@@ -125,7 +125,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/rent/rent?check=true">
-              Change<span class="govuk-visually-hidden">Rent</span>
+              {{ "Change" if data["outstanding"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
             </a>
           </dd>
         </div>
@@ -142,7 +142,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/rent/rent?check=true">
-              Change<span class="govuk-visually-hidden">rent</span>
+              {{ "Change" if data["outstanding-amount"] else "Answer"}}<span class="govuk-visually-hidden">rent</span>
             </a>
           </dd>
         </div>

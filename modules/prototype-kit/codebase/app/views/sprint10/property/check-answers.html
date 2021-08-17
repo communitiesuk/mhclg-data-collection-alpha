@@ -29,7 +29,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/property-location?check=true">
-              Change<span class="govuk-visually-hidden">property-location</span>
+              {{ "Change" if data["property-location"] else "Answer"}}<span class="govuk-visually-hidden">property-location</span>
             </a>
           </dd>
         </div>
@@ -46,7 +46,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/postcode?check=true">
-              Change<span class="govuk-visually-hidden">postcode</span>
+              {{ "Change" if data["postcode"] else "Answer"}}<span class="govuk-visually-hidden">postcode</span>
             </a>
           </dd>
         </div>
@@ -62,7 +62,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/relet?check=true">
-              Change<span class="govuk-visually-hidden">relet</span>
+              {{ "Change" if data["relet"] else "Answer"}}<span class="govuk-visually-hidden">relet</span>
             </a>
           </dd>
         </div>
@@ -78,7 +78,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/reason-for-vacancy?check=true">
-              Change<span class="govuk-visually-hidden">reason for vacancy</span>
+              {{ "Change" if data["reason-for-vacancy"] else "Answer"}}<span class="govuk-visually-hidden">reason for vacancy</span>
             </a>
           </dd>
         </div>
@@ -94,7 +94,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/property-reference?check=true">
-              Change<span class="govuk-visually-hidden">property reference</span>
+              {{ "Change" if data["property-reference"] else "Answer"}}<span class="govuk-visually-hidden">property reference</span>
             </a>
           </dd>
         </div>
@@ -110,7 +110,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/type-of-unit?check=true">
-              Change<span class="govuk-visually-hidden">Type of unit</span>
+              {{ "Change" if data["type-of-unit"] else "Answer"}}<span class="govuk-visually-hidden">Type of unit</span>
             </a>
           </dd>
         </div>
@@ -126,7 +126,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/type-of-building?check=true">
-              Change<span class="govuk-visually-hidden">Type of building</span>
+              {{ "Change" if data["type-of-building"] else "Answer"}}<span class="govuk-visually-hidden">Type of building</span>
             </a>
           </dd>
         </div>
@@ -142,7 +142,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/number-of-bedrooms?check=true">
-              Change<span class="govuk-visually-hidden">Bedrooms</span>
+              {{ "Change" if data["number-of-bedrooms"] else "Answer"}}<span class="govuk-visually-hidden">Bedrooms</span>
             </a>
           </dd>
         </div>
@@ -158,7 +158,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/void-date?check=true">
-              Change<span class="govuk-visually-hidden">void-date</span>
+              {{ "Change" if data["void-date-day"] else "Answer"}}<span class="govuk-visually-hidden">void-date</span>
             </a>
           </dd>
         </div>
@@ -174,7 +174,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/repair-date?check=true">
-              Change<span class="govuk-visually-hidden">repair-date</span>
+              {{ "Change" if data["repair-date-day"] else "Answer"}}<span class="govuk-visually-hidden">repair-date</span>
             </a>
           </dd>
         </div>
@@ -190,7 +190,7 @@ Check your answers
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/previously-offered?check=true">
-              Change<span class="govuk-visually-hidden">previously-offered</span>
+              {{ "Change" if data["previously-offered"] else "Answer"}}<span class="govuk-visually-hidden">previously-offered</span>
             </a>
           </dd>
         </div>
@@ -202,11 +202,11 @@ Check your answers
             Is property built or adapted to wheelchair user standards?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["wheelchair-accesible"] }}
+            {{ data["wheelchair-accessible"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/wheelchair-accesible?check=true">
-              Change<span class="govuk-visually-hidden">Wheelchair accesible</span>
+            <a class="govuk-link" href="/sprint10/property/wheelchair-accessible?check=true">
+              {{ "Change" if data["wheelchair-accessible"] else "Answer"}}<span class="govuk-visually-hidden">Wheelchair accessible</span>
             </a>
           </dd>
         </div>
