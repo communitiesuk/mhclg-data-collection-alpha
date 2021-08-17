@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="type-of-building" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {{ govukRadios({
+      idPrefix: "type-of-unit",
+      name: "type-of-unit",
+      classes: "govuk-radios--small",
+      fieldset: {
+        legend: {
+          text: "Type of unit",
+          classes: "govuk-label--l"
+        }
+      },
+      items: [
+        {
+          value: "Flat / maisonette",
+          text: "Flat / maisonette",
+          checked: checked("type-of-unit", "Flat / maisonette")
+        },
+        {
+          value: "Bed-sit",
+          text: "Bed-sit",
+          checked: checked("type-of-unit", "Bed-sit")
+        },
+        {
+          value: "House",
+          text: "House",
+          checked: checked("type-of-unit", "House")
+        },
+        {
+          value: "Bungalow",
+          text: "Bungalow",
+          checked: checked("type-of-unit", "Bungalow")
+        },
+        {
+          value: "Shared flat / maisonette",
+          text: "Shared flat / maisonette",
+          checked: checked("type-of-unit", "Shared flat / maisonette")
+        },
+        {
+          value: "Shared house",
+          text: "Shared house",
+          checked: checked("type-of-unit", "Shared house")
+        },
+        {
+          value: "Shared bungalow",
+          text: "Shared bungalow",
+          checked: checked("type-of-unit", "Shared bungalow")
+        },
+        {
+          value: "Other",
+          text: "Other",
+          checked: checked("type-of-unit", "Other")
+        }
+      ]
+    }) }}
+
+      <input type="hidden" name="type-of-unit-page" value="true">
+      <input type="hidden" name="property-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

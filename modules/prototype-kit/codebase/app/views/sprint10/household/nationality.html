@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="economic-status" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Nationality
+            </h1>
+          </legend>
+          <div id="nationality-hint" class="govuk-hint">
+
+          </div>
+
+          <div id="nationality-div">
+            {% macro radio(data, group, items, changefn) %}
+              <div class="govuk-form-group" id="{{ group }}">
+                <div class="govuk-radios--small">
+                  {% for i in range(0, items['items'].length) %}
+                  {% set item = items['items'][i] %}
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
+                      onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
+                    <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
+                      {{ item['text'] }}
+                    </label>
+                  </div>
+                    {% endfor %}
+                </div>
+              </div>
+            {% endmacro %}
+
+            {{ radio(data, "nationality", {
+              items: [
+                {
+                  value: "UK national resident in UK",
+                  text: "UK national resident in UK"
+                },
+                {
+                  value: "A current or former reserve in the UK Armed Forces (exc. National Service)",
+                  text: "A current or former reserve in the UK Armed Forces (exc. National Service)"
+                },
+                {
+                  value: "UK national returning from residence overseas",
+                  text: "UK national returning from residence overseas"
+                },
+                {
+                  value: "Czech Republic",
+                  text: "Czech Republic"
+                },
+                {
+                  value: "Estonia",
+                  text: "Estonia"
+                },
+                {
+                  value: "Hungary",
+                  text: "Hungary"
+                },
+                {
+                  value: "Latvia",
+                  text: "Latvia"
+                },
+                {
+                  value: "Lithuania",
+                  text: "Lithuania"
+                },
+                {
+                  value: "Poland",
+                  text: "Poland"
+                },
+                {
+                  value: "Slovakia",
+                  text: "Slovakia"
+                },
+                {
+                  value: "Bulgaria",
+                  text: "Bulgaria"
+                },
+                {
+                  value: "Romania",
+                  text: "Romania"
+                },
+                {
+                  value: "Croatia",
+                  text: "Croatia"
+                },
+                {
+                  value: "Ireland",
+                  text: "Ireland"
+                },
+                {
+                  value: "Other EU Economic Area (EEA country)",
+                  text: "Other EU Economic Area (EEA country)"
+                },
+                {
+                  value: "Any other country",
+                  text: "Any other country"
+                },
+                {
+                  value: "Refused",
+                  text: "Refused"
+                }
+              ]
+              }) }}
+          </div>
+      </div>
+
+      <input type="hidden" name="nationality-page". value="true">
+      <input type="hidden" name="household-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

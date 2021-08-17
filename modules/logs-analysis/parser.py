@@ -37,3 +37,9 @@ user_agents.drop(user_agents[user_agents['browser'] == 'DuckDuckGo-Favicons-Bot'
 
 grouped = user_agents.groupby(['device', 'os', 'browser'])['count'].sum().sort_values(ascending=False)
 print(grouped)
+
+import psutil
+memory = psutil.virtual_memory()
+print(f" {'*' * 3} Memory used percentage - {memory.percent} \n {'*' * 4} Free Memory available - { round(memory.free / (1024.0 ** 3))} GB")
+
+print(f" ** Memory usage of the file - {sum(logs.memory_usage()) * 0.000001} MB for {len(logs.index)} Rows")

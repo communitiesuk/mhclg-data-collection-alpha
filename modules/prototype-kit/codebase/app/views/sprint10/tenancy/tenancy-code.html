@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="tenancy-start-date" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              What is the tenancy code?
+            </h1>
+          </legend>
+
+          <div class="govuk-form-group">
+            <input class="govuk-input govuk-input--width-20" id="tenancy-code" name="tenancy-code" data-value="tenancy-code" type="text" value={{ data['tenancy-code'] }}>
+          </div>
+      </div>
+
+      <div class="govuk-button-group">
+        <input type="hidden" name="tenancy-code-page" value="true">
+        <input type="hidden" name="tenancy-inprogress" value="true">
+        <input class="govuk-button" type="submit" value="Save and continue" />
+      </div>
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

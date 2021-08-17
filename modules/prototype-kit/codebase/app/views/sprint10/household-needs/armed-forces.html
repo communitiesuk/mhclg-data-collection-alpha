@@ -1,0 +1,184 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="disabilities" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset" aria-describedby="armed-forces-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Armed Forces
+            </h1>
+          </legend>
+          <div id="armed-forces-hint" class="govuk-hint">
+
+          </div>
+
+          <div id="armed-forces">
+
+            {% macro radio(data, group, items, changefn) %}
+              <div class="govuk-form-group" id="{{ group }}">
+                <div class="govuk-radios--small">
+                  {% for i in range(0, items['items'].length) %}
+                  {% set item = items['items'][i] %}
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
+                      onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
+                    <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
+                      {{ item['text'] }}
+                    </label>
+                  </div>
+                    {% endfor %}
+                </div>
+              </div>
+            {% endmacro %}
+
+            {{ radio(data, "armed-forces", {
+              items: [
+                {
+                  value: "A current or former regular in the UK Armed Forces (exc. National Service)",
+                  text: "A current or former regular in the UK Armed Forces (exc. National Service)"
+                },
+                {
+                  value: "A current or former reserve in the UK Armed Forces (exc. National Service)",
+                  text: "A current or former reserve in the UK Armed Forces (exc. National Service)"
+                },
+                {
+                  value: "A spouse/civil partner of a UK Armed Forces member who has been separated or been bereaved within the last 2 years",
+                  text: "A spouse/civil partner of a UK Armed Forces member who has been separated or been bereaved within the last 2 years"
+                },
+                {
+                  value: "No",
+                  text: "None of the above"
+                },
+                {
+                  value: "Refused",
+                  text: "Refused"
+                }
+              ]
+              }, "displayArmed()") }}
+              <br />
+
+              <div id="armed-forces-tenure-div">
+                {{ govukRadios({
+                idPrefix: "armed-forces-tenure",
+                name: "armed-forces-tenure",
+                classes: "govuk-radios",
+                fieldset: {
+                  legend: {
+                    text: "When did they leave the Armed Forces?",
+                    classes: "govuk-label--l"
+                  }
+                },
+                items: [
+                  {
+                    value: "Up to and including 5 years ago",
+                    text: "Up to and including 5 years ago",
+                    checked: checked("armed-forces-tenure", "Up to and including 5 years ago")
+                  },
+                  {
+                    value: "More than 5 years ago",
+                    text: "More than 5 years ago",
+                    checked: checked("armed-forces-tenure", "More than 5 years ago")
+                  },
+                  {
+                    value: "Still serving",
+                    text: "Still serving",
+                    checked: checked("armed-forces-tenure", "Still serving")
+                  },
+                  {
+                    value: "Refused",
+                    text: "Refused",
+                    checked: checked("armed-forces-tenure", "Refused")
+                  }
+                ]
+              }) }}
+            </div>
+            <br />
+            <br />
+
+            <div id="armed-forces-injured-div">
+              {{ govukRadios({
+              idPrefix: "armed-forces-injured",
+              name: "armed-forces-injured",
+              fieldset: {
+                legend: {
+                  text: "Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?",
+                  classes: "govuk-label--l"
+                }
+              },
+              items: [
+                {
+                  value: "Yes",
+                  text: "Yes",
+                  checked: checked("armed-forces-injured", "Yes")
+                },
+                {
+                  value: "No",
+                  text: "No",
+                  checked: checked("armed-forces-injured", "No")
+                },
+                {
+                  value: "Refused",
+                  text: "Refused",
+                  checked: checked("armed-forces-injured", "Refused")
+                }
+              ]
+            }) }}
+          </div>
+
+          </div>
+      </div>
+
+      <input type="hidden" name="armed-forces-page" value="true">
+      <input type="hidden" name="household-needs-inprogress" value="true">
+      <input class="govuk-button" type="submit" value="Save and continue" />
+
+      <style>
+      #armed-forces-tenure-div {
+        display: none;
+      }
+      #armed-forces-injured-div {
+        display: none;
+      }
+      </style>
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<script>
+  function displayArmed() {
+    const regular = document.getElementById("armed-forces-0").checked
+    const reserve = document.getElementById("armed-forces-1").checked
+    const spouse = document.getElementById("armed-forces-2").checked
+    if(regular || reserve || spouse){
+      document.getElementById("armed-forces-tenure-div").style.display = "block";
+      document.getElementById("armed-forces-injured-div").style.display = "block";
+    } else {
+      document.getElementById("armed-forces-tenure-div").style.display = "none";
+      document.getElementById("armed-forces-tenure").checked = false;
+      document.getElementById("armed-forces-tenure-2").checked = false;
+      document.getElementById("armed-forces-tenure-3").checked = false;
+      document.getElementById("armed-forces-tenure-4").checked = false;
+
+      document.getElementById("armed-forces-injured-div").style.display = "none";
+      document.getElementById("armed-forces-injured").checked = false;
+      document.getElementById("armed-forces-injured-2").checked = false;
+      document.getElementById("armed-forces-injured-3").checked = false;
+    }
+  }
+  // So that this runs if you've already answered and hit the back button
+  displayArmed()
+</script>
+
+{% endblock %}
