@@ -36,12 +36,13 @@ GOV.UK Prototype Kit
       {% endfor %}
 
       {{ govukRadios({
-      idPrefix: "property-location",
-      name: "property-location",
-      classes: "govuk-radios--small",
-      items: locationItems
-    }) }}
+        idPrefix: "property-location",
+        name: "property-location",
+        classes: "govuk-radios--small",
+        items: locationItems
+      }) }}
 
+      <input type="hidden" name="next-page" value="postcode">
       <input type="hidden" name="property-location-page" value="true">
       <input type="hidden" name="property-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />

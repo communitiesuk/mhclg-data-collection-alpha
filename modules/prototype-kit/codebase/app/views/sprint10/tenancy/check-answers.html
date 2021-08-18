@@ -11,8 +11,8 @@ Check your answers
 
 {% block content %}
 
-{% set baseQuestions = ['tenancy-code', 'tenancy-start-date', 'starter-tenancy', 'fixed-term', 'tenancy-type', 'letting-type', 'landlord'] %}
-{% set allQuestions = ['tenancy-code', 'tenancy-start-date', 'starter-tenancy', 'fixed-term', 'tenancy-type', 'letting-type', 'landlord']  %}
+{% set baseQuestions = ['tenancy-code', 'tenancy-start-day', 'starter-tenancy', 'fixed-term', 'tenancy-type', 'letting-type', 'landlord'] %}
+{% set allQuestions = ['tenancy-code', 'tenancy-start-day', 'starter-tenancy', 'fixed-term', 'tenancy-type', 'letting-type', 'landlord']  %}
 {% set numberOfQuestions = baseQuestions | length %}
 {% set numberOfCompletedQuestions = 0 %}
 
@@ -30,7 +30,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
         {% if numberOfCompletedQuestions < numberOfQuestions %}
-          <a class="task-name" href="/sprint10/household-needs-section" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+          <a class="task-name" href="/sprint10/tenancy-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
         {% endif %}
       </p>
 

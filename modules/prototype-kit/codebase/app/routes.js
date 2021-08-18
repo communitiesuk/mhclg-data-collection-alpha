@@ -63,10 +63,12 @@ router.get('/sprint10/nextIncompleteSection', function (req, res) {
 
 function redirectToNextFormPage(req, res, section, sectionPageMap) {
   const sectionPages = Object.keys(sectionPageMap)
+  const next = req.session.data['next-page']
+  idx = Math.max(sectionPages.indexOf(next), 0)
 
   // Get next incomplete page in the section
   const incompleteSectionPages = []
-  sectionPages.forEach(function (page, i) {
+  sectionPages.slice(idx, sectionPages.length + 1).forEach(function (page, i) {
     questions = sectionPageMap[page]
     questions.forEach(function (question, i) {
       if(!req.session.data[question]) {
@@ -75,7 +77,8 @@ function redirectToNextFormPage(req, res, section, sectionPageMap) {
     })
   });
 
-  res.redirect(section + incompleteSectionPages[0])
+  const nextPage = incompleteSectionPages[0] || 'check-answers'
+  res.redirect(section + nextPage)
 }
 
 router.get('/sprint10/household-section', function (req, res) {
@@ -102,11 +105,23 @@ router.get('/sprint10/household-situation-section', function (req, res) {
   redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
+router.get('/sprint10/household-needs-section', function (req, res) {
+  const section = 'household-needs/'
+  const sectionPageMap = {
+    'armed-forces': ['tenant-code'],
+    'disabilities': ['long-term-conditions'],
+    'pregnancy': ['pregnancy'],
+    'requirements': ['requirements'],
+    'conditions': ['conditions']
+  }
+  redirectToNextFormPage(req, res, section, sectionPageMap)
+})
+
 router.get('/sprint10/tenancy-section', function (req, res) {
   const section = 'tenancy/'
   const sectionPageMap = {
     'tenancy-code': ['tenancy-code'],
-    'tenancy-starter-date': ['tenancy-start-day'],
+    'tenancy-start-date': ['tenancy-start-day'],
     'starter-tenancy': ['starter-tenancy'],
     'fixed-term': ['fixed-term'],
     'type-of-main-tenancy': ['type-of-main-tenancy'],
@@ -148,7 +163,7 @@ router.get('/sprint10/income-and-benefits-section', function (req, res) {
 router.get('/sprint10/rent-section', function (req, res) {
   const section = 'rent/'
   const sectionPageMap = {
-    'rent': ['rent']
+    'rent': ['rent', 'rent-period', 'service-charge', 'personal-service-charge', 'support-charge', 'outstanding']
   }
   redirectToNextFormPage(req, res, section, sectionPageMap)
 })

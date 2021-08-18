@@ -11,9 +11,9 @@ Check your answers
 
 {% block content %}
 
-{% set baseQuestions = ['armed-forces', 'long-term-conditions', 'pregnancy', 'disabilities', 'conditions'] %}
+{% set baseQuestions = ['armed-forces', 'long-term-conditions', 'pregnancy', 'requirements', 'conditions'] %}
 {% set conditionalQuestions = ['armed-forces-tenure', 'armed-forces-injured'] %}
-{% set allQuestions = ['armed-forces', 'long-term-conditions', 'pregnancy', 'disabilities', 'conditions', 'armed-forces-tenure', 'armed-forces-injured'] %}
+{% set allQuestions = ['armed-forces', 'long-term-conditions', 'pregnancy', 'requirements', 'conditions', 'armed-forces-tenure', 'armed-forces-injured'] %}
 {% set numberOfQuestions = baseQuestions | length %}
 {% set armedConditional = not (data['armed-forces'] == "No" or data['armed-forces'] == "Refused") %}
 {% if armedConditional %}
@@ -35,7 +35,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
         {% if numberOfCompletedQuestions < numberOfQuestions %}
-          <a class="task-name" href="/sprint10/household-needs-section" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+          <a class="task-name" href="/sprint10/household-needs-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
         {% endif %}
       </p>
 
@@ -129,12 +129,12 @@ Check your answers
           Disability Requirements
         </dt>
         <dd class="govuk-summary-list__value">
-          {% set value = data["disabilities"] |d([]) | join(", ") %}
+          {% set value = data["requirements"] |d([]) | join(", ") %}
             {{ value | trim_end(", ") }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-needs/disabilities?check=true">
-            {{ "Change" if data["disabilities"] else "Answer"}}<span class="govuk-visually-hidden">disabilities</span>
+          <a class="govuk-link" href="/sprint10/household-needs/requirements?check=true">
+            {{ "Change" if data["requirements"] else "Answer"}}<span class="govuk-visually-hidden">requirements</span>
           </a>
         </dd>
       </div>
@@ -150,8 +150,8 @@ Check your answers
             {{ value | trim_end(", ") }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-needs/disabilities?check=true">
-            {{ "Change" if data["conditions"] else "Answer"}}<span class="govuk-visually-hidden">disabilities</span>
+          <a class="govuk-link" href="/sprint10/household-needs/conditions?check=true">
+            {{ "Change" if data["conditions"] else "Answer"}}<span class="govuk-visually-hidden">conditions</span>
           </a>
         </dd>
       </div>

@@ -13,7 +13,7 @@ Check your answers
 
 {% set baseQuestions = ['time-lived-in-la', 'time-on-waiting-list', 'previous-la', 'previous-postcode', 'reasonable-preference', 'choice-based', 'common-housing-register', 'common-allocation-policy'] %}
 {% set conditionalQuestions = ['reasonable-preference-reason'] %}
-{% set allQuestions = ['time-lived-in-la', 'time-on-waiting-list', 'previous-la', 'previous-postcode', 'reasonable-preference', 'choice-based', 'common-housing-register', 'common-allocation-policy'] %}
+{% set allQuestions = ['time-lived-in-la', 'time-on-waiting-list', 'previous-la', 'previous-postcode', 'reasonable-preference', 'reasonable-preference-reason', 'choice-based', 'common-housing-register', 'common-allocation-policy'] %}
 {% set numberOfQuestions = baseQuestions | length %}
 {% set reasonablePreferenceConditional = data['reasonable-preference'] == 'Yes' %}
 {% if reasonablePreferenceConditional %}
@@ -35,7 +35,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
         {% if numberOfCompletedQuestions < numberOfQuestions %}
-          <a class="task-name" href="/sprint10/household-needs-section" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+          <a class="task-name" href="/sprint10/local-authority-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
         {% endif %}
       </p>
 

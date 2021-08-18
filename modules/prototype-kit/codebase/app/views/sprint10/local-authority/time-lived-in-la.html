@@ -33,17 +33,16 @@ GOV.UK Prototype Kit
       </legend>
 
       {{ govukRadios({
-      idPrefix: "time-lived-in-la",
-      name: "time-lived-in-la",
-      classes: "govuk-radios--small",
-      items: optionsItems
-    }) }}
+        idPrefix: "time-lived-in-la",
+        name: "time-lived-in-la",
+        classes: "govuk-radios--small",
+        items: optionsItems
+      }) }}
 
+      <input type="hidden" name="next-page" value="time-on-waiting-list">
       <input type="hidden" name="time-lived-in-la-page" value="true">
       <input type="hidden" name="local-authority-inprogress" value="true">
       <input class="govuk-button" type="submit" value="Save and continue" />
-
-      </fieldset>
 
     </form>
   </div>
