@@ -11,10 +11,15 @@ Check your answers
 
 {% block content %}
 
-{% set baseQuestions = ['previous-housing-situation', 'homeless', 'reason-for-leaving'] %}
-{% set allQuestions = ['previous-housing-situation', 'homeless', 'reason-for-leaving'] %}
+{% set baseQuestions = ['previous-housing-situation', 'homeless', 'reason-for-leaving', 'reason-removal'] %}
+{% set conditionalQuestions = ['other-reason-for-leaving'] %}
+{% set allQuestions = ['previous-housing-situation', 'homeless', 'reason-for-leaving', 'reason-removal'] %}
 {% set numberOfQuestions = baseQuestions | length %}
 {% set numberOfCompletedQuestions = 0 %}
+{% set otherReasonConditional = data['reason-for-leaving'] == 'Other' %}
+{% if otherReasonConditional %}
+  {% set numberOfQuestions = numberOfQuestions + 1 %}
+{% endif %}
 
 {% for question in allQuestions %}
   {% if data[question] %}
@@ -77,6 +82,42 @@ Check your answers
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link" href="/sprint10/household-situation/reason-for-leaving?check=true">
             {{ "Change" if data["reason-for-leaving"] else "Answer"}}<span class="govuk-visually-hidden">reason-for-leaving</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    </dl>
+
+    {% if otherReasonConditional %}
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Other reason for leaving past settled accomodation
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["other-reason-for-leaving"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-situation/reason-for-leaving?check=true">
+            {{ "Change" if data["other-reason-for-leaving"] else "Answer"}}<span class="govuk-visually-hidden">reason-for-leaving</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    </dl>
+    {% endif %}
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Was the reason for leaving a direct result of the removal of the spare room subsidy or benefit cap introduced from 2013?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["reason-removal"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-situation/reason-for-leaving?check=true">
+            {{ "Change" if data["reason-removal"] else "Answer"}}<span class="govuk-visually-hidden">reason-for-leaving</span>
           </a>
         </dd>
       </div>

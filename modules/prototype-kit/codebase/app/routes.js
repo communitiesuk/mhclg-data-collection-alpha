@@ -60,69 +60,110 @@ router.get('/sprint10/nextIncompleteSection', function (req, res) {
   res.redirect(incompleteSections[0] + '-section')
 })
 
-function redirectToNextFormPage(req, res, section, sectionPages) {
-  const referer = req.headers.referer
+
+function redirectToNextFormPage(req, res, section, sectionPageMap) {
+  const sectionPages = Object.keys(sectionPageMap)
+
+  // Get next incomplete page in the section
   const incompleteSectionPages = []
   sectionPages.forEach(function (page, i) {
-    if(!req.session.data[page + '-page']) {
-      incompleteSectionPages.push(page)
-    }
+    questions = sectionPageMap[page]
+    questions.forEach(function (question, i) {
+      if(!req.session.data[question]) {
+        incompleteSectionPages.push(page)
+      }
+    })
   });
-  let next = ''
-  if(req.session.data.onlyMissing){
-    if(incompleteSectionPages.length > 1){
-      next = '?next=' + incompleteSectionPages[1]
-    } else {
-      next = '?next=check-answers'
-    }
-  } else if (referer.endsWith("check-answers")) {
-    next = '?next=check-answers'
-  }
-  let redirect = section + incompleteSectionPages[0] + next
-  res.redirect(redirect)
+
+  res.redirect(section + incompleteSectionPages[0])
 }
 
 router.get('/sprint10/household-section', function (req, res) {
   const section = 'household/'
-  const sectionPages = ['tenant-code', 'tenant-age', 'gender', 'ethnicity', 'nationality', 'economic-status', 'other-household-members']
-  redirectToNextFormPage(req, res, section, sectionPages)
+  const sectionPageMap = {
+    'tenant-code': ['tenant-code'],
+    'tenant-age': ['tenant-age'],
+    'gender': ['gender'],
+    'ethnicity': ['ethnicity'],
+    'nationality': ['nationality'],
+    'economic-status': ['economic-status'],
+    'other-household-members': ['number-of-other-members']
+  }
+  redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
 router.get('/sprint10/household-situation-section', function (req, res) {
   const section = 'household-situation/'
-  const sectionPages = ['previous-housing-situation', 'homeless', 'reason-for-leaving']
-  redirectToNextFormPage(req, res, section, sectionPages)
+  const sectionPageMap = {
+    'previous-housing-situation': ['previous-housing-situation'],
+    'homeless': ['homeless'],
+    'reason-for-leaving': ['reason-for-leaving', 'removal-reason']
+  }
+  redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
 router.get('/sprint10/tenancy-section', function (req, res) {
   const section = 'tenancy/'
-  const sectionPages = ['tenancy-code', 'tenancy-start-date', 'starter-tenancy', 'fixed-term', 'type-of-main-tenancy', 'letting-type', 'landlord']
-  redirectToNextFormPage(req, res, section, sectionPages)
+  const sectionPageMap = {
+    'tenancy-code': ['tenancy-code'],
+    'tenancy-starter-date': ['tenancy-start-day'],
+    'starter-tenancy': ['starter-tenancy'],
+    'fixed-term': ['fixed-term'],
+    'type-of-main-tenancy': ['type-of-main-tenancy'],
+    'letting-type': ['letting-type'],
+    'landlord': ['landlord']
+  }
+  redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
 router.get('/sprint10/property-section', function (req, res) {
   const section = 'property/'
-  const sectionPages = ['property-location', 'postcode', 'relet', 'reason-for-vacancy', 'property-reference',
-  'type-of-unit', 'type-of-building', 'number-of-bedrooms', 'void-date', 'repair-date', 'previously-offered', 'wheelchair-accessible']
-  redirectToNextFormPage(req, res, section, sectionPages)
+  const sectionPageMap = {
+    'property-location': ['property-location'],
+    'postcode': ['postcode'],
+    'relet': ['relet'],
+    'reason-for-vacancy': ['reason-for-vacancy'],
+    'property-reference': ['property-reference'],
+    'type-of-unit': ['type-of-unit'],
+    'type-of-building': ['type-of-building'],
+    'number-of-bedrooms': ['bedrooms'],
+    'void-date': ['void-date-day'],
+    'repair-date': ['repair-date-day'],
+    'previously-offered': ['previously-offered'],
+    'wheelchair-accessible': ['wheelchair-accessible']
+  }
+  redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
 router.get('/sprint10/income-and-benefits-section', function (req, res) {
   const section = 'income-and-benefits/'
-  const sectionPages = ['income', 'benefit-proportion', 'benefits']
-  redirectToNextFormPage(req, res, section, sectionPages)
+  const sectionPageMap = {
+    'income': ['income', 'income-frequency'],
+    'benefit-proportion': ['benefit-proportion'],
+    'benefits': ['benefit']
+  }
+  redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
 router.get('/sprint10/rent-section', function (req, res) {
   const section = 'rent/'
-  const sectionPages = ['rent']
-  redirectToNextFormPage(req, res, section, sectionPages)
+  const sectionPageMap = {
+    'rent': ['rent']
+  }
+  redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
 router.get('/sprint10/local-authority-section', function (req, res) {
   const section = 'local-authority/'
-  const sectionPages = ['time-lived-in-la', 'time-on-waiting-list', 'previous-la', 'previous-postcode', 'reasonable-preference', 'allocation-type']
-  redirectToNextFormPage(req, res, section, sectionPages)
+  const sectionPageMap = {
+    'time-lived-in-la': ['time-lived-in-la'],
+    'time-on-waiting-list': ['time-on-waiting-list'],
+    'previous-la': ['previous-la'],
+    'previous-postcode': ['previous-postcode'],
+    'reasonable-preference': ['reasonable-preference'],
+    'allocation-type': ['choice-based', 'common-housing-register', 'common-allocation-policy']
+  }
+  redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
 router.get('/sprint10/submission-section', function (req, res) {
