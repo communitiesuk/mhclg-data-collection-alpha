@@ -11,13 +11,28 @@ Check your answers
 
 {% block content %}
 
+{% set baseQuestions = ['property-location', 'postcode', 'relet', 'reason-for-vacancy', 'property-reference', 'type-of-unit', 'type-of-building', 'bedrooms', 'void-date-day', 'repair-date-day', 'previously-offered', 'wheelchair-accessible'] %}
+{% set allQuestions = ['property-location', 'postcode', 'relet', 'reason-for-vacancy', 'property-reference', 'type-of-unit', 'type-of-building', 'bedrooms', 'void-date-day', 'repair-date-day', 'previously-offered', 'wheelchair-accessible'] %}
+{% set numberOfQuestions = baseQuestions | length %}
+{% set numberOfCompletedQuestions = 0 %}
+
+{% for question in allQuestions %}
+  {% if data[question] %}
+    {% set numberOfCompletedQuestions = numberOfCompletedQuestions + 1 %}
+  {% endif %}
+{% endfor %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
 
-    <h1 class="govuk-heading-l">Check your answers</h1>
+    <h1 class="govuk-heading-l">Check the answers you gave for Property</h1>
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-      <h2 class="govuk-heading-m">Property</h2>
+      <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
+        {% if numberOfCompletedQuestions < numberOfQuestions %}
+          <a class="task-name" href="/sprint10/household-needs-section" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+        {% endif %}
+      </p>
 
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">

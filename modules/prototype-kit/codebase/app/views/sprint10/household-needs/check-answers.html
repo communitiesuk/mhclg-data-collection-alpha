@@ -11,13 +11,33 @@ Check your answers
 
 {% block content %}
 
+{% set baseQuestions = ['armed-forces', 'long-term-conditions', 'pregnancy', 'disabilities', 'conditions'] %}
+{% set conditionalQuestions = ['armed-forces-tenure', 'armed-forces-injured'] %}
+{% set allQuestions = ['armed-forces', 'long-term-conditions', 'pregnancy', 'disabilities', 'conditions', 'armed-forces-tenure', 'armed-forces-injured'] %}
+{% set numberOfQuestions = baseQuestions | length %}
+{% set armedConditional = not (data['armed-forces'] == "No" or data['armed-forces'] == "Refused") %}
+{% if armedConditional %}
+  {% set numberOfQuestions = numberOfQuestions + 2 %}
+{% endif %}
+{% set numberOfCompletedQuestions = 0 %}
+
+{% for question in allQuestions %}
+  {% if data[question] %}
+    {% set numberOfCompletedQuestions = numberOfCompletedQuestions + 1 %}
+  {% endif %}
+{% endfor %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
 
-    <h1 class="govuk-heading-l">Check your answers</h1>
+    <h1 class="govuk-heading-l">Check the answers you gave for Household needs</h1>
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-      <h2 class="govuk-heading-m">Household needs</h2>
+      <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
+        {% if numberOfCompletedQuestions < numberOfQuestions %}
+          <a class="task-name" href="/sprint10/household-needs-section" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+        {% endif %}
+      </p>
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
@@ -35,7 +55,7 @@ Check your answers
       </div>
     </dl>
 
-    {% if  data['armed-forces-tenure'] %}
+    {% if armedConditional %}
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
@@ -53,7 +73,7 @@ Check your answers
     </dl>
     {% endif %}
 
-    {% if  data['armed-forces-injured'] %}
+    {% if  armedConditional %}
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">

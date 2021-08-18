@@ -16,7 +16,7 @@ CORE tasklist
 {% set numberOfCompletedSections = 0 %}
 
 {% set sections = [
-  'household', 'household-situation', 'household-needs', 'tenancy', 'property', 'income-and-benefits', 'rent', 'local-authority', 'submitted'
+  'household', 'household-situation', 'household-needs', 'tenancy', 'property', 'income-and-benefits', 'rent', 'local-authority', 'submission'
   ]
 %}
 
@@ -48,7 +48,7 @@ CORE tasklist
         <h2 class="govuk-heading-s govuk-!-margin-bottom-2">This submission is in progress</h2>
         <p class="govuk-body govuk-!-margin-bottom-7">You've completed {{ numberOfCompletedSections }} of 9 sections.</p>
 
-        <p class="govuk-body govuk-!-margin-bottom-7">Skip to next {{ nextIncompleteSectionStatus }} section: <a href="#">{{ nextIncompleteSection | replace("-", " ") | capitalize }}</a></p>
+        <p class="govuk-body govuk-!-margin-bottom-7">Skip to next {{ nextIncompleteSectionStatus }} section: <a href="nextIncompleteSection">{{ nextIncompleteSection | replace("-", " ") | capitalize }}</a></p>
 
         <ol class="app-task-list">
           <li>
@@ -231,7 +231,6 @@ CORE tasklist
           </h2>
           <ul class="app-task-list__items">
             <li class="app-task-list__item">
-              <span class="app-task-list__task-name">Declaration</span>
               {% if (data['household-completed'] == 'true') and
                     (data['household-situation-completed'] == 'true') and
                     (data['household-needs-completed'] == 'true') and
@@ -240,13 +239,10 @@ CORE tasklist
                     (data['income-and-benefits-completed'] == 'true') and
                     (data['rent-completed'] == 'true') and
                     (data['local-authority-completed'] == 'true') %}
-                    <form action="confirmation" method="post" novalidate>
-                      <input type="hidden" name="submitted-completed" value="true">
-                      <button class="govuk-button govuk-button app-task-list__tag" data-module="govuk-button">
-                        Submit
-                      </button>
-                    </form>
+              <span class="app-task-list__task-name"><a class="task-name" href="submission/declaration" aria-describedby="read-declaration-completed">Declaration</a></span>
+              <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
               {% else %}
+              <span class="app-task-list__task-name">Declaration</span>
               <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="submit-pay-status">Cannot start yet</strong>
               {% endif %}
             </li>
