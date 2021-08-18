@@ -55,5 +55,10 @@ module.exports = function (env) {
     return str.replace(re, '')
   }
 
+  filters.dateFormat = function(str) {
+    date = new Date(str);
+    return date.toLocaleDateString('en-gb', {day: 'numeric', month: 'short', year: 'numeric'});
+  }
+
   return filters
 }

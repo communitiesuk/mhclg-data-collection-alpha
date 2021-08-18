@@ -169,7 +169,10 @@ Check your answers
             Void date
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["void-date-day"] }} {{ data["void-date-month"] }} {{ data["void-date-year"] }}
+            {% if data['void-date-day'] %}
+              {% set date = [data["void-date-day"], '/', data["void-date-month"], '/', data["void-date-year"]] | join | dateFormat  %}
+              {{ date }}
+            {% endif %}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/void-date?check=true">
@@ -185,7 +188,10 @@ Check your answers
             Repair date
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["repair-date-day"] }} {{ data["repair-date-month"] }} {{ data["repair-date-year"] }}
+            {% if data['repair-date-day'] %}
+              {% set date = [data["repair-date-day"], '/', data["repair-date-month"], '/', data["repair-date-year"]] | join | dateFormat %}
+              {{ date }}
+            {% endif %}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/property/repair-date?check=true">

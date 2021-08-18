@@ -56,7 +56,10 @@ Check your answers
             When is the tenancy start date?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["tenancy-start-day"]}} {{ data["tenancy-start-month"]}} {{ data["tenancy-start-year"]}}
+            {% if data['tenancy-start-day'] %}
+              {% set date = [data["tenancy-start-day"], '/', data["tenancy-start-month"], '/', data["tenancy-start-year"]] | join | dateFormat   %}
+              {{ date }}
+            {% endif %}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="tenancy-start-date?check=true">
