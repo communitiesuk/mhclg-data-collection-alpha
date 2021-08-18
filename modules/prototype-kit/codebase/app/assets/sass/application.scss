@@ -20,3 +20,15 @@ $govuk-assets-path: '/govuk/assets/';
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
+//custom
+.app-task-list {
+  &__item:target {
+    @extend .govuk-link:focus;
+  }
+  &--no-numbers &__items {
+    @include govuk-media-query($from: tablet) {
+      padding-left: 0;
+    }
+  }
+}

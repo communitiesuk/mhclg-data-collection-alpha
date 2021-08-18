@@ -39,219 +39,216 @@ CORE tasklist
   {% set nextIncompleteSectionStatus = 'incomplete' %}
 {% endif %}
 
-<div class="govuk-width-container ">
-  <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-xl">
-          Task list for log 342351 </h1>
-        <h2 class="govuk-heading-s govuk-!-margin-bottom-2">This submission is in progress</h2>
-        <p class="govuk-body govuk-!-margin-bottom-7">You've completed {{ numberOfCompletedSections }} of 9 sections.</p>
 
-        <p class="govuk-body govuk-!-margin-bottom-7">Skip to next {{ nextIncompleteSectionStatus }} section: <a href="nextIncompleteSection">{{ nextIncompleteSection | replace("-", " ") | capitalize }}</a></p>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+      Task list for log 342351 </h1>
+    <h2 class="govuk-heading-s govuk-!-margin-bottom-2">This submission is in progress</h2>
+    <p class="govuk-body govuk-!-margin-bottom-7">You've completed {{ numberOfCompletedSections }} of 9 sections.</p>
 
-        <ol class="app-task-list">
-          <li>
-            <h2 class="app-task-list__section">
-              <span class="app-task-list__section-number">About the household</span>
-            </h2>
-            <ul class="app-task-list__items">
-              <li class="app-task-list__item"">
-                {% if  data['household-completed'] == 'true' %}
-                <a class=" task-name" href="household/check-answers" aria-describedby="read-declaration-completed">
-                Household characteristics
-                </a>
-                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-                {% elif  data['household-inprogress'] == 'true' %}
-                    <a class="task-name" href="household/check-answers" aria-describedby="read-declaration-completed">
-                  Household characteristics
-                </a>
-                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
-                {% else %}
-                <a class="task-name" href="household/tenant-code" aria-describedby="read-declaration-completed">
-                  Household characteristics
-                </a>
-                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
-                {% endif %}
-              </li>
+    <p class="govuk-body govuk-!-margin-bottom-7"><a href="#{{ nextIncompleteSection }}">Skip to next incomplete section</a></p>
 
-              <li class="app-task-list__item"">
-              {% if  data['household-situation-completed'] == 'true' %}
-                <a class=" task-name" href="household-situation/check-answers" aria-describedby="read-declaration-completed">
-                Household situation
-                </a>
-                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-                {% elif  data['household-situation-inprogress'] == 'true' %}
-                    <a class="task-name" href="household-situation/check-answers" aria-describedby="read-declaration-completed">
-                  Household situation
-                </a>
-                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
-                {% else %}
-                <a class="task-name" href="household-situation/previous-housing-situation" aria-describedby="read-declaration-completed">
-                  Household situation
-                </a>
-                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
-                {% endif %}
-              </li>
-
-              <li class="app-task-list__item"">
-              {% if  data['household-needs-completed'] == 'true' %}
-                <a class=" task-name" href="household-needs/check-answers" aria-describedby="read-declaration-completed">
-                Household needs
-                </a>
-                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-                {% elif  data['household-needs-inprogress'] == 'true' %}
-                    <a class="task-name" href="household-needs/check-answers" aria-describedby="read-declaration-completed">
-                  Household needs
-                </a>
-                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
-                {% else %}
-                <a class="task-name" href="household-needs/armed-forces" aria-describedby="read-declaration-completed">
-                  Household needs
-                </a>
-                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
-                {% endif %}
-              </li>
-            </ul>
-
-          <li>
-            <h2 class="app-task-list__section">
-              <span class="app-task-list__section-number">Tenancy & Property Information</span>
-            </h2>
-            <ul class="app-task-list__items">
-              <li class="app-task-list__item"">
-            {% if  data['tenancy-completed'] == 'true' %}
-              <a class=" task-name" href="tenancy/check-answers" aria-describedby="read-declaration-completed">
-                Tenancy information
-                </a>
-                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-                {% elif  data['tenancy-inprogress'] == 'true' %}
-                    <a class="task-name" href="tenancy/check-answers" aria-describedby="read-declaration-completed">
-                  Tenancy information
-                </a>
-                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
-                {% else %}
-                <a class="task-name" href="tenancy/tenancy-code" aria-describedby="read-declaration-completed">
-                  Tenancy information
-                </a>
-                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
-                {% endif %}
-              </li>
-
-              <li class="app-task-list__item"">
-            {% if  data['property-completed'] == 'true' %}
-              <a class=" task-name" href="property/check-answers" aria-describedby="read-declaration-completed">
-                Property information
-                </a>
-                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-                {% elif  data['property-inprogress'] == 'true' %}
-                    <a class="task-name" href="property/check-answers" aria-describedby="read-declaration-completed">
-                  Property information
-                </a>
-                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
-                {% else %}
-                <a class="task-name" href="property/property-location" aria-describedby="read-declaration-completed">
-                  Property information
-                </a>
-                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
-                {% endif %}
-              </li>
-            </ul>
-
-            <h2 class="app-task-list__section">
-              <span class="app-task-list__section-number">Rent & Charges</span>
-            </h2>
-            <ul class="app-task-list__items">
-              <li class="app-task-list__item"">
-            {% if  data['income-and-benefits-completed'] == 'true' %}
-              <a class=" task-name" href="income-and-benefits/check-answers" aria-describedby="read-declaration-completed">
-                Income & benefits
-                </a>
-                <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-                {% elif  data['income-and-benefits-inprogress'] == 'true' %}
-                    <a class="task-name" href="income-and-benefits/check-answers" aria-describedby="read-declaration-completed">
-                  Income & benefits
-                </a>
-                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
-                {% else %}
-                <a class="task-name" href="income-and-benefits/income" aria-describedby="read-declaration-completed">
-                  Income & benefits
-                </a>
-                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
-                {% endif %}
-              </li>
-
-              <li class="app-task-list__item"">
-              {% if  data['rent-completed'] == 'true' %}
-              <a class=" task-name" href="rent/check-answers" aria-describedby="read-declaration-completed">
-                Rent
-              </a>
-              <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-              {% elif  data['rent-inprogress'] == 'true' %}
-                  <a class="task-name" href="rent/check-answers" aria-describedby="read-declaration-completed">
-                Rent
-              </a>
-              <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
-              {% else %}
-              <a class="task-name" href="rent/rent" aria-describedby="read-declaration-completed">
-                Rent
-              </a>
-              <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
-              {% endif %}
-          </li>
-          </ul>
-
-          <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">Local authority</span>
-          </h2>
-          <ul class="app-task-list__items">
-            <li class="app-task-list__item"">
-            {% if  data['local-authority-completed'] == 'true' %}
-            <a class=" task-name" href="local-authority/check-answers" aria-describedby="read-declaration-completed">
-              Local authority
+    <ol class="app-task-list app-task-list--no-numbers">
+      <li>
+        <h2 class="app-task-list__section">
+          <span class="app-task-list__section-number">About the household</span>
+        </h2>
+        <ul class="app-task-list__items">
+          <li class="app-task-list__item" id="household">
+            {% if  data['household-completed'] == 'true' %}
+            <a class="task-name" href="household/check-answers" aria-describedby="read-declaration-completed">
+            Household characteristics
             </a>
             <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
-            {% elif  data['local-authority-inprogress'] == 'true' %}
-                <a class="task-name" href="local-authority/check-answers" aria-describedby="read-declaration-completed">
-              Local authority
+            {% elif  data['household-inprogress'] == 'true' %}
+                <a class="task-name" href="household/check-answers" aria-describedby="read-declaration-completed">
+              Household characteristics
             </a>
             <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
             {% else %}
-            <a class="task-name" href="local-authority/time-lived-in-la" aria-describedby="read-declaration-completed">
-              Local authority
+            <a class="task-name" href="household/tenant-code" aria-describedby="read-declaration-completed">
+              Household characteristics
             </a>
             <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
             {% endif %}
-            </li>
-          </ul>
-
-
-          <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">Submission</span>
-          </h2>
-          <ul class="app-task-list__items">
-            <li class="app-task-list__item">
-              {% if (data['household-completed'] == 'true') and
-                    (data['household-situation-completed'] == 'true') and
-                    (data['household-needs-completed'] == 'true') and
-                    (data['tenancy-completed'] == 'true') and
-                    (data['property-completed'] == 'true') and
-                    (data['income-and-benefits-completed'] == 'true') and
-                    (data['rent-completed'] == 'true') and
-                    (data['local-authority-completed'] == 'true') %}
-              <span class="app-task-list__task-name"><a class="task-name" href="submission/declaration" aria-describedby="read-declaration-completed">Declaration</a></span>
-              <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
-              {% else %}
-              <span class="app-task-list__task-name">Declaration</span>
-              <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="submit-pay-status">Cannot start yet</strong>
-              {% endif %}
-            </li>
-          </ul>
           </li>
-        </ol>
-      </div>
-    </div>
-  </main>
+
+          <li class="app-task-list__item" id="household-situation">
+          {% if  data['household-situation-completed'] == 'true' %}
+            <a class=" task-name" href="household-situation/check-answers" aria-describedby="read-declaration-completed">
+            Household situation
+            </a>
+            <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+            {% elif  data['household-situation-inprogress'] == 'true' %}
+                <a class="task-name" href="household-situation/check-answers" aria-describedby="read-declaration-completed">
+              Household situation
+            </a>
+            <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+            {% else %}
+            <a class="task-name" href="household-situation/previous-housing-situation" aria-describedby="read-declaration-completed">
+              Household situation
+            </a>
+            <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+            {% endif %}
+          </li>
+
+          <li class="app-task-list__item" id="household-needs">
+          {% if  data['household-needs-completed'] == 'true' %}
+            <a class=" task-name" href="household-needs/check-answers" aria-describedby="read-declaration-completed">
+            Household needs
+            </a>
+            <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+            {% elif  data['household-needs-inprogress'] == 'true' %}
+                <a class="task-name" href="household-needs/check-answers" aria-describedby="read-declaration-completed">
+              Household needs
+            </a>
+            <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+            {% else %}
+            <a class="task-name" href="household-needs/armed-forces" aria-describedby="read-declaration-completed">
+              Household needs
+            </a>
+            <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+            {% endif %}
+          </li>
+        </ul>
+
+      <li>
+        <h2 class="app-task-list__section">
+          <span class="app-task-list__section-number">Tenancy and property information</span>
+        </h2>
+        <ul class="app-task-list__items">
+          <li class="app-task-list__item" id="tenancy">
+        {% if  data['tenancy-completed'] == 'true' %}
+          <a class=" task-name" href="tenancy/check-answers" aria-describedby="read-declaration-completed">
+            Tenancy information
+            </a>
+            <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+            {% elif  data['tenancy-inprogress'] == 'true' %}
+                <a class="task-name" href="tenancy/check-answers" aria-describedby="read-declaration-completed">
+              Tenancy information
+            </a>
+            <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+            {% else %}
+            <a class="task-name" href="tenancy/tenancy-code" aria-describedby="read-declaration-completed">
+              Tenancy information
+            </a>
+            <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+            {% endif %}
+          </li>
+
+          <li class="app-task-list__item" id="property">
+        {% if  data['property-completed'] == 'true' %}
+          <a class=" task-name" href="property/check-answers" aria-describedby="read-declaration-completed">
+            Property information
+            </a>
+            <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+            {% elif  data['property-inprogress'] == 'true' %}
+                <a class="task-name" href="property/check-answers" aria-describedby="read-declaration-completed">
+              Property information
+            </a>
+            <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+            {% else %}
+            <a class="task-name" href="property/property-location" aria-describedby="read-declaration-completed">
+              Property information
+            </a>
+            <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+            {% endif %}
+          </li>
+        </ul>
+
+        <h2 class="app-task-list__section">
+          <span class="app-task-list__section-number">Rent and charges</span>
+        </h2>
+        <ul class="app-task-list__items">
+          <li class="app-task-list__item" id="income-and-benefits">
+        {% if  data['income-and-benefits-completed'] == 'true' %}
+          <a class=" task-name" href="income-and-benefits/check-answers" aria-describedby="read-declaration-completed">
+            Income & benefits
+            </a>
+            <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+            {% elif  data['income-and-benefits-inprogress'] == 'true' %}
+                <a class="task-name" href="income-and-benefits/check-answers" aria-describedby="read-declaration-completed">
+              Income & benefits
+            </a>
+            <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+            {% else %}
+            <a class="task-name" href="income-and-benefits/income" aria-describedby="read-declaration-completed">
+              Income & benefits
+            </a>
+            <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+            {% endif %}
+          </li>
+
+          <li class="app-task-list__item" id="rent">
+          {% if  data['rent-completed'] == 'true' %}
+          <a class=" task-name" href="rent/check-answers" aria-describedby="read-declaration-completed">
+            Rent
+          </a>
+          <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+          {% elif  data['rent-inprogress'] == 'true' %}
+              <a class="task-name" href="rent/check-answers" aria-describedby="read-declaration-completed">
+            Rent
+          </a>
+          <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+          {% else %}
+          <a class="task-name" href="rent/rent" aria-describedby="read-declaration-completed">
+            Rent
+          </a>
+          <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+          {% endif %}
+      </li>
+      </ul>
+
+      <h2 class="app-task-list__section">
+        <span class="app-task-list__section-number">Local authority</span>
+      </h2>
+      <ul class="app-task-list__items">
+        <li class="app-task-list__item" id="local-authority">
+        {% if  data['local-authority-completed'] == 'true' %}
+        <a class=" task-name" href="local-authority/check-answers" aria-describedby="read-declaration-completed">
+          Local authority
+        </a>
+        <strong class="govuk-tag app-task-list__tag" id="eligibility-status">Completed</strong>
+        {% elif  data['local-authority-inprogress'] == 'true' %}
+            <a class="task-name" href="local-authority/check-answers" aria-describedby="read-declaration-completed">
+          Local authority
+        </a>
+        <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="contact-details-status">In progress</strong>
+        {% else %}
+        <a class="task-name" href="local-authority/time-lived-in-la" aria-describedby="read-declaration-completed">
+          Local authority
+        </a>
+        <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+        {% endif %}
+        </li>
+      </ul>
+
+
+      <h2 class="app-task-list__section">
+        <span class="app-task-list__section-number">Submission</span>
+      </h2>
+      <ul class="app-task-list__items">
+        <li class="app-task-list__item" id="submission">
+          {% if (data['household-completed'] == 'true') and
+                (data['household-situation-completed'] == 'true') and
+                (data['household-needs-completed'] == 'true') and
+                (data['tenancy-completed'] == 'true') and
+                (data['property-completed'] == 'true') and
+                (data['income-and-benefits-completed'] == 'true') and
+                (data['rent-completed'] == 'true') and
+                (data['local-authority-completed'] == 'true') %}
+          <span class="app-task-list__task-name"><a class="task-name" href="submission/declaration" aria-describedby="read-declaration-completed">Declaration</a></span>
+          <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="eligibility-status">Not started</strong>
+          {% else %}
+          <span class="app-task-list__task-name">Declaration</span>
+          <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="submit-pay-status">Cannot start yet</strong>
+          {% endif %}
+        </li>
+      </ul>
+      </li>
+    </ol>
+  </div>
 </div>
 
 {% endblock %}
