@@ -99,7 +99,10 @@ GOV.UK Prototype Kit
       <input type="hidden" name="next-page" value="">
       <input type="hidden" name="allocation-type-page" value="true">
       <input type="hidden" name="tenancy-inprogress" value="true">
-      <input class="govuk-button" type="submit" value="Save and continue" />
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <input class="govuk-button govuk-button--secondary" type="submit" value="Save and exit" onclick="saveExit()" />
+      </div>
 
     </form>
   </div>

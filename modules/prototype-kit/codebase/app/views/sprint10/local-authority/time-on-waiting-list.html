@@ -42,7 +42,10 @@ GOV.UK Prototype Kit
       <input type="hidden" name="next-page" value="previous-la">
       <input type="hidden" name="time-on-waiting-list-page" value="true">
       <input type="hidden" name="local-authority-inprogress" value="true">
-      <input class="govuk-button" type="submit" value="Save and continue" />
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <input class="govuk-button govuk-button--secondary" type="submit" value="Save and exit" onclick="saveExit()" />
+      </div>
 
     </form>
   </div>
