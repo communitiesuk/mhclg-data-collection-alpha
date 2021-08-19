@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% set title = 'What’s in ya dirty big data pile, oh great prototype?' %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">{{ title }}</h1>
+      <ul class="govuk-list govuk-list--bullet">
+      {{ data | dump }}
+        {% for item in data %}
+          <li>{{ item | dump }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

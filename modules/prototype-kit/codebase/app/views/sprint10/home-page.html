@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 
 {% block pageTitle %}
-GOV.UK Prototype Kit
+Your logs - {{ serviceName }} - gov.uk
 {% endblock %}
+
 
 {% block content %}
 
@@ -29,18 +30,13 @@ GOV.UK Prototype Kit
 {% set numberOfCompletedLogs = '3,872' %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-one-quarter">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Your logs</h1>
   </div>
-  <div class="govuk-grid-column-three-quarters">
-    <h1 class="govuk-heading-xl">
-      Your CORE logs
-    </h1>
-    <ul class="govuk-list">
-      <li>
-        <a class="govuk-button" href="tasklist" data-module="govuk-button">Create new Log</a>
-      </li>
-    </ul>
-    <br />
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="tasklist" class="govuk-button">Create new Log</a>
+
     {% if ((numberOfCompletedSections > 0) and (numberOfCompletedSections < 9)) or ((numberOfInProgressSections > 0) and (numberOfCompletedSections < 9)) %}
     <table class="govuk-table">
       <caption class="govuk-table__caption govuk-table__caption--m">Logs you need to complete</caption>
