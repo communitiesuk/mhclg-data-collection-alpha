@@ -28,9 +28,11 @@ Check your answers
     <h1 class="govuk-heading-l">Check the answers you gave for Income & Benefits</h1>
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-      <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
         {% if numberOfCompletedQuestions < numberOfQuestions %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
           <a class="task-name" href="/sprint10/income-and-benefits-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+        {% else %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
         {% endif %}
       </p>
 
@@ -101,7 +103,11 @@ Check your answers
 
 
     <form action="../tasklist" method="post" novalidate>
-      <input type="hidden" name="income-and-benefits-completed" value="true">
+      {% if numberOfCompletedQuestions < numberOfQuestions %}
+        <input type="hidden" name="income-and-benefits-completed" value="false">
+      {% else %}
+        <input type="hidden" name="income-and-benefits-completed" value="true">
+      {% endif %}
       <button class="govuk-button" data-module="govuk-button">
         Save and continue
       </button>

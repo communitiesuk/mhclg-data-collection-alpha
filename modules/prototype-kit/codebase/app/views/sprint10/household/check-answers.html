@@ -13,13 +13,13 @@ Check your answers
 
 {% set previous = "other-household-members" %}
 
-{% set baseQuestions = ['tenant-code', 'tenant-age', 'gender', 'nationality', 'ethnicity', 'economic-status', 'other-household-members'] %}
-{% set allQuestions = ['tenant-code', 'tenant-age', 'gender', 'nationality', 'ethnicity', 'economic-status', 'other-household-members'] %}
+{% set baseQuestions = ['tenant-code', 'tenant-age', 'gender', 'nationality', 'ethnicity', 'economic-status', 'number-of-other-members'] %}
+{% set allQuestions = ['tenant-code', 'tenant-age', 'gender', 'nationality', 'ethnicity', 'economic-status', 'number-of-other-members'] %}
 {% for i in [1,2,3,4,5,6,7] %}
- {% set allQuestions = (allQuestions.push("Person " + i + "-relationship-to-main"), allQuestions) %}
- {% set allQuestions = (allQuestions.push("Person " + i + "-age"), allQuestions) %}
+ {% set allQuestions = (allQuestions.push("person-" + i + "-relationship-to-main"), allQuestions) %}
+ {% set allQuestions = (allQuestions.push("person-" + i + "-age"), allQuestions) %}
  {% set allQuestions = (allQuestions.push("person-" + i + "-gender"), allQuestions) %}
- {% set allQuestions = (allQuestions.push("Person " + i + "-work"), allQuestions) %}
+ {% set allQuestions = (allQuestions.push("person-" + i + "-economic-status"), allQuestions) %}
 {% endfor %}
 {% set numberOfQuestions = baseQuestions | length %}
 {% set numberOfHouseholdMembers = data['number-of-other-members'][0] if data['number-of-other-members'][0] else 0 %}
@@ -38,9 +38,11 @@ Check your answers
     <h1 class="govuk-heading-l">Check the answers you gave for Household characteristics</h1>
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-      <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
         {% if numberOfCompletedQuestions < numberOfQuestions %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
           <a class="task-name" href="/sprint10/household-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+        {% else %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
         {% endif %}
       </p>
 
@@ -225,12 +227,14 @@ Check your answers
       {% endif %}
     {% endfor %}
 
-
-
     </dl>
 
     <form action="../tasklist" method="post" novalidate>
-      <input type="hidden" name="household-completed" value="true">
+      {% if numberOfCompletedQuestions < numberOfQuestions %}
+        <input type="hidden" name="household-completed" value="false">
+      {% else %}
+        <input type="hidden" name="household-completed" value="true">
+      {% endif %}
       <button class="govuk-button" data-module="govuk-button">
         Save and continue
       </button>
