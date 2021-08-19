@@ -83,7 +83,7 @@ function redirectToNextFormPage(req, res, section, sectionPageMap) {
 
 router.get('/sprint10/household-section', function (req, res) {
   const section = 'household/'
-  const sectionPageMap = {
+  let sectionPageMap = {
     'tenant-code': ['tenant-code'],
     'tenant-age': ['tenant-age'],
     'gender': ['gender'],
@@ -92,27 +92,42 @@ router.get('/sprint10/household-section', function (req, res) {
     'economic-status': ['economic-status'],
     'other-household-members': ['number-of-other-members']
   }
+  if(req.session.data['number-of-other-members'] && req.session.data['number-of-other-members'] > 0){
+    for(let i=1; i <= req.session.data['number-of-other-members']; i++){
+      sectionPageMap['other-household-members'].push('person-' + i + '-relationship-to-main')
+      sectionPageMap['other-household-members'].push('person-' + i + '-age')
+      sectionPageMap['other-household-members'].push('person-' + i + '-gender')
+      sectionPageMap['other-household-members'].push('person-' + i + '-economic-status')
+    }
+  }
   redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
 router.get('/sprint10/household-situation-section', function (req, res) {
   const section = 'household-situation/'
-  const sectionPageMap = {
+  let sectionPageMap = {
     'previous-housing-situation': ['previous-housing-situation'],
     'homeless': ['homeless'],
     'reason-for-leaving': ['reason-for-leaving', 'removal-reason']
+  }
+  if(req.session.data['reason-for-leaving'] == 'Other'){
+    sectionPageMap['reason-for-leaving'].push('other-reason-for-leaving')
   }
   redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
 router.get('/sprint10/household-needs-section', function (req, res) {
   const section = 'household-needs/'
-  const sectionPageMap = {
+  let sectionPageMap = {
     'armed-forces': ['tenant-code'],
     'disabilities': ['long-term-conditions'],
     'pregnancy': ['pregnancy'],
     'requirements': ['requirements'],
     'conditions': ['conditions']
+  }
+  if(req.session.data['armed-forces'] != 'No' || req.session.data['armed-forces'] != 'Refused'){
+    sectionPageMap['armed-forces'].push('armed-forces-tenure')
+    sectionPageMap['armed-forces'].push('armed-forces-injured')
   }
   redirectToNextFormPage(req, res, section, sectionPageMap)
 })
@@ -162,21 +177,27 @@ router.get('/sprint10/income-and-benefits-section', function (req, res) {
 
 router.get('/sprint10/rent-section', function (req, res) {
   const section = 'rent/'
-  const sectionPageMap = {
+  let sectionPageMap = {
     'rent': ['rent', 'rent-period', 'service-charge', 'personal-service-charge', 'support-charge', 'outstanding']
+  }
+  if(req.session.data['outstanding'] == 'Yes'){
+    sectionPageMap['rent'].push('outstanding-amount')
   }
   redirectToNextFormPage(req, res, section, sectionPageMap)
 })
 
 router.get('/sprint10/local-authority-section', function (req, res) {
   const section = 'local-authority/'
-  const sectionPageMap = {
+  let sectionPageMap = {
     'time-lived-in-la': ['time-lived-in-la'],
     'time-on-waiting-list': ['time-on-waiting-list'],
     'previous-la': ['previous-la'],
     'previous-postcode': ['previous-postcode'],
     'reasonable-preference': ['reasonable-preference'],
     'allocation-type': ['choice-based', 'common-housing-register', 'common-allocation-policy']
+  }
+  if(req.session.data['reasonable-preference'] == 'Yes'){
+    sectionPageMap['reasonable-preference'].push('reasonable-preference-reason')
   }
   redirectToNextFormPage(req, res, section, sectionPageMap)
 })
