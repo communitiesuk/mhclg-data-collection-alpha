@@ -13,7 +13,7 @@ Check your answers
 
 {% set baseQuestions = ['rent-period', 'rent', 'service-charge', 'personal-service-charge', 'support-charge', 'outstanding'] %}
 {% set conditionalQuestions = ['outstanding-amount'] %}
-{% set allQuestions = ['rent-period', 'rent', 'service-charge', 'personal-service-charge', 'support-charge', 'outstanding'] %}
+{% set allQuestions = ['rent-period', 'rent', 'service-charge', 'personal-service-charge', 'support-charge', 'outstanding', 'outstanding-amount'] %}
 {% set numberOfQuestions = baseQuestions | length %}
 {% set outstandingConditional = data['outstanding'] == 'Yes' %}
 {% if outstandingConditional %}
@@ -63,7 +63,7 @@ Check your answers
             Basic Rent
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ data["rent"][0] }}
+            {{ data["rent"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="/sprint10/rent/rent?check=true">
