@@ -44,7 +44,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          The housing situation for this household immediately before this letting
+          Housing situation immediately before this letting
         </dt>
         <dd class="govuk-summary-list__value">
           {{ data["previous-housing-situation"] }}
@@ -60,7 +60,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Immediately prior to this letting, was this household…?
+          Homelessness experienced immediately before this letting
         </dt>
         <dd class="govuk-summary-list__value">
           {{ data["homeless"] }}
@@ -76,7 +76,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Reason for leaving past settled accomodation
+          Main reason for leaving their last settled home
         </dt>
         <dd class="govuk-summary-list__value">
           {{ data["reason-for-leaving"] }}
@@ -87,7 +87,6 @@ Check your answers
           </a>
         </dd>
       </div>
-    </dl>
     </dl>
 
     {% if otherReasonConditional %}
@@ -106,13 +105,12 @@ Check your answers
         </dd>
       </div>
     </dl>
-    </dl>
     {% endif %}
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Was the reason for leaving a direct result of the removal of the spare room subsidy or benefit cap introduced from 2013?
+          Left their last settled home because of the spare room subsidy or benefit cap
         </dt>
         <dd class="govuk-summary-list__value">
           {{ data["reason-removal"] }}

@@ -20,7 +20,7 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset" aria-describedby="reason-for-leaving-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              In the tenant’s view what was the main reason the household left their last settled home?
+              Main reason for leaving their last settled home
             </h1>
           </legend>
           <div id="reason-for-leaving-hint" class="govuk-hint">
@@ -40,7 +40,7 @@ GOV.UK Prototype Kit
             "Couldn't afford rent or mortgage - employment","Couldn't afford rent or mortgage - other",
             "To move nearer to family / friends / school","To move nearer to work","To move to accomodation with support",
             "To move to independent accomodation","Hate crime","Death of household member in last settled accomodation",
-            "Discharged from prison","Discharged from long stay hospital or similar institution","Other","Don't know"
+            "Discharged from prison","Discharged from long stay hospital or similar institution","Other","Don't know", "Prefer not to say"
           ] %}
 
           {% set optionsItems = [] %}
@@ -81,26 +81,26 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Was the reason for leaving a direct result of the removal of the spare room subsidy or benefit cap introduced from 2013?
+              Was the reason for leaving their last home because of the spare room subsidy or benefit cap?
             </h1>
           </legend>
           <div class="govuk-radios govuk-radios--small">
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes: Removal of the spare room subsidy" {{ 'checked' if data['reason-removal'] == "Yes: Removal of the spare room subsidy" }}>
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes - benefit cap" {{ 'checked' if data['reason-removal'] == "Yes - benefit cap" }}>
               <label class="govuk-label govuk-radios__label" for="reason-removal">
-                Yes: Removal of the spare room subsidy
+                Yes - benefit cap
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes: Benefit cap" {{ 'checked' if data['reason-removal'] == "Yes: Benefit cap" }}>
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes - removal of the spare room subsidy" {{ 'checked' if data['reason-removal'] == "Yes - removal of the spare room subsidy" }}>
               <label class="govuk-label govuk-radios__label" for="reason-removal-2">
-                Yes: Benefit cap
+                Yes - removal of the spare room subsidy
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes: Both" {{ 'checked' if data['reason-removal'] == "Yes: Both" }}>
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes - both the benefit cap and the removal of the spare room subsidy" {{ 'checked' if data['reason-removal'] == "Yes - both the benefit cap and the removal of the spare room subsidy" }}>
               <label class="govuk-label govuk-radios__label" for="reason-removal-3">
-                Yes: Both
+                Yes - both the benefit cap and the removal of the spare room subsidy
               </label>
             </div>
             <div class="govuk-radios__item">
@@ -113,6 +113,12 @@ GOV.UK Prototype Kit
               <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Don't Know" {{ 'checked' if data['reason-removal'] == "Don't Know" }}>
               <label class="govuk-label govuk-radios__label" for="reason-removal-4">
                 Don't Know
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Prefer not to say" {{ 'checked' if data['reason-removal'] == "Prefer not to say" }}>
+              <label class="govuk-label govuk-radios__label" for="reason-removal-5">
+                Prefer not to say
               </label>
             </div>
           </div>

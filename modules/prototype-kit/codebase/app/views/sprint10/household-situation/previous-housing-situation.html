@@ -27,7 +27,11 @@ GOV.UK Prototype Kit
 
       <legend class="govuk-fieldset__legend--l">
         <h1 class="govuk-fieldset__heading">
-          The housing situation for this household immediately before this letting
+          {% if not (data["number-of-other-members"][0] > 0) %}
+            Tenant's housing situation immediately before this letting
+          {% else %}
+            Household's housing situation immediately before this letting
+          {% endif %}
         </h1>
       </legend>
 

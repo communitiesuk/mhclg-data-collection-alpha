@@ -16,8 +16,8 @@ GOV.UK Prototype Kit
     <form name="form" class="form" action="../household-situation-section" method="POST" novalidate="" data-validate="my-form-validation">
 
       {% set options = [
-        "Not homeless","Assessed as homeless (or threatened with homelessness within 56 days) by a local authority and owed a homelessness duty",
-        "Other homelessness i.e. not found statutorily homeless by a housing authority but considered to be homeless by the letting"
+        "No","Assessed as homeless (or threatened with homelessness within 56 days) by a local authority and owed a homelessness duty",
+        "Other homelessness - not found statutorily homeless by a housing authority but considered to be homeless by the letting"
         ] %}
 
       {% set optionsItems = [] %}
@@ -28,7 +28,11 @@ GOV.UK Prototype Kit
 
       <legend class="govuk-fieldset__legend--l">
         <h1 class="govuk-fieldset__heading">
-          Immediately prior to this letting, was this household …?
+          {% if not (data["number-of-other-members"][0] > 0) %}
+            Did the tenant experience homelessness immediately before this letting?
+          {% else %}
+            Did the household experience homelessness immediately before this letting?
+          {% endif %}
         </h1>
       </legend>
 
