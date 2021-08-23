@@ -5,8 +5,8 @@ GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
-  <a href="armed-forces" class="govuk-back-link">Back</a>
-  <a href="../sign-in" class="govuk-link--right ">Sign out</a>
+<a href="armed-forces" class="govuk-back-link">Back</a>
+<a href="../sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
@@ -19,13 +19,26 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Does anyone in the household have any physical or mental health conditions or illness lasting or expected to last for 12 months or more?
+              {% if not (data["number-of-other-members"][0] > 0) %}
+              Does the tenant have any of these that they expect to last for 12 months or more?
+              {% else %}
+              Does anyone in the household have any of these that they expect to last for 12 months or more?
+              {% endif %}
             </h1>
+            <h3 class="govuk-fieldset__legend govuk-fieldset__legend--m">
+              <ul>
+                <li>Physical condition</li>
+                <li>Mental health condition</li>
+                <li>Other illness</li>
+              </ul>
+            </h3>
           </legend>
+
+
           <div class="govuk-radios govuk-radios">
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="long-term-conditions" name="long-term-conditions" type="radio" value="Yes" {{ 'checked' if data['long-term-conditions'] == "Yes" }}>
-              <label class="govuk-label govuk-radios__label" for="long-term-conditions">
+              <label class="govuk-label govuk-radios__label" for="long-term-conditions-1">
                 Yes
               </label>
             </div>
@@ -41,6 +54,12 @@ GOV.UK Prototype Kit
                 Don't know
               </label>
             </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="long-term-conditions" name="long-term-conditions" type="radio" value="Prefer not to say" {{ 'checked' if data['long-term-conditions'] == "Prefer not to say" }}>
+              <label class="govuk-label govuk-radios__label" for="long-term-conditions-4">
+                Prefer not to say
+              </label>
+            </div>
           </div>
         </fieldset>
       </div>
@@ -49,7 +68,7 @@ GOV.UK Prototype Kit
       <input type="hidden" name="disabilities-page" value="true">
       <input type="hidden" name="household-needs-inprogress" value="true">
       <div class="govuk-button-group">
-        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()" />
         <a href="../home-page" class="govuk-link">Return to logs</a>
       </div>
 

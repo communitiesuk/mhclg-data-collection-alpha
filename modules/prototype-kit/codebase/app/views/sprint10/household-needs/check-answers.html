@@ -15,7 +15,7 @@ Check your answers
 {% set conditionalQuestions = ['armed-forces-tenure', 'armed-forces-injured'] %}
 {% set allQuestions = ['armed-forces', 'long-term-conditions', 'pregnancy', 'requirements', 'conditions', 'armed-forces-tenure', 'armed-forces-injured'] %}
 {% set numberOfQuestions = baseQuestions | length %}
-{% set armedConditional = not (data['armed-forces'] == "No" or data['armed-forces'] == "Refused") %}
+{% set armedConditional = not (data['armed-forces'] == "No" or data['armed-forces'] == "Prefer not to say") %}
 {% if armedConditional %}
   {% set numberOfQuestions = numberOfQuestions + 2 %}
 {% endif %}
@@ -79,7 +79,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?
+          Has anyone in the household been seriously injured or ill as a result of their service in the armed forces?
         </dt>
         <dd class="govuk-summary-list__value">
           {{ data['armed-forces-injured'] }}
@@ -96,7 +96,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Physical or Mental Health Conditions lasting more than 12 months
+          Physical, mental health or illness in the household
         </dt>
         <dd class="govuk-summary-list__value">
           {{ data["long-term-conditions"] }}
@@ -112,7 +112,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Pregnancy
+          Pregnancy in the household
         </dt>
         <dd class="govuk-summary-list__value">
           {{ data["pregnancy"] }}
@@ -128,7 +128,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Disability Requirements
+          Disability requirements
         </dt>
         <dd class="govuk-summary-list__value">
           {% set value = data["requirements"] |d([]) | join(", ") %}

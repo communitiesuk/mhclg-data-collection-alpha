@@ -125,7 +125,7 @@ router.get('/sprint10/household-needs-section', function (req, res) {
     'requirements': ['requirements'],
     'conditions': ['conditions']
   }
-  if(req.session.data['armed-forces'] != 'No' || req.session.data['armed-forces'] != 'Refused'){
+  if(req.session.data['armed-forces'] != 'No' || req.session.data['armed-forces'] != 'Prefer not to say'){
     sectionPageMap['armed-forces'].push('armed-forces-tenure')
     sectionPageMap['armed-forces'].push('armed-forces-injured')
   }
