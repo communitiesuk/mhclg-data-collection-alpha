@@ -148,7 +148,7 @@ router.get('/sprint10/tenancy-section', function (req, res) {
 
 router.get('/sprint10/property-section', function (req, res) {
   const section = 'property/'
-  const sectionPageMap = {
+  let sectionPageMap = {
     'property-location': ['property-location'],
     'postcode': ['postcode'],
     'relet': ['relet'],
@@ -158,9 +158,12 @@ router.get('/sprint10/property-section', function (req, res) {
     'type-of-building': ['type-of-building'],
     'number-of-bedrooms': ['bedrooms'],
     'void-date': ['void-date-day'],
-    'repair-date': ['repair-date-day'],
+    'repair-date': ['repairs'],
     'previously-offered': ['previously-offered'],
     'wheelchair-accessible': ['wheelchair-accessible']
+  }
+  if(req.session.data['repairs'] == 'Yes'){
+    sectionPageMap['repair-date'].push('repair-date-day')
   }
   redirectToNextFormPage(req, res, section, sectionPageMap)
 })

@@ -11,10 +11,16 @@ Check your answers
 
 {% block content %}
 
-{% set baseQuestions = ['property-location', 'postcode', 'relet', 'reason-for-vacancy', 'property-reference', 'type-of-unit', 'type-of-building', 'bedrooms', 'void-date-day', 'repair-date-day', 'previously-offered', 'wheelchair-accessible'] %}
-{% set allQuestions = ['property-location', 'postcode', 'relet', 'reason-for-vacancy', 'property-reference', 'type-of-unit', 'type-of-building', 'bedrooms', 'void-date-day', 'repair-date-day', 'previously-offered', 'wheelchair-accessible'] %}
+{% set baseQuestions = ['property-location', 'postcode', 'relet', 'reason-for-vacancy', 'property-reference', 'type-of-unit', 'type-of-building', 'bedrooms', 'void-date-day', 'repairs', 'previously-offered', 'wheelchair-accessible'] %}
+{% set conditionalQuestions = ['repairs-date-day'] %}
+{% set allQuestions = ['property-location', 'postcode', 'relet', 'reason-for-vacancy', 'property-reference', 'type-of-unit', 'type-of-building', 'bedrooms', 'void-date-day', 'repairs', 'repair-date-day', 'previously-offered', 'wheelchair-accessible'] %}
 {% set numberOfQuestions = baseQuestions | length %}
 {% set numberOfCompletedQuestions = 0 %}
+
+{% set repairDateConditional = (data['repairs'] == "Yes") %}
+{% if repairDateConditional %}
+  {% set numberOfQuestions = numberOfQuestions + 1 %}
+{% endif %}
 
 {% for question in allQuestions %}
   {% if data[question] %}
@@ -187,6 +193,23 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
+            Were major repairs carried out during the void period?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['repairs'] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/property/repair-date?check=true">
+              {{ "Change" if data["repairs"] else "Answer"}}<span class="govuk-visually-hidden">repair-date</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      {% if repairDateConditional %}
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
             Repair date
           </dt>
           <dd class="govuk-summary-list__value">
@@ -202,6 +225,7 @@ Check your answers
           </dd>
         </div>
       </dl>
+      {% endif %}
 
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
