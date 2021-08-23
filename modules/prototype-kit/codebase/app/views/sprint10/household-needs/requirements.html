@@ -19,7 +19,7 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset" aria-describedby="requirements-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Does anyone in the household require
+              Which of these are required because of their condition or illness?
             </h1>
           </legend>
           <div id="requirements-hint" class="govuk-hint">
@@ -60,6 +60,12 @@ GOV.UK Prototype Kit
               <input class="govuk-checkboxes__input" id="requirements-6" name="requirements" type="checkbox" value="Don’t know" {{ 'checked' if data['requirements'][0] == "Don't know" }}>
               <label class="govuk-label govuk-checkboxes__label" for="requirements-6">
                  Don’t know
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="requirements-6" name="requirements" type="checkbox" value="Prefer not to say" {{ 'checked' if data['requirements'][0] == "Prefer not to say" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="requirements-6">
+                 Prefer not to say
               </label>
             </div>
           </div>
