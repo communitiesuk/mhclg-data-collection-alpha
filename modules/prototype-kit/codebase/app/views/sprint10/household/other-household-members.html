@@ -20,12 +20,12 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset" aria-describedby="number-of-other-members-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              How many other members of the household are there?
+              Number of other people in the household
             </h1>
           </legend>
 
           <div id="number-of-other-members-hint" class="govuk-hint">
-            Maximum 7
+            The maximum number of others is 7
           </div>
 
           <div class="govuk-form-group">
@@ -39,7 +39,7 @@ GOV.UK Prototype Kit
 
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 class="govuk-fieldset__heading">
-            {{ "Person " + i }}
+            {{ "Person " + (i + 1) }}
           </h1>
         </legend>
 
@@ -48,7 +48,7 @@ GOV.UK Prototype Kit
           name: "person-" + i + "-relationship-to-main",
           fieldset: {
             legend: {
-              text: "Relationship to main tenant",
+              text: "Person " + (i + 1) + "'s relationship to lead tenant",
               classes: "govuk-label--s"
             }
           },
@@ -60,7 +60,7 @@ GOV.UK Prototype Kit
             },
             {
               value: "Child",
-              text: "Child",
+              text: "Child - includes young adult and grown-up",
               checked: checked("person-" + i + "-relationship-to-main", "Child")
             },
             {
@@ -69,20 +69,21 @@ GOV.UK Prototype Kit
               checked: checked("person-" + i + "-relationship-to-main", "Other")
             },
             {
-              value: "Refused",
-              text: "Refused",
-              checked: checked("person-" + i + "-relationship-to-main", "Refused")
+              value: "Prefer not to say",
+              text: "Prefer not to say",
+              checked: checked("person-" + i + "-relationship-to-main", "Prefer not to say")
             }
           ]
         }) }}
 
           {{ govukInput({
             label: {
-              text: "Age",
+              text: "Person " + (i + 1) + "'s age",
               classes: "govuk-label--s"
             },
             id: "person-" + i + "-age",
-            name: "person-" + i + "-age"
+            name: "person-" + i + "-age",
+            value: data["person-" + i + "-age"]
           }) }}
 
           {{ govukRadios({
@@ -90,7 +91,7 @@ GOV.UK Prototype Kit
             name: "person-" + i + "-gender",
             fieldset: {
               legend: {
-                text: "Gender",
+                text: "Which of these best describes person " + (i + 1) + "'s gender identity?",
                 classes: "govuk-label--s"
               }
             },
@@ -124,40 +125,65 @@ GOV.UK Prototype Kit
             classes: "govuk-radios--small",
             fieldset: {
               legend: {
-                text: "Work",
+                text: "Which of these best describes person " + (i + 1) + "'s working situation?",
                 classes: "govuk-label--s"
               }
             },
             items: [
               {
-                value: "Part-time (Less than 30 hours)",
-                text: "Part-time (Less than 30 hours)",
+                value: "Part-time - Less than 30 hours",
+                text: "Part-time - Less than 30 hours",
                 checked: checked("person-" + i + "-economic-status", "Part-time (Less than 30 hours)")
               },
               {
-                value: "Full-time (30 hours or more)",
-                text: "Full-time (30 hours or more)",
+                value: "Full-time - 30 hours or more",
+                text: "Full-time - 30 hours or more",
                 checked: checked("person-" + i + "-economic-status", "Full-time (30 hours or more)")
               },
               {
-                value: "Not seeking work, in government training or New Deal",
-                text: "Not seeking work, in government training or New Deal",
-                checked: checked("person-" + i + "-economic-status", "Not seeking work, in government training or New Deal")
+                value: "In government training into work, such as New Deal",
+                text: "In government training into work, such as New Deal",
+                checked: checked("person-" + i + "-economic-status", "In government training into work, such as New Deal")
               },
               {
-                value: "Full-time student, jobseeker, child under 16 or retired",
-                text: "Full-time student, jobseeker, child under 16 or retired",
-                checked: checked("person-" + i + "-economic-status", "Full-time student, jobseeker, child under 16 or retired")
+                value: "Jobseeker",
+                text: "Jobseeker",
+                checked: checked("person-" + i + "-economic-status", "Jobseeker")
               },
               {
-                value: "Unable to work, on long term sick or has a disability",
-                text: "Unable to work, on long term sick or has a disability",
-                checked: checked("person-" + i + "-economic-status", "Unable to work, on long term sick or has a disability")
+                value: "Retired",
+                text: "Retired",
+                checked: checked("person-" + i + "-economic-status", "Retired")
+              },
+              {
+                value: "Not seeking work",
+                text: "Not seeking work",
+                checked: checked("person-" + i + "-economic-status", "Not seeking work")
+              },
+              {
+                value: "Full-time student",
+                text: "Full-time student",
+                checked: checked("person-" + i + "-economic-status", "Full-time student")
+              },
+              {
+                value: "Unable to work because of long term sick or disability",
+                text: "Unable to work because of long term sick or disability",
+                checked: checked("person-" + i + "-economic-status", "Unable to work because of long term sick or disability")
+              },
+              {
+                value: "Child under 16",
+                text: "Child under 16",
+                checked: checked("person-" + i + "-economic-status", "Child under 16")
               },
               {
                 value: "Other",
                 text: "Other",
                 checked: checked("person-" + i + "-economic-status", "Other")
+              },
+              {
+                value: "Prefer not to say",
+                text: "Prefer not to say",
+                checked: checked("person-" + i + "-economic-status", "Prefer not to say")
               }
             ]
           }) }}

@@ -35,7 +35,7 @@ Check your answers
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
 
-    <h1 class="govuk-heading-l">Check the answers you gave for Household characteristics</h1>
+    <h1 class="govuk-heading-l">Check the answers you gave for household characteristics</h1>
 
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         {% if numberOfCompletedQuestions < numberOfQuestions %}
@@ -49,7 +49,7 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            What is the tenant code?
+            Tenant code
           </dt>
           <dd class="govuk-summary-list__value">
 
@@ -164,7 +164,7 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            {{ "Person " + i + "'s relationship to main tenant" }}
+            {{ "Person " + (i + 1) + "'s relationship to lead tenant" }}
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["person-" + i + "-relationship-to-main"] }}
@@ -180,7 +180,7 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            {{ "Person " + i + "'s age" }}
+            {{ "Person " + (i + 1) + "'s age" }}
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["person-" + i + "-age"] }}
@@ -196,7 +196,7 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            {{ "Person " + i + "'s gender" }}
+            {{ "Which of these best describes person " + (i + 1) + "'s gender identity?" }}
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["person-" + i + "-gender"] }}
@@ -212,7 +212,7 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            {{ "Person " + i + "'s work" }}
+            {{ "Which of these best describes person " + (i + 1) + "'s working situation?" }}
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["person-" + i + "-economic-status"] }}

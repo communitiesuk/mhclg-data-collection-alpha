@@ -19,26 +19,26 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Gender
+              Which of these best describes the tenant's gender identity?
             </h1>
           </legend>
           <div class="govuk-radios govuk-radios">
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Male" {{ 'checked' if data['gender'] == "Male" }}>
-              <label class="govuk-label govuk-radios__label" for="gender">
-                Male
-              </label>
-            </div>
-            <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Female" {{ 'checked' if data['gender'] == "Female" }}>
-              <label class="govuk-label govuk-radios__label" for="gender-2">
+              <label class="govuk-label govuk-radios__label" for="gender">
                 Female
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Other" {{ 'checked' if data['gender'] == "Other" }}>
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Male" {{ 'checked' if data['gender'] == "Male" }}>
+              <label class="govuk-label govuk-radios__label" for="gender-2">
+                Male
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="gender" name="gender" type="radio" value="Non-binary" {{ 'checked' if data['gender'] == "Non-binary" }}>
               <label class="govuk-label govuk-radios__label" for="gender-3">
-                Other
+                Non-binary
               </label>
             </div>
             <div class="govuk-radios__item">

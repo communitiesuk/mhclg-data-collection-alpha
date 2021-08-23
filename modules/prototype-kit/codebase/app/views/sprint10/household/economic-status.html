@@ -19,47 +19,78 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Work
+              Which of these best describes the tenant's working situation?
             </h1>
           </legend>
-          <div class="govuk-radios govuk-radios--small">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Part-time (Less than 30 hours)" {{ 'checked' if data['economic-status'] == "Part-time (Less than 30 hours)"}}>
-              <label class="govuk-label govuk-radios__label" for="economic-status">
-                Part-time (Less than 30 hours) 
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Full-time (30 hours or more)" {{ 'checked' if data['economic-status'] == "Full-time (30 hours or more)"}}>
-              <label class="govuk-label govuk-radios__label" for="economic-status-2">
-                Full-time (30 hours or more)
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Not seeking work, in government training or New Deal" {{ 'checked' if data['economic-status'] == "Not seeking work, in government training or New Deal"}}>
-              <label class="govuk-label govuk-radios__label" for="economic-status-3">
-                Not seeking work, in government training or New Deal                  
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Full-time student, jobseeker, child under 16 or retired" {{ 'checked' if data['economic-status'] == "Full-time student, jobseeker, child under 16 or retired"}}>
-              <label class="govuk-label govuk-radios__label" for="economic-status-4">
-                Full-time student, jobseeker, child under 16 or retired                 
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Unable to work, on long term sick or has a disability" {{ 'checked' if data['economic-status'] == "Unable to work, on long term sick or has a disability"}}>
-              <label class="govuk-label govuk-radios__label" for="economic-status-5">
-                Unable to work, on long term sick or has a disability                
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="economic-status" name="economic-status" type="radio" value="Other" {{ 'checked' if data['economic-status'] == "Other"}}>
-              <label class="govuk-label govuk-radios__label" for="economic-status-6">
-                Other              
-              </label>
-            </div>
-          </div>
+
+          {{ govukRadios({
+            idPrefix: "economic-status",
+            name: "economic-status",
+            classes: "govuk-radios--small",
+            fieldset: {
+              legend: {
+                text: "",
+                classes: "govuk-label--s"
+              }
+            },
+            items: [
+              {
+                value: "Part-time - Less than 30 hours",
+                text: "Part-time - Less than 30 hours",
+                checked: checked("person-" + i + "-economic-status", "Part-time (Less than 30 hours)")
+              },
+              {
+                value: "Full-time - 30 hours or more",
+                text: "Full-time - 30 hours or more",
+                checked: checked("person-" + i + "-economic-status", "Full-time (30 hours or more)")
+              },
+              {
+                value: "In government training into work, such as New Deal",
+                text: "In government training into work, such as New Deal",
+                checked: checked("person-" + i + "-economic-status", "In government training into work, such as New Deal")
+              },
+              {
+                value: "Jobseeker",
+                text: "Jobseeker",
+                checked: checked("person-" + i + "-economic-status", "Jobseeker")
+              },
+              {
+                value: "Retired",
+                text: "Retired",
+                checked: checked("person-" + i + "-economic-status", "Retired")
+              },
+              {
+                value: "Not seeking work",
+                text: "Not seeking work",
+                checked: checked("person-" + i + "-economic-status", "Not seeking work")
+              },
+              {
+                value: "Full-time student",
+                text: "Full-time student",
+                checked: checked("person-" + i + "-economic-status", "Full-time student")
+              },
+              {
+                value: "Unable to work because of long term sick or disability",
+                text: "Unable to work because of long term sick or disability",
+                checked: checked("person-" + i + "-economic-status", "Unable to work because of long term sick or disability")
+              },
+              {
+                value: "Child under 16",
+                text: "Child under 16",
+                checked: checked("person-" + i + "-economic-status", "Child under 16")
+              },
+              {
+                value: "Other",
+                text: "Other",
+                checked: checked("person-" + i + "-economic-status", "Other")
+              },
+              {
+                value: "Prefer not to say",
+                text: "Prefer not to say",
+                checked: checked("person-" + i + "-economic-status", "Prefer not to say")
+              }
+            ]
+          }) }}
 
         </fieldset>
       </div>
