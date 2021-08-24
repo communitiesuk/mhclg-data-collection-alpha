@@ -64,6 +64,13 @@ user_agents.drop(user_agents[(user_agents['browser'] == 'Other') & (user_agents[
 grouped = user_agents.groupby(['device', 'os', 'browser'])['count'].sum().sort_values(ascending=False)
 total = grouped.sum()
 percentage = grouped / total * 100
-percentage.to_csv('../percentage.csv')
+percentage.to_csv('../grouped-percentage.csv')
+
+device_grouped = user_agents.groupby(['device'])['count'].sum().sort_values(ascending=False)
+device_total = device_grouped.sum()
+device_percentage = device_grouped / device_total * 100
+device_percentage.to_csv('../device-percentage.csv')
+
+
 with pandas.option_context('display.max_rows', None):
     print(percentage)
