@@ -10,6 +10,7 @@ colnames = ['Date Time', 'Time Zone', 'Connection From', 'col3', 'col4', 'Action
 
 dir = sys.argv[1]
 os.chdir(dir)
+log_count = 0
 
 extension = 'csv'
 all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
@@ -23,11 +24,13 @@ for file in all_filenames:
     browsers = []
     parsed_user_agents = []
     devices = []
+    versions = []
     for ua_string in user_agents['user-agent']:
         user_agent = parse(ua_string)
         parsed_user_agents.append(str(user_agent))
         oses.append(user_agent.os.family + " " + user_agent.os.version_string)
         browsers.append(user_agent.browser.family)
+        versions.append(user_agent.browser.version_string)
         if user_agent.is_pc:
             device = 'PC'
         elif user_agent.is_mobile:
@@ -42,11 +45,13 @@ for file in all_filenames:
     user_agents['device'] = pandas.Series(devices)
     user_agents['os'] = pandas.Series(oses)
     user_agents['browser'] = pandas.Series(browsers)
+    user_agents['version'] = pandas.Series(versions)
+    log_count = log_count + logs.shape[0]
 
     user_agents.to_csv('../combined.csv', mode='a', header=False)
 
 file = '../combined.csv'
-colnames = ['idx', 'user-agent', 'count', 'parsed', 'device', 'os', 'browser', 'rec']
+colnames = ['idx', 'user-agent', 'count', 'parsed', 'device', 'os', 'browser', 'version', 'rec']
 user_agents = pandas.read_csv(file, names=colnames, header=None, index_col=0)
 
 excluded_agents = ['Googlebot', 'DuckDuckGo-Favicons-Bot', 'Magus Bot', 'bingbot',
@@ -71,6 +76,13 @@ device_total = device_grouped.sum()
 device_percentage = device_grouped / device_total * 100
 device_percentage.to_csv('../device-percentage.csv')
 
+browser_grouped = user_agents.groupby(['browser', 'version'])['count'].sum().sort_values(ascending=False)
+browser_total = browser_grouped.sum()
+browser_percentage = browser_grouped / browser_total * 100
+browser_percentage.to_csv('../browser_percentage.csv')
+
 
 with pandas.option_context('display.max_rows', None):
     print(percentage)
+
+print(log_count)
