@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% import "./_get-help.njk" as help %}
+
+{% set title = "Get help" %}
+
+{% block pageTitle %}
+{{ title }} - {{ serviceName }} - gov.uk
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:history.go(-1);"
+}) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+    {{ help.content() }}
+
+  </div>
+
+</div>
+
+{% endblock %}

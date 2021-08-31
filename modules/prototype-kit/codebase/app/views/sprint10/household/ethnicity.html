@@ -136,6 +136,9 @@ GOV.UK Prototype Kit
         <a href="../home-page" class="govuk-link">Return to logs</a>
       </div>
 
+      {% import "./../_get-help.njk" as help %}
+      {{ help.details() }}
+
       </fieldset>
     </form>
   </div>

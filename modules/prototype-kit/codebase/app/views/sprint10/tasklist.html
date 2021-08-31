@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "./_get-help.njk" as help %}
 
 {% block pageTitle %}
 CORE tasklist
@@ -256,6 +257,7 @@ CORE tasklist
       </li>
     </ol>
     <p><a href="/public/files/paper-form-social-housing-letting.pdf">Print this form</a></p>
+    {{ help.details() }}
   </div>
 </div>
 
