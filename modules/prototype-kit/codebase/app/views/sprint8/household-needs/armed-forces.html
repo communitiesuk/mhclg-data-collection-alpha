@@ -15,7 +15,7 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset" aria-describedby="armed-forces-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Armed Forces
+              Experience of the UK Armed Forces
             </h1>
           </legend>
           <div id="armed-forces-hint" class="govuk-hint">
@@ -73,25 +73,25 @@ GOV.UK Prototype Kit
                 name: "armed-forces-tenure",
                 fieldset: {
                   legend: {
-                    text: "When did they leave the Armed Forces?",
+                    text: "Are they still serving?",
                     classes: "govuk-label--l"
                   }
                 },
                 items: [
                   {
-                    value: "Up to and including 5 years ago",
-                    text: "Up to and including 5 years ago",
-                    checked: checked("armed-forces-tenure", "Up to and including 5 years ago")
+                    value: "Yes",
+                    text: "Yes",
+                    checked: checked("armed-forces-tenure", "Yes")
                   },
                   {
-                    value: "More than 5 years ago",
-                    text: "More than 5 years ago",
-                    checked: checked("armed-forces-tenure", "More than 5 years ago")
+                    value: "No - they left up to 5 years ago",
+                    text: "No - they left up to 5 years ago",
+                    checked: checked("armed-forces-tenure", "No - they left up to 5 years ago")
                   },
                   {
-                    value: "Still serving",
-                    text: "Still serving",
-                    checked: checked("armed-forces-tenure", "Still serving")
+                    value: "No - they left more than 5 years ago",
+                    text: "No - they left more than 5 years ago",
+                    checked: checked("armed-forces-tenure", "No - they left more than 5 years ago")
                   },
                   {
                     value: "Prefer not to say",
@@ -110,7 +110,7 @@ GOV.UK Prototype Kit
               name: "armed-forces-injured",
               fieldset: {
                 legend: {
-                  text: "Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?",
+                  text: "Were they seriously injured or ill as a result of their service?",
                   classes: "govuk-label--l"
                 }
               },
