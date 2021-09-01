@@ -17,7 +17,7 @@ const checkGender = (record) => {
         };
     } else if (ilc == "r" || ilc == "refused") {
         out.gender = {
-            value: "Refused",
+            value: "Prefer not to say",
         };
     } else {
         out.gender = input;

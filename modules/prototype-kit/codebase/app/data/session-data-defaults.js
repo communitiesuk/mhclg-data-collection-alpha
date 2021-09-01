@@ -152,7 +152,7 @@ module.exports = {
         'Which benefits does the tenant receive',
         'How much income comes from these benefits',
         'Tenant\'s net income',
-        'Income refused',
+        'Income Prefer not to say',
         'Main reason the household left their last settled home',
         'Accessibility requirements',
         'Housing situation',
@@ -279,7 +279,7 @@ module.exports = {
                     value: '24',
                   },
                   {
-                    label: 'Person 1 Age Refused',
+                    label: 'Person 1 Age Prefer not to say',
                     value: 'No',
                   },
                   {
