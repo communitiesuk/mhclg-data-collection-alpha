@@ -7,7 +7,7 @@ const homeless_options = [
     { label: "Living in insanitary, overcrowded or unsatisfactory housing", value: "unsatisfactory_housing" },
     { label: "A need to move on medical and welfare grounds (including a disability)", value: "welfare" },
     { label: "A need to move to avoid hardship to themselves or others", value: "hardship" },
-    { label: "Don't know", value: "unknown" },
+    { label: "Do not know", value: "unknown" },
 ]
 
 const homelessCombined = {
@@ -43,7 +43,7 @@ const homeless4 = {
 
 const homeless5 = {
     label: "Unknown", key: "unknown",
-    alternates: ["Don't know"],
+    alternates: ["Do not know"],
     type: 'checkbox',
 }
 

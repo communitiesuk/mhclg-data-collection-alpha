@@ -8,40 +8,70 @@ GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form name="form" class="form" action="reason-for-vacancy" method="POST" novalidate="" data-validate="my-form-validation">
-
-      {{ govukRadios({
-      idPrefix: "relet",
-      name: "relet",
-      fieldset: {
-        legend: {
-          text: "If this is a relet, was the property most recently let on",
-          classes: "govuk-fieldset__legend--l"
-        }
-      },
-      items: [
-        {
-          value: "A social rent basis",
-          text: "A social rent basis",
-          checked: checked("relet", "A social rent basis")
-        },
-        {
-          value: "An affordable rent basis",
-          text: "An affordable rent basis",
-          checked: checked("relet", "An affordable rent basis")
-        },
-        {
-          value: "An intermediate rent basis",
-          text: "An intermediate rent basis",
-          checked: checked("relet", "An intermediate rent basis")
-        },
-        {
-          value: "Don't know",
-          text: "Don't know",
-          checked: checked("relet", "Don't know")
-        }
-      ]
-    }) }}
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Is the property a relet?
+          </h1>
+        </legend>
+        <div class="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="property-relet" name="property-relet" type="radio" value="Yes" onClick="checkRelet(this.value);">
+            <label class="govuk-label govuk-radios__label" for="property-relet">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="property-relet-2" name="property-relet" type="radio" value="No" onClick="checkRelet(this.value);">
+            <label class="govuk-label govuk-radios__label" for="property-relet-2">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <style>
+      #relet-radios {
+        display: none;
+      }
+    </style>
+      
+    <form name="form" class="relet-form" id="relet-form" action="reason-for-vacancy" method="POST" novalidate="" data-validate="my-form-validation">
+      <div id="relet-radios">
+        {{ govukRadios({
+          idPrefix: "relet",
+          name: "relet",
+          fieldset: {
+            legend: {
+              text: "Which type was the property most recently let as?",
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "A social rent basis",
+              text: "A social rent basis",
+              checked: checked("relet", "A social rent basis")
+            },
+            {
+              value: "An affordable rent basis",
+              text: "An affordable rent basis",
+              checked: checked("relet", "An affordable rent basis")
+            },
+            {
+              value: "An intermediate rent basis",
+              text: "An intermediate rent basis",
+              checked: checked("relet", "An intermediate rent basis")
+            },
+            {
+              value: "Do not know",
+              text: "Do not know",
+              checked: checked("relet", "Do not know")
+            }
+          ]
+        }) }}
+      </div>
 
       <input type="hidden" name="relet-page" value="true">
       <input type="hidden" name="property-inprogress" value="true">
@@ -51,4 +81,14 @@ GOV.UK Prototype Kit
   </div>
 </div>
 
+<script>
+function checkRelet(selectedValue) {
+  console.log(selectedValue);
+  if(selectedValue == "Yes") {
+    document.getElementById('relet-radios').style.display = "block";
+  } else {
+    document.getElementById('relet-radios').style.display = "none";
+  }
+}
+</script>
 {% endblock %}

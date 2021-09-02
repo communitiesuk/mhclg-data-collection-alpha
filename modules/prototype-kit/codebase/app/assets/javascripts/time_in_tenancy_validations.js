@@ -6,7 +6,7 @@ const timeInTenancyOptions = [
     { label: "3 year but under 4 years", value: "<4" },
     { label: "4 year but under 5 years", value: "<5" },
     { label: "5 years or more", value: ">5" },
-    { label: "Don't know", value: "unknown" },
+    { label: "Do not know", value: "unknown" },
 ]
 
 const timeInTenancy = {

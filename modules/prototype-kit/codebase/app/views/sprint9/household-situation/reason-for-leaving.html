@@ -35,7 +35,7 @@ GOV.UK Prototype Kit
             "Couldn't afford rent or mortgage - employment","Couldn't afford rent or mortgage - other",
             "To move nearer to family / friends / school","To move nearer to work","To move to accomodation with support",
             "To move to independent accomodation","Hate crime","Death of household member in last settled accomodation",
-            "Discharged from prison","Discharged from long stay hospital or similar institution","Other","Don't know"
+            "Discharged from prison","Discharged from long stay hospital or similar institution","Other","Do not know"
           ] %}
 
           {% set optionsItems = [] %}
@@ -105,9 +105,9 @@ GOV.UK Prototype Kit
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Don't Know" {{ 'checked' if data['reason-removal'] == "Don't Know" }}>
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Do not know" {{ 'checked' if data['reason-removal'] == "Do not know" }}>
               <label class="govuk-label govuk-radios__label" for="reason-removal-4">
-                Don't Know
+                Do not know
               </label>
             </div>
           </div>

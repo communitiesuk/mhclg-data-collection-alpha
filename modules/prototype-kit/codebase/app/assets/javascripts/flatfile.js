@@ -23,9 +23,9 @@ const allFields = [
     validators: [
       {
         validate: "regex_matches",
-        regex: "/\W|(Female)|(Male)|(Other)|(Refused)|\W/gm",
+        regex: "/\W|(Female)|(Male)|(Other)|(Prefer not to say)|\W/gm",
         error:
-          "Please use valid gender ('Male','Female','Other' or 'Refused')",
+          "Please use valid gender ('Male','Female','Other' or 'Prefer not to say')",
       },
     ],
   },

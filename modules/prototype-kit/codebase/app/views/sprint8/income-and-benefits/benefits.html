@@ -1,40 +1,123 @@
-{% extends "layout.html" %}
-
-{% block pageTitle %}
-GOV.UK Prototype Kit
-{% endblock %}
-
-{% block content %}
+{% extends "layout.html" %} {% block pageTitle %} GOV.UK Prototype Kit {%
+endblock %} {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form name="form" class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
-
+    <form
+      name="form"
+      class="form"
+      action="check-answers"
+      method="POST"
+      novalidate=""
+      data-validate="my-form-validation"
+    >
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Is the tenant in receipt of, or likely to be in receipt of, any of the following?
+              Is the tenant likely to be in receipt of any of these
+              housing-related benefits?
             </h1>
           </legend>
 
-          <div class="govuk-form-group">
-            <select class="govuk-select" id="benefit" name="benefit">
-              <option value="Housing Benefit" selected>Housing Benefit (if not in receipt of Universal Credit)</option>
-              <option value="Not in receipt of either UC or HB">Not in receipt of either UC or HB</option>
-              <option value="Don't Know">Don't Know</option>
-              <option value="UC - with housing element">UC - with housing element (and not in receipt of Housing Benefit)</option>
-              <option value="UC - without housing element (and not in receipt of HB)">UC - without housing element (not in receipt of HB and tenants not eligible for housing support e.g. residential care home)</option>
-              <option value="UC - without housing element (and in receipt of HB)">UC - without housing element (and in receipt of HB)</option>
-            </select>
+          <div class="govuk-radios">
+            <div class="govuk-radios__item">
+              <input
+                class="govuk-radios__input"
+                id="benefit-1"
+                name="benefit"
+                type="radio"
+                value="Housing Benefit"
+              />
+              <label
+                class="govuk-label govuk-radios__label"
+                for="benefit-1"
+              >
+                Housing Benefit, but not Universal Credit
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input
+                class="govuk-radios__input"
+                id="benefit-2"
+                name="benefit"
+                type="radio"
+                value="Universal Credit with housing element, but not Housing Benefit"
+              />
+              <label
+                class="govuk-label govuk-radios__label"
+                for="benefit-2"
+              >
+                Universal Credit with housing element, but not Housing Benefit
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input
+                class="govuk-radios__input"
+                id="benefit-3"
+                name="benefit"
+                type="radio"
+                value="Universal Credit without housing element, and not Housing Benefit"
+              />
+              <label
+                class="govuk-label govuk-radios__label"
+                for="benefit-3"
+              >
+                Universal Credit without housing element, and not Housing Benefit
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input
+                class="govuk-radios__input"
+                id="benefit-4"
+                name="benefit"
+                type="radio"
+                value="Universal Credit and Housing Benefit"
+              />
+              <label
+                class="govuk-label govuk-radios__label"
+                for="benefit-4"
+              >
+                Universal Credit and Housing Benefit
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input
+                class="govuk-radios__input"
+                id="benefit-5"
+                name="benefit"
+                type="radio"
+                value="Not Housing Benefit or Universal Credit"
+              />
+              <label
+                class="govuk-label govuk-radios__label"
+                for="benefit-5"
+              >
+                Not Housing Benefit or Universal Credit
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input
+                class="govuk-radios__input"
+                id="benefit-6"
+                name="benefit"
+                type="radio"
+                value="Do not know"
+              />
+              <label
+                class="govuk-label govuk-radios__label"
+                for="benefit-6"
+              >
+                Do not know
+              </label>
+            </div>
           </div>
         </fieldset>
       </div>
 
-      <input type="hidden" name="benefits-page" value="true">
-      <input type="hidden" name="income-and-benefits-inprogress" value="true">
+      <input type="hidden" name="benefits-page" value="true" />
+      <input type="hidden" name="income-and-benefits-inprogress" value="true" />
       <input class="govuk-button" type="submit" value="Save and continue" />
-
     </form>
   </div>
 </div>

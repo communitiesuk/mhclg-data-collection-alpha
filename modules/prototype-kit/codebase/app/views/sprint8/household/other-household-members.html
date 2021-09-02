@@ -15,12 +15,12 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset" aria-describedby="number-of-other-members-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              How many other members of the household are there?
+              How many other people are there in the household?
             </h1>
           </legend>
 
           <div id="number-of-other-members-hint" class="govuk-hint">
-            Maximum 7
+            The maximum number of others is 7
           </div>
 
           <div class="govuk-form-group">
@@ -28,7 +28,7 @@ GOV.UK Prototype Kit
           </div>
       </div>
 
-      {% for i in [1,2,3,4,5,6,7] %}
+      {% for i in [2,3,4,5,6,7,8] %}
       <div id="person-{{i}}">
         <hr class="govuk-!-margin-bottom-6" />
 
@@ -43,7 +43,7 @@ GOV.UK Prototype Kit
           name: "person-" + i + "-relationship-to-main",
           fieldset: {
             legend: {
-              text: "Relationship to main tenant",
+              text: "What is person " + i + "'s relationship to the lead tenant?",
               classes: "govuk-label--s"
             }
           },
@@ -55,7 +55,7 @@ GOV.UK Prototype Kit
             },
             {
               value: "Child",
-              text: "Child",
+              text: "Child - includes young adult and grown-up",
               checked: checked("person-" + i + "-relationship-to-main", "Child")
             },
             {
@@ -64,16 +64,16 @@ GOV.UK Prototype Kit
               checked: checked("person-" + i + "-relationship-to-main", "Other")
             },
             {
-              value: "Refused",
-              text: "Refused",
-              checked: checked("person-" + i + "-relationship-to-main", "Refused")
+              value: "Prefer not to say",
+              text: "Prefer not to say",
+              checked: checked("person-" + i + "-relationship-to-main", "Prefer not to say")
             }
           ]
         }) }}
 
           {{ govukInput({
             label: {
-              text: "Age",
+              text: "What is person " + i + "'s age",
               classes: "govuk-label--s"
             },
             id: "person-" + i + "-age",
@@ -85,7 +85,7 @@ GOV.UK Prototype Kit
             name: "person-" + i + "-gender",
             fieldset: {
               legend: {
-                text: "Gender",
+                text: "Which of these best describes person " + i + "'s gender",
                 classes: "govuk-label--s"
               }
             },
@@ -102,7 +102,7 @@ GOV.UK Prototype Kit
               },
               {
                 value: "Other",
-                text: "Other",
+                text: "Non-binary",
                 checked: checked("person-" + i + "-gender", "Other")
               },
               {
@@ -118,40 +118,65 @@ GOV.UK Prototype Kit
             name: "person-" + i + "-economic-status",
             fieldset: {
               legend: {
-                text: "Work",
+                text: "Which of these best describes person "+i+"’s current working situation?",
                 classes: "govuk-label--s"
               }
             },
             items: [
               {
-                value: "Part-time (Less than 30 hours)",
-                text: "Part-time (Less than 30 hours)",
-                checked: checked("person-" + i + "-economic-status", "Part-time (Less than 30 hours)")
+                value: "Part-time - less than 30 hours a week",
+                text: "Part-time - less than 30 hours a week",
+                checked: checked("person-" + i + "-economic-status", "Part-time - less than 30 hours a week")
               },
               {
-                value: "Full-time (30 hours or more)",
-                text: "Full-time (30 hours or more)",
-                checked: checked("person-" + i + "-economic-status", "Full-time (30 hours or more)")
+                value: "Full-time - 30 hours or more a week",
+                text: "Full-time - 30 hours or more a week",
+                checked: checked("person-" + i + "-economic-status", "Full-time - 30 hours or more a week")
               },
               {
-                value: "Not seeking work, in government training or New Deal",
-                text: "Not seeking work, in government training or New Deal",
-                checked: checked("person-" + i + "-economic-status", "Not seeking work, in government training or New Deal")
+                value: "In government training into work, such as New Deal",
+                text: "In government training into work, such as New Deal",
+                checked: checked("person-" + i + "-economic-status", "In government training into work, such as New Deal")
               },
               {
-                value: "Full-time student, jobseeker, child under 16 or retired",
-                text: "Full-time student, jobseeker, child under 16 or retired",
-                checked: checked("person-" + i + "-economic-status", "Full-time student, jobseeker, child under 16 or retired")
+                value: "Jobseeker",
+                text: "Jobseeker",
+                checked: checked("person-" + i + "-economic-status", "Jobseeker")
               },
               {
-                value: "Unable to work, on long term sick or has a disability",
-                text: "Unable to work, on long term sick or has a disability",
-                checked: checked("person-" + i + "-economic-status", "Unable to work, on long term sick or has a disability")
+                value: "Retired",
+                text: "Retired",
+                checked: checked("person-" + i + "-economic-status", "Retired")
+              },
+              {
+                value: "Not seeking work",
+                text: "Not seeking work",
+                checked: checked("person-" + i + "-economic-status", "Not seeking work")
+              },
+              {
+                value: "Full-time student",
+                text: "Full-time student",
+                checked: checked("person-" + i + "-economic-status", "Full-time student")
+              },
+              {
+                value: "Unable to work because of long-term sickness or disability",
+                text: "Unable to work because of long-term sickness or disability",
+                checked: checked("person-" + i + "-economic-status", "Unable to work because of long-term sickness or disability")
+              },
+              {
+                value: "Child under 16",
+                text: "Child under 16",
+                checked: checked("person-" + i + "-economic-status", "Child under 16")
               },
               {
                 value: "Other",
                 text: "Other",
                 checked: checked("person-" + i + "-economic-status", "Other")
+              },
+              {
+                value: "Prefer not to say",
+                text: "Prefer not to say",
+                checked: checked("person-" + i + "-economic-status", "Prefer not to say")
               }
             ]
           }) }}
@@ -165,7 +190,7 @@ GOV.UK Prototype Kit
       <input class="govuk-button" type="submit" value="Save and continue" />
 
       <style>
-      #person-1 {
+      #person-8 {
         display: none;
       }
       #person-2{
@@ -195,7 +220,7 @@ GOV.UK Prototype Kit
 
 <script>
   const reset_fields = () => {
-    for(var i = 1; i<=7; i++ ) {
+    for(var i = 2; i<=8; i++ ) {
       let div = "person-".concat(i.toString());
       document.getElementById(div).style.display = "none";
     }
@@ -203,9 +228,10 @@ GOV.UK Prototype Kit
 
   function check() {
     reset_fields();
-    var val = document.getElementById("number-of-other-members").value > 7 ? 7 : document.getElementById("number-of-other-members").value;
+    var numberOfOtherMember = parseInt(document.getElementById("number-of-other-members").value);
+    var val = numberOfOtherMember > 7 ? 7 : numberOfOtherMember;
 
-    for(var i = 1; i<=val; i++ ) {
+    for(var i = 2; i<=val+1; i++ ) {
       let div = "person-".concat(i.toString());
       document.getElementById(div).style.display = "block";
     }
