@@ -14,39 +14,81 @@ GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <form name="form" class="form" action="../property-section" method="POST" novalidate="" data-validate="my-form-validation">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Is this property a relet?
+            </h1>
+          </legend>
+            {% macro reletRadio(data, group, items, changefn) %}
+              <div class="govuk-form-group" id="{{ group }}">
+                <div class="govuk-radios--small">
+                  {% for i in range(0, items['items'].length) %}
+                  {% set item = items['items'][i] %}
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
+                      onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
+                    <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
+                      {{ item['text'] }}
+                    </label>
+                  </div>
+                    {% endfor %}
+                </div>
+              </div>
+            {% endmacro %}
 
-      {{ govukRadios({
-      idPrefix: "relet",
-      name: "relet",
-      fieldset: {
-        legend: {
-          text: "If this is a relet, was the property most recently let on",
-          classes: "govuk-fieldset__legend--l"
+            {{ reletRadio(data, "property-relet", {
+              items: [
+                {
+                  value: "Yes",
+                  text: "Yes"
+                },
+                {
+                  value: "No",
+                  text: "No"
+                }
+              ]
+              }, "reletSelect(this.value)") }}
+
+      <div id="relet">
+        {{ govukRadios({
+        idPrefix: "relet",
+        name: "relet",
+        fieldset: {
+          legend: {
+            text: "Which type was the property most recently let as?",
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        items: [
+          {
+            value: "A social rent basis",
+            text: "A social rent basis",
+            checked: checked("relet", "A social rent basis")
+          },
+          {
+            value: "An affordable rent basis",
+            text: "An affordable rent basis",
+            checked: checked("relet", "An affordable rent basis")
+          },
+          {
+            value: "An intermediate rent basis",
+            text: "An intermediate rent basis",
+            checked: checked("relet", "An intermediate rent basis")
+          },
+          {
+            value: "Do not know",
+            text: "Do not know",
+            checked: checked("relet", "Do not know")
+          }
+        ]
+        }) }}
+      </div>
+
+      <style>
+        #relet {
+          display: none;
         }
-      },
-      items: [
-        {
-          value: "A social rent basis",
-          text: "A social rent basis",
-          checked: checked("relet", "A social rent basis")
-        },
-        {
-          value: "An affordable rent basis",
-          text: "An affordable rent basis",
-          checked: checked("relet", "An affordable rent basis")
-        },
-        {
-          value: "An intermediate rent basis",
-          text: "An intermediate rent basis",
-          checked: checked("relet", "An intermediate rent basis")
-        },
-        {
-          value: "Do not know",
-          text: "Do not know",
-          checked: checked("relet", "Do not know")
-        }
-      ]
-    }) }}
+      </style>
 
       <input type="hidden" name="next-page" value="reason-for-vacancy">
       <input type="hidden" name="relet-page" value="true">
@@ -61,5 +103,14 @@ GOV.UK Prototype Kit
     {{ help.details() }}
   </div>
 </div>
-
+<script>
+function reletSelect(value) {
+  var el = document.getElementById("relet");
+  if(value == "Yes") {
+    el.style.display = "block";
+  } else {
+    el.style.display = "none";
+  }
+}
+</script>
 {% endblock %}

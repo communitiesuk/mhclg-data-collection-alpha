@@ -20,14 +20,23 @@ GOV.UK Prototype Kit
 
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              How much of your income comes from UC, state pensions or benefits?
+              {% if not (data["number-of-other-members"][0] > 0) %}
+              How much of the tenant’s income is from Universal Credit, state pensions or benefits?
+              {% else %}
+                How much of the household’s income is from Universal Credit, state pensions or benefits?
+              {% endif %}
             </h1>
           </legend>
-
-          <div id="benefit-proportion--hint" class="govuk-hint">
-            Exclude child & housing benefit, UC housing element, council tax support or tax credits
-          </div>
-
+          <div id="income-hint" class="govuk-hint">
+              <p class="govuk-body">Do not include:</p>
+              <ul class="govuk-list govuk-list--bullet">
+                <li>Child Benefit</li>
+                <li>Housing Benefit</li>
+                <li>The housing element of Universal Credit</li>
+                <li>Council tax support </li>
+                <li>Tax credits</li>
+              </ul>
+            </div>
           <div class="govuk-radios govuk-radios">
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="benefit-proportion" name="benefit-proportion" type="radio" value="All" {{ 'checked' if data['benefit-proportion'][0] == "All" }}>

@@ -20,7 +20,7 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset" aria-describedby="number-of-other-members-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Number of other people in the household
+              How many other people are there in the household?
             </h1>
           </legend>
 
@@ -33,13 +33,13 @@ GOV.UK Prototype Kit
           </div>
       </div>
 
-      {% for i in [1,2,3,4,5,6,7] %}
+      {% for i in [2,3,4,5,6,7,8] %}
       <div id="person-{{i}}">
         <hr class="govuk-!-margin-bottom-6" />
 
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 class="govuk-fieldset__heading">
-            {{ "Person " + (i + 1) }}
+            {{ "Person " + i }}
           </h1>
         </legend>
 
@@ -48,7 +48,7 @@ GOV.UK Prototype Kit
           name: "person-" + i + "-relationship-to-main",
           fieldset: {
             legend: {
-              text: "Person " + (i + 1) + "'s relationship to lead tenant",
+              text: "What's person " + i + "'s relationship to lead tenant",
               classes: "govuk-label--s"
             }
           },
@@ -78,7 +78,7 @@ GOV.UK Prototype Kit
 
           {{ govukInput({
             label: {
-              text: "Person " + (i + 1) + "'s age",
+              text: "What's person " + i + "'s age",
               classes: "govuk-label--s"
             },
             id: "person-" + i + "-age",
@@ -91,7 +91,7 @@ GOV.UK Prototype Kit
             name: "person-" + i + "-gender",
             fieldset: {
               legend: {
-                text: "Which of these best describes person " + (i + 1) + "'s gender identity?",
+                text: "Which of these best describes person " + i + "'s gender identity?",
                 classes: "govuk-label--s"
               }
             },
@@ -107,9 +107,9 @@ GOV.UK Prototype Kit
                 checked: checked("person-" + i + "-gender", "Female")
               },
               {
-                value: "Other",
-                text: "Other",
-                checked: checked("person-" + i + "-gender", "Other")
+                value: "Non-binary",
+                text: "Non-binary",
+                checked: checked("person-" + i + "-gender", "Non-binary")
               },
               {
                 value: "Prefer not to say",
@@ -125,7 +125,7 @@ GOV.UK Prototype Kit
             classes: "govuk-radios--small",
             fieldset: {
               legend: {
-                text: "Which of these best describes person " + (i + 1) + "'s working situation?",
+                text: "Which of these best describes person " + i + "'s working situation?",
                 classes: "govuk-label--s"
               }
             },
@@ -200,7 +200,7 @@ GOV.UK Prototype Kit
       </div>
 
       <style>
-      #person-1 {
+      #person-8 {
         display: none;
       }
       #person-2{
@@ -232,7 +232,7 @@ GOV.UK Prototype Kit
 
 <script>
   const reset_fields = () => {
-    for(var i = 1; i<=7; i++ ) {
+    for(var i = 2; i<=8; i++ ) {
       let div = "person-".concat(i.toString());
       document.getElementById(div).style.display = "none";
     }
@@ -240,9 +240,10 @@ GOV.UK Prototype Kit
 
   function check() {
     reset_fields();
-    var val = document.getElementById("number-of-other-members").value > 7 ? 7 : document.getElementById("number-of-other-members").value;
+    var numberOfOtherMembers = parseInt(document.getElementById("number-of-other-members").value);
+    var val = numberOfOtherMembers > 7 ? 7 : numberOfOtherMembers;
 
-    for(var i = 1; i<=val; i++ ) {
+    for(var i = 2; i<=val+1; i++ ) {
       let div = "person-".concat(i.toString());
       document.getElementById(div).style.display = "block";
     }

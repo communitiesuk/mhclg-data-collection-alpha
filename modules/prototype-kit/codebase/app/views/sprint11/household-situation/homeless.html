@@ -15,10 +15,8 @@ GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
     <form name="form" class="form" action="../household-situation-section" method="POST" novalidate="" data-validate="my-form-validation">
 
-      {% set options = [
-        "No","Assessed as homeless (or threatened with homelessness within 56 days) by a local authority and owed a homelessness duty",
-        "Other homelessness - not found statutorily homeless by a housing authority but considered to be homeless by the letting"
-        ] %}
+      {% set options = [ "Yes - assessed as homeless by a local authority and owed a homelessness duty. Including if threatened with homelessness within 56 days", "Yes - other homelessness",
+        "No"] %}
 
       {% set optionsItems = [] %}
 

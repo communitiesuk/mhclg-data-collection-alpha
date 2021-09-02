@@ -18,14 +18,22 @@ GOV.UK Prototype Kit
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset" aria-describedby="income-hint">
             <h1 class="govuk-fieldset__legend--l">
-              Tenant’s or tenant and partner’s net income (after tax deductions)
+              What is the tenant’s /and partner’s combined income after tax?
             </h1>
           <div id="income-hint" class="govuk-hint">
-            For those receiving Universal Credit, please enter net income from employment, pensions and Universal Credit. <br /> <br />
-            Please exclude child benefit, housing element of universal credit and council tax support.<br /> <br />
-            For those not receiving Universal Credit, please enter net income from employment, pensions and other benefits.<br /> <br />
-            Please exclude housing benefit, child benefit and council tax support.<br /> <br />
-            Rounded to nearest £
+            <p class="govuk-body">Income to include:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>Employment</li>
+              <li>Pensions</li>
+              <li>Universal Credit</li>
+            </ul>
+            <p class="govuk-body">Income to not include:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>Tax and National Insurance contributions (NI)</li>
+              <li>Housing Benefit</li>
+              <li>Child Benefit</li>
+              <li>Council tax support</li>
+            </ul>
           </div>
 
           <div class="govuk-form-group">
@@ -38,7 +46,7 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Is the income...?
+              How often do they receive this income?
             </h1>
           </legend>
 
@@ -58,7 +66,7 @@ GOV.UK Prototype Kit
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="income-frequency" name="income-frequency" type="radio" value="Annual" {{ 'checked' if data['income-frequency'] == "Annual" }}>
               <label class="govuk-label govuk-radios__label" for="income-frequency-3">
-                Annual
+                Yearly
               </label>
             </div>
           </div>
