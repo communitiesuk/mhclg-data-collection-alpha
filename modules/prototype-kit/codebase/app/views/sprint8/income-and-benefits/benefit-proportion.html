@@ -1,50 +1,78 @@
-{% extends "layout.html" %}
-
-{% block pageTitle %}
-GOV.UK Prototype Kit
-{% endblock %}
-
-{% block content %}
+{% extends "layout.html" %} {% block pageTitle %} GOV.UK Prototype Kit {%
+endblock %} {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form name="form" class="form" action="benefits" method="POST" novalidate="" data-validate="my-form-validation">
-
+    <form
+      name="form"
+      class="form"
+      action="benefits"
+      method="POST"
+      novalidate=""
+      data-validate="my-form-validation"
+    >
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
-
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              How much of your income comes from UC, state pensions or benefits?
+              How much of the tenant’s/household’s income is from Universal
+              Credit, state pensions or benefits?
             </h1>
           </legend>
 
           <div id="benefit-proportion--hint" class="govuk-hint">
-            Exclude child & housing benefit, UC housing element, council tax support or tax credits
+            <p class="govuk-body">Do not include:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>Child Benefit</li>
+              <li>Housing Benefit</li>
+              <li>The housing element of Universal Credit</li>
+              <li>Council tax support</li>
+              <li>Tax credits</li>
+            </ul>
           </div>
 
           <div class="govuk-radios govuk-radios--small">
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="benefit-proportion" name="benefit-proportion" type="radio" value="All" {{ 'checked' if data['benefit-proportion'][0] == "All" }}>
-              <label class="govuk-label govuk-radios__label" for="benefit-proportion">
+              <input class="govuk-radios__input" id="benefit-proportion"
+              name="benefit-proportion" type="radio" value="All" {{ 'checked' if
+              data['benefit-proportion'][0] == "All" }}>
+              <label
+                class="govuk-label govuk-radios__label"
+                for="benefit-proportion"
+              >
                 All
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="benefit-proportion" name="benefit-proportion" type="radio" value="Some" {{ 'checked' if data['benefit-proportion'][0] == "Some" }}>
-              <label class="govuk-label govuk-radios__label" for="benefit-proportion-2">
+              <input class="govuk-radios__input" id="benefit-proportion"
+              name="benefit-proportion" type="radio" value="Some" {{ 'checked'
+              if data['benefit-proportion'][0] == "Some" }}>
+              <label
+                class="govuk-label govuk-radios__label"
+                for="benefit-proportion-2"
+              >
                 Some
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="benefit-proportion" name="benefit-proportion" type="radio" value="None" {{ 'checked' if data['benefit-proportion'][0] == "None" }}>
-              <label class="govuk-label govuk-radios__label" for="benefit-proportion-3">
+              <input class="govuk-radios__input" id="benefit-proportion"
+              name="benefit-proportion" type="radio" value="None" {{ 'checked'
+              if data['benefit-proportion'][0] == "None" }}>
+              <label
+                class="govuk-label govuk-radios__label"
+                for="benefit-proportion-3"
+              >
                 None
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="benefit-proportion" name="benefit-proportion" type="radio" value="Do not know" {{ 'checked' if data['benefit-proportion'][0] == "Do not know" }}>
-              <label class="govuk-label govuk-radios__label" for="benefit-proportion-3">
+              <input class="govuk-radios__input" id="benefit-proportion"
+              name="benefit-proportion" type="radio" value="Do not know" {{
+              'checked' if data['benefit-proportion'][0] == "Do not know" }}>
+              <label
+                class="govuk-label govuk-radios__label"
+                for="benefit-proportion-3"
+              >
                 Do not know
               </label>
             </div>
@@ -52,10 +80,9 @@ GOV.UK Prototype Kit
         </fieldset>
       </div>
 
-      <input type="hidden" name="benefit-proportion-page" value="true">
-      <input type="hidden" name="income-and-benefits-inprogress" value="true">
+      <input type="hidden" name="benefit-proportion-page" value="true" />
+      <input type="hidden" name="income-and-benefits-inprogress" value="true" />
       <input class="govuk-button" type="submit" value="Save and continue" />
-
     </form>
   </div>
 </div>
