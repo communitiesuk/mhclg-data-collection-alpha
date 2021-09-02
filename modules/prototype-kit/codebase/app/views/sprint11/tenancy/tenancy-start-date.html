@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="tenancy-code" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../tenancy-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              What is the tenancy start date?
+            </h1>
+          </legend>
+
+          <div id="tenancy-start-hint" class="govuk-hint">
+            For example, 27 3 2007
+          </div>
+          <div class="govuk-date-input" id="tenancy-start">
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="tenancy-start-day">
+                  Day
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-start-day" name="tenancy-start-day" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data['tenancy-start-day'] }} >
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="tenancy-start-month">
+                  Month
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tenancy-start-month" name="tenancy-start-month" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data['tenancy-start-month'] }}>
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="tenancy-start-year">
+                  Year
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="tenancy-start-year" name="tenancy-start-year" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data['tenancy-start-year'] }}>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <input type="hidden" name="next-page" value="starter-tenancy">
+      <input type="hidden" name="tenancy-start-date-page" value="true">
+      <input type="hidden" name="tenancy-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+      </fieldset>
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+<script type="application/json" id="my-form-validation">
+  {
+    "tenancy-start-day": {
+      "date": {
+        "namePrefix": "tenancy-start",
+        "message": "^Tenancy start should be a valid date"
+      }
+    }
+  }
+</script>
+
+{% endblock %}

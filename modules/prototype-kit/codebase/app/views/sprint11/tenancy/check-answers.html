@@ -1,0 +1,170 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="landlord" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+{% set baseQuestions = ['tenancy-code', 'tenancy-start-day', 'starter-tenancy', 'fixed-term', 'tenancy-type', 'letting-type', 'landlord'] %}
+{% set allQuestions = ['tenancy-code', 'tenancy-start-day', 'starter-tenancy', 'fixed-term', 'tenancy-type', 'letting-type', 'landlord']  %}
+{% set numberOfQuestions = baseQuestions | length %}
+{% set numberOfCompletedQuestions = 0 %}
+
+{% for question in allQuestions %}
+  {% if data[question] %}
+    {% set numberOfCompletedQuestions = numberOfCompletedQuestions + 1 %}
+  {% endif %}
+{% endfor %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">Check the answers you gave for Tenancy</h1>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        {% if numberOfCompletedQuestions < numberOfQuestions %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
+          <a class="task-name" href="/sprint10/tenancy-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+        {% else %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
+        {% endif %}
+      </p>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            What is the tenancy code?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["tenancy-code"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="tenancy-code?check=true">
+              {{ "Change" if data["tenancy-code"] else "Answer"}}<span class="govuk-visually-hidden">tenancy-code</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            When is the tenancy start date?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% if data['tenancy-start-day'] %}
+              {% set date = [data["tenancy-start-day"], '/', data["tenancy-start-month"], '/', data["tenancy-start-year"]] | join | dateFormat   %}
+              {{ date }}
+            {% endif %}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="tenancy-start-date?check=true">
+              {{ "Change" if data["tenancy-start-day"] else "Answer"}}<span class="govuk-visually-hidden">Tenancy Start Date</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Is this a starter or introductory tenancy?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["starter-tenancy"]}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="starter-tenancy?check=true">
+              {{ "Change" if data["starter-tenancy"] else "Answer"}}<span class="govuk-visually-hidden">start-tenancy</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            If the main tenancy is a fixed term tenancy, please provide the length of the fixed term (to the nearest year) excluding any starter/introductory period
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["fixed-term"][0] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="fixed-term?check=true">
+              {{ "Change" if data["fixed-term"] else "Answer"}}<span class="govuk-visually-hidden">fixed-term</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Type of main tenancy (after any starter/introductory period)
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["tenancy-type"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="type-of-main-tenancy?check=true">
+              {{ "Change" if data["tenancy-type"] else "Answer"}}<span class="govuk-visually-hidden">type-of-main-tenancy</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Type of letting
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["letting-type"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="letting-type?check=true">
+              {{ "Change" if data["letting-type"] else "Answer"}}<span class="govuk-visually-hidden">letting type</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Provider
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["landlord"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="landlord?check=true">
+              {{ "Change" if data["landlord"] else "Answer"}}<span class="govuk-visually-hidden">landlord</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <form action="../tasklist" method="post" novalidate>
+        {% if numberOfCompletedQuestions < numberOfQuestions %}
+          <input type="hidden" name="tenancy-completed" value="false">
+        {% else %}
+          <input type="hidden" name="tenancy-completed" value="true">
+        {% endif %}
+        <button class="govuk-button" data-module="govuk-button">
+          Save and continue
+        </button>
+      </form>
+
+      {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

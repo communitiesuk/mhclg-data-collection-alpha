@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="previous-housing-situation" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../household-situation-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {% set options = [
+        "No","Assessed as homeless (or threatened with homelessness within 56 days) by a local authority and owed a homelessness duty",
+        "Other homelessness - not found statutorily homeless by a housing authority but considered to be homeless by the letting"
+        ] %}
+
+      {% set optionsItems = [] %}
+
+      {% for option in options %}
+        {% set optionsItems = (optionsItems.push({value: option, text: option, checked: checked("homeless", option)}), optionsItems) %}
+      {% endfor %}
+
+      <legend class="govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          {% if not (data["number-of-other-members"][0] > 0) %}
+            Did the tenant experience homelessness immediately before this letting?
+          {% else %}
+            Did the household experience homelessness immediately before this letting?
+          {% endif %}
+        </h1>
+      </legend>
+
+      {{ govukRadios({
+      idPrefix: "homeless",
+      name: "homeless",
+      items: optionsItems
+    }) }}
+
+      <input type="hidden" name="next-page" value="reason-for-leaving">
+      <input type="hidden" name="homeless-page" value="true">
+      <input type="hidden" name="household-situation-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+      </fieldset>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

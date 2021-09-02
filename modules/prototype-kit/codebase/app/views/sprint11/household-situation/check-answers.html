@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="reason-for-leaving" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+{% set baseQuestions = ['previous-housing-situation', 'homeless', 'reason-for-leaving', 'reason-removal'] %}
+{% set conditionalQuestions = ['other-reason-for-leaving'] %}
+{% set allQuestions = ['previous-housing-situation', 'homeless', 'reason-for-leaving', 'reason-removal'] %}
+{% set numberOfQuestions = baseQuestions | length %}
+{% set numberOfCompletedQuestions = 0 %}
+{% set otherReasonConditional = data['reason-for-leaving'] == 'Other' %}
+{% if otherReasonConditional %}
+  {% set numberOfQuestions = numberOfQuestions + 1 %}
+{% endif %}
+
+{% for question in allQuestions %}
+  {% if data[question] %}
+    {% set numberOfCompletedQuestions = numberOfCompletedQuestions + 1 %}
+  {% endif %}
+{% endfor %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">Check the answers you gave for Household situation</h1>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        {% if numberOfCompletedQuestions < numberOfQuestions %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
+          <a class="task-name" href="/sprint10/household-situation-section?next-page='' aria-describedby="read-declaration-completed">Answer the missing questions</a>
+        {% else %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
+        {% endif %}
+      </p>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Housing situation immediately before this letting
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["previous-housing-situation"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-situation/previous-housing-situation?check=true">
+            {{ "Change" if data["previous-housing-situation"] else "Answer"}}<span class="govuk-visually-hidden">previous-housing-situation</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Homelessness experienced immediately before this letting
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["homeless"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-situation/homeless?check=true">
+            {{ "Change" if data["homeless"] else "Answer"}}<span class="govuk-visually-hidden">homeless</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Main reason for leaving their last settled home
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["reason-for-leaving"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-situation/reason-for-leaving?check=true">
+            {{ "Change" if data["reason-for-leaving"] else "Answer"}}<span class="govuk-visually-hidden">reason-for-leaving</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    {% if otherReasonConditional %}
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Other reason for leaving past settled accomodation
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["other-reason-for-leaving"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-situation/reason-for-leaving?check=true">
+            {{ "Change" if data["other-reason-for-leaving"] else "Answer"}}<span class="govuk-visually-hidden">reason-for-leaving</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    {% endif %}
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Left their last settled home because of the spare room subsidy or benefit cap
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["reason-removal"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-situation/reason-for-leaving?check=true">
+            {{ "Change" if data["reason-removal"] else "Answer"}}<span class="govuk-visually-hidden">reason-for-leaving</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    </dl>
+
+    <form action="../tasklist" method="post" novalidate>
+      {% if numberOfCompletedQuestions < numberOfQuestions %}
+        <input type="hidden" name="household-situation-completed" value="false">
+      {% else %}
+        <input type="hidden" name="household-situation-completed" value="true">
+      {% endif %}
+      <button class="govuk-button" data-module="govuk-button">
+        Save and continue
+      </button>
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+
+  </div>
+</div>
+
+{% endblock %}

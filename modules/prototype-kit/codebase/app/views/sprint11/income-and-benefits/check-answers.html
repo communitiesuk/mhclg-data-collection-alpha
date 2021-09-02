@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="benefits" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+{% set baseQuestions = ['income', 'income-frequency', 'benefit-proportion', 'benefit'] %}
+{% set allQuestions = ['income', 'income-frequency', 'benefit-proportion', 'benefit'] %}
+{% set numberOfQuestions = baseQuestions | length %}
+{% set numberOfCompletedQuestions = 0 %}
+
+{% for question in allQuestions %}
+  {% if data[question] %}
+    {% set numberOfCompletedQuestions = numberOfCompletedQuestions + 1 %}
+  {% endif %}
+{% endfor %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">Check the answers you gave for Income & Benefits</h1>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        {% if numberOfCompletedQuestions < numberOfQuestions %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
+          <a class="task-name" href="/sprint10/income-and-benefits-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+        {% else %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
+        {% endif %}
+      </p>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Income
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["income"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/income-and-benefits/income?check=true">
+              {{ "Change" if data["income"] else "Answer"}}<span class="govuk-visually-hidden">Income</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Income Frequency
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["income-frequency"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/income-and-benefits/income?check=true">
+              {{ "Change" if data["income-frequency"] else "Answer"}}<span class="govuk-visually-hidden">Income Frequency</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Benefits as a proportion of income
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["benefit-proportion"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/income-and-benefits/benefit-proportion?check=true">
+              {{ "Change" if data["benefit-proportion"] else "Answer"}}<span class="govuk-visually-hidden">Benefit Proportion</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Universal Credit & Housing Benefit
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["benefit"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/income-and-benefits/benefits?check=true">
+              {{ "Change" if data["benefits"] else "Answer"}}<span class="govuk-visually-hidden">Benefits</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </dl>
+
+
+    <form action="../tasklist" method="post" novalidate>
+      {% if numberOfCompletedQuestions < numberOfQuestions %}
+        <input type="hidden" name="income-and-benefits-completed" value="false">
+      {% else %}
+        <input type="hidden" name="income-and-benefits-completed" value="true">
+      {% endif %}
+      <button class="govuk-button" data-module="govuk-button">
+        Save and continue
+      </button>
+    </form>
+
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="starter-tenancy" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../tenancy-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              If fixed-term, provide the length of it to the nearest year excluding any starter or introductory period
+            </h1>
+            <div class="govuk-hint">To the nearest year</div>
+          </legend>
+
+          <div class="govuk-form-group">
+            <input class="govuk-input govuk-input--width-20" id="width-20" name="fixed-term" type="text" value={{ data['fixed-term'] }} >
+          </div>
+      </div>
+
+      <input type="hidden" name="next-page" value="type-of-main-tenancy">
+      <input type="hidden" name="fixed-term-page" value="true">
+      <input type="hidden" name="tenancy-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+      </fieldset>
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

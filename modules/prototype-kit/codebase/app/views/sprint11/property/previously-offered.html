@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="repair-date" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../property-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              How many times has this unit been previously offered since becoming available for relet since the last tenancy ended or as a first let?
+            </h1>
+          </legend>
+
+          <div id="previously-offered-hint" class="govuk-hint">
+            For an Affordable Rent or Intermediate Rent Letting, only include number of offers as that type<br /><br />
+            For a property let at the first attempt enter ‘0’
+          </div>
+
+          <div class="govuk-form-group">
+            <input class="govuk-input govuk-input--width-20" id="previously-offered" name="previously-offered" type="text" value={{ data["previously-offered"] }}>
+          </div>
+
+      </div>
+
+      <input type="hidden" name="next-page" value="wheelchair-accessible">
+      <input type="hidden" name="previously-offered-page" value="true">
+      <input type="hidden" name="property-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

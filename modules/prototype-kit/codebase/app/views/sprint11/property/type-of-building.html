@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="type-of-unit" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../property-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {{ govukRadios({
+      idPrefix: "type-of-building",
+      name: "type-of-building",
+      fieldset: {
+        legend: {
+          text: "Type of building",
+          classes: "govuk-label--l"
+        }
+      },
+      items: [
+        {
+          value: "Purpose built",
+          text: "Purpose built",
+          checked: checked("type-of-building", "Purpose built")
+        },
+        {
+          value: "Converted from previous residential or non-residential property",
+          text: "Converted from previous residential or non-residential property",
+          checked: checked("type-of-building", "Converted from previous residential or non-residential property")
+        }
+      ]
+    }) }}
+
+      <input type="hidden" name="next-page" value="number-of-bedrooms">
+      <input type="hidden" name="type-of-building" value="true">
+      <input type="hidden" name="property-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

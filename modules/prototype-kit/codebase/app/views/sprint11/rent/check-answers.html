@@ -1,0 +1,191 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="rent" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+{% set baseQuestions = ['rent-period', 'rent', 'service-charge', 'personal-service-charge', 'support-charge', 'outstanding'] %}
+{% set conditionalQuestions = ['outstanding-amount'] %}
+{% set allQuestions = ['rent-period', 'rent', 'service-charge', 'personal-service-charge', 'support-charge', 'outstanding', 'outstanding-amount'] %}
+{% set numberOfQuestions = baseQuestions | length %}
+{% set outstandingConditional = data['outstanding'] == 'Yes' %}
+{% if outstandingConditional %}
+  {% set numberOfQuestions = numberOfQuestions + 1 %}
+{% endif %}
+{% set numberOfCompletedQuestions = 0 %}
+
+{% for question in allQuestions %}
+  {% if data[question] %}
+    {% set numberOfCompletedQuestions = numberOfCompletedQuestions + 1 %}
+  {% endif %}
+{% endfor %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">Check the answers you gave for Rent</h1>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        {% if numberOfCompletedQuestions < numberOfQuestions %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
+          <a class="task-name" href="/sprint10/rent-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+        {% else %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
+        {% endif %}
+      </p>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Rent Period
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["rent-period"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/rent/rent?check=true">
+              {{ "Change" if data["rent-period"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Basic Rent
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["rent"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/rent/rent?check=true">
+              {{ "Change" if data["rent"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Service Charge
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["service-charge"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/rent/rent?check=true">
+              {{ "Change" if data["service-charge"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Personal Service Charge
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["personal-service-charge"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/rent/rent?check=true">
+              {{ "Change" if data["personal-service-charge"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Support Charge
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["support-charge"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/rent/rent?check=true">
+              {{ "Change" if data["support-charge"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Total Charge
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["total-charge"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/rent/rent?check=true">
+              {{ "Change" if data["total-charge"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            After housing benefit and/or housing element of UC payment is received, will there be an outstanding amount for basic rent and/or benefit eligible charges?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["outstanding"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/rent/rent?check=true">
+              {{ "Change" if data["outstanding"] else "Answer"}}<span class="govuk-visually-hidden">Rent</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      {% if outstandingConditional %}
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Outstanding amount
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data["outstanding-amount"] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/sprint10/rent/rent?check=true">
+              {{ "Change" if data["outstanding-amount"] else "Answer"}}<span class="govuk-visually-hidden">rent</span>
+            </a>
+          </dd>
+        </div>
+      </dl>
+      {% endif %}
+
+    <form action="../tasklist" method="post" novalidate>
+      {% if numberOfCompletedQuestions < numberOfQuestions %}
+        <input type="hidden" name="rent-completed" value="false">
+      {% else %}
+        <input type="hidden" name="rent-completed" value="true">
+      {% endif %}
+      <button class="govuk-button" data-module="govuk-button">
+        Save and continue
+      </button>
+    </form>
+
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+
+  </div>
+</div>
+
+{% endblock %}

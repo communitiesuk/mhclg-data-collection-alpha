@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="fixed-term" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../tenancy-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              What is the type of tenancy after the starter period has ended?
+            </h1>
+          </legend>
+
+          <div class="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="tenancy-type" type="radio" name="tenancy-type" value="Fixed term – Secure" data-value="Fixed term – Secure">
+              <label class="govuk-label govuk-radios__label" for="tenancy-type">
+                Fixed term – Secure
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="tenancy-type" type="radio" name="tenancy-type" value="Fixed term – Assured Shorthold Tenancy (AST)" data-value="Fixed term – Assured Shorthold Tenancy (AST)">
+              <label class="govuk-label govuk-radios__label" for="tenancy-type-2">
+                Fixed term – Assured Shorthold Tenancy (AST)
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="tenancy-type" type="radio" name="tenancy-type" value="Lifetime – Secure" data-value="Lifetime – Secure">
+              <label class="govuk-label govuk-radios__label" for="tenancy-type-3">
+                Lifetime – Secure
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="tenancy-type" type="radio" name="tenancy-type" value="Lifetime – Assured" data-value="Lifetime – Assured">
+              <label class="govuk-label govuk-radios__label" for="tenancy-type-4">
+                Lifetime – Assured
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="tenancy-type" type="radio" name="tenancy-type" value="License agreement" data-value="License agreement">
+              <label class="govuk-label govuk-radios__label" for="tenancy-type-5">
+                License agreement
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="tenancy-type" type="radio" name="tenancy-type" value="Other" data-value="Other">
+              <label class="govuk-label govuk-radios__label" for="tenancy-type-6">
+                Other
+              </label>
+            </div>
+
+          </div>
+      </div>
+
+      <input type="hidden" name="next-page" value="letting-type">
+      <input type="hidden" name="type-of-main-tenacy-page" value="true">
+      <input type="hidden" name="tenancy-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+      </fieldset>
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+{% endblock %}

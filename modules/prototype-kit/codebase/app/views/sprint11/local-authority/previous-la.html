@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="time-on-waiting-list" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../local-authority-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {% set locations = [
+        "Adur","Allerdale","Amber Valley","Arun","Ashfield","Ashford","Babergh","Barking & Dagenham","Barnet","Barnsley","Barrow-in-Furness","Basildon","Basingstoke & Deane","Bassetlaw","Bath & NE Somerset","Bedford Borough Council","Bexley","Birmingham","Blaby","Blackburn","Blackpool","Bolsover","Bolton","Boston","Bournemouth & Christchurch & Poole","Bracknell Forest","Bradford","Braintree","Breckland","Brent","Brentwood","Brighton & Hove","Bristol","Broadland","Bromley","Bromsgrove","Broxbourne","Broxtowe","Buckinghamshire","Burnley","Bury","Calderdale","Cambridge","Camden","Cannock Chase","Canterbury","Carlisle","Castle Point","Central Bedfordshire","Charnwood","Chelmsford","Cheltenham","Cherwell","Cheshire West & Chester","Chesterfield","Chichester","Chorley","City of London","Colchester","Copeland","Cornwall","Cotswold","Coventry","Craven","Crawley","Croydon","Dacorum","Darlington","Dartford","Derby","Derbyshire Dales","Doncaster","Dorset","Dover","Dudley","Durham","Ealing","East Cambridgeshire","East Cheshire","East Devon","East Hampshire","East Herts","East Lindsey","East Riding","East Staffordshire","East Suffolk","Eastbourne","Eastleigh","Eden","Elmbridge","Enfield","Epping Forest","Epsom & Ewell","Erewash","Exeter","Fareham","Fenland","Folkestone & Hythe","Forest of Dean","Fylde","Gateshead","Gedling","Gloucester","Gosport","Gravesham","Great Yarmouth","Greenwich","Guildford","Hackney","Halton","Hambleton","Hammersmith & Fulham","Harborough","Haringey","Harlow","Harrogate","Harrow","Hart","Hartlepool","Hastings","Havant","Havering","Herefordshire","Hertsmere","High Peak","Hillingdon","Hinckley & Bosworth","Horsham","Hounslow","Huntingdonshire","Hyndburn","Ipswich","Isle of Wight","Isles of Scilly","Islington","Kensington & Chelsea","Kings Lynn & West Norfolk","Kingston-upon-Hull","Kingston-upon-Thames","Kirklees","Knowsley","Lambeth","Lancaster","Leeds","Leicester","Lewes","Lewisham","Lichfield","Lincoln","Liverpool","Luton","Maidstone","Maldon","Malvern Hills","Manchester","Mansfield","Medway","Melton","Mendip","Merton","Mid Devon","Mid Suffolk","Mid Sussex","Middlesbrough","Milton Keynes","Mole Valley","N. Ireland","New Forest","Newark","Newcastle-under-Lyme","Newcastle-upon-Tyne","Newham","North Devon","North East Derbyshire","North East Lincolnshire","North Hertfordshire","North Kesteven","North Lincolnshire","North Norfolk","North Northamptonshire","North Somerset","North Tyneside","North Warwickshire","North West Leics","Northumberland","Norwich","Nottingham","Nuneaton & Bedworth","Oadby & Wigston","Oldham","Outside UK","Oxford","Pendle","Peterborough","Plymouth","Portsmouth","Preston","Reading","Redbridge","Redcar & Cleveland","Redditch","Reigate & Banstead","Ribble Valley","Richmond-upon-Thames","Richmondshire","Rochdale","Rochford","Rossendale","Rother","Rotherham","Rugby","Runnymede","Rushcliffe","Rushmoor","Rutland","Ryedale","Salford","Sandwell","Scarborough","Scotland","Sedgemoor","Sefton","Selby","Sevenoaks","Sheffield","Shropshire","Slough","Solihull","Somerset West & Taunton","South Cambridgeshire","South Derbyshire","South Gloucestershire","South Hams","South Holland","South Kesteven","South Lakeland","South Norfolk","South Oxfordshire","South Ribble","South Somerset","South Staffordshire","South Tyneside","Southampton","Southend-on-Sea","Southwark","Spelthorne","St Albans","St Helens","Stafford","Staffordshire Moorlands","Stevenage","Stockport","Stockton-on-Tees","Stoke-on-Trent","Stratford-on-Avon","Stroud","Sunderland","Surrey Heath","Sutton","Swale","Swindon","Tameside","Tamworth","Tandridge","Teignbridge","Telford & Wrekin","Tendring","Test Valley","Tewkesbury","Thanet","Three Rivers","Thurrock","Tonbridge & Malling","Torbay","Torridge","Tower Hamlets","Trafford","Tunbridge Wells","Uttlesford","Vale of White Horse","Wakefield","Wales","Walsall","Waltham Forest","Wandsworth","Warrington","Warwick","Watford","Waverley","Wealden","Welwyn Hatfield","West Berkshire","West Devon","West Lancashire","West Lindsey","West Northamptonshire","West Oxfordshire","West Suffolk","Westminster","Wigan","Wiltshire","Winchester","Windsor & Maidenhead","Wirral","Woking","Wokingham","Wolverhampton","Worcester","Worthing","Wychavon","Wyre","Wyre Forest","York"
+        ] %}
+
+      {% set locationItems = [] %}
+
+      {% for location in locations %}
+        {% set locationItems = (locationItems.push({value: location, text: location, checked: checked("previous-la", location)}), locationItems) %}
+      {% endfor %}
+
+      <legend class="govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Enter LA in which household lived immediately before this letting
+        </h1>
+      </legend>
+
+      <div id="previous-la-hint" class="govuk-hint">
+        Including temporary accomodation
+      </div>
+
+      {{ govukRadios({
+        idPrefix: "previous-la",
+        name: "previous-la",
+        classes: "govuk-radios--small",
+        items: locationItems
+      }) }}
+
+      <input type="hidden" name="next-page" value="previous-postcode">
+      <input type="hidden" name="previous-la-page" value="true">
+      <input type="hidden" name="local-authority-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+    </form>
+
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="previously-offered" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {{ govukRadios({
+      idPrefix: "wheelchair-accessible",
+      name: "wheelchair-accessible",
+      fieldset: {
+        legend: {
+          text: "Is property built or adapted to wheelchair user standards?",
+          classes: "govuk-label--l"
+        }
+      },
+      items: [
+        {
+          value: "Yes",
+          text: "Yes",
+          checked: checked("wheelchair-accessible", "Yes")
+        },
+        {
+          value: "No",
+          text: "No",
+          checked: checked("wheelchair-accessible", "No")
+        }
+      ]
+    }) }}
+
+      <input type="hidden" name="next-page" value="">
+      <input type="hidden" name="wheelchair-accessible-page" value="true">
+      <input type="hidden" name="property-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

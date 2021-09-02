@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="nationality" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../household-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Which of these best describes the tenant's working situation?
+            </h1>
+          </legend>
+
+          {{ govukRadios({
+            idPrefix: "economic-status",
+            name: "economic-status",
+            classes: "govuk-radios--small",
+            fieldset: {
+              legend: {
+                text: "",
+                classes: "govuk-label--s"
+              }
+            },
+            items: [
+              {
+                value: "Part-time - Less than 30 hours",
+                text: "Part-time - Less than 30 hours",
+                checked: checked("person-" + i + "-economic-status", "Part-time (Less than 30 hours)")
+              },
+              {
+                value: "Full-time - 30 hours or more",
+                text: "Full-time - 30 hours or more",
+                checked: checked("person-" + i + "-economic-status", "Full-time (30 hours or more)")
+              },
+              {
+                value: "In government training into work, such as New Deal",
+                text: "In government training into work, such as New Deal",
+                checked: checked("person-" + i + "-economic-status", "In government training into work, such as New Deal")
+              },
+              {
+                value: "Jobseeker",
+                text: "Jobseeker",
+                checked: checked("person-" + i + "-economic-status", "Jobseeker")
+              },
+              {
+                value: "Retired",
+                text: "Retired",
+                checked: checked("person-" + i + "-economic-status", "Retired")
+              },
+              {
+                value: "Not seeking work",
+                text: "Not seeking work",
+                checked: checked("person-" + i + "-economic-status", "Not seeking work")
+              },
+              {
+                value: "Full-time student",
+                text: "Full-time student",
+                checked: checked("person-" + i + "-economic-status", "Full-time student")
+              },
+              {
+                value: "Unable to work because of long term sick or disability",
+                text: "Unable to work because of long term sick or disability",
+                checked: checked("person-" + i + "-economic-status", "Unable to work because of long term sick or disability")
+              },
+              {
+                value: "Child under 16",
+                text: "Child under 16",
+                checked: checked("person-" + i + "-economic-status", "Child under 16")
+              },
+              {
+                value: "Other",
+                text: "Other",
+                checked: checked("person-" + i + "-economic-status", "Other")
+              },
+              {
+                value: "Prefer not to say",
+                text: "Prefer not to say",
+                checked: checked("person-" + i + "-economic-status", "Prefer not to say")
+              }
+            ]
+          }) }}
+
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="next-page" value="other-household-members">
+      <input type="hidden" name="economic-status-page" value="true">
+      <input type="hidden" name="household-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+      </fieldset>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+<script type="application/json" id="my-form-validation">
+  {
+    "economic-status": {
+      "presence": {
+        "value": true,
+        "message": "^Select which best describes the tenant’s current working situation"
+      }
+    }
+  }
+</script>
+
+{% endblock %}

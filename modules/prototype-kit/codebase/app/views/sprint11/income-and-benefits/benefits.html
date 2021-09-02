@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="benefit-proportion" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Is the tenant in receipt of, or likely to be in receipt of, any of the following?
+            </h1>
+          </legend>
+
+          {% set options = [
+            "Housing Benefit (if not in receipt of Universal Credit)", "Not in receipt of either UC or HB", "Do not know",
+            "UC - with housing element (and not in receipt of Housing Benefit)",
+            "UC - without housing element (not in receipt of HB and tenants not eligible for housing support e.g. residential care home)",
+            "UC - without housing element (and in receipt of HB)"
+            ] %}
+
+          {% set optionItems = [] %}
+
+          {% for option in options %}
+            {% set optionItems = (optionItems.push({value: option, text: option, checked: checked("benefit", option)}), optionItems) %}
+          {% endfor %}
+
+          {{ govukRadios({
+          idPrefix: "benefit",
+          name: "benefit",
+          classes: "govuk-radios--small",
+          items: optionItems
+        }) }}
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="next-page" value="">
+      <input type="hidden" name="benefits-page" value="true">
+      <input type="hidden" name="income-and-benefits-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

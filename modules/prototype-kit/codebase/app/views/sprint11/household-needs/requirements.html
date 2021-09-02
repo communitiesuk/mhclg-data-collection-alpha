@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="pregnancy" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../household-needs-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="requirements-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Which of these are required because of their condition or illness?
+            </h1>
+          </legend>
+          <div id="requirements-hint" class="govuk-hint">
+            Select all that apply.
+          </div>
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="requirements" name="requirements" type="checkbox" value="Fully wheelchair accessible housing" {{ 'checked' if data['requirements'][0] == "Fully wheelchair accessible housing" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="requirements">
+                Fully wheelchair accessible housing
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="requirements-2" name="requirements" type="checkbox" value="Wheelchair access to essential rooms" {{ 'checked' if data['requirements'][0] == "Wheelchair access to essential rooms" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="requirements-2">
+                Wheelchair access to essential rooms
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="requirements-3" name="requirements" type="checkbox" value="Level access housing" {{ 'checked' if data['requirements'][0] == "Level access housing" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="requirements-3">
+                 Level access housing
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="requirements-4" name="requirements" type="checkbox" value="Other disability requirements" {{ 'checked' if data['requirements'][0] == "Other disability requirements" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="requirements-4">
+                 Other disability requirements
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="requirements-5" name="requirements" type="checkbox" value="No disability requirements" {{ 'checked' if data['requirements'][0] == "No disability requirements" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="requirements-5">
+                 No disability requirements
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="requirements-6" name="requirements" type="checkbox" value="Don’t know" {{ 'checked' if data['requirements'][0] == "Do not know" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="requirements-6">
+                 Don’t know
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="requirements-6" name="requirements" type="checkbox" value="Prefer not to say" {{ 'checked' if data['requirements'][0] == "Prefer not to say" }}>
+              <label class="govuk-label govuk-checkboxes__label" for="requirements-6">
+                 Prefer not to say
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="next-page" value="conditions">
+      <input type="hidden" name="requirements-page" value="true">
+      <input type="hidden" name="household-needs-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+      </fieldset>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

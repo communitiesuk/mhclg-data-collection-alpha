@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="postcode" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../property-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {{ govukRadios({
+      idPrefix: "relet",
+      name: "relet",
+      fieldset: {
+        legend: {
+          text: "If this is a relet, was the property most recently let on",
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [
+        {
+          value: "A social rent basis",
+          text: "A social rent basis",
+          checked: checked("relet", "A social rent basis")
+        },
+        {
+          value: "An affordable rent basis",
+          text: "An affordable rent basis",
+          checked: checked("relet", "An affordable rent basis")
+        },
+        {
+          value: "An intermediate rent basis",
+          text: "An intermediate rent basis",
+          checked: checked("relet", "An intermediate rent basis")
+        },
+        {
+          value: "Do not know",
+          text: "Do not know",
+          checked: checked("relet", "Do not know")
+        }
+      ]
+    }) }}
+
+      <input type="hidden" name="next-page" value="reason-for-vacancy">
+      <input type="hidden" name="relet-page" value="true">
+      <input type="hidden" name="property-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

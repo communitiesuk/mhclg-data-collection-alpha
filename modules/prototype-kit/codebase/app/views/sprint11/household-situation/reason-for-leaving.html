@@ -1,0 +1,158 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="homeless" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="check-answers" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset" aria-describedby="reason-for-leaving-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Main reason for leaving their last settled home
+            </h1>
+          </legend>
+          <div id="reason-for-leaving-hint" class="govuk-hint">
+
+          </div>
+
+          {% set options = [
+            "Permanently decanted from another property owned by this landlord","Left home country as a refugee",
+            "Loss of tied accommodation","Domestic abuse","(Non violent) relationship breakdown with partner",
+            "Asked to leave by family or friends","Racial harassment","Other problems with neighbours",
+            "Property unsuitable because of overcrowding","End of assured shorthold tenancy - no fault",
+            "End of assured shorthold tenancy - tenant's fault","End of fixed term tenancy - no fault",
+            "End of fixed term tenancy - tenant's fault","Repossession","Under occupation - offered incentive to downsize",
+            "Under occupation - no incentive","Property unsuitable because of ill health / disability",
+            "Property unsuitable because of poor condition","Couldn't afford fees attached to renewing the tenancy",
+            "Couldn't afford increase in rent","Couldn't afford rent or mortgage - welfare reforms",
+            "Couldn't afford rent or mortgage - employment","Couldn't afford rent or mortgage - other",
+            "To move nearer to family / friends / school","To move nearer to work","To move to accomodation with support",
+            "To move to independent accomodation","Hate crime","Death of household member in last settled accomodation",
+            "Discharged from prison","Discharged from long stay hospital or similar institution","Other","Do not know", "Prefer not to say"
+          ] %}
+
+          {% set optionsItems = [] %}
+
+          {% for option in options %}
+            {% set optionsItems = (optionsItems.push({value: option, text: option, checked: checked("reason-for-leaving", option)}), optionsItems) %}
+          {% endfor %}
+
+          {{ govukRadios({
+          idPrefix: "reason-for-leaving",
+          name: "reason-for-leaving",
+          classes: "govuk-radios--small",
+          items: optionsItems
+        }) }}
+      </div>
+
+      <div id="other-reason-for-leaving-group" class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Please state the reason for leaving last settled home
+            </h1>
+          </legend>
+
+          <div class="govuk-form-group">
+            <input class="govuk-input govuk-input--width-20" id="other-reason-for-leaving" name="other-reason-for-leaving" type="text">
+          </div>
+      </div>
+
+      <style>
+      #other-reason-for-leaving-group {
+        display: none;
+      }
+      </style>
+
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Was the reason for leaving their last home because of the spare room subsidy or benefit cap?
+            </h1>
+          </legend>
+          <div class="govuk-radios govuk-radios--small">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes - benefit cap" {{ 'checked' if data['reason-removal'] == "Yes - benefit cap" }}>
+              <label class="govuk-label govuk-radios__label" for="reason-removal">
+                Yes - benefit cap
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes - removal of the spare room subsidy" {{ 'checked' if data['reason-removal'] == "Yes - removal of the spare room subsidy" }}>
+              <label class="govuk-label govuk-radios__label" for="reason-removal-2">
+                Yes - removal of the spare room subsidy
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Yes - both the benefit cap and the removal of the spare room subsidy" {{ 'checked' if data['reason-removal'] == "Yes - both the benefit cap and the removal of the spare room subsidy" }}>
+              <label class="govuk-label govuk-radios__label" for="reason-removal-3">
+                Yes - both the benefit cap and the removal of the spare room subsidy
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="No" {{ 'checked' if data['reason-removal'] == "No" }}>
+              <label class="govuk-label govuk-radios__label" for="reason-removal-4">
+                No
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Do not know" {{ 'checked' if data['reason-removal'] == "Do not know" }}>
+              <label class="govuk-label govuk-radios__label" for="reason-removal-4">
+                Do not know
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="reason-removal" name="reason-removal" type="radio" value="Prefer not to say" {{ 'checked' if data['reason-removal'] == "Prefer not to say" }}>
+              <label class="govuk-label govuk-radios__label" for="reason-removal-5">
+                Prefer not to say
+              </label>
+            </div>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="next-page" value="">
+      <input type="hidden" name="reason-for-leaving-page" value="true">
+      <input type="hidden" name="household-situation-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+      </fieldset>
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+<script>
+  function displayConditional() {
+    const other = document.getElementById("reason-for-leaving").value == "Other"
+    if(other){
+      document.getElementById("other-reason-for-leaving-group").style.display = "block";
+    } else {
+      document.getElementById("other-reason-for-leaving-group").style.display = "none";
+      document.getElementById("other-reason-for-leaving-group").value = "";
+    }
+  }
+  // So that this runs if you've already answered and hit the back button
+  displayConditional()
+</script>
+
+{% endblock %}

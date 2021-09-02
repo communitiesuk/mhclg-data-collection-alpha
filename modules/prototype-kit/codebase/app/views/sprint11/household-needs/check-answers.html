@@ -1,0 +1,178 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="conditions" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+{% set baseQuestions = ['armed-forces', 'long-term-conditions', 'pregnancy', 'requirements', 'conditions'] %}
+{% set conditionalQuestions = ['armed-forces-tenure', 'armed-forces-injured'] %}
+{% set allQuestions = ['armed-forces', 'long-term-conditions', 'pregnancy', 'requirements', 'conditions', 'armed-forces-tenure', 'armed-forces-injured'] %}
+{% set numberOfQuestions = baseQuestions | length %}
+{% set armedConditional = not (data['armed-forces'] == "No" or data['armed-forces'] == "Prefer not to say") %}
+{% if armedConditional %}
+  {% set numberOfQuestions = numberOfQuestions + 2 %}
+{% endif %}
+{% set numberOfCompletedQuestions = 0 %}
+
+{% for question in allQuestions %}
+  {% if data[question] %}
+    {% set numberOfCompletedQuestions = numberOfCompletedQuestions + 1 %}
+  {% endif %}
+{% endfor %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">Check the answers you gave for Household needs</h1>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        {% if numberOfCompletedQuestions < numberOfQuestions %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
+          <a class="task-name" href="/sprint10/household-needs-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+        {% else %}
+          <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
+        {% endif %}
+      </p>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Armed Forces
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["armed-forces"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-needs/armed-forces?check=true">
+            {{ "Change" if data["armed-forces"] else "Answer"}}<span class="govuk-visually-hidden">Armed Forces</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    {% if armedConditional %}
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          When did they leave the Armed Forces?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['armed-forces-tenure'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-needs/armed-forces?check=true">
+            {{ "Change" if data["armed-forces-tenure"] else "Answer"}}<span class="govuk-visually-hidden">armed forces</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    {% endif %}
+
+    {% if  armedConditional %}
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Has anyone in the household been seriously injured or ill as a result of their service in the armed forces?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['armed-forces-injured'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-needs/armed-forces?check=true">
+            {{ "Change" if data["armed-forces-injured"] else "Answer"}}<span class="govuk-visually-hidden">armed forces</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    {% endif %}
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Physical, mental health or illness in the household
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["long-term-conditions"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-needs/disabilities?check=true">
+            {{ "Change" if data["long-term-conditions"] else "Answer"}}<span class="govuk-visually-hidden">disabilities</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Pregnancy in the household
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data["pregnancy"] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-needs/pregnancy?check=true">
+            {{ "Change" if data["pregnancy"] else "Answer"}}<span class="govuk-visually-hidden">Pregnancy</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Disability requirements
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% set value = data["requirements"] |d([]) | join(", ") %}
+            {{ value | trim_end(", ") }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-needs/requirements?check=true">
+            {{ "Change" if data["requirements"] else "Answer"}}<span class="govuk-visually-hidden">requirements</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Conditions or illnesses
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% set value = data["conditions"] |d([]) | join(", ") %}
+            {{ value | trim_end(", ") }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/sprint10/household-needs/conditions?check=true">
+            {{ "Change" if data["conditions"] else "Answer"}}<span class="govuk-visually-hidden">conditions</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+    </dl>
+
+    <form action="../tasklist" method="post" novalidate>
+      {% if numberOfCompletedQuestions < numberOfQuestions %}
+        <input type="hidden" name="household-needs-completed" value="false">
+      {% else %}
+        <input type="hidden" name="household-needs-completed" value="true">
+      {% endif %}
+      <button class="govuk-button" data-module="govuk-button">
+        Save and continue
+      </button>
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

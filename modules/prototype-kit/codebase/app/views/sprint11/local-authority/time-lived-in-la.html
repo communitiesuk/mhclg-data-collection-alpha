@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="../tasklist" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../local-authority-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      {% set options = [
+        "Just moved to Local Authority area","Less than 1 year","1 year but under 2 years", "2 years but under 3 years","3 years but under 4 years",
+        "4 years but under 5 years","5 years or more", "Do not know"
+        ] %}
+
+      {% set optionsItems = [] %}
+
+      {% for option in options %}
+        {% set optionsItems = (optionsItems.push({value: option, text: option, checked: checked("time-lived-in-la", option)}), optionsItems) %}
+      {% endfor %}
+
+      <legend class="govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          How long has the household continuously lived in the local authority area where the new letting is located?
+        </h1>
+      </legend>
+
+      {{ govukRadios({
+        idPrefix: "time-lived-in-la",
+        name: "time-lived-in-la",
+        classes: "govuk-radios--small",
+        items: optionsItems
+      }) }}
+
+      <input type="hidden" name="next-page" value="time-on-waiting-list">
+      <input type="hidden" name="time-lived-in-la-page" value="true">
+      <input type="hidden" name="local-authority-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

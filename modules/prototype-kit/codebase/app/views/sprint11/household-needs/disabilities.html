@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+<a href="armed-forces" class="govuk-back-link">Back</a>
+<a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../household-needs-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              {% if not (data["number-of-other-members"][0] > 0) %}
+              Does the tenant have any of these that they expect to last for 12 months or more?
+              {% else %}
+              Does anyone in the household have any of these that they expect to last for 12 months or more?
+              {% endif %}
+            </h1>
+            <h3 class="govuk-fieldset__legend govuk-fieldset__legend--m">
+              <ul>
+                <li>Physical condition</li>
+                <li>Mental health condition</li>
+                <li>Other illness</li>
+              </ul>
+            </h3>
+          </legend>
+
+
+          <div class="govuk-radios govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="long-term-conditions" name="long-term-conditions" type="radio" value="Yes" {{ 'checked' if data['long-term-conditions'] == "Yes" }}>
+              <label class="govuk-label govuk-radios__label" for="long-term-conditions-1">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="long-term-conditions" name="long-term-conditions" type="radio" value="No" {{ 'checked' if data['long-term-conditions'] == "No" }}>
+              <label class="govuk-label govuk-radios__label" for="long-term-conditions-2">
+                No
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="long-term-conditions" name="long-term-conditions" type="radio" value="Do not know" {{ 'checked' if data['long-term-conditions'] == "Do not know" }}>
+              <label class="govuk-label govuk-radios__label" for="long-term-conditions-3">
+                Do not know
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="long-term-conditions" name="long-term-conditions" type="radio" value="Prefer not to say" {{ 'checked' if data['long-term-conditions'] == "Prefer not to say" }}>
+              <label class="govuk-label govuk-radios__label" for="long-term-conditions-4">
+                Prefer not to say
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <input type="hidden" name="next-page" value="pregnancy">
+      <input type="hidden" name="disabilities-page" value="true">
+      <input type="hidden" name="household-needs-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()" />
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+      </fieldset>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+<a href="void-date" class="govuk-back-link">Back</a>
+<a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../property-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        {% macro radio(data, group, items, changefn) %}
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+                Were any major repairs completed during the void period?
+            </h1>
+          </legend>
+          <div class="govuk-form-group" id="{{ group }}">
+            <div class="govuk-radios">
+              {% for i in range(0, items['items'].length) %}
+              {% set item = items['items'][i] %}
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
+                  onchange="{{ changefn }}" value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
+                <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
+                  {{ item['text'] }}
+                </label>
+              </div>
+                {% endfor %}
+            </div>
+          </div>
+        {% endmacro %}
+
+        {{ radio(data, "repairs", {
+          items: [
+          {
+            value: "Yes",
+            text: "Yes",
+            checked: checked("repairs", "Yes")
+          },
+          {
+            value: "No",
+            text: "No",
+            checked: checked("repairs", "No")
+          }
+          ]
+          }, "displayConditional()") }}
+
+        <div id="repair-date-div">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                What was the major repairs completion date?
+              </h1>
+            </legend>
+
+            <div id="repair-date-hint" class="govuk-hint">
+              For example, 27 3 2007
+            </div>
+            <div class="govuk-date-input" id="repair-date">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="repair-date-day">
+                    Day
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="repair-date-day" name="repair-date-day" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data["repair-date-day"] }}>
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="repair-date-month">
+                    Month
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="repair-date-month" name="repair-date-month" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data["repair-date-month"] }}>
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="repair-date-year">
+                    Year
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="repair-date-year" name="repair-date-year" type="text" pattern="[0-9]*" inputmode="numeric" value={{ data["repair-date-year"] }}>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <style>
+        #repair-date-div {
+          display: none;
+      </style>
+
+      <input type="hidden" name="next-page" value="previously-offered">
+      <input type="hidden" name="repair-date-page" value="true">
+      <input type="hidden" name="property-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()" />
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+<script>
+  function displayConditional() {
+    const repaired= document.getElementById("repairs-0").checked
+    if(repaired){
+      document.getElementById("repair-date-div").style.display = "block";
+    } else {
+      document.getElementById("repair-date-div").style.display = "none";
+      document.getElementById("repair-date-day").value = "";
+      document.getElementById("repair-date-month").value = "";
+      document.getElementById("repair-date-year").value = "";
+
+    }
+  }
+  // So that this runs if you've already answered and hit the back button
+  displayConditional()
+</script>
+
+{% endblock %}

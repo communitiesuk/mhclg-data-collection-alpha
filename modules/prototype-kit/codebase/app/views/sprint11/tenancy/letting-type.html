@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="type-of-main-tenancy" class="govuk-back-link">Back</a>
+  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form name="form" class="form" action="../tenancy-section" method="POST" novalidate="" data-validate="my-form-validation">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Which type of letting is this?
+            </h1>
+          </legend>
+
+          <div class="govuk-radios--small">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="letting-typen" type="radio" name="letting-type" value="Social Rent General Needs" data-value="Social Rent General Needs">
+              <label class="govuk-label govuk-radios__label" for="letting-typen">
+                Social Rent - General Needs
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="letting-type" type="radio" name="letting-type" value="Social Rent Supporting Housing" data-value="Social Rent Supporting Housing">
+              <label class="govuk-label govuk-radios__label" for="letting-type-2">
+                Social Rent - Supporting Housing
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="letting-type" type="radio" name="letting-type" value="Affordable Rent General Needs" data-value="Affordable Rent General Needs">
+              <label class="govuk-label govuk-radios__label" for="letting-type-3">
+                Affordable Rent - General Needs
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="letting-type" type="radio" name="letting-type" value="Affordable Rent Supporting Housing" data-value="Affordable Rent Supporting Housing">
+              <label class="govuk-label govuk-radios__label" for="letting-type-4">
+                Affordable Rent - Supporting Housing
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="letting-type" type="radio" name="letting-type" value="Rent To Buy General Needs" data-value="Rent To Buy General Needs">
+              <label class="govuk-label govuk-radios__label" for="letting-type-5">
+                Rent To Buy - General Needs
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="letting-type" type="radio" name="letting-type" value="Rent To Buy Supported Housing" data-value="Rent To Buy Supported Housing">
+              <label class="govuk-label govuk-radios__label" for="letting-type-6">
+                Rent To Buy - Supported Housing
+              </label>
+            </div>
+
+          </div>
+      </div>
+
+      <input type="hidden" name="next-page" value="landlord">
+      <input type="hidden" name="letting-type-page" value="true">
+      <input type="hidden" name="tenancy-inprogress" value="true">
+      <div class="govuk-button-group">
+        <input class="govuk-button" type="submit" value="Save and continue" onclick="saveContinue()"/>
+        <a href="../home-page" class="govuk-link">Return to logs</a>
+      </div>
+
+      </fieldset>
+    </form>
+    {% import "./../_get-help.njk" as help %}
+    {{ help.details() }}
+  </div>
+</div>
+
+{% endblock %}
