@@ -6,14 +6,14 @@ GOV.UK Prototype Kit
 
 {% block beforeContent %}
   <a href="gender" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form name="form" class="form" action="../household-section" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="nationality" method="POST" novalidate="" data-validate="my-form-validation">
 
       <div class="govuk-form-group">
 
@@ -143,5 +143,13 @@ GOV.UK Prototype Kit
     </form>
   </div>
 </div>
-
+<script type="application/json" id="my-form-validation">
+  {
+    "ethnicity": {
+      "presence": {
+        "value": true
+      }
+    }
+  }
+</script>
 {% endblock %}

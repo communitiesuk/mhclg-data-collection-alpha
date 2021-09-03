@@ -6,7 +6,7 @@ Check your answers
 
 {% block beforeContent %}
   <a href="conditions" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
@@ -35,7 +35,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         {% if numberOfCompletedQuestions < numberOfQuestions %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
-          <a class="task-name" href="/sprint10/household-needs-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+          <a class="task-name" href="/sprint11/household-needs-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
         {% else %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
         {% endif %}
@@ -50,7 +50,7 @@ Check your answers
           {{ data["armed-forces"] }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-needs/armed-forces?check=true">
+          <a class="govuk-link" href="/sprint11/household-needs/armed-forces?check=true">
             {{ "Change" if data["armed-forces"] else "Answer"}}<span class="govuk-visually-hidden">Armed Forces</span>
           </a>
         </dd>
@@ -67,7 +67,7 @@ Check your answers
           {{ data['armed-forces-tenure'] }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-needs/armed-forces?check=true">
+          <a class="govuk-link" href="/sprint11/household-needs/armed-forces?check=true">
             {{ "Change" if data["armed-forces-tenure"] else "Answer"}}<span class="govuk-visually-hidden">armed forces</span>
           </a>
         </dd>
@@ -85,7 +85,7 @@ Check your answers
           {{ data['armed-forces-injured'] }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-needs/armed-forces?check=true">
+          <a class="govuk-link" href="/sprint11/household-needs/armed-forces?check=true">
             {{ "Change" if data["armed-forces-injured"] else "Answer"}}<span class="govuk-visually-hidden">armed forces</span>
           </a>
         </dd>
@@ -102,7 +102,7 @@ Check your answers
           {{ data["long-term-conditions"] }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-needs/disabilities?check=true">
+          <a class="govuk-link" href="/sprint11/household-needs/disabilities?check=true">
             {{ "Change" if data["long-term-conditions"] else "Answer"}}<span class="govuk-visually-hidden">disabilities</span>
           </a>
         </dd>
@@ -118,7 +118,7 @@ Check your answers
           {{ data["pregnancy"] }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-needs/pregnancy?check=true">
+          <a class="govuk-link" href="/sprint11/household-needs/pregnancy?check=true">
             {{ "Change" if data["pregnancy"] else "Answer"}}<span class="govuk-visually-hidden">Pregnancy</span>
           </a>
         </dd>
@@ -135,7 +135,7 @@ Check your answers
             {{ value | trim_end(", ") }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-needs/requirements?check=true">
+          <a class="govuk-link" href="/sprint11/household-needs/requirements?check=true">
             {{ "Change" if data["requirements"] else "Answer"}}<span class="govuk-visually-hidden">requirements</span>
           </a>
         </dd>
@@ -152,7 +152,7 @@ Check your answers
             {{ value | trim_end(", ") }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-needs/conditions?check=true">
+          <a class="govuk-link" href="/sprint11/household-needs/conditions?check=true">
             {{ "Change" if data["conditions"] else "Answer"}}<span class="govuk-visually-hidden">conditions</span>
           </a>
         </dd>

@@ -6,7 +6,7 @@ Check your answers
 
 {% block beforeContent %}
   <a href="reason-for-leaving" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
@@ -35,7 +35,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         {% if numberOfCompletedQuestions < numberOfQuestions %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
-          <a class="task-name" href="/sprint10/household-situation-section?next-page='' aria-describedby="read-declaration-completed">Answer the missing questions</a>
+          <a class="task-name" href="/sprint11/household-situation-section?next-page='' aria-describedby="read-declaration-completed">Answer the missing questions</a>
         {% else %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
         {% endif %}
@@ -50,7 +50,7 @@ Check your answers
           {{ data["previous-housing-situation"] }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-situation/previous-housing-situation?check=true">
+          <a class="govuk-link" href="/sprint11/household-situation/previous-housing-situation?check=true">
             {{ "Change" if data["previous-housing-situation"] else "Answer"}}<span class="govuk-visually-hidden">previous-housing-situation</span>
           </a>
         </dd>
@@ -66,7 +66,7 @@ Check your answers
           {{ data["homeless"] }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-situation/homeless?check=true">
+          <a class="govuk-link" href="/sprint11/household-situation/homeless?check=true">
             {{ "Change" if data["homeless"] else "Answer"}}<span class="govuk-visually-hidden">homeless</span>
           </a>
         </dd>
@@ -82,7 +82,7 @@ Check your answers
           {{ data["reason-for-leaving"] }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-situation/reason-for-leaving?check=true">
+          <a class="govuk-link" href="/sprint11/household-situation/reason-for-leaving?check=true">
             {{ "Change" if data["reason-for-leaving"] else "Answer"}}<span class="govuk-visually-hidden">reason-for-leaving</span>
           </a>
         </dd>
@@ -99,7 +99,7 @@ Check your answers
           {{ data["other-reason-for-leaving"] }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-situation/reason-for-leaving?check=true">
+          <a class="govuk-link" href="/sprint11/household-situation/reason-for-leaving?check=true">
             {{ "Change" if data["other-reason-for-leaving"] else "Answer"}}<span class="govuk-visually-hidden">reason-for-leaving</span>
           </a>
         </dd>
@@ -116,7 +116,7 @@ Check your answers
           {{ data["reason-removal"] }}
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/sprint10/household-situation/reason-for-leaving?check=true">
+          <a class="govuk-link" href="/sprint11/household-situation/reason-for-leaving?check=true">
             {{ "Change" if data["reason-removal"] else "Answer"}}<span class="govuk-visually-hidden">reason-for-leaving</span>
           </a>
         </dd>
