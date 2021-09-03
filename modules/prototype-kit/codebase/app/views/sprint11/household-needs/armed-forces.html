@@ -6,25 +6,30 @@ GOV.UK Prototype Kit
 
 {% block beforeContent %}
   <a href="../tasklist" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form name="form" class="form" action="../household-needs-section" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="disabilities" method="POST" novalidate="" data-validate="my-form-validation">
 
       <div class="govuk-form-group">
 
         <fieldset class="govuk-fieldset" aria-describedby="armed-forces-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Armed Forces
+              Experience of the UK Armed Forces
             </h1>
           </legend>
           <div id="armed-forces-hint" class="govuk-hint">
-
+            {% if not (data["number-of-other-members"][0] > 0) %}
+              Has the tenant ever served in the UK armed forces? 
+                
+              {% else %}
+                Has anyone in the household's ever served in the UK armed forces?
+              {% endif %}
           </div>
 
           <div id="armed-forces">
@@ -49,55 +54,50 @@ GOV.UK Prototype Kit
             {{ radio(data, "armed-forces", {
               items: [
                 {
-                  value: "A current or former regular in the UK Armed Forces (exc. National Service)",
-                  text: "A current or former regular in the UK Armed Forces (exc. National Service)"
+                  value: "Yes - a regular",
+                  text: "Yes - a regular"
                 },
                 {
-                  value: "A current or former reserve in the UK Armed Forces (exc. National Service)",
-                  text: "A current or former reserve in the UK Armed Forces (exc. National Service)"
-                },
-                {
-                  value: "A spouse/civil partner of a UK Armed Forces member who has been separated or been bereaved within the last 2 years",
-                  text: "A spouse/civil partner of a UK Armed Forces member who has been separated or been bereaved within the last 2 years"
+                  value: "Yes - a reserve",
+                  text: "Yes - a reserve"
                 },
                 {
                   value: "No",
-                  text: "None of the above"
+                  text: "No"
                 },
                 {
                   value: "Prefer not to say",
                   text: "Prefer not to say"
                 }
               ]
-              }, "displayArmed()") }}
-              <br />
+              }, "displayArmed(this.value)") }}
 
-              <div id="armed-forces-tenure-div">
+              <div id="armed-forces-tenure-div" class="govuk-!-padding-bottom-5">
                 {{ govukRadios({
                 idPrefix: "armed-forces-tenure",
                 name: "armed-forces-tenure",
                 classes: "govuk-radios",
                 fieldset: {
                   legend: {
-                    text: "When did they leave the Armed Forces?",
+                    text: "Are they still serving?",
                     classes: "govuk-label--l"
                   }
                 },
                 items: [
                   {
-                    value: "Up to and including 5 years ago",
-                    text: "Up to and including 5 years ago",
-                    checked: checked("armed-forces-tenure", "Up to and including 5 years ago")
+                    value: "Yes",
+                    text: "Yes",
+                    checked: checked("armed-forces-tenure", "Yes")
                   },
                   {
-                    value: "More than 5 years ago",
-                    text: "More than 5 years ago",
-                    checked: checked("armed-forces-tenure", "More than 5 years ago")
+                    value: "No - they left up to 5 years ago",
+                    text: "No - they left up to 5 years ago",
+                    checked: checked("armed-forces-tenure", "No - they left up to 5 years ago")
                   },
                   {
-                    value: "Still serving",
-                    text: "Still serving",
-                    checked: checked("armed-forces-tenure", "Still serving")
+                    value: "No - they left more than 5 years ago",
+                    text: "No - they left more than 5 years ago",
+                    checked: checked("armed-forces-tenure", "No - they left more than 5 years ago")
                   },
                   {
                     value: "Prefer not to say",
@@ -107,16 +107,14 @@ GOV.UK Prototype Kit
                 ]
               }) }}
             </div>
-            <br />
-            <br />
 
-            <div id="armed-forces-injured-div">
+            <div id="armed-forces-injured-div" class="govuk-!-padding-bottom-5">
               {{ govukRadios({
               idPrefix: "armed-forces-injured",
               name: "armed-forces-injured",
               fieldset: {
                 legend: {
-                  text: "Has anyone in the household been seriously injured or ill as a direct result of their time and activities serving as a regular or reserve?",
+                  text: "Were they seriously injured or ill as a result of their service?",
                   classes: "govuk-label--l"
                 }
               },
@@ -139,7 +137,52 @@ GOV.UK Prototype Kit
               ]
             }) }}
           </div>
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              {% if not (data["number-of-other-members"][0] > 0) %}
+                Was the tenant the spouse or civil partner of someone who served in the UK armed forces? 
+              {% else %}
+                Was anyone in the household the spouse or civil partner of someone who served in the UK armed forces?
+              {% endif %}
+            </h1>
+          </legend>
+          {% macro spouseRadio(data, group, items) %}
+              <div class="govuk-form-group" id="{{ group }}">
+                <div class="govuk-radios--small">
+                  {% for i in range(0, items['items'].length) %}
+                  {% set item = items['items'][i] %}
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="{{ group }}-{{ i }}" name="{{ group }}" type="radio"
+                      value="{{ item['value'] }}" {{ 'checked' if data[group] == item['value'] }} />
+                    <label class="govuk-label govuk-radios__label" for="{{ group }}-{{ i }}">
+                      {{ item['text'] }}
+                    </label>
+                  </div>
+                    {% endfor %}
+                </div>
+              </div>
+            {% endmacro %}
 
+            {{ spouseRadio(data, "armed-forces-spouse", {
+              items: [
+                {
+                  value: "Yes - was the spouse or civil partner of a UK Armed Forces member and have separated within the last 2 years ",
+                  text: "Yes - was the spouse or civil partner of a UK Armed Forces member and have separated within the last 2 years "
+                },
+                {
+                  value: "Yes - was the spouse or civil partner of a UK Armed Forces member who died within the last 2 years ",
+                  text: "Yes - was the spouse or civil partner of a UK Armed Forces member who died within the last 2 years"
+                },
+                {
+                  value: "No",
+                  text: "No"
+                },
+                {
+                  value: "Prefer not to say",
+                  text: "Prefer not to say"
+                }
+              ]
+              }) }}
           </div>
       </div>
 
@@ -168,11 +211,8 @@ GOV.UK Prototype Kit
 </div>
 
 <script>
-  function displayArmed() {
-    const regular = document.getElementById("armed-forces-0").checked
-    const reserve = document.getElementById("armed-forces-1").checked
-    const spouse = document.getElementById("armed-forces-2").checked
-    if(regular || reserve || spouse){
+  function displayArmed(selected) {
+    if(selected == "Yes - a regular" || selected == "Yes - a reserve"){
       document.getElementById("armed-forces-tenure-div").style.display = "block";
       document.getElementById("armed-forces-injured-div").style.display = "block";
     } else {

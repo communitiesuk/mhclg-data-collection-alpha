@@ -6,14 +6,14 @@ GOV.UK Prototype Kit
 
 {% block beforeContent %}
   <a href="../tasklist" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form name="form" class="form" action="../household-situation-section?next=homeless" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="homeless" method="POST" novalidate="" data-validate="my-form-validation">
 
       {% set situations = [
         "Owner occupation (private)","Owner occupation (low cost home ownership)","Private sector tenancy","Tied housing or rented with job","Supported housing","Sheltered accomodation","Residential care home","Living with friends or family","Refuge","Hospital","Prison / Approved Probation Hostel","Direct access hostel","Bed & Breakfast","Mobile home / caravan","Any other temporary accommodation","Home Office Asylum Support","Children’s home / foster care","Rough sleeping","Other","Fixed term Local Authority General Needs tenancy","Lifetime Local Authority General Needs tenancy","Fixed term PRP General Needs tenancy","Lifetime PRP General Needs tenancy"
@@ -28,9 +28,9 @@ GOV.UK Prototype Kit
       <legend class="govuk-fieldset__legend--l">
         <h1 class="govuk-fieldset__heading">
           {% if not (data["number-of-other-members"][0] > 0) %}
-            Tenant's housing situation immediately before this letting
+            What was the tenant’s housing situation immediately before this letting?
           {% else %}
-            Household's housing situation immediately before this letting
+            What was the household's housing situation immediately before this letting?
           {% endif %}
         </h1>
       </legend>

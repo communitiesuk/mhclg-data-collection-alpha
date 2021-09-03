@@ -6,21 +6,21 @@ GOV.UK Prototype Kit
 
 {% block beforeContent %}
   <a href="ethnicity" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form name="form" class="form" action="../household-section" method="POST" novalidate="" data-validate="my-form-validation">
+    <form name="form" class="form" action="economic-status" method="POST" novalidate="" data-validate="my-form-validation">
 
       <div class="govuk-form-group">
 
         <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Tenant's nationality
+              What is the tenant’s nationality?
             </h1>
           </legend>
           <div id="nationality-hint" class="govuk-hint">
@@ -134,5 +134,13 @@ GOV.UK Prototype Kit
     {{ help.details() }}
   </div>
 </div>
-
+<script type="application/json" id="my-form-validation">
+  {
+    "nationality": {
+      "presence": {
+        "value": true
+      }
+    }
+  }
+</script>
 {% endblock %}

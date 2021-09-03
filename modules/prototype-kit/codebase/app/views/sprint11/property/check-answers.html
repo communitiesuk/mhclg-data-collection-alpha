@@ -6,7 +6,7 @@ Check your answers
 
 {% block beforeContent %}
   <a href="wheelchair-accessible" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
@@ -36,7 +36,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         {% if numberOfCompletedQuestions < numberOfQuestions %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
-          <a class="task-name" href="/sprint10/property-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+          <a class="task-name" href="/sprint11/property-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
         {% else %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
         {% endif %}
@@ -51,7 +51,7 @@ Check your answers
             {{ data["property-location"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/property-location?check=true">
+            <a class="govuk-link" href="/sprint11/property/property-location?check=true">
               {{ "Change" if data["property-location"] else "Answer"}}<span class="govuk-visually-hidden">property-location</span>
             </a>
           </dd>
@@ -62,13 +62,13 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Postcode
+            What was the previous postcode?
           </dt>
           <dd class="govuk-summary-list__value">
             {{ value | trim_end(",") }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/postcode?check=true">
+            <a class="govuk-link" href="/sprint11/property/postcode?check=true">
               {{ "Change" if data["postcode"] else "Answer"}}<span class="govuk-visually-hidden">postcode</span>
             </a>
           </dd>
@@ -78,13 +78,13 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Most recent let basis
+            Which type was the property most recently let as?
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["relet"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/relet?check=true">
+            <a class="govuk-link" href="/sprint11/property/relet?check=true">
               {{ "Change" if data["relet"] else "Answer"}}<span class="govuk-visually-hidden">relet</span>
             </a>
           </dd>
@@ -94,13 +94,13 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Reason for vacancy
+            What is the reason for the property vacancy?
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["reason-for-vacancy"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/reason-for-vacancy?check=true">
+            <a class="govuk-link" href="/sprint11/property/reason-for-vacancy?check=true">
               {{ "Change" if data["reason-for-vacancy"] else "Answer"}}<span class="govuk-visually-hidden">reason for vacancy</span>
             </a>
           </dd>
@@ -110,13 +110,13 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Property reference
+            What’s the property reference?
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["property-reference"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/property-reference?check=true">
+            <a class="govuk-link" href="/sprint11/property/property-reference?check=true">
               {{ "Change" if data["property-reference"] else "Answer"}}<span class="govuk-visually-hidden">property reference</span>
             </a>
           </dd>
@@ -126,13 +126,13 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Type of Unit
+            Which type of unit is the property?
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["type-of-unit"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/type-of-unit?check=true">
+            <a class="govuk-link" href="/sprint11/property/type-of-unit?check=true">
               {{ "Change" if data["type-of-unit"] else "Answer"}}<span class="govuk-visually-hidden">Type of unit</span>
             </a>
           </dd>
@@ -142,13 +142,13 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Type of Building
+            Which type of building is the property?
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["type-of-building"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/type-of-building?check=true">
+            <a class="govuk-link" href="/sprint11/property/type-of-building?check=true">
               {{ "Change" if data["type-of-building"] else "Answer"}}<span class="govuk-visually-hidden">Type of building</span>
             </a>
           </dd>
@@ -158,13 +158,13 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Number of bedrooms
+            How many bedrooms are there in the property?
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["bedrooms"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/number-of-bedrooms?check=true">
+            <a class="govuk-link" href="/sprint11/property/number-of-bedrooms?check=true">
               {{ "Change" if data["number-of-bedrooms"] else "Answer"}}<span class="govuk-visually-hidden">Bedrooms</span>
             </a>
           </dd>
@@ -174,7 +174,7 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Void date
+            What is the void, new build handover or renewal date?
           </dt>
           <dd class="govuk-summary-list__value">
             {% if data['void-date-day'] %}
@@ -183,7 +183,7 @@ Check your answers
             {% endif %}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/void-date?check=true">
+            <a class="govuk-link" href="/sprint11/property/void-date?check=true">
               {{ "Change" if data["void-date-day"] else "Answer"}}<span class="govuk-visually-hidden">void-date</span>
             </a>
           </dd>
@@ -199,7 +199,7 @@ Check your answers
             {{ data['repairs'] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/repair-date?check=true">
+            <a class="govuk-link" href="/sprint11/property/repair-date?check=true">
               {{ "Change" if data["repairs"] else "Answer"}}<span class="govuk-visually-hidden">repair-date</span>
             </a>
           </dd>
@@ -210,7 +210,7 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Repair date
+            What was the major repairs completion date?
           </dt>
           <dd class="govuk-summary-list__value">
             {% if data['repair-date-day'] %}
@@ -219,7 +219,7 @@ Check your answers
             {% endif %}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/repair-date?check=true">
+            <a class="govuk-link" href="/sprint11/property/repair-date?check=true">
               {{ "Change" if data["repair-date-day"] else "Answer"}}<span class="govuk-visually-hidden">repair-date</span>
             </a>
           </dd>
@@ -236,7 +236,7 @@ Check your answers
             {{ data["previously-offered"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/previously-offered?check=true">
+            <a class="govuk-link" href="/sprint11/property/previously-offered?check=true">
               {{ "Change" if data["previously-offered"] else "Answer"}}<span class="govuk-visually-hidden">previously-offered</span>
             </a>
           </dd>
@@ -252,7 +252,7 @@ Check your answers
             {{ data["wheelchair-accessible"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/property/wheelchair-accessible?check=true">
+            <a class="govuk-link" href="/sprint11/property/wheelchair-accessible?check=true">
               {{ "Change" if data["wheelchair-accessible"] else "Answer"}}<span class="govuk-visually-hidden">Wheelchair accessible</span>
             </a>
           </dd>

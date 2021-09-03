@@ -6,7 +6,7 @@ GOV.UK Prototype Kit
 
 {% block beforeContent %}
   <a href="previous-postcode" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@ GOV.UK Prototype Kit
           <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
               <h1 class="govuk-fieldset__heading">
-                Was the household given Reasonable Preference (i.e. priority) for housing by the Local Authority?
+                Was the household given reasonable preference by the local authority?
               </h1>
             </legend>
 
@@ -62,7 +62,7 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset" aria-describedby="reasonable-preference-reason-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-               Which of the following reasons for Reasonable Preference apply?
+               Why were they given reasonable preference?
             </h1>
           </legend>
           <div id="reasonable-preference-reason-hint" class="govuk-hint">
@@ -96,7 +96,7 @@ GOV.UK Prototype Kit
             <div class="govuk-checkboxes__item">
               <input class="govuk-checkboxes__input" id="reasonable-preference-reason-6" name="reasonable-preference-reason" type="checkbox" value="Don’t know" {{ 'checked' if data['reasonable-preference-reason'][0] == "Do not know" }}>
               <label class="govuk-label govuk-checkboxes__label" for="reasonable-preference-reason-6">
-                 Don’t know
+                 Do not know
               </label>
             </div>
           </div>

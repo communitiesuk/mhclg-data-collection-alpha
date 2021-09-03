@@ -6,7 +6,7 @@ Check your answers
 
 {% block beforeContent %}
   <a href="landlord" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
@@ -30,7 +30,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         {% if numberOfCompletedQuestions < numberOfQuestions %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
-          <a class="task-name" href="/sprint10/tenancy-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+          <a class="task-name" href="/sprint11/tenancy-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
         {% else %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
         {% endif %}

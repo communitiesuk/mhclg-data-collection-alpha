@@ -8,7 +8,6 @@ console.log('hello')
 function saveContinue() {
   if(form) {
     const action = form.action;
-
     if(check){
       form.action = "check-answers"
     } else {

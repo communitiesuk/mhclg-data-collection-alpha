@@ -6,7 +6,7 @@ Check your answers
 
 {% block beforeContent %}
   <a href="benefits" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
@@ -30,7 +30,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         {% if numberOfCompletedQuestions < numberOfQuestions %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
-          <a class="task-name" href="/sprint10/income-and-benefits-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+          <a class="task-name" href="/sprint11/income-and-benefits-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
         {% else %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
         {% endif %}
@@ -45,7 +45,7 @@ Check your answers
             {{ data["income"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/income-and-benefits/income?check=true">
+            <a class="govuk-link" href="/sprint11/income-and-benefits/income?check=true">
               {{ "Change" if data["income"] else "Answer"}}<span class="govuk-visually-hidden">Income</span>
             </a>
           </dd>
@@ -61,7 +61,7 @@ Check your answers
             {{ data["income-frequency"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/income-and-benefits/income?check=true">
+            <a class="govuk-link" href="/sprint11/income-and-benefits/income?check=true">
               {{ "Change" if data["income-frequency"] else "Answer"}}<span class="govuk-visually-hidden">Income Frequency</span>
             </a>
           </dd>
@@ -77,7 +77,7 @@ Check your answers
             {{ data["benefit-proportion"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/income-and-benefits/benefit-proportion?check=true">
+            <a class="govuk-link" href="/sprint11/income-and-benefits/benefit-proportion?check=true">
               {{ "Change" if data["benefit-proportion"] else "Answer"}}<span class="govuk-visually-hidden">Benefit Proportion</span>
             </a>
           </dd>
@@ -93,7 +93,7 @@ Check your answers
             {{ data["benefit"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/income-and-benefits/benefits?check=true">
+            <a class="govuk-link" href="/sprint11/income-and-benefits/benefits?check=true">
               {{ "Change" if data["benefits"] else "Answer"}}<span class="govuk-visually-hidden">Benefits</span>
             </a>
           </dd>

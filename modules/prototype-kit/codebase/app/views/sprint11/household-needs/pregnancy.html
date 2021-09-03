@@ -6,7 +6,7 @@ GOV.UK Prototype Kit
 
 {% block beforeContent %}
   <a href="disabilities" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,11 @@ GOV.UK Prototype Kit
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Does the household contain a pregnant person?
+              {% if not (data["number-of-other-members"][0] > 0) %}
+              Is the tenant pregnant?
+              {% else %}
+              Is anyone in the household pregnant?
+              {% endif %}
             </h1>
           </legend>
           <div class="govuk-radios govuk-radios">

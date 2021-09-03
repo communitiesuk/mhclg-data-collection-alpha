@@ -6,7 +6,7 @@ GOV.UK Prototype Kit
 
 {% block beforeContent %}
   <a href="../tasklist" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
@@ -16,8 +16,8 @@ GOV.UK Prototype Kit
     <form name="form" class="form" action="../local-authority-section" method="POST" novalidate="" data-validate="my-form-validation">
 
       {% set options = [
-        "Just moved to Local Authority area","Less than 1 year","1 year but under 2 years", "2 years but under 3 years","3 years but under 4 years",
-        "4 years but under 5 years","5 years or more", "Do not know"
+        "Just moved to local authority area","1 to 2 years","2 to 3 years", "3 to 4 years","4 to 5 years",
+        "5 years or more", "Do not know"
         ] %}
 
       {% set optionsItems = [] %}

@@ -6,7 +6,7 @@ Check your answers
 
 {% block beforeContent %}
   <a href="allocation-type" class="govuk-back-link">Back</a>
-  <a href="/sprint10/sign-in" class="govuk-link--right ">Sign out</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
 {% endblock %}
 
 {% block content %}
@@ -35,7 +35,7 @@ Check your answers
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         {% if numberOfCompletedQuestions < numberOfQuestions %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered {{ numberOfCompletedQuestions }} of {{ numberOfQuestions }} questions.<br />
-          <a class="task-name" href="/sprint10/local-authority-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
+          <a class="task-name" href="/sprint11/local-authority-section?next-page=''" aria-describedby="read-declaration-completed">Answer the missing questions</a>
         {% else %}
           <p class="govuk-body govuk-!-margin-bottom-7">You answered all the questions.<br />
         {% endif %}
@@ -50,7 +50,7 @@ Check your answers
             {{ data["time-lived-in-la"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/local-authority/time-lived-in-la?check=true">
+            <a class="govuk-link" href="/sprint11/local-authority/time-lived-in-la?check=true">
               {{ "Change" if data["time-lived-in-la"] else "Answer"}}<span class="govuk-visually-hidden">time-lived-in-la</span>
             </a>
           </dd>
@@ -66,7 +66,7 @@ Check your answers
             {{ data["time-on-waiting-list"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/local-authority/time-on-waiting-list?check=true">
+            <a class="govuk-link" href="/sprint11/local-authority/time-on-waiting-list?check=true">
               {{ "Change" if data["time-on-waiting-list"] else "Answer"}}<span class="govuk-visually-hidden">time-on-waiting-list</span>
             </a>
           </dd>
@@ -82,7 +82,7 @@ Check your answers
             {{ data["previous-la"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/local-authority/previous-la?check=true">
+            <a class="govuk-link" href="/sprint11/local-authority/previous-la?check=true">
               {{ "Change" if data["previous-la"] else "Answer"}}<span class="govuk-visually-hidden">previous-la</span>
             </a>
           </dd>
@@ -99,7 +99,7 @@ Check your answers
             {{ value | trim_end(",") }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/local-authority/previous-postcode?check=true">
+            <a class="govuk-link" href="/sprint11/local-authority/previous-postcode?check=true">
               {{ "Change" if data["previous-postcode"] else "Answer"}}<span class="govuk-visually-hidden">previous-postcode</span>
             </a>
           </dd>
@@ -115,7 +115,7 @@ Check your answers
             {{ data["reasonable-preference"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/local-authority/reasonable-preference?check=true">
+            <a class="govuk-link" href="/sprint11/local-authority/reasonable-preference?check=true">
               {{ "Change" if data["reasonable-preference"] else "Answer"}}<span class="govuk-visually-hidden">reasonable-preference</span>
             </a>
           </dd>
@@ -133,7 +133,7 @@ Check your answers
             {{ value | trim_end(", ") }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/local-authority/reasonable-preference?check=true">
+            <a class="govuk-link" href="/sprint11/local-authority/reasonable-preference?check=true">
               {{ "Change" if data["reasonable-preference-reason"] else "Answer"}}<span class="govuk-visually-hidden">reason for reasonable preference</span>
             </a>
           </dd>
@@ -150,7 +150,7 @@ Check your answers
             {{ data["choice-based"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/local-authority/allocation-type?check=true">
+            <a class="govuk-link" href="/sprint11/local-authority/allocation-type?check=true">
               {{ "Change" if data["choice-based"] else "Answer"}}<span class="govuk-visually-hidden">allocation type</span>
             </a>
           </dd>
@@ -166,7 +166,7 @@ Check your answers
             {{ data["common-housing-register"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/local-authority/allocation-type?check=true">
+            <a class="govuk-link" href="/sprint11/local-authority/allocation-type?check=true">
               {{ "Change" if data["common-housing-register"] else "Answer"}}<span class="govuk-visually-hidden">allocation type</span>
             </a>
           </dd>
@@ -182,7 +182,7 @@ Check your answers
             {{ data["common-allocation-policy"] }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/sprint10/local-authority/allocation-type?check=true">
+            <a class="govuk-link" href="/sprint11/local-authority/allocation-type?check=true">
               {{ "Change" if data["common-allocation-policy"] else "Answer"}}<span class="govuk-visually-hidden">allocation type</span>
             </a>
           </dd>
