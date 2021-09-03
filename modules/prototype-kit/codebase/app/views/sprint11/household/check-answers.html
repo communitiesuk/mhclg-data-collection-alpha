@@ -15,7 +15,7 @@ Check your answers
 
 {% set baseQuestions = ['tenant-code', 'tenant-age', 'gender', 'nationality', 'ethnicity', 'economic-status', 'number-of-other-members'] %}
 {% set allQuestions = ['tenant-code', 'tenant-age', 'gender', 'nationality', 'ethnicity', 'economic-status', 'number-of-other-members'] %}
-{% for i in [1,2,3,4,5,6,7] %}
+{% for i in [2,3,4,5,6,7,8] %}
  {% set allQuestions = (allQuestions.push("person-" + i + "-relationship-to-main"), allQuestions) %}
  {% set allQuestions = (allQuestions.push("person-" + i + "-age"), allQuestions) %}
  {% set allQuestions = (allQuestions.push("person-" + i + "-gender"), allQuestions) %}
@@ -159,12 +159,12 @@ Check your answers
       </div>
     </dl>
 
-    {% for i in [1,2,3,4,5,6,7] %}
-      {% if  data["number-of-other-members"][0] >= i %}
+    {% for i in [2,3,4,5,6,7,8] %}
+      {% if  data["number-of-other-members"][0] >= i-1 %}
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            {{ "Person " + (i + 1) + "'s relationship to lead tenant" }}
+            {{ "Person " + (i) + "'s relationship to lead tenant" }}
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["person-" + i + "-relationship-to-main"] }}
@@ -180,7 +180,7 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            {{ "Person " + (i + 1) + "'s age" }}
+            {{ "Person " + (i) + "'s age" }}
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["person-" + i + "-age"] }}
@@ -196,7 +196,7 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            {{ "Which of these best describes person " + (i + 1) + "'s gender identity?" }}
+            {{ "Which of these best describes person " + (i) + "'s gender identity?" }}
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["person-" + i + "-gender"] }}
@@ -212,7 +212,7 @@ Check your answers
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            {{ "Which of these best describes person " + (i + 1) + "'s working situation?" }}
+            {{ "Which of these best describes person " + (i) + "'s working situation?" }}
           </dt>
           <dd class="govuk-summary-list__value">
             {{ data["person-" + i + "-economic-status"] }}
