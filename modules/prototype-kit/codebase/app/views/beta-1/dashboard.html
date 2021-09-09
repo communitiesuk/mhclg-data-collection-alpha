@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% set title = "Your logs" %}
+
+{% block pageTitle %}
+{{ title }} - {{ serviceName }} - GOV.UK
+{% endblock %}
+
+
+{% block content %}
+
+{% set numberOfCompletedSections = 0 %}
+{% set numberOfInProgressSections = 0 %}
+
+{% set sections = [
+  'household', 'household-situation', 'household-needs', 'tenancy', 'property', 'income-and-benefits', 'rent', 'local-authority', 'submission'
+  ]
+%}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Your logs</h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds">
+
+    <a href="tasklist" class="govuk-button">Create new Log</a>
+
+    
+    <p><a href="#" class="govuk-link">See all completed logs ({{ numberOfCompletedLogs }})</a></p>
+  </div>
+</div>
+
+
+
+{% endblock %}

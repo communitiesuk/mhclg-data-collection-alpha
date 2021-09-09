@@ -4,7 +4,10 @@ const multer = require('multer')
 
 const storage = multer.memoryStorage()
 const upload = multer({ storage })
-const router = express.Router()
+const router = express()
+
+//From Beta, all versions have their own router files:
+require(`./views/beta-1/_routes.js`)(router);
 
 // Add your routes here - above the module.exports line
 router.post(
@@ -338,5 +341,7 @@ router.get('/sprint11/submission-section', function (req, res) {
   const section = 'submission/'
   res.redirect(section + 'declaration')
 })
+
+
 
 module.exports = router

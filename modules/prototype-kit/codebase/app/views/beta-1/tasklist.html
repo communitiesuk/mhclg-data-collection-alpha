@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% import "./_partials/_get-help.njk" as help %}
+
+{% set title = "CORE tasklist" %}
+{% set groups = data['beta-1']['groups'] %}
+{% set tags = data['beta-1']['tags'] %}
+
+{% block pageTitle %}
+{{ title }} - {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="dashboard" class="govuk-back-link">Back</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% macro makeTag(tagId,statusId) %}
+{% for tag in tags %}
+  {% if tag.id == tagId %}
+    <strong class="govuk-tag govuk-tag--{{ tag.color }} app-task-list__tag" id="{{ statusId }}-status">{{ tag.title }}</strong>
+  {% endif %}
+{% endfor %}
+{% endmacro %}
+
+{% macro taskListItems(items, tags) %}
+<ul class="app-task-list__items">
+  {% for item in items %}
+  <li class="app-task-list__item">
+    <span class="app-task-list__task-name">
+      {{ item.canStart}}
+      {% if item.tag != 'cannotstart' %}
+      <a href="{{ item.id }}/{{ item.firstPage }}" aria-describedby="{{ item.id }}-status">{{ item.title}}</a>
+      {% else %}
+      {{ item.title }}
+      {% endif %}
+    </span>
+    {{ makeTag(item.tag,item.id) }}
+  </li>
+  {% endfor %}
+</ul>
+{% endmacro %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">{{ title }}</h1>
+    <h2 class="govuk-heading-s govuk-!-margin-bottom-2">This log is incomplete</h2>
+    <p class="govuk-body govuk-!-margin-bottom-7">You have completed x of x sections.<br>
+    <a href="#">[Jump link goes here]</a></p>
+
+    <ol class="app-task-list app-task-list--no-numbers">
+      {% for group in groups %}
+      <li>  
+        <h2 class="app-task-list__section">{{ group.title }}</h2>
+        {{ taskListItems(group.sections) }}
+      </li>
+      {% endfor %}
+    </ol>
+
+  </div>
+</div>
+{% endblock %}

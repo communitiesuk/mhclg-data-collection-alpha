@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+
+{% set title = "What is the tenant code?" %}
+{% set section = "Household characteristics" %}
+{% set sectionId = 'household-characteristics' %}
+
+{% block pageTitle %}
+{{ title }} - {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="javascript:history.go(-1);" class="govuk-back-link">Back</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    
+    
+    <form action="/{{ data['version'] }}/submit-form" method="post">
+      <div class="govuk-form-group">
+        <span class="govuk-caption-xl">{{ section }}</span>
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--xl" for="tenant-code">
+            {{ title }}
+          </label>
+        </h1>
+        <input class="govuk-input" id="tenant-code" name="[{{ data['version'] }}][tenant-code]" type="text">
+      </div>
+      <input type="hidden" name="next" value="/{{ data['version'] }}/{{ sectionId }}/about-the-main-tenant">
+      <input type="hidden" name="startSection" value="{{ section }}">
+      <button class="govuk-button">Save and continue</button>
+    </form>
+
+
+  </div>
+</div>
+{% endblock %}

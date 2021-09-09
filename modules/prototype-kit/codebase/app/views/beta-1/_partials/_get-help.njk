@@ -1,0 +1,24 @@
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% macro content() %}
+<h2 class="govuk-heading-s">Online helpdesk</h2>
+<p><a href="https://digital.dclg.gov.uk/jira/servicedesk/customer/portal/4/group/21" target="_blank">CORE helpdesk</a> (opens in a new tab)</p>
+
+<h2 class="govuk-heading-s">Telephone</h2>
+<ul class="govuk-list">
+  <li>Telephone: 0333 202 5084</li>
+  <li>Monday to Friday, 9am to 5:30pm (except public holidays)</li>
+</ul>
+
+<h2 class="govuk-heading-s">Email</h2>
+<ul class="govuk-list">
+  <li><a class="govuk-link" href="mailto:mhclg.digital-services@communities.gov.uk?subject=CORE">mhclg.digital-services@communities.gov.uk</a></li>
+  <li>We aim to respond within 2 working days</li>
+</ul>
+{% endmacro %}
+
+{% macro details() %}
+{{ govukDetails({
+  summaryText: "Get help with this service",
+  html: content()
+}) }}
+{% endmacro %}

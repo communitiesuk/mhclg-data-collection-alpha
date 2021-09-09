@@ -18,6 +18,7 @@ Example usage:
 */
 
 module.exports = {
+  'beta-1': require('../views/beta-1/_session-data.js'),
   nextPage: 0,
   columnMappings: {
     'Who is the landlord': 'Landlord Name',
@@ -545,4 +546,5 @@ module.exports = {
       }
     }
   }
+
 }

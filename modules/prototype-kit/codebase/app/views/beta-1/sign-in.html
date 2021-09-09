@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Sign in - {{ serviceName }} - gov.uk
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Sign in</h1>
+    {{ govukInput({
+      label: {
+        text: "Email address"
+      },
+      id: "email",
+      name: "email",
+      autocomplete: "email",
+      spellcheck: false
+    }) }}
+
+    {{ govukInput({
+      label: {
+        text: "Password"
+      },
+      id: "password",
+      name: "password",
+      type: "password",
+      spellcheck: false
+    }) }}
+
+    <a class="govuk-button" href="dashboard" data-module="govuk-button">Continue</a>
+  </div>
+</div>
+
+<script>
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const timeout = urlParams.get('timeout')
+  if(timeout){
+    alert('Your session has been timed out. Please sign in again')
+  }
+</script>
+
+{% endblock %}
