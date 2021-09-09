@@ -1,0 +1,11 @@
+{% macro text(params) %}
+<div class="govuk-form-group">
+  <span class="govuk-caption-xl">{{ params.sectionTitle }}</span>
+  <h1 class="govuk-label-wrapper">
+    <label class="govuk-label govuk-label--xl" for="{{ params.questionId }}">
+      {{ params.questionTitle }}
+    </label>
+  </h1>
+  <input class="govuk-input" id="{{ params.questionId }}" name="[{{ params.version }}][{{ params.questionId }}]" value="{{ params.value }}" type="text">
+</div>
+{% endmacro %}

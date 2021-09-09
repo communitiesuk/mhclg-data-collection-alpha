@@ -3,6 +3,7 @@
 
 {% set title = "CORE tasklist" %}
 {% set groups = data['beta-1']['groups'] %}
+{% set sections = data['beta-1']['sections'] %}
 {% set tags = data['beta-1']['tags'] %}
 
 {% block pageTitle %}
@@ -22,20 +23,22 @@
 {% endfor %}
 {% endmacro %}
 
-{% macro taskListItems(items, tags) %}
+{% macro taskListItems(groupId) %}
 <ul class="app-task-list__items">
-  {% for item in items %}
+  {% for section in sections %}
+  {% if section.group == groupId %}
   <li class="app-task-list__item">
     <span class="app-task-list__task-name">
-      {{ item.canStart}}
-      {% if item.tag != 'cannotstart' %}
-      <a href="{{ item.id }}/{{ item.firstPage }}" aria-describedby="{{ item.id }}-status">{{ item.title}}</a>
+      {{ section.canStart}}
+      {% if section.tag != 'cannotstart' %}
+      <a href="{{ groupId }}-{{ section.id }}/{{ section.firstPage }}" aria-describedby="{{ section.id }}-status">{{ section.title}}</a>
       {% else %}
-      {{ item.title }}
+      {{ section.title }}
       {% endif %}
     </span>
-    {{ makeTag(item.tag,item.id) }}
+    {{ makeTag(section.tag,section.id) }}
   </li>
+  {% endif %}
   {% endfor %}
 </ul>
 {% endmacro %}
@@ -52,7 +55,7 @@
       {% for group in groups %}
       <li>  
         <h2 class="app-task-list__section">{{ group.title }}</h2>
-        {{ taskListItems(group.sections) }}
+        {{ taskListItems(group.id) }}
       </li>
       {% endfor %}
     </ol>

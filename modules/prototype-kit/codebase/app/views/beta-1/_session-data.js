@@ -1,37 +1,39 @@
 module.exports = {
+  sections: [
+    {
+      id: 'characteristics',
+      title: 'Household characteristics',
+      group: 'household',
+      tag: 'notstarted',
+      firstPage: 'tenant-code'
+    },
+    {
+      id: 'situation',
+      title: 'Household situation',
+      group: 'household',
+      tag: 'notstarted'
+    },
+    {
+      id: 'needs',
+      title: 'Household needs',
+      group: 'household',
+      tag: 'notstarted'
+    },
+    {
+      id: 'declaration',
+      title: 'Declaration',
+      group: 'submission',
+      tag: 'cannotstart'
+    }
+  ],
   'groups': [
     {
       id: 'household',
-      title: 'About the household',
-      sections: [
-        {
-          id: 'household-characteristics',
-          title: 'Household characteristics',
-          tag: 'notstarted',
-          firstPage: 'tenant-code'
-        },
-        {
-          id: 'household-situation',
-          title: 'Household situation',
-          tag: 'notstarted'
-        },
-        {
-          id: 'household-needs',
-          title: 'Household needs',
-          tag: 'notstarted'
-        }
-      ]
+      title: 'About the household'
     },
     {
       id: 'submission',
-      title: 'Submission',
-      sections: [
-        {
-          id: 'decloration',
-          title: 'Decloration',
-          tag: 'cannotstart'
-        }
-      ] 
+      title: 'Submission'
     }
   ],
   'tags': [

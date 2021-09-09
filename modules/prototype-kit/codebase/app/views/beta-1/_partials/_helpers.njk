@@ -1,0 +1,13 @@
+{% macro pageTitle(title, serviceName) %}
+{{ title }} - {{ serviceName }} - GOV.UK
+{% endmacro %}
+
+{% macro beforeContent(params) %}
+<a href="{{ params.back.url or 'javascript:history.go(-1);' }}" class="govuk-back-link">{{ params.back.title or 'Back' }}</a>
+<a href="{{ params.signOut.url or '/' }}" class="govuk-link--right">Sign out</a>
+{% endmacro %}
+
+{% macro title(title, section) %}
+{% if section %}<span class="govuk-caption-xl">{{ section }}</span>{% endif %}
+<h1 class="govuk-heading-xl">{{ title }}</h1>
+{% endmacro %}

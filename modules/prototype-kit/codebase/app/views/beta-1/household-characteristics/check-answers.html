@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Check your answers" %}
+{% set sectionTitle = 'Household characteristics' %}
+{% set sectionId = 'characteristics' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ helper.title(title,sectionTitle) }}
+       
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Tenant code</dt>
+        <dd class="govuk-summary-list__value">{{ data[version]['tenant-code'] }}</dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/{{ version }}/household-{{ sectionId }}/tenant-code">
+            Change<span class="govuk-visually-hidden"> tenant code</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+  </div>
+</div>
+{% endblock %}
