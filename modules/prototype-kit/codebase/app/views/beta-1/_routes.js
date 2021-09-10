@@ -9,6 +9,24 @@ module.exports = function (router) {
     return next()
   })
 
+  router.get('/beta-1/tasklist', function(req,res) {
+    //work out the skip to links
+    var skipTo = {}
+    var tripSwitch = false
+    for(section of req.session.data[version]['sections']) {
+      if(section.tag === 'inprogress' || section.tag === 'notstarted') {
+        if(!tripSwitch) {
+          tripSwitch = true
+          skipTo.title = section.title
+          skipTo.id = section.id
+        }
+      }
+    }
+    res.render('./beta-1/tasklist', {
+      skipTo: skipTo
+    })
+  })
+
   router.post('/beta-1/submit-form', function(req,res) {
     
     //mark a section as "In progress"

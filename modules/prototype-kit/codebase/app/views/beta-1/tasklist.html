@@ -27,7 +27,7 @@
 <ul class="app-task-list__items">
   {% for section in sections %}
   {% if section.group == groupId %}
-  <li class="app-task-list__item">
+  <li class="app-task-list__item" id="{{ section.id }}">
     <span class="app-task-list__task-name">
       {{ section.canStart}}
       {% if section.tag != 'cannotstart' %}
@@ -43,13 +43,21 @@
 </ul>
 {% endmacro %}
 
+{# work out how many sections the user has completed #}
+{% set completedSectionsCount = 0 %}
+{% for section in sections %}
+  {% if section.tag == 'completed' %}
+    {% set completedSectionCount = completedSectionCount + 1 %}
+  {% endif %}
+{% endfor %}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl">{{ title }}</h1>
     <h2 class="govuk-heading-s govuk-!-margin-bottom-2">This log is incomplete</h2>
-    <p class="govuk-body govuk-!-margin-bottom-7">You have completed x of x sections.<br>
-    <a href="#">[Jump link goes here]</a></p>
+    <p class="govuk-body govuk-!-margin-bottom-7">You have completed {{ completedSectionsCount }} of {{ sections | length }} sections.<br>
+    Skip to next incomplete section: <a href="#{{ skipTo.id }}">{{ skipTo.title }}</a></p>
 
     <ol class="app-task-list app-task-list--no-numbers">
       {% for group in groups %}
