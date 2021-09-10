@@ -1,11 +1,16 @@
 {% macro text(params) %}
-<div class="govuk-form-group">
+<div class="govuk-form-group {% if params.error %}govuk-form-group--error{% endif %}">
   <span class="govuk-caption-xl">{{ params.sectionTitle }}</span>
   <h1 class="govuk-label-wrapper">
     <label class="govuk-label govuk-label--xl" for="{{ params.questionId }}">
       {{ params.questionTitle }}
     </label>
   </h1>
-  <input class="govuk-input" id="{{ params.questionId }}" name="[{{ params.version }}][{{ params.questionId }}]" value="{{ params.value }}" type="text">
+  {% if params.error %}
+  <span id="event-name-error" class="govuk-error-message">
+    <span class="govuk-visually-hidden">Error:</span> {{ params.errorMessage }}
+  </span>
+  {% endif %}
+  <input class="govuk-input {% if params.error %}govuk-input--error{% endif %}" id="{{ params.questionId }}" name="[{{ params.version }}][{{ params.questionId }}]" value="{{ params.value }}" type="text">
 </div>
 {% endmacro %}

@@ -4,7 +4,7 @@ const multer = require('multer')
 
 const storage = multer.memoryStorage()
 const upload = multer({ storage })
-const router = express()
+const router = express.Router()
 
 //From Beta, all versions have their own router files:
 require(`./views/beta-1/_routes.js`)(router);

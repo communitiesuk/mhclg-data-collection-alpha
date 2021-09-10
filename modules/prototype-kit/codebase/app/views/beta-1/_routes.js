@@ -1,7 +1,8 @@
-const _ = require('lodash');
+const _ = require('lodash')
+const validate = require("validate.js")
 
 module.exports = function (router) {
-  const version = 'beta-1';
+  const version = 'beta-1'
 
   router.use(function(req,res,next) {
     req.session.data['version'] = version
@@ -27,20 +28,24 @@ module.exports = function (router) {
     }
 
     //check for required fields
+    var errors = []
+    console.log(req.body.this)
     if(req.body.required.length > 0) {
       for(field of req.body.required) {
         if(!req.session.data[version][field] || req.session.data[version][field] === '') {
-          res.render(req.body.this, {
-            error: true,
-            errors: [
-              field
-            ]
-          })
+          errors.push(field)
         }
       }
     }
-
-    res.redirect(req.body.next)
+    if(errors.length === 0) {
+      res.redirect(req.body.next)
+    }
+    else {
+      res.render(`.${req.body.this}`, {
+          errors: errors  
+      })
+    }
+    
   })
 
 }

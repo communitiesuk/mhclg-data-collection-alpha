@@ -15,6 +15,11 @@ module.exports = function (env) {
     out.push("<No mapping>")
     return out
   }
+
+  filters.includes = function(hay,needle) {
+    if(!hay) return false
+    return hay.includes(needle)
+  }
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
     @example:

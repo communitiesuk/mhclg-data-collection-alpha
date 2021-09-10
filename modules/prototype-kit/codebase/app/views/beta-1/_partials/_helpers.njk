@@ -1,5 +1,5 @@
-{% macro pageTitle(title, serviceName) %}
-{{ title }} - {{ serviceName }} - GOV.UK
+{% macro pageTitle(title, serviceName, errors) %}
+{% if errors | length > 0 %}Error: {% endif %}{{ title }} - {{ serviceName }} - GOV.UK
 {% endmacro %}
 
 {% macro beforeContent(params) %}
@@ -10,4 +10,21 @@
 {% macro title(title, section) %}
 {% if section %}<span class="govuk-caption-xl">{{ section }}</span>{% endif %}
 <h1 class="govuk-heading-xl">{{ title }}</h1>
+{% endmacro %}
+
+{% macro errorSummary(errors, messages) %}
+{% if errors | length > 0 %}
+<div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+  <h2 class="govuk-error-summary__title" id="error-summary-title">There is a problem</h2>
+  <div class="govuk-error-summary__body">
+    <ul class="govuk-list govuk-error-summary__list">
+      {% for error in errors %}
+        {% if error == messages[error].href %}
+        <li><a href="#{{ messages[error].href }}">{{ messages[error].message }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
 {% endmacro %}
