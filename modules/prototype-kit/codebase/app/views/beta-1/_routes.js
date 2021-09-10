@@ -48,9 +48,9 @@ module.exports = function (router) {
     //check for required fields
     var errors = []
     console.log(req.body.this)
-    if(req.body.required.length > 0) {
+    if(req.body.required != undefined && req.body.required.length > 0) {
       for(field of req.body.required) {
-        if(!req.session.data[version][field] || req.session.data[version][field] === '') {
+        if(req.session.data[version][field] === undefined || req.session.data[version][field] === null || req.session.data[version][field] === '') {
           errors.push(field)
         }
       }

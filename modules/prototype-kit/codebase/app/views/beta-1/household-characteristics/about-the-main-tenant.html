@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Tell us about the main tenant" %}
+{% set sectionTitle = 'Household characteristics' %}
+{% set groupId = 'household' %}
+{% set sectionId = 'characteristics' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+  {{ helper.title(title,sectionTitle) }}
+
+    {{ helper.errorSummary(errors, {
+      'know-tenant-age': {
+        href: 'know-tenant-age',
+        message: 'You must tell us whether you know the tenants age'
+      },
+      'tenant-gender-identity': {
+        href: 'tenant-gender-identity',
+        message: 'You must tell us about the tenant’s gender identity'
+      }
+    })}}
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      {% set tenantAgeInput %}
+        {{ govukInput({
+          id: "tenant-age",
+          name: "tenant-age",
+          classes: "govuk-input--width-3",
+          label: {
+            text: "Age in years"
+          },
+          suffix: {
+            text: "years"
+          }
+        }) }}
+      {% endset -%}
+
+      {{ govukRadios({
+        idPrefix: "know-tenant-age",
+        name: "know-tenant-age",
+        fieldset: {
+          legend: {
+            text: "Do you know the tenant’s age?"
+          }
+        },
+        items: [
+          {
+            value: "yes",
+            text: "Yes",
+            conditional: {
+              html: tenantAgeInput
+            }
+          },
+          {
+            value: "no",
+            text: "No"
+          }
+        ]
+      }) }}
+      
+      {{ govukRadios({
+        idPrefix: "tenant-gender-identity",
+        name: "tenant-gender-identity",
+        fieldset: {
+          legend: {
+            text: "Which of these best describes the tenant’s gender identity?"
+          }
+        },
+        items: [
+          {
+            value: "male",
+            text: "Male"
+          },
+          {
+            value: "female",
+            text: "Female"
+          },
+          {
+            value: "non-binary",
+            text: "Non-binary"
+          },
+          {
+            divider: "or"
+          },
+          {
+            value: "perfer-not-to-say",
+            text: "Prefer not to say"
+          }
+        ]
+      }) }}
+
+      {{ govukRadios({
+        idPrefix: "tenant-ethnic-group",
+        name: "tenant-ethnic-group",
+        fieldset: {
+          legend: {
+            text: "What is the tenant’s ethnic group?"
+          }
+        },
+        items: data[version].questions['ethnic-group']
+      }) }}
+
+
+
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/others-in-the-household">
+      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/about-the-main-tenant">
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
