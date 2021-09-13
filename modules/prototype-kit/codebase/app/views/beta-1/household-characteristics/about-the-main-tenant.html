@@ -36,88 +36,41 @@
        
     <form action="/{{ version }}/submit-form" method="post">
 
-      {% set tenantAgeInput %}
-        {{ govukInput({
-          id: "tenant-age",
-          name: "tenant-age",
-          classes: "govuk-input--width-3",
-          label: {
-            text: "Age in years"
-          },
-          suffix: {
-            text: "years"
-          }
-        }) }}
-      {% endset -%}
-
-      {{ govukRadios({
-        idPrefix: "know-tenant-age",
-        name: "know-tenant-age",
-        fieldset: {
-          legend: {
-            text: "Do you know the tenant’s age?"
-          }
+      {{ govukInput({
+        id: "tenant-age",
+        name: "tenant-age",
+        value: data['tenant-age'],
+        classes: "govuk-input--width-3",
+        label: {
+          text: "What is the tenant’s age in years?"
         },
-        items: [
-          {
-            value: "yes",
-            text: "Yes",
-            conditional: {
-              html: tenantAgeInput
-            }
-          },
-          {
-            value: "no",
-            text: "No"
-          }
-        ]
-      }) }}
-      
-      {{ govukRadios({
-        idPrefix: "tenant-gender-identity",
-        name: "tenant-gender-identity",
-        fieldset: {
-          legend: {
-            text: "Which of these best describes the tenant’s gender identity?"
-          }
-        },
-        items: [
-          {
-            value: "male",
-            text: "Male"
-          },
-          {
-            value: "female",
-            text: "Female"
-          },
-          {
-            value: "non-binary",
-            text: "Non-binary"
-          },
-          {
-            divider: "or"
-          },
-          {
-            value: "perfer-not-to-say",
-            text: "Prefer not to say"
-          }
-        ]
+        suffix: {
+          text: "years"
+        }
       }) }}
 
-      {{ govukRadios({
-        idPrefix: "tenant-ethnic-group",
-        name: "tenant-ethnic-group",
-        fieldset: {
-          legend: {
-            text: "What is the tenant’s ethnic group?"
-          }
-        },
-        items: data[version].questions['ethnic-group']
+      {{ question.radios({
+        legend: 'Which of these best describes the tenant’s gender identity?',
+        id: 'tenant-gender-identity',
+        items: data[version].radios['gender'],
+        currentValue: data['tenant-gender-identity']
       }) }}
 
+      {{ question.radios({
+        legend: 'What is the tenant’s ethnic group?',
+        id: 'tenant-ethnic-group',
+        items: data[version].radios['ethnic-group'],
+        currentValue: data['tenant-ethnic-group']
+      }) }}
 
+      {{ question.radios({
+        legend: 'What is the tenant’s nationality?',
+        id: 'tenant-nationality',
+        items: data[version].radios['nationality'],
+        currentValue: data['tenant-nationality']
+      }) }}
 
-      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/others-in-the-household">
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/check-answers">
       <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/about-the-main-tenant">
       
       {{ govukButton({

@@ -21,17 +21,38 @@
 
     {{ helper.title(title,sectionTitle) }}
        
-    <dl class="govuk-summary-list">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">Tenant code</dt>
-        <dd class="govuk-summary-list__value">{{ data[version]['tenant-code'] }}</dd>
-        <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="/{{ version }}/household-{{ sectionId }}/tenant-code">
-            Change<span class="govuk-visually-hidden"> tenant code</span>
-          </a>
-        </dd>
-      </div>
-    </dl>
+    {{ helper.checkAnswers([
+      {
+        title: 'Tenant code',
+        id: 'tenant-code',
+        url: '/' + version + '/household-characteristics/tenant-code'
+      },
+      {
+        title: 'Tenant’s age',
+        id: 'tenant-age',
+        url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-age'
+      },
+      {
+        title: 'Tenant’s gender identity',
+        id: 'tenant-gender-identity',
+        url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-gender-identity',
+        radios: 'gender'
+      },
+      {
+        title: 'Tenant’s ethnic group',
+        id: 'tenant-ethnic-group',
+        url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-ethnic-group',
+        radios: 'ethnic-group'
+      },
+      {
+        title: 'Tenant’s nationality',
+        id: 'tenant-nationality',
+        url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-nationality',
+        radios: 'nationality'
+      }
+    ],data,version)}}
+
+    <a href="/{{ version }}/tasklist?complete=characteristics" class="govuk-button">Save and continue</a>
 
   </div>
 </div>

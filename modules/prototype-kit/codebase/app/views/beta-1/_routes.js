@@ -1,8 +1,8 @@
 const _ = require('lodash')
 const validate = require("validate.js")
+const version = require("./_version.js");
 
 module.exports = function (router) {
-  const version = 'beta-1'
 
   router.use(function(req,res,next) {
     req.session.data['version'] = version
@@ -10,6 +10,15 @@ module.exports = function (router) {
   })
 
   router.get('/beta-1/tasklist', function(req,res) {
+
+    //catch completed section trigger
+    if(req.query.complete != undefined) {
+      var currentSectionObject = _.find(req.session.data[version].sections, function(o) {
+        return o.id === req.query.complete
+      })
+      currentSectionObject.tag = 'completed'
+    }
+
     //work out the skip to links
     var skipTo = {}
     var tripSwitch = false
@@ -22,6 +31,7 @@ module.exports = function (router) {
         }
       }
     }
+
     res.render('./beta-1/tasklist', {
       skipTo: skipTo
     })
@@ -46,23 +56,25 @@ module.exports = function (router) {
     }
 
     //check for required fields
-    var errors = []
-    console.log(req.body.this)
-    if(req.body.required != undefined && req.body.required.length > 0) {
-      for(field of req.body.required) {
-        if(req.session.data[version][field] === undefined || req.session.data[version][field] === null || req.session.data[version][field] === '') {
-          errors.push(field)
-        }
-      }
-    }
-    if(errors.length === 0) {
-      res.redirect(req.body.next)
-    }
-    else {
-      res.render(`.${req.body.this}`, {
-          errors: errors  
-      })
-    }
+    // var errors = []
+    // console.log(req.body.this)
+    // if(req.body.required != undefined && req.body.required.length > 0) {
+    //   for(field of req.body.required) {
+    //     if(req.session.data[version][field] === undefined || req.session.data[version][field] === null || req.session.data[version][field] === '') {
+    //       errors.push(field)
+    //     }
+    //   }
+    // }
+    // if(errors.length === 0) {
+    //   res.redirect(req.body.next)
+    // }
+    // else {
+    //   res.render(`.${req.body.this}`, {
+    //       errors: errors  
+    //   })
+    // }
+
+    res.redirect(req.body.next)
     
   })
 

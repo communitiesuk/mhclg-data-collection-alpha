@@ -1,16 +1,23 @@
-{% macro text(params) %}
-<div class="govuk-form-group {% if params.error %}govuk-form-group--error{% endif %}">
-  <span class="govuk-caption-xl">{{ params.sectionTitle }}</span>
-  <h1 class="govuk-label-wrapper">
-    <label class="govuk-label govuk-label--xl" for="{{ params.questionId }}">
-      {{ params.questionTitle }}
-    </label>
-  </h1>
-  {% if params.error %}
-  <span id="event-name-error" class="govuk-error-message">
-    <span class="govuk-visually-hidden">Error:</span> {{ params.errorMessage }}
-  </span>
-  {% endif %}
-  <input class="govuk-input {% if params.error %}govuk-input--error{% endif %}" id="{{ params.questionId }}" name="[{{ params.version }}][{{ params.questionId }}]" value="{{ params.value }}" type="text">
+{% macro radios(params) %}
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend">{{ params.legend }}</legend>
+    <div class="govuk-radios">
+      {%- for item in params.items -%}
+        {% if item.divider %}
+        <div class="govuk-radios__divider">{{ item.divider }}</div>
+        {% else %}
+        {% set checked = '' %}
+        {% if item.value == params.currentValue %}{% set checked = 'checked' %}{% endif %}
+        {% set idSuffix = '-' + loop.index %}
+        {% if loop.index == 1 %}{% set idSuffix = '' %}{% endif %}
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="{{ params.id }}{{ idSuffix }}" name="{{ params.id }}" type="radio" value="{{ item.value }}" {{ checked }}>
+          <label class="govuk-label govuk-radios__label" for="{{ params.id }}{{ idSuffix }}">{{ item.text }}</label>
+        </div>
+        {% endif %}
+      {%- endfor -%}
+    </div>
+  </fieldset>
 </div>
 {% endmacro %}
