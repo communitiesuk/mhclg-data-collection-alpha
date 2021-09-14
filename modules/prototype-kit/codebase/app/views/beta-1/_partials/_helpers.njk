@@ -33,14 +33,13 @@
 <dl class="govuk-summary-list">
   {% for itemToCheck in dataToCheck %}
   
-  {# this shit doesnt work - make it work. #}
   {% set showRow = true %}
   {% if itemToCheck.showIf %}
     {% set showRow = false %}
-    {{ itemToCheck.showIf | length }}
-    {% for id, b in itemToCheck.showIf %}
-      {{ b | dump }}{{ val }}
-      {% if data[id] == value %}{% set showRow = true %}{% endif %}
+    {% for showIf in itemToCheck.showIf %}
+      {% for equals in showIf.equals %}
+        {% if data[showIf.id] == equals %}{% set showRow = true %}{% endif %}
+      {% endfor %}
     {% endfor %}
   {% endif %}
 
