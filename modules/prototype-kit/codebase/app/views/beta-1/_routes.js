@@ -74,7 +74,21 @@ module.exports = function (router) {
     //   })
     // }
 
-    res.redirect(req.body.next)
+    //branching
+    if(req.body.branch) {
+      var goNext = req.body.next['*']
+      for(next in req.body.next) {
+        if(next === req.body[req.body.branch]) {
+          goNext = req.body.next[next]
+        }
+      }
+      res.redirect(goNext)
+    }
+    else {
+      res.redirect(req.body.next)
+    }
+
+    
     
   })
 

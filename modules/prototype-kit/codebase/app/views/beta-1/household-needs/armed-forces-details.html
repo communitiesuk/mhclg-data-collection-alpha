@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Details of UK Armed Forces service" %}
+{% set sectionTitle = 'Household needs' %}
+{% set groupId = 'household' %}
+{% set sectionId = 'needs' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ helper.title(title, sectionTitle) }}
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      {{ question.radios({
+        legend: 'Is the tenant still serving?',
+        id: 'armed-forces-service-length',
+        items: data[version]['radios']['armed-forces-service-length'],
+        currentValue: data['armed-forces-service-length']
+      }) }}
+
+      {{ question.radios({
+        legend: 'Was the tenant seriously injured or ill as a result of their service?',
+        id: 'armed-forces-injured',
+        items: data[version]['radios']['yes-no'],
+        currentValue: data['armed-forces-injured']
+      }) }}
+
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/armed-forces-spouse">
+      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/armed-forces-details">
+      
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+    {{ helper.quit(version) }}
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

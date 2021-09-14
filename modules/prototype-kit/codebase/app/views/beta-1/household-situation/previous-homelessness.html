@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Did the tenant experience homelessness immediately before this letting?" %}
+{% set sectionTitle = 'Household situation' %}
+{% set groupId = 'household' %}
+{% set sectionId = 'situation' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      {{ question.radios({
+        legend: title,
+        id: 'previous-homelessness',
+        items: data[version]['radios']['homelessness'],
+        currentValue: data['previous-homelessness'],
+        isPageTitle: true
+      }) }}
+      
+      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/previous-homelessness">
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/reason-for-leaving-last-home">
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+    {{ helper.quit(version) }}
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

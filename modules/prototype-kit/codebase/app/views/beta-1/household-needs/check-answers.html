@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Check your answers" %}
+{% set sectionTitle = 'Household needs' %}
+{% set sectionId = 'needs' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ helper.title(title,sectionTitle) }}
+       
+    {{ helper.checkAnswers([
+      {
+        title: 'Tenant served in the armed forces',
+        id: 'armed-forces',
+        url: '/' + version + '/household-needs/armed-forces',
+        radios: 'armed-forces'
+      },
+      {
+        title: 'Still serving',
+        id: 'armed-forces-service-length',
+        url: '/' + version + '/household-needs/armed-forces-details#armed-forces-service-length',
+        radios: 'armed-forces-service-length',
+        showIf: [
+          {'armed-forces': 'yes-regular'},
+          {'armed-forces': 'yes-reserve'}
+        ]
+      },
+      {
+        title: 'Injuries',
+        id: 'armed-forces-injured',
+        url: '/' + version + '/household-needs/armed-forces-details#armed-forces-injured',
+        radios: 'yes-no',
+        showIf: [
+          {'armed-forces': 'yes-regular'},
+          {'armed-forces': 'yes-reserve'}
+        ]
+      },
+      {
+        title: 'Spouse of someone who served',
+        id: 'armed-forces-spouse',
+        url: '/' + version + '/household-needs/armed-forces-spouse',
+        radios: 'armed-forces-spouse'
+      }
+    ],data,version)}}
+
+    <a href="/{{ version }}/tasklist?complete=needs" class="govuk-button">Save and continue</a>
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

@@ -11,13 +11,15 @@ module.exports = {
       id: 'situation',
       title: 'Household situation',
       group: 'household',
-      tag: 'notstarted'
+      tag: 'notstarted',
+      firstPage: 'previous-housing-situation'
     },
     {
       id: 'needs',
       title: 'Household needs',
       group: 'household',
-      tag: 'notstarted'
+      tag: 'notstarted',
+      firstPage: 'armed-forces'
     },
     {
       id: 'declaration',
@@ -59,8 +61,16 @@ module.exports = {
     }
   ],
   radios: {
+    'yes-no': require('./_radios/yes-no.js'),
     'gender': require('./_radios/gender.js'),
     'ethnic-group': require('./_radios/ethnic-group.js'),
-    'nationality': require('./_radios/nationality.js')
+    'nationality': require('./_radios/nationality.js'),
+    'housing-situation': require('./_radios/housing-situation.js'),
+    'homelessness': require('./_radios/homelessness.js'),
+    'reasons-for-leaving': require('./_radios/reasons-for-leaving.js'),
+    'reasons-for-leaving-benefits-cap': require('./_radios/reasons-for-leaving-benefit-cap.js'),
+    'armed-forces': require('./_radios/armed-forces.js'),
+    'armed-forces-service-length': require('./_radios/armed-forces-service-length.js'),
+    'armed-forces-spouse': require('./_radios/armed-forces-spouse.js')
   }
 }

@@ -32,6 +32,19 @@
 {% macro checkAnswers(dataToCheck,data,version) %}
 <dl class="govuk-summary-list">
   {% for itemToCheck in dataToCheck %}
+  
+  {# this shit doesnt work - make it work. #}
+  {% set showRow = true %}
+  {% if itemToCheck.showIf %}
+    {% set showRow = false %}
+    {{ itemToCheck.showIf | length }}
+    {% for id, b in itemToCheck.showIf %}
+      {{ b | dump }}{{ val }}
+      {% if data[id] == value %}{% set showRow = true %}{% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if showRow %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">{{ itemToCheck.title }}</dt>
     <dd class="govuk-summary-list__value">
@@ -53,6 +66,12 @@
       </a>
     </dd>
   </div>
+  {% endif %}
+
   {% endfor %}
 </dl>
+{% endmacro %}
+
+{% macro quit(version) %}
+<p><a href="/{{ version }}/tasklist">Exit to tasklist</a></p>
 {% endmacro %}

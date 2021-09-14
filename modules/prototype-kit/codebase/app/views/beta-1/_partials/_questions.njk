@@ -1,7 +1,14 @@
 {% macro radios(params) %}
 <div class="govuk-form-group">
   <fieldset class="govuk-fieldset">
-    <legend class="govuk-fieldset__legend">{{ params.legend }}</legend>
+    <legend class="govuk-fieldset__legend {% if params.isPageTitle %}govuk-fieldset__legend--xl{% endif %}">
+      {% if params.isPageTitle %}
+        {% if params.sectionTitle %}<span class="govuk-caption-xl">{{ params.sectionTitle }}</span>{% endif %}
+        <h1 class="govuk-fieldset__heading">{{ params.legend }}</h1>
+      {% else %}
+        {{ params.legend }}
+      {% endif %}
+    </legend>
     <div class="govuk-radios">
       {%- for item in params.items -%}
         {% if item.divider %}
