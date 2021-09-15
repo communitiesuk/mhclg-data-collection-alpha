@@ -71,6 +71,27 @@
 </dl>
 {% endmacro %}
 
+{% macro isThisSectionComplete(dataToCheck,data,version,ifTrue='true',ifFalse='false') %}
+{%- set isComplete = true -%}
+{%- for itemToCheck in dataToCheck -%}
+  {# should this item count towrads a complete section? #}
+  {% set itemInScope = true %}
+  {% if itemToCheck.showIf %}
+    {% set itemInScope = false %}
+    {% for showIf in itemToCheck.showIf %}
+      {% for equals in showIf.equals %}
+        {% if data[showIf.id] == equals %}{% set itemInScope = true %}{% endif %}
+      {% endfor %}
+    {% endfor %}  
+  {% endif %}
+
+  {% if itemInScope %}
+    {% if not data[itemToCheck.id] %}{% set isComplete = false %}{% endif %}
+  {% endif %}
+{%- endfor -%}
+{%- if isComplete %}{{ ifTrue }}{% else %}{{ ifFalse }}{% endif -%}
+{% endmacro %}
+
 {% macro quit(version) %}
 <p><a href="/{{ version }}/tasklist">Exit to tasklist</a></p>
 {% endmacro %}

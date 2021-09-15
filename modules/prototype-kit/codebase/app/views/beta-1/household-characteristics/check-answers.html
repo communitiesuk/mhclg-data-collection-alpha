@@ -15,44 +15,45 @@
 {{ helper.beforeContent() }}
 {% endblock %}
 
+{% set answersToCheck = [
+  {
+    title: 'Tenant code',
+    id: 'tenant-code',
+    url: '/' + version + '/household-characteristics/tenant-code'
+  },
+  {
+    title: 'Tenant’s age',
+    id: 'tenant-age',
+    url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-age'
+  },
+  {
+    title: 'Tenant’s gender identity',
+    id: 'tenant-gender-identity',
+    url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-gender-identity',
+    radios: 'gender'
+  },
+  {
+    title: 'Tenant’s ethnic group',
+    id: 'tenant-ethnic-group',
+    url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-ethnic-group',
+    radios: 'ethnic-group'
+  },
+  {
+    title: 'Tenant’s nationality',
+    id: 'tenant-nationality',
+    url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-nationality',
+    radios: 'nationality'
+  }
+] %}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
     {{ helper.title(title,sectionTitle) }}
-       
-    {{ helper.checkAnswers([
-      {
-        title: 'Tenant code',
-        id: 'tenant-code',
-        url: '/' + version + '/household-characteristics/tenant-code'
-      },
-      {
-        title: 'Tenant’s age',
-        id: 'tenant-age',
-        url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-age'
-      },
-      {
-        title: 'Tenant’s gender identity',
-        id: 'tenant-gender-identity',
-        url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-gender-identity',
-        radios: 'gender'
-      },
-      {
-        title: 'Tenant’s ethnic group',
-        id: 'tenant-ethnic-group',
-        url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-ethnic-group',
-        radios: 'ethnic-group'
-      },
-      {
-        title: 'Tenant’s nationality',
-        id: 'tenant-nationality',
-        url: '/' + version + '/household-characteristics/about-the-main-tenant#tenant-nationality',
-        radios: 'nationality'
-      }
-    ],data,version)}}
+    {{ helper.checkAnswers(answersToCheck,data,version)}}
 
-    <a href="/{{ version }}/tasklist?complete=characteristics" class="govuk-button">Save and continue</a>
+    <a href="/{{ version }}/tasklist{{ helper.isThisSectionComplete(answersToCheck,data,version,'?complete=characteristics','') | whitespace }}" class="govuk-button">Save and continue</a>
     {{ help.details() }}
 
   </div>

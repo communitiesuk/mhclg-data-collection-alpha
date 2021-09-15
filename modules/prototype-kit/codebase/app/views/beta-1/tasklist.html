@@ -2,9 +2,10 @@
 {% import "./_partials/_get-help.njk" as help %}
 
 {% set title = "CORE tasklist" %}
-{% set groups = data['beta-1']['groups'] %}
-{% set sections = data['beta-1']['sections'] %}
-{% set tags = data['beta-1']['tags'] %}
+{% set version = data['version'] %}
+{% set groups = data[version]['groups'] %}
+{% set sections = data[version]['sections'] %}
+{% set tags = data[version]['tags'] %}
 
 {% block pageTitle %}
 {{ title }} - {{ serviceName }} - GOV.UK
@@ -49,7 +50,7 @@
 {% set completedSectionsCount = 0 %}
 {% for section in sections %}
   {% if section.tag == 'completed' %}
-    {% set completedSectionCount = completedSectionCount + 1 %}
+    {% set completedSectionsCount = completedSectionsCount + 1 %}
   {% endif %}
 {% endfor %}
 

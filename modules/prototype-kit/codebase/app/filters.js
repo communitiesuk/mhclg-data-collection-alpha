@@ -20,6 +20,9 @@ module.exports = function (env) {
     if(!hay) return false
     return hay.includes(needle)
   }
+  filters.whitespace = function(string) {
+    return string.replace(/\s+/g, '')
+  }
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
     @example:

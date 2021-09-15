@@ -60,7 +60,7 @@
       }
     ],data,version)}}
 
-    <a href="/{{ version }}/tasklist?complete=needs" class="govuk-button">Save and continue</a>
+    <a href="/{{ version }}/tasklist{{ helper.isThisSectionComplete(answersToCheck,data,version,'?complete=needs','') | whitespace }}" class="govuk-button">Save and continue</a>
     {{ help.details() }}
 
   </div>

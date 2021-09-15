@@ -32,7 +32,7 @@ module.exports = function (router) {
       }
     }
 
-    res.render('./beta-1/tasklist', {
+    res.render(`./${version}/tasklist`, {
       skipTo: skipTo
     })
   })
