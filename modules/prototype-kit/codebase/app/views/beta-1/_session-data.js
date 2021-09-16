@@ -62,6 +62,7 @@ module.exports = {
   ],
   radios: {
     'yes-no': require('./_radios/yes-no.js'),
+    'yes-no-dunno': require('./_radios/yes-no-dunno.js'),
     'gender': require('./_radios/gender.js'),
     'ethnic-group': require('./_radios/ethnic-group.js'),
     'nationality': require('./_radios/nationality.js'),
@@ -72,5 +73,8 @@ module.exports = {
     'armed-forces': require('./_radios/armed-forces.js'),
     'armed-forces-service-length': require('./_radios/armed-forces-service-length.js'),
     'armed-forces-spouse': require('./_radios/armed-forces-spouse.js')
+  },
+  checkboxes: {
+    'disability-needs': require('./_checkboxes/disability-needs.js')
   }
 }

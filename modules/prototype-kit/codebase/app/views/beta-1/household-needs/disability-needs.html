@@ -3,7 +3,7 @@
 {% import "../_partials/_questions.njk" as question %}
 {% import "../_partials/_helpers.njk" as helper %}
 
-{% set title = "Was the tenant the spouse or civil partner of someone who served in the UK armed forces?" %}
+{% set title = "Does anyone in the household have disability needs?" %}
 {% set sectionTitle = 'Household needs' %}
 {% set groupId = 'household' %}
 {% set sectionId = 'needs' %}
@@ -23,18 +23,18 @@
        
     <form action="/{{ version }}/submit-form" method="post">
 
-      {{ question.radios({
+      {{ question.checkboxes({
         legend: title,
-        id: 'armed-forces-spouse',
-        items: data[version]['radios']['armed-forces-spouse'],
-        currentValue: data['armed-forces-spouse'],
+        id: 'disability-needs',
+        items: data[version]['checkboxes']['disability-needs'],
+        currentValue: data['is-pregnant'],
         isPageTitle: true,
         sectionTitle: sectionTitle
       }) }}
 
 
-      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/medical-needs">
-      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/armed-forces-spouse">
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/medical-needs-effects">
+      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/pregnancy">
       
       
       {{ govukButton({

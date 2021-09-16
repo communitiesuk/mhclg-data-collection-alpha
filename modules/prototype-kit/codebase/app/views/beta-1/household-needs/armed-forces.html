@@ -31,7 +31,8 @@
         isPageTitle: true,
         sectionTitle: sectionTitle
       }) }}
-
+      
+      <input type="hidden" name="startSection" value="{{ sectionId }}">  
       <input type="hidden" name="branch" value="armed-forces">
       <input type="hidden" name="next[yes-regular]" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/armed-forces-details">
       <input type="hidden" name="next[yes-reserve]" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/armed-forces-details">

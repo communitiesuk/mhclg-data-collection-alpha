@@ -3,7 +3,7 @@
 {% import "../_partials/_questions.njk" as question %}
 {% import "../_partials/_helpers.njk" as helper %}
 
-{% set title = "Was the tenant the spouse or civil partner of someone who served in the UK armed forces?" %}
+{% set title = "Tell us about any medical needs or disabilities" %}
 {% set sectionTitle = 'Household needs' %}
 {% set groupId = 'household' %}
 {% set sectionId = 'needs' %}
@@ -20,21 +20,28 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+
+    {{ helper.title(title, sectionTitle) }}
+
+    <p>You should tell us if the tenant has any</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>physical condition</li>
+      <li>mental health condition</li>
+      <li>other illness</li>
+    </ul>
        
     <form action="/{{ version }}/submit-form" method="post">
 
       {{ question.radios({
-        legend: title,
-        id: 'armed-forces-spouse',
-        items: data[version]['radios']['armed-forces-spouse'],
-        currentValue: data['armed-forces-spouse'],
-        isPageTitle: true,
-        sectionTitle: sectionTitle
+        legend: 'Does the tenant have any of these that they expect to last for 12 months or more?',
+        id: 'medical-needs',
+        items: data[version]['radios']['yes-no-dunno'],
+        currentValue: data['medical-needs']
       }) }}
 
 
-      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/medical-needs">
-      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/armed-forces-spouse">
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/pregnancy">
+      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/medical-needs">
       
       
       {{ govukButton({
