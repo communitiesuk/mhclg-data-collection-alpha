@@ -15,40 +15,42 @@
 {{ helper.beforeContent() }}
 {% endblock %}
 
+{% set answersToCheck = [
+  {
+    title: 'Tenant’s housing situation before this letting',
+    id: 'previous-housing-situation',
+    url: '/' + version + '/household-situation/previous-housing-situation',
+    radios: 'housing-situation'
+  },
+  {
+    title: 'Homelessness before this letting',
+    id: 'previous-homelessness',
+    url: '/' + version + '/household-situation/previous-homelessness',
+    radios: 'homelessness'
+  },
+  {
+    title: 'Main reason for leaving',
+    id: 'previous-housing-reasons-for-leaving',
+    url: '/' + version + '/household-situation/reason-for-leaving-last-home#previous-housing-reasons-for-leaving',
+    radios: 'gender',
+    radios: 'reasons-for-leaving'
+  },
+  {
+    title: 'Left due to benefit cap or removal of the spare room subsidy',
+    id: 'previous-housing-reasons-for-leaving-benefits-cap',
+    url: '/' + version + '/household-situation/reason-for-leaving-last-home#previous-housing-reasons-for-leaving-benefits-cap',
+    radios: 'gender',
+    radios: 'reasons-for-leaving-benefits-cap'
+  }
+]%}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
     {{ helper.title(title,sectionTitle) }}
        
-    {{ helper.checkAnswers([
-      {
-        title: 'Tenant’s housing situation before this letting',
-        id: 'previous-housing-situation',
-        url: '/' + version + '/household-situation/previous-housing-situation',
-        radios: 'housing-situation'
-      },
-      {
-        title: 'Homelessness before this letting',
-        id: 'previous-homelessness',
-        url: '/' + version + '/household-situation/previous-homelessness',
-        radios: 'homelessness'
-      },
-      {
-        title: 'Main reason for leaving',
-        id: 'previous-housing-reasons-for-leaving',
-        url: '/' + version + '/household-situation/reason-for-leaving-last-home#previous-housing-reasons-for-leaving',
-        radios: 'gender',
-        radios: 'reasons-for-leaving'
-      },
-      {
-        title: 'Left due to benefit cap or removal of the spare room subsidy',
-        id: 'previous-housing-reasons-for-leaving-benefits-cap',
-        url: '/' + version + '/household-situation/reason-for-leaving-last-home#previous-housing-reasons-for-leaving-benefits-cap',
-        radios: 'gender',
-        radios: 'reasons-for-leaving-benefits-cap'
-      }
-    ],data,version)}}
+    {{ helper.checkAnswers(answersToCheck,data,version)}}
 
     <a href="/{{ version }}/tasklist{{ helper.isThisSectionComplete(answersToCheck,data,version,'?complete=situation','') | whitespace }}" class="govuk-button">Save and continue</a>
     {{ help.details() }}

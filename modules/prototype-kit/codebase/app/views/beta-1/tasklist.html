@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% import "./_partials/_get-help.njk" as help %}
 
-{% set title = "CORE tasklist" %}
+{% set title = "Log BZ882" %}
 {% set version = data['version'] %}
 {% set groups = data[version]['groups'] %}
 {% set sections = data[version]['sections'] %}
@@ -30,10 +30,10 @@
   {% if section.group == groupId %}
   <li class="app-task-list__item" id="{{ section.id }}">
     <span class="app-task-list__task-name">
-      {{ section.canStart}}
+      {{ section.canStart }}
       {% if section.tag != 'cannotstart' %}
       {% set href = groupId + "-" + section.id + "/" + section.firstPage %}
-      {% if section.tag == 'completed' %}{% set href = groupId + "-" + section.id + "/check-answers" %}{% endif %}
+      {% if section.tag == 'completed' or section.tag == 'inprogress' %}{% set href = groupId + "-" + section.id + "/check-answers" %}{% endif %}
       <a href="{{ href }}" aria-describedby="{{ section.id }}-status">{{ section.title}}</a>
       {% else %}
       {{ section.title }}

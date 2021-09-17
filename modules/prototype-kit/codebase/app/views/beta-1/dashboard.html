@@ -10,7 +10,7 @@
 
 {% set hasLogsInProgress = false %}
 {% for section in sections %}
-{% if section.tag != 'notstarted' %}{% set hasLogsInProgress = true %}{% endif %}
+{% if section.tag != 'notstarted' and section.tag != 'cannotstart' %}{% set hasLogsInProgress = true %}{% endif %}
 {% endfor %}
 
 

@@ -3,7 +3,7 @@
 {% import "../_partials/_questions.njk" as question %}
 {% import "../_partials/_helpers.njk" as helper %}
 
-{% set title = "Is the tenant pregnant?" %}
+{% set title = "Is anyone in the household pregnant?" %}
 {% set sectionTitle = 'Household needs' %}
 {% set groupId = 'household' %}
 {% set sectionId = 'needs' %}
@@ -33,7 +33,7 @@
       }) }}
 
 
-      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/disability-needs">
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/check-answers">
       <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/pregnancy">
       
       
