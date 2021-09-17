@@ -22,6 +22,36 @@ module.exports = {
       firstPage: 'armed-forces'
     },
     {
+      id: 'tenancy',
+      title: 'Tenancy information',
+      tag: 'notstarted',
+      group: 'tenancy-and-property'
+    },
+    {
+      id: 'property',
+      title: 'Property information',
+      tag: 'notstarted',
+      group: 'tenancy-and-property'
+    },
+    {
+      id: 'income-and-benefits',
+      title: 'Income and benefits',
+      group: 'rent-and-charges',
+      tag: 'notstarted'
+    },
+    {
+      id: 'rent',
+      title: 'Rent',
+      group: 'rent-and-charges',
+      tag: 'notstarted'
+    },
+    {
+      id: 'local-authority',
+      title: 'Local authority',
+      group: 'local-authority',
+      tag: 'notstarted'
+    },
+    {
       id: 'declaration',
       title: 'Declaration',
       group: 'submission',
@@ -32,6 +62,18 @@ module.exports = {
     {
       id: 'household',
       title: 'About the household'
+    },
+    {
+      id: 'tenancy-and-property',
+      title: 'Tenancy and property information'
+    },
+    {
+      id: 'rent-and-charges',
+      title: 'Rent and charges'
+    },
+    {
+      id: 'local-authority',
+      title: 'Local authority'
     },
     {
       id: 'submission',

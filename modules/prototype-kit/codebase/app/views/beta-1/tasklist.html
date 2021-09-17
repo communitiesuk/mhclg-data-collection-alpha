@@ -32,7 +32,10 @@
     <span class="app-task-list__task-name">
       {{ section.canStart }}
       {% if section.tag != 'cannotstart' %}
+      {% set href = '' %}
+      {% if section.firstPage %}
       {% set href = groupId + "-" + section.id + "/" + section.firstPage %}
+      {% endif %}
       {% if section.tag == 'completed' or section.tag == 'inprogress' %}{% set href = groupId + "-" + section.id + "/check-answers" %}{% endif %}
       <a href="{{ href }}" aria-describedby="{{ section.id }}-status">{{ section.title}}</a>
       {% else %}
