@@ -2,16 +2,23 @@
 <div class="govuk-grid-column-two-thirds">
   <h2 class="govuk-heading-l">Beta 1</h2>
   <h3 class="govuk-heading-m">Hypotheses we’re testing with this prototype</h3>
-  <p>If we show more than one thing per page</p>
+  <ol class="govuk-list govuk-list--number">
+    <li>If we show more than one thing per page in the household characteristics section:
+      <ul>
+        <li>we should observe users all completing the form as easily as the previous version of the prototype</li>
+        <li>users who utilise assive technology will be able to successfully navigate through the section</li>
+      </ul>
+    </li>
+    <li>By changing the "Exit to logs" link to "Exit to task list", we will observe users building a successful mental modal of the service IA</li>
+  </ol>
+  <h3 class="govuk-heading-m">Release notes</h3>
   <ul class="govuk-list govuk-list--bullet">
-    <li>this will speed-up data entry</li>
-    <li>all users, regardless of access need, can effectively use the service</li>
-  </ul>
-  <h3 class="govuk-heading-m">Smaller things we changed</h3>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>Changed the javascript reveal of more questions (on same page) to separate pages in the <a href="/beta-1/household-situation/previous-housing-situation">household situation</a> journey</li>
-    <li>Removed the "Answer missing questions" component from the check answers pages</li>
-    <li>"Exit to logs" is now "Exit to tasklist"</li>
+    <li>Rebuilt the prototype to allow for easier question reordering and flow-logic.</li>
+    <li>All data is now stored in the session. You should use the clear data in the footer to reset the prototype.</li>
+    <li>This version of the prototype only contains questions in the “about the household” section.</li>
+    <li>Changed the javascript reveal of more questions (on same page) to separate pages in the <a href="/beta-1/household-situation/previous-housing-situation">household situation</a> journey.</li>
+    <li>Removed the "Answer missing questions" component from the check answers pages which didn't test well last round.</li>
+    <li>Remove ALL validation until we can decided on how best to skip past questions the user might not know in the moment.</li>
   </ul>
   <div class="govuk-button-group">
   <a href="/beta-1/guidance" class="govuk-button">Start Beta 1 prototype</a>
