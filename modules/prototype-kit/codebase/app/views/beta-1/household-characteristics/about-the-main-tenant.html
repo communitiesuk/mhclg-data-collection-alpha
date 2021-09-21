@@ -42,7 +42,8 @@
         value: data['tenant-age'],
         classes: "govuk-input--width-3",
         label: {
-          text: "What is the tenant’s age in years?"
+          text: "What is the tenant’s age in years?",
+          classes: "govuk-label--s"
         },
         suffix: {
           text: "years"
@@ -75,6 +76,17 @@
         id: 'tenant-economic-status',
         items: data[version].radios['economic-status'],
         currentValue: data['tenant-economic-status']
+      }) }}
+
+      {{ govukInput({
+        id: "number-other-household-members",
+        name: "number-other-household-members",
+        value: data['number-other-household-members'],
+        classes: "govuk-input--width-2",
+        label: {
+          text: "How many other people are there in the household?",
+          classes: "govuk-label--s"
+        }
       }) }}
 
       <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/check-answers">
