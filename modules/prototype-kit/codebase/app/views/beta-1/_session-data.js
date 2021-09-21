@@ -108,6 +108,7 @@ module.exports = {
     'gender': require('./_radios/gender.js'),
     'ethnic-group': require('./_radios/ethnic-group.js'),
     'nationality': require('./_radios/nationality.js'),
+    'economic-status': require('./_radios/economic-status.js'),
     'housing-situation': require('./_radios/housing-situation.js'),
     'homelessness': require('./_radios/homelessness.js'),
     'reasons-for-leaving': require('./_radios/reasons-for-leaving.js'),

@@ -33,7 +33,7 @@
         message: 'You must tell us about the tenant’s gender identity'
       }
     })}}
-       
+
     <form action="/{{ version }}/submit-form" method="post">
 
       {{ govukInput({
@@ -70,9 +70,16 @@
         currentValue: data['tenant-nationality']
       }) }}
 
+      {{ question.radios({
+        legend: "Which of these best describes the tenant's working situation?",
+        id: 'tenant-economic-status',
+        items: data[version].radios['economic-status'],
+        currentValue: data['tenant-economic-status']
+      }) }}
+
       <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/check-answers">
       <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/about-the-main-tenant">
-      
+
       {{ govukButton({
         text: "Save and continue"
       }) }}

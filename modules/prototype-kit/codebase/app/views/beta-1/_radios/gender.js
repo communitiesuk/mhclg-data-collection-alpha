@@ -15,7 +15,7 @@ module.exports = [
     divider: "or"
   },
   {
-    value: "perfer-not-to-say",
+    value: "prefer-not-to-say",
     text: "Prefer not to say"
   }
 ]
