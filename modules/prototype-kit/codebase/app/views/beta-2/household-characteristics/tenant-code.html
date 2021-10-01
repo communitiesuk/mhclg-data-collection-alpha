@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "What is the tenant code?" %}
+{% set sectionTitle = 'Household characteristics' %}
+{% set groupId = 'household' %}
+{% set sectionId = 'characteristics' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {# {{ helper.errorSummary(errors, {
+      'tenant-code': {
+        href: 'tenant-code',
+        message: 'You must enter a tenant code'
+      }
+    })}} #}
+       
+    <form action="/{{ version }}/submit-form" method="post">
+      {# {{ question.text({
+        sectionTitle: sectionTitle,
+        questionTitle: title,
+        questionId: 'tenant-code',
+        version: version,
+        value: 'tenant-code',
+        error: errors | includes('tenant-code'),
+        errorMessage: 'You must enter a tenant code'
+      }) }} #}
+
+      {{ govukInput({
+        label: {
+          text: "What is the tenant code?",
+          classes: "govuk-label--xl",
+          isPageHeading: true
+        },
+        value: data['tenant-code'],
+        id: "tenant-code",
+        name: "tenant-code"
+      }) }}
+
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/about-the-main-tenant">
+      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/tenant-code">
+      <input type="hidden" name="startSection" value="{{ sectionId }}">  
+      <input type="hidden" name="required[]" value="tenant-code">
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+
+    {{ helper.quit(version) }}
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

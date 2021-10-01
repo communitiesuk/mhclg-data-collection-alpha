@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% set title = "Your logs" %}
+{% set version = data['version'] %}
+{% set sections = data[version]['sections'] %}
+
+{% block pageTitle %}
+{{ title }} - {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% set hasLogsInProgress = false %}
+{% for section in sections %}
+{% if section.tag != 'notstarted' and section.tag != 'cannotstart' %}{% set hasLogsInProgress = true %}{% endif %}
+{% endfor %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Your logs</h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds">
+    <a href="tasklist" class="govuk-button">Create a new log</a>
+
+    {% if hasLogsInProgress %}
+    {{ govukTable({
+      caption: "Logs you need to complete",
+      captionClasses: "govuk-table__caption--m",
+      firstCellIsHeader: true,
+      head: [
+        {
+          text: "Log reference"
+        },
+        {
+          text: "Tenant code"
+        },
+        {
+          text: "Postcode"
+        },
+        {
+          text: "Last changed"
+        }
+      ],
+      rows: [
+        [
+          {
+            html: "<a href='/" + version + "/tasklist'>BZ882</a>"
+          },
+          {
+            text: "298739"
+          },
+          {
+            text: "BN17 6RJ"
+          },
+          {
+            text: "29 July 2021"
+          }
+        ]  
+      ]
+    }) }}
+    {% endif %}
+
+    {{ govukTable({
+      caption: "Logs you’ve submitted",
+      captionClasses: "govuk-table__caption--m",
+      firstCellIsHeader: true,
+      head: [
+        {
+          text: "Log reference"
+        },
+        {
+          text: "Tenant code"
+        },
+        {
+          text: "Postcode"
+        },
+        {
+          text: "Date submitted"
+        }
+      ],
+      rows: [
+        [
+          {
+            html: "<a href='#'>BZ787</a>"
+          },
+          {
+            text: "298739"
+          },
+          {
+            text: "BN17 6RJ"
+          },
+          {
+            text: "29 July 2021"
+          }
+        ],
+        [
+          {
+            html: "<a href='#'>BZ766</a>"
+          },
+          {
+            text: "298720"
+          },
+          {
+            text: "BN16 5PU"
+          },
+          {
+            text: "26 July 2021"
+          }
+        ],
+        [
+          {
+            html: "<a href='#'>BZ765</a>"
+          },
+          {
+            text: "298719"
+          },
+          {
+            text: "BN16 5PU"
+          },
+          {
+            text: "26 July 2021"
+          }
+        ]  
+      ]
+    }) }}
+
+    
+    <p><a href="#" class="govuk-link">See all completed logs (465)</a></p>
+  </div>
+</div>
+
+
+
+{% endblock %}

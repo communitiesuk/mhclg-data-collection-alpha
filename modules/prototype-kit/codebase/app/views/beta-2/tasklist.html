@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% import "./_partials/_get-help.njk" as help %}
+
+{% set title = "Log BZ882" %}
+{% set version = data['version'] %}
+{% set groups = data[version]['groups'] %}
+{% set sections = data[version]['sections'] %}
+{% set tags = data[version]['tags'] %}
+
+{% block pageTitle %}
+{{ title }} - {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="dashboard" class="govuk-back-link">Back</a>
+  <a href="/sprint11/sign-in" class="govuk-link--right ">Sign out</a>
+{% endblock %}
+
+{% macro makeTag(tagId,statusId) %}
+{% for tag in tags %}
+  {% if tag.id == tagId %}
+    <strong class="govuk-tag govuk-tag--{{ tag.color }} app-task-list__tag" id="{{ statusId }}-status">{{ tag.title }}</strong>
+  {% endif %}
+{% endfor %}
+{% endmacro %}
+
+{% macro taskListItems(groupId) %}
+<ul class="app-task-list__items">
+  {% for section in sections %}
+  {% if section.group == groupId %}
+  <li class="app-task-list__item" id="{{ section.id }}">
+    <span class="app-task-list__task-name">
+      {{ section.canStart }}
+      {% if section.tag != 'cannotstart' %}
+      {% set href = '' %}
+      {% if section.firstPage %}
+      {% set href = groupId + "-" + section.id + "/" + section.firstPage %}
+      {% endif %}
+      {% if section.tag == 'completed' or section.tag == 'inprogress' %}{% set href = groupId + "-" + section.id + "/check-answers" %}{% endif %}
+      <a href="{{ href }}" aria-describedby="{{ section.id }}-status">{{ section.title}}</a>
+      {% else %}
+      {{ section.title }}
+      {% endif %}
+    </span>
+    {{ makeTag(section.tag,section.id) }}
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endmacro %}
+
+{# work out how many sections the user has completed #}
+{% set completedSectionsCount = 0 %}
+{% for section in sections %}
+  {% if section.tag == 'completed' %}
+    {% set completedSectionsCount = completedSectionsCount + 1 %}
+  {% endif %}
+{% endfor %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">{{ title }}</h1>
+    <h2 class="govuk-heading-s govuk-!-margin-bottom-2">This log is incomplete</h2>
+    <p class="govuk-body govuk-!-margin-bottom-7">You have completed {{ completedSectionsCount }} of {{ sections | length }} sections.<br>
+    Skip to next incomplete section: <a href="#{{ skipTo.id }}">{{ skipTo.title }}</a></p>
+
+    <ol class="app-task-list app-task-list--no-numbers">
+      {% for group in groups %}
+      <li>  
+        <h2 class="app-task-list__section">{{ group.title }}</h2>
+        {{ taskListItems(group.id) }}
+      </li>
+      {% endfor %}
+    </ol>
+
+  </div>
+</div>
+{% endblock %}

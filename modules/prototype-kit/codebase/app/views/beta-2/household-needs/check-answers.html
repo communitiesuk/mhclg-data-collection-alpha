@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Check your answers" %}
+{% set sectionTitle = 'Household needs' %}
+{% set sectionId = 'needs' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% set answersToCheck = [
+  {
+    title: 'Tenant served in the armed forces',
+    id: 'armed-forces',
+    url: '/' + version + '/household-needs/armed-forces',
+    radios: 'armed-forces'
+  },
+  {
+    title: 'Still serving',
+    id: 'armed-forces-service-length',
+    url: '/' + version + '/household-needs/armed-forces-details#armed-forces-service-length',
+    radios: 'armed-forces-service-length',
+    showIf: [
+      {
+        id: 'armed-forces',
+        equals: ['yes-regular','yes-reserve']
+      }
+    ]
+  },
+  {
+    title: 'Injuries',
+    id: 'armed-forces-injured',
+    url: '/' + version + '/household-needs/armed-forces-details#armed-forces-injured',
+    radios: 'yes-no',
+    showIf: [
+      {
+        id: 'armed-forces',
+        equals: ['yes-regular','yes-reserve']
+      }
+    ]
+  },
+  {
+    title: 'Spouse of someone who served',
+    id: 'armed-forces-spouse',
+    url: '/' + version + '/household-needs/armed-forces-spouse',
+    radios: 'armed-forces-spouse'
+  },
+  {
+    title: 'Medical needs or disabilities',
+    id: 'medical-needs',
+    url: '/' + version + '/household-needs/medical-needs',
+    radios: 'yes-no-dunno'
+  },
+  {
+    title: 'Pregnancy',
+    id: 'is-pregnant',
+    url: '/' + version + '/household-needs/pregnancy',
+    radios: 'yes-no'
+  }
+]%}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ helper.title(title,sectionTitle) }}
+       
+    {{ helper.checkAnswers(answersToCheck,data,version)}}
+
+    <a href="/{{ version }}/tasklist{{ helper.isThisSectionComplete(answersToCheck,data,version,'?complete=needs','') | whitespace }}" class="govuk-button">Save and continue</a>
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

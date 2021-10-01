@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Leaving their last settled home" %}
+{% set sectionTitle = 'Household situation' %}
+{% set groupId = 'household' %}
+{% set sectionId = 'situation' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ helper.title(title,sectionTitle) }}
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      {{ question.radios({
+        legend: 'What is the tenant’s main reason for leaving?',
+        id: 'previous-housing-reasons-for-leaving',
+        items: data[version].radios['reasons-for-leaving'],
+        currentValue: data['previous-housing-reasons-for-leaving']
+      }) }}
+
+      {{ question.radios({
+        legend: 'Was the reason for leaving because of the benefit cap or removal of the spare room subsidy?',
+        id: 'previous-housing-reasons-for-leaving-benefits-cap',
+        items: data[version].radios['reasons-for-leaving-benefits-cap'],
+        currentValue: data['previous-housing-reasons-for-leaving-benefits-cap']
+      }) }}
+
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/check-answers">
+      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/reasons-for-leaving-last-home">
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+    {{ helper.quit(version) }}
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% macro pageTitle(title, serviceName, errors) %}
+{% if errors | length > 0 %}Error: {% endif %}{{ title }} - {{ serviceName }} - GOV.UK
+{% endmacro %}
+
+{% macro beforeContent(params) %}
+<a href="{{ params.back.url or 'javascript:history.go(-1);' }}" class="govuk-back-link">{{ params.back.title or 'Back' }}</a>
+<a href="{{ params.signOut.url or '/' }}" class="govuk-link--right">Sign out</a>
+{% endmacro %}
+
+{% macro title(title, section) %}
+{% if section %}<span class="govuk-caption-xl">{{ section }}</span>{% endif %}
+<h1 class="govuk-heading-xl">{{ title }}</h1>
+{% endmacro %}
+
+{% macro errorSummary(errors, messages) %}
+{% if errors | length > 0 %}
+<div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+  <h2 class="govuk-error-summary__title" id="error-summary-title">There is a problem</h2>
+  <div class="govuk-error-summary__body">
+    <ul class="govuk-list govuk-error-summary__list">
+      {% for error in errors %}
+        {% if error == messages[error].href %}
+        <li><a href="#{{ messages[error].href }}">{{ messages[error].message }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro checkAnswers(dataToCheck,data,version) %}
+<dl class="govuk-summary-list">
+  {% for itemToCheck in dataToCheck %}
+  
+  {% set showRow = true %}
+  {% if itemToCheck.showIf %}
+    {% set showRow = false %}
+    {% for showIf in itemToCheck.showIf %}
+      {% for equals in showIf.equals %}
+        {% if data[showIf.id] == equals %}{% set showRow = true %}{% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+
+  {% if showRow %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">{{ itemToCheck.title }}</dt>
+    <dd class="govuk-summary-list__value">
+      {% if data[itemToCheck.id] %}
+        {% if itemToCheck.radios %}
+        {% for radio in data[version]['radios'][itemToCheck.radios] %}
+          {% if radio.value == data[itemToCheck.id] %}{{ radio.text }}{% endif %}
+        {% endfor %}
+        {% else %}
+        {{ data[itemToCheck.id] }}
+        {% endif %}
+      {% else %}
+      <span class="govuk-hint">You didn’t answer this question</span>
+      {% endif %}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="{{ itemToCheck.url }}">
+        Change<span class="govuk-visually-hidden"> {{ itemToCheck.title | lower }}</span>
+      </a>
+    </dd>
+  </div>
+  {% endif %}
+
+  {% endfor %}
+</dl>
+{% endmacro %}
+
+{% macro isThisSectionComplete(dataToCheck,data,version,ifTrue='true',ifFalse='false') %}
+{%- set isComplete = true -%}
+{%- for itemToCheck in dataToCheck -%}
+  {# should this item count towrads a complete section? #}
+  {% set itemInScope = true %}
+  {% if itemToCheck.showIf %}
+    {% set itemInScope = false %}
+    {% for showIf in itemToCheck.showIf %}
+      {% for equals in showIf.equals %}
+        {% if data[showIf.id] == equals %}{% set itemInScope = true %}{% endif %}
+      {% endfor %}
+    {% endfor %}  
+  {% endif %}
+
+  {% if itemInScope %}
+    {% if not data[itemToCheck.id] %}{% set isComplete = false %}{% endif %}
+  {% endif %}
+{%- endfor -%}
+{%- if isComplete %}{{ ifTrue }}{% else %}{{ ifFalse }}{% endif -%}
+{% endmacro %}
+
+{% macro quit(version) %}
+<p><a href="/{{ version }}/tasklist">Exit to tasklist</a></p>
+{% endmacro %}

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Tell us about any medical needs or disabilities" %}
+{% set sectionTitle = 'Household needs' %}
+{% set groupId = 'household' %}
+{% set sectionId = 'needs' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ helper.title(title, sectionTitle) }}
+
+    <p>You should tell us if the tenant has any</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>physical condition</li>
+      <li>mental health condition</li>
+      <li>other illness</li>
+    </ul>
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      {{ question.radios({
+        legend: 'Does the tenant have any of these that they expect to last for 12 months or more?',
+        id: 'medical-needs',
+        items: data[version]['radios']['yes-no-dunno'],
+        currentValue: data['medical-needs']
+      }) }}
+
+
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/pregnancy">
+      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/medical-needs">
+      
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+    {{ helper.quit(version) }}
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}
