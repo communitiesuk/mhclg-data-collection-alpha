@@ -20,11 +20,12 @@ data** so check that no one is currently using it.
 
 > Note: This only applies from `beta-1` version onwards.
 
-You need to do three things
+You need to do four things
 
 1. Copy the previous version of the prototype, eg Copy `modules/prototype-kit/codebase/app/views/beta-1` to `modules/prototype-kit/codebase/app/views/beta-2`
 2. In the new version, update `modules/prototype-kit/codebase/app/views/beta-2/version.js`
 3. Import the new session data in `modules/prototype-kit/codebase/app/data/session-data-defaults.js`
+4. Import the router file from your new version in `modules/prototype-kit/codebase/app/routes.js`
 
 ### Lambda in Container
 
