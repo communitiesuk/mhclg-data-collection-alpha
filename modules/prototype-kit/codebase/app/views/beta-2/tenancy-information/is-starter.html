@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Is this a starter tenancy?" %}
+{% set sectionTitle = 'Tenancy information' %}
+{% set groupId = 'tenancy' %}
+{% set sectionId = 'information' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      {{ question.radios({
+        legend: title,
+        id: 'is-starter-tenancy',
+        items: data[version].radios['yes-no-only'],
+        isPageTitle: true,
+        sectionTitle: sectionTitle,
+        currentValue: data['is-starter-tenancy'],
+        classes: 'govuk-radios--inline'
+      }) }}
+      
+      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/is-starter">
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/type-of-tenancy">
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+    {{ helper.quit(version) }}
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

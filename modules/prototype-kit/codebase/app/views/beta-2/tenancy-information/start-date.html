@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "What is the tenancy start date?" %}
+{% set sectionTitle = 'Tenancy information' %}
+{% set groupId = 'tenancy' %}
+{% set sectionId = 'information' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      <span class="govuk-caption-xl">{{ sectionTitle }}</span>
+
+      {{ govukDateInput({
+        id: "tenancy-start-date",
+        namePrefix: "tenancy-start-date",
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--xl"
+          }
+        },
+        hint: {
+          text: "For example, 12 11 2021"
+        },
+        items: [
+          {
+            classes: "govuk-input--width-2",
+            name: "day",
+            value: data['tenancy-start-date-day']
+          },
+          {
+            classes: "govuk-input--width-2",
+            name: "month",
+            value: data['tenancy-start-date-month']
+          },
+          {
+            classes: "govuk-input--width-4",
+            name: "year",
+            value: data['tenancy-start-date-year']
+          }
+        ]
+      }) }}
+      
+      <input type="hidden" name="this" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/start-date">
+      <input type="hidden" name="next" value="/{{ version }}/{{ groupId }}-{{ sectionId }}/is-starter">
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+    {{ helper.quit(version) }}
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

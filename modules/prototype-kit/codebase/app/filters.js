@@ -23,6 +23,23 @@ module.exports = function (env) {
   filters.whitespace = function(string) {
     return string.replace(/\s+/g, '')
   }
+  filters.months = function(int) {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ]
+    return months[int-1]
+  }
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
     @example:

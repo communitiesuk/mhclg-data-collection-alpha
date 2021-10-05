@@ -1,15 +1,16 @@
 const _ = require('lodash')
 const validate = require("validate.js")
-const version = require("./_version.js");
+const version = require("./_version.js")
 
 module.exports = function (router) {
 
   router.use(function(req,res,next) {
     req.session.data['version'] = version
+    console.log('beta-2')
     return next()
   })
 
-  router.get('/beta-1/tasklist', function(req,res) {
+  router.get(`/${version}/tasklist`, function(req,res) {
 
     //catch completed section trigger
     if(req.query.complete != undefined) {
@@ -37,7 +38,7 @@ module.exports = function (router) {
     })
   })
 
-  router.post('/beta-1/submit-form', function(req,res) {
+  router.post(`/${version}/submit-form`, function(req,res) {
     
     //mark a section as "In progress"
     if(req.body.startSection) {

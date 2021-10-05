@@ -9,7 +9,7 @@
         {{ params.legend }}
       {% endif %}
     </legend>
-    <div class="govuk-radios">
+    <div class="govuk-radios {{ params.classes }}">
       {%- for item in params.items -%}
         {% if item.divider %}
         <div class="govuk-radios__divider">{{ item.divider }}</div>

@@ -47,13 +47,17 @@
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">{{ itemToCheck.title }}</dt>
     <dd class="govuk-summary-list__value">
-      {% if data[itemToCheck.id] %}
-        {% if itemToCheck.radios %}
-        {% for radio in data[version]['radios'][itemToCheck.radios] %}
-          {% if radio.value == data[itemToCheck.id] %}{{ radio.text }}{% endif %}
-        {% endfor %}
+      {% if data[itemToCheck.id] or data[itemToCheck.date.day] %}
+        {% if itemToCheck.date %}
+          {{ data[itemToCheck.date.day] }} {{ data[itemToCheck.date.month] | months }} {{ data[itemToCheck.date.year] }}
         {% else %}
-        {{ data[itemToCheck.id] }}
+          {% if itemToCheck.radios %}
+          {% for radio in data[version]['radios'][itemToCheck.radios] %}
+            {% if radio.value == data[itemToCheck.id] %}{{ radio.text }}{% endif %}
+          {% endfor %}
+          {% else %}
+          {{ data[itemToCheck.id] }}
+          {% endif %}
         {% endif %}
       {% else %}
       <span class="govuk-hint">You didn’t answer this question</span>
@@ -86,7 +90,11 @@
   {% endif %}
 
   {% if itemInScope %}
-    {% if not data[itemToCheck.id] %}{% set isComplete = false %}{% endif %}
+    {% if itemToCheck.date %}
+      {% if not data[itemToCheck.date.day] %}{% set isComplete = false %}{% endif %}
+    {% else %}
+      {% if not data[itemToCheck.id]  %}{% set isComplete = false %}{% endif %}
+    {% endif %}
   {% endif %}
 {%- endfor -%}
 {%- if isComplete %}{{ ifTrue }}{% else %}{{ ifFalse }}{% endif -%}

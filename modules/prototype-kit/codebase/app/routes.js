@@ -8,6 +8,7 @@ const router = express.Router()
 
 //From Beta, all versions have their own router files:
 require(`./views/beta-1/_routes.js`)(router);
+require(`./views/beta-2/_routes.js`)(router);
 
 // Add your routes here - above the module.exports line
 router.post(

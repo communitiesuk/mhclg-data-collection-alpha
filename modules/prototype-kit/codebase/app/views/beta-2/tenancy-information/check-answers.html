@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Check your answers" %}
+{% set sectionTitle = 'Tenancy information' %}
+{% set groupId = 'tenancy' %}
+{% set sectionId = 'information' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% set answersToCheck = [
+  {
+    title: 'Tenancy start date',
+    id: 'tenancy-start-date',
+    url: '/' + version + '/' + groupId  + '-' + sectionId + '/start-date',
+    date: {
+      day: 'tenancy-start-date-day',
+      month: 'tenancy-start-date-month',
+      year: 'tenancy-start-date-year'
+    }
+  },
+  {
+    title: 'Starter tenancy',
+    id: 'is-starter-tenancy',
+    url: '/' + version + '/' + groupId  + '-' + sectionId + '/is-starter',
+    radios: 'yes-no-only'
+  },
+  {
+    title: 'Tenancy type',
+    id: 'type-of-tenancy',
+    url: '/' + version + '/' + groupId  + '-' + sectionId + '/type-of-tenancy',
+    radios: 'type-of-tenancy'
+  }
+]%}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ helper.title(title,sectionTitle) }}
+       
+    {{ helper.checkAnswers(answersToCheck,data,version)}}
+
+    <a href="/{{ version }}/tasklist{{ helper.isThisSectionComplete(answersToCheck,data,version,'?complete=information','') | whitespace }}" class="govuk-button">Save and continue</a>
+    {{ help.details() }}
+  </div>
+</div>
+{% endblock %}
