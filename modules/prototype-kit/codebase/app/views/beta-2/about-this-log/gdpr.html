@@ -19,6 +19,13 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+
+    {{ helper.errorSummary(errors, {
+      'gdpr': {
+        href: 'gdpr',
+        message: 'You must tell us if the tenant has seen the GDPR notice'
+      }
+    })}}
        
     <form action="/{{ version }}/submit-form" method="post">
 
@@ -34,6 +41,7 @@
 
       <input type="hidden" name="this" value="/{{ version }}/{{ sectionId }}/gdpr">
       <input type="hidden" name="branch" value="gdpr">
+      <input type="hidden" name="validate[gdpr]" value="required">
       <input type="hidden" name="next[yes]" value="/{{ version }}/{{ sectionId }}/sale-or-letting">
       <input type="hidden" name="next[no]" value="/{{ version }}/{{ sectionId }}/cannot-use-this-service">
       

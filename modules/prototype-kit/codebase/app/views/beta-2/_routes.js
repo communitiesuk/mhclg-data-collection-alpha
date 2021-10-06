@@ -1,5 +1,4 @@
 const _ = require('lodash')
-const validate = require("validate.js")
 const version = require("./_version.js")
 
 module.exports = function (router) {
@@ -55,38 +54,44 @@ module.exports = function (router) {
       currentSectionObject.tag = 'completed'
     }
 
-    //check for required fields
-    // var errors = []
-    // console.log(req.body.this)
-    // if(req.body.required != undefined && req.body.required.length > 0) {
-    //   for(field of req.body.required) {
-    //     if(req.session.data[version][field] === undefined || req.session.data[version][field] === null || req.session.data[version][field] === '') {
-    //       errors.push(field)
-    //     }
-    //   }
-    // }
-    // if(errors.length === 0) {
-    //   res.redirect(req.body.next)
-    // }
-    // else {
-    //   res.render(`.${req.body.this}`, {
-    //       errors: errors  
-    //   })
-    // }
-
-    //branching
-    if(req.body.branch) {
-      var goNext = req.body.next['*']
-      for(next in req.body.next) {
-        if(next === req.body[req.body.branch]) {
-          goNext = req.body.next[next]
+    var errors = []
+    if(req.body.validate) {
+      for(field in req.body.validate) {
+        console.log(req.session.data[version][field])
+        switch (req.body.validate[field]) {
+          case 'required':
+            if(req.session.data[version][field] === undefined || req.session.data[version][field] === null || req.session.data[version][field] === '') {
+              errors.push(field)
+            }
+            break;
         }
       }
-      res.redirect(goNext)
     }
+
+    //if no errors, fine, go on:
+    if(errors.length === 0) {
+      //branching
+      if(req.body.branch) {
+        var goNext = req.body.next['*']
+        for(next in req.body.next) {
+          if(next === req.body[req.body.branch]) {
+            goNext = req.body.next[next]
+          }
+        }
+        res.redirect(goNext)
+      }
+      else {
+        res.redirect(req.body.next)
+      }
+    }
+    //but if you DARE to error, you SHALL PAY:
     else {
-      res.redirect(req.body.next)
+      res.render(`.${req.body.this}`, {
+          errors: errors  
+      })
     }
+
+    
 
     
     
