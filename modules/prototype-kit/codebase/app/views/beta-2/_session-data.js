@@ -118,7 +118,10 @@ module.exports = {
     'armed-forces': require('./_radios/armed-forces.js'),
     'armed-forces-service-length': require('./_radios/armed-forces-service-length.js'),
     'armed-forces-spouse': require('./_radios/armed-forces-spouse.js'),
-    'type-of-tenancy': require('./_radios/type-of-tenancy.js')
+    'type-of-tenancy': require('./_radios/type-of-tenancy.js'),
+    'sale-or-letting': require('./_radios/sale-or-letting.js'),
+    'letting-rent-type': require('./_radios/letting-rent-type.js'),
+    'letting-need-type': require('./_radios/letting-need-type.js')
   },
   checkboxes: {
     'disability-needs': require('./_checkboxes/disability-needs.js')

@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "What is the previous log code?" %}
+{% set sectionTitle = 'About this log' %}
+{% set sectionId = 'about-this-log' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      <span class="govuk-caption-xl">{{ sectionTitle }}</span>
+
+      {{ govukInput({
+        label: {
+          text: title,
+          classes: "govuk-label--xl",
+          isPageHeading: true
+        },
+        id: "previous-log-code",
+        name: "previous-log-code",
+        value: data['previous-log-code']
+      }) }}
+
+      <input type="hidden" name="this" value="/{{ version }}/{{ sectionId }}/previous-log">
+      <input type="hidden" name="next" value="/{{ version }}/{{ sectionId }}/tenancy-start-date">
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

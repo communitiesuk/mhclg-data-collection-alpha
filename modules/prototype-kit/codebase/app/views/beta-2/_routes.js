@@ -6,7 +6,6 @@ module.exports = function (router) {
 
   router.use(function(req,res,next) {
     req.session.data['version'] = version
-    console.log('beta-2')
     return next()
   })
 

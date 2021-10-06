@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Tell us about sales reference numbers" %}
+{% set sectionTitle = 'About this log' %}
+{% set sectionId = 'about-this-log' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      {{ helper.title(title, sectionTitle) }}
+
+      {{ govukInput({
+        label: {
+          text: "What is the purchaser code?"
+        },
+        id: "purchaser-code",
+        name: "purchaser-code",
+        value: data['purchaser-code']
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "What is the Unique Property Reference Number (UPRN)?"
+        },
+        id: "uprn",
+        name: "uprn",
+        value: data['uprn']
+      }) }}
+      <input type="hidden" name="this" value="/{{ version }}/{{ sectionId }}/sales-codes">
+      <input type="hidden" name="next" value="/{{ version }}/{{ sectionId }}/check-answers">
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

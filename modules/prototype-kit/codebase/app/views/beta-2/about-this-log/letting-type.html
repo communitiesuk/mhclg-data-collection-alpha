@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Tell us about this letting" %}
+{% set sectionTitle = 'About this log' %}
+{% set sectionId = 'about-this-log' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      {{ helper.title(title, sectionTitle) }}
+
+      {{ question.radios({
+        legend: 'What type of rent is this log about?',
+        id: 'letting-rent-type',
+        items: data[version]['radios']['letting-rent-type'],
+        currentValue: data['letting-rent-type']
+      }) }}
+
+      {{ question.radios({
+        legend: 'What need type is this log about?',
+        id: 'letting-need-type',
+        items: data[version]['radios']['letting-need-type'],
+        currentValue: data['letting-need-type']
+      }) }}
+
+      <input type="hidden" name="this" value="/{{ version }}/{{ sectionId }}/letting-type">
+      <input type="hidden" name="next" value="/{{ version }}/{{ sectionId }}/tenant-code">
+      
+      
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

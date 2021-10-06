@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Is this a sale or letting?" %}
+{% set sectionTitle = 'About this log' %}
+{% set sectionId = 'about-this-log' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      {{ question.radios({
+        legend: title,
+        id: 'sale-or-letting',
+        items: data[version]['radios']['sale-or-letting'],
+        currentValue: data['sale-or-letting'],
+        isPageTitle: true,
+        sectionTitle: sectionTitle
+      }) }}
+
+      <input type="hidden" name="this" value="/{{ version }}/{{ sectionId }}/sale-or-letting">
+      {# which question should the next branch on? #}
+      <input type="hidden" name="branch" value="sale-or-letting">
+      <input type="hidden" name="next[sale]" value="/{{ version }}/{{ sectionId }}/sale-completion-date">
+      <input type="hidden" name="next[letting]" value="/{{ version }}/{{ sectionId }}/renewal">
+      
+      
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

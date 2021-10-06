@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Is this a renewal?" %}
+{% set sectionTitle = 'About this log' %}
+{% set sectionId = 'about-this-log' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+       
+    <form action="/{{ version }}/submit-form" method="post">
+
+      {{ question.radios({
+        legend: title,
+        id: 'renewal',
+        items: data[version]['radios']['yes-no-only'],
+        currentValue: data['renewal'],
+        isPageTitle: true,
+        sectionTitle: sectionTitle,
+        classes: "govuk-radios--inline"
+      }) }}
+
+      <input type="hidden" name="this" value="/{{ version }}/{{ sectionId }}/renewal">
+      <input type="hidden" name="branch" value="renewal">
+      <input type="hidden" name="next[yes]" value="/{{ version }}/{{ sectionId }}/previous-log">
+      <input type="hidden" name="next[no]" value="/{{ version }}/{{ sectionId }}/tenancy-start-date">
+      
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

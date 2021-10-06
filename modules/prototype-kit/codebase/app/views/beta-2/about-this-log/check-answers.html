@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "Check your answers" %}
+{% set sectionTitle = 'About this log' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ helper.title(title,sectionTitle) }}
+    
+    <p>[To do: once routing of this section is more certain]</p>
+
+    <a href="/{{ version }}/tasklist" class="govuk-button">Save and continue</a>
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}

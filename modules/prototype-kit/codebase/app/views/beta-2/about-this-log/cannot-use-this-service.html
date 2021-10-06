@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% import "../_partials/_get-help.njk" as help %}
+{% import "../_partials/_questions.njk" as question %}
+{% import "../_partials/_helpers.njk" as helper %}
+
+{% set title = "You cannot use this service" %}
+{% set sectionTitle = 'About this log' %}
+{% set sectionId = 'about-this-log' %}
+{% set version = data['version'] %}
+
+{% block pageTitle %}
+{{ helper.pageTitle(title, serviceName, errors) }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ helper.beforeContent() }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+       
+    {{ helper.title(title, sectionTitle) }}
+
+    <p>We cannot accept data about a tenant or buyer who has not seen the official MHCLG GDPR notice.</p>
+    <p><a href="/{{ version }}/dashboard">Go to the dashboard</a></p>
+    
+    {{ help.details() }}
+
+  </div>
+</div>
+{% endblock %}
