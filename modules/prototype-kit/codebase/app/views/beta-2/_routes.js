@@ -54,19 +54,17 @@ module.exports = function (router) {
       currentSectionObject.tag = 'completed'
     }
 
+    //todo
+
     var errors = []
-    if(req.body.validate) {
-      for(field in req.body.validate) {
-        console.log(req.session.data[version][field])
-        switch (req.body.validate[field]) {
-          case 'required':
-            if(req.session.data[version][field] === undefined || req.session.data[version][field] === null || req.session.data[version][field] === '') {
-              errors.push(field)
-            }
-            break;
-        }
-      }
-    }
+    // if(req.body.validate) {
+    //   for(field in req.body.validate) {
+    //     console.log(field)
+    //     if(req.session.data[version][field] === undefined || req.session.data[version][field] === null || req.session.data[version][field] === '') {
+    //       errors.push(field)
+    //     }
+    //   }
+    // }
 
     //if no errors, fine, go on:
     if(errors.length === 0) {

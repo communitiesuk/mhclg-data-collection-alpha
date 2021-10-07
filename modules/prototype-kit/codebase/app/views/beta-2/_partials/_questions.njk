@@ -1,5 +1,5 @@
 {% macro radios(params) %}
-<div class="govuk-form-group">
+<div class="govuk-form-group {% if params.error.show %}govuk-form-group--error{% endif %}">
   <fieldset class="govuk-fieldset">
     <legend class="govuk-fieldset__legend {% if params.isPageTitle %}govuk-fieldset__legend--xl{% else %}govuk-!-font-weight-bold{% endif %}">
       {% if params.isPageTitle %}
@@ -9,6 +9,11 @@
         {{ params.legend }}
       {% endif %}
     </legend>
+    {% if params.error.show %}
+    <span id="{{ params.id }}-error" class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span> {{ params.error.message }}
+    </span>
+    {% endif %}
     <div class="govuk-radios {{ params.classes }}">
       {%- for item in params.items -%}
         {% if item.divider %}
